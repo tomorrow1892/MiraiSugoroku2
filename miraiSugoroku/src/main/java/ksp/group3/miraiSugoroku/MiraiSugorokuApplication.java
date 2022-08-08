@@ -10,6 +10,9 @@ public class MiraiSugorokuApplication {
 		SpringApplication.run(MiraiSugorokuApplication.class, args);
 	}
 
-	
+	// sample1
+	// sample2
+	// sample3
+	// sample4
 
 }
