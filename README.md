@@ -30,17 +30,17 @@ git rebase "親ブランチ"
 (develop) git branch hoge
 (develop) git checkout hoge
 ```
-1. 作業をこまめに作業ブランチのリモートリポジトリにコミットする
+2. 作業をこまめに作業ブランチのリモートリポジトリにコミットする
 ```
 (hoge) git add ＊
 (hoge) git commit -m "hoge"
 (hoge) git push origin hoge
 ```
-1. pull requestを送りたい場合は、リモートの最新版developブランチをローカルの作業ブランチに反映する
+3. pull requestを送りたい場合は、リモートの最新版developブランチをローカルの作業ブランチに反映する
 ```
 (hoge) git add ＊
 (hoge) git commit -m "hoge"
-(hoge) git push origin hoge
+(hoge) git push origin hog
 (hoge) git checkout develop
 (develop) git pull origin develop
 (develop) git checkout hoge
@@ -48,8 +48,7 @@ git rebase "親ブランチ"
 ```
 - 最後のとこでコンフリクトが起きたら、コンフリクトを解決してadd〜pushをやり直す
 
-1. pull requestを送る
-
+4. pull requestを送る
 
 
 
