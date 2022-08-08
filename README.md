@@ -35,13 +35,13 @@ git rebase "親ブランチ"
 ```
 2. 作業をこまめに作業ブランチのリモートリポジトリにコミットする
 ```
-(hoge) git add ＊
+(hoge) git add .
 (hoge) git commit -m "hoge"
 (hoge) git push origin hoge
 ```
 3. pull requestを送りたい場合は、リモートの最新版developブランチをローカルの作業ブランチに反映する
 ```
-(hoge) git add ＊
+(hoge) git add .
 (hoge) git commit -m "hoge"
 (hoge) git push origin hoge
 (hoge) git checkout develop
