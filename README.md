@@ -14,7 +14,8 @@ git rebase "親ブランチ"
   - develop → game_base
   - game_base においてgame関連のissueに関するbranchを立てる
 
-##試したい運用案　中橋
+## 試したい運用案　中橋
+### 初めにやること
 -(最初mainブランチだけの状態でスタート)
 -mainブランチからdevelopブランチを切る
   - 切ったらすぐpush
@@ -22,3 +23,7 @@ git rebase "親ブランチ"
 '''
 (main)git pull --all
 '''
+
+###普段やること
+1. 作業ブランチをきる
+1. あ
