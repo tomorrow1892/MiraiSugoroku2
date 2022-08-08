@@ -14,7 +14,7 @@ git rebase "親ブランチ"
   - develop → game_base
   - game_base においてgame関連のissueに関するbranchを立てる
 
-## 試したい運用案　中橋
+## 運用案　中橋
 ### 初めにやること
 - developブランチをmainにマージして、developブランチを消す
 - 皆クローンをし直す
