@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>メニュー</title>
+</head>
+<body>
+    <h1>作成者メニュー</h1>
+    <a th:href="@{/{cid}/config}" class="link">すごろくで遊ぶ</a>
+    <a th:href="@{/{cid}/squares}" class="link">マス一覧</a>
+    <a th:href="@{/{cid}/create}" class="link">マス作成</a>
+    <a th:href="@{/}" class="link">トップページ</a>
+</body>
+</html>
