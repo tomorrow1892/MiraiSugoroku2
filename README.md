@@ -20,14 +20,37 @@ git rebase "親ブランチ"
 -mainブランチからdevelopブランチを切る
   - 切ったらすぐpush
 - 皆んながpullする
-'''
+```
 (main) git pull --all
-'''
+```
 
-###普段やること
+### 普段やること
 1. 作業ブランチをきって作業する
-'''
+```
 (develop) git branch hoge
 (develop) git checkout hoge
-'''
-1. あ
+```
+1. 作業をこまめに作業ブランチのリモートリポジトリにコミットする
+```
+(hoge) git add ＊
+(hoge) git commit -m "hoge"
+(hoge) git push origin hoge
+```
+1. pull requestを送りたい場合は、リモートの最新版developブランチをローカルの作業ブランチに反映する
+```
+(hoge) git add ＊
+(hoge) git commit -m "hoge"
+(hoge) git push origin hoge
+(hoge) git checkout develop
+(develop) git pull origin develop
+(develop) git checkout hoge
+(hoge) git merge origin develop
+```
+- 最後のとこでコンフリクトが起きたら、コンフリクトを解決してadd〜pushをやり直す
+
+1. pull requestを送る
+
+
+
+
+
