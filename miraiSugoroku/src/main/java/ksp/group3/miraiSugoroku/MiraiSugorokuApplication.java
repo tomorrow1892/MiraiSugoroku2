@@ -10,4 +10,6 @@ public class MiraiSugorokuApplication {
 		SpringApplication.run(MiraiSugorokuApplication.class, args);
 	}
 
+	
+
 }
