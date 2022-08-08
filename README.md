@@ -27,6 +27,7 @@ git rebase "親ブランチ"
 ### 普段やること
 1. 作業ブランチをきって作業する
 ```
+(main) git checkout develop
 (develop) git branch hoge
 (develop) git checkout hoge
 ```
@@ -40,7 +41,7 @@ git rebase "親ブランチ"
 ```
 (hoge) git add ＊
 (hoge) git commit -m "hoge"
-(hoge) git push origin hog
+(hoge) git push origin hoge
 (hoge) git checkout develop
 (develop) git pull origin develop
 (develop) git checkout hoge
