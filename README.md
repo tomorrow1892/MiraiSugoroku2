@@ -21,9 +21,13 @@ git rebase "親ブランチ"
   - 切ったらすぐpush
 - 皆んながpullする
 '''
-(main)git pull --all
+(main) git pull --all
 '''
 
 ###普段やること
-1. 作業ブランチをきる
+1. 作業ブランチをきって作業する
+'''
+(develop) git branch hoge
+(develop) git checkout hoge
+'''
 1. あ
