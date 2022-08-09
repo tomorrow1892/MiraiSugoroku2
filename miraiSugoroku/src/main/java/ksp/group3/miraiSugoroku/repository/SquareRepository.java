@@ -9,6 +9,8 @@ import ksp.group3.miraiSugoroku.entity.Square;
 
 @Repository
 public interface SquareRepository extends CrudRepository<Square, Long> {
+    public List<Square> findAll();
+    
     public List<Square> findByIsApproved(boolean isApproved);
 
     public List<Square> findByTitleContaining(String keyword);

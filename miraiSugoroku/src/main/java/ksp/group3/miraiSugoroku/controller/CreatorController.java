@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ksp.group3.miraiSugoroku.entity.Square;
 import ksp.group3.miraiSugoroku.entity.SquareCreator;
@@ -39,10 +40,10 @@ public class CreatorController {
     @GetMapping("/login")
     public String creatorLogin(Long eventId, String loginId) {
         String cid = "test";
-        return "redirect:/" + cid + "/manu";
+        return "redirect:/" + cid + "/menu";
     }
 
-    @GetMapping("/{cid}/manu")
+    @GetMapping("/{cid}/menu")
     public String showcreatorMenu() {
         return "creator_menu";
     }
@@ -59,7 +60,27 @@ public class CreatorController {
     }
 
     @GetMapping("/{cid}/squares")
-    public String showSquare() {
+    public String showSquare(Model model) {
+        List<Square> square_list = sService.filterSquaresByIsApproved(true);
+        model.addAttribute("square_list", square_list);
+        return "creator_squarelist";
+    }
+
+    // 検索結果の内承認済みのやつだけ表示できるように今後修正
+    @GetMapping("/{cid}/squares/search/keyword")
+    public String searchSquaresByKeyword(@RequestParam("keyword") String keyword, Model model){
+        List<Square> square_list = sService.searchSquaresByKeyword(keyword);
+        model.addAttribute("square_list", square_list);
+
+        return "creator_squarelist";
+    }
+
+    // 検索結果の内承認済みのやつだけ表示できるように今後修正
+    @GetMapping("/{cid}/squares/search/nickname")
+    public String searchSquaresByNickname(@RequestParam("nickname") String nickname, Model model){
+        List<Square> square_list = sService.searchSquaresByNickname(nickname);
+        model.addAttribute("square_list", square_list);
+
         return "creator_squarelist";
     }
 
