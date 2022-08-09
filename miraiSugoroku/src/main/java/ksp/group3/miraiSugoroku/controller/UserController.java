@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ksp.group3.miraiSugoroku.service.SquareService;
 import ksp.group3.miraiSugoroku.entity.Square;
@@ -30,6 +32,20 @@ public class UserController {
         List<Square> square_list = sService.getAllSquare();
         model.addAttribute("square_list", square_list);
         return "guest_squarelist";
+    }
+
+    //修正途中！このままだとリダイレクトできない！
+    @GetMapping("/squares/search/keyword")
+    public String searchSuaresByKeyword(@RequestParam("keyword") String keyword, Model model){
+        List<Square> square_list = sService.searchSquaresByKeyword(keyword);
+        model.addAttribute("square_list", square_list);
+
+        return "redirect:/squares";
+    }
+
+    @GetMapping("/squares/search/nickname")
+    public String searchSquaresByNickname(@RequestParam("nickname") String nickname, Model model){
+        return "redirect:/squares";
     }
 
     @GetMapping("/config")

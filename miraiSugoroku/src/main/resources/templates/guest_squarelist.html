@@ -9,6 +9,19 @@
     <h1>ゲストマス一覧</h1>
     <a th:href="@{/menu}" class="link">戻る</a>
 
+    <h2>検索</h2>
+    <form th:action="@{/squares/search/keyword}" method="get">
+        <label for="keyword">キーワード：</label>
+        <input type="text" required name="keyword" id="keyword" />
+        <input type="submit" value="検索する" />
+    </form>
+
+    <form th:action="@{/squares/search/nickname}" method="get">
+        <label for="nickname">ニックネーム：</label>
+        <input type="text" required name="nickname" id="nickname" />
+        <input type="submit" value="検索する" />
+    </form>
+
     <h2>マス一覧</h2>
     <table border="1">
         <tr>
