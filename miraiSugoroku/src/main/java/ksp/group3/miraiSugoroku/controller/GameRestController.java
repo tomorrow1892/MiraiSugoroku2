@@ -19,11 +19,11 @@ public class GameRestController {
 
     ObjectMapper objectMapper = new ObjectMapper();
     @GetMapping("/api/diceRoll")
-    String diceRoll(@RequestParam String suzi) throws JsonProcessingException{
-    
+    String diceRoll(@RequestParam String suzi,@RequestParam String sugorokuId) throws JsonProcessingException{
         System.out.println("出目:"+suzi);
+        System.out.println("すごろくID:"+ sugorokuId);
         //return objectMapper.writeValueAsString(new Player( null, null, "aaa!", "さんだろう", 1, 0, 1, true, false));
-         return objectMapper.writeValueAsString(new Player( null, null, "aaa!", "さんだろう", 1, 0, 1+Integer.parseInt(suzi), false, false));
+         return objectMapper.writeValueAsString(gameService.moveByDice(Long.parseLong(sugorokuId), Integer.parseInt(suzi)));
     }
 
     @GetMapping("/api/doEvent")

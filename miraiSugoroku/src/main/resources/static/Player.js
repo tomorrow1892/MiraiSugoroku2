@@ -56,9 +56,9 @@ class Player {
     }
 
     //サイコロの出目をバックエンドに送って，帰ってきたプレイヤーのステータスをviewに反映
-    requestDiceRoll(diceNum) {
+    requestDiceRoll(diceNum,sugorokuId) {
         var xhr = new XMLHttpRequest();
-        var URI = "/api/diceRoll?suzi=" + diceNum;
+        var URI = "/api/diceRoll?suzi=" + diceNum +"&sugorokuId="+sugorokuId;
         xhr.open("GET", URI, false);
         xhr.send();
         var response = JSON.parse(xhr.responseText);
