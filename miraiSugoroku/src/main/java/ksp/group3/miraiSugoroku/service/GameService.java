@@ -61,14 +61,20 @@ public class GameService {
      * @param n          出目の値
      */
     public Player moveByDice(Long sugorokuId, int n) {
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa");
         Sugoroku game = sgRepo.findById(sugorokuId).get();
         int turn = game.getNowPlayer();
         List<Player> players = pRepo.findBySugorokuIdAndOrder(sugorokuId, turn);
         if (players.size() != 1) {
             // exceptionを返す
         }
+       
         Player player = players.get(0);
+        System.out.println("ddddddddddddddddddddddddd");
+        System.out.println(player.getPlayerId());
         pService.move(player.getPlayerId(), n);
+
+       
         return player;
     }
 

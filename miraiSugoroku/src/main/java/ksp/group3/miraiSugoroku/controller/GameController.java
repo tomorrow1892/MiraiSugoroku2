@@ -12,6 +12,7 @@ public class GameController {
     public String showSugorokuPage(@PathVariable String sugorokuId,Model model) {
         Long sId = Long.parseLong(sugorokuId);
         model.addAttribute("sugorokuId",sId);
+        System.out.println("sugorokuId======"+sId);
         return "sugorokuGame";
     }
 }

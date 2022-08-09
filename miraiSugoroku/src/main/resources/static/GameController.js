@@ -8,10 +8,10 @@ let turnPlayer;
 //ページが読み込まれて初めに実行される
 window.onload = function () {
     btnDisabled("diceBtn1", true);
-    player1 = new Player("coma1", "さんだろう", 0, 1, false, false, 1, 2);
-    player2 = new Player("coma2", "よんだろう", 0, 1, false, false, 2, 3);
-    player3 = new Player("coma3", "ごだろう", 0, 1, false, false, 3, 4);
-    player4 = new Player("coma4", "ろくだろう", 0, 1, false, false, 4, 1);
+    player1 = new Player("coma1", "さんだろう", 0, 0, false, false, 1, 2);
+    player2 = new Player("coma2", "よんだろう", 0, 0, false, false, 2, 3);
+    player3 = new Player("coma3", "ごだろう", 0, 0, false, false, 3, 4);
+    player4 = new Player("coma4", "ろくだろう", 0,0, false, false, 4, 1);
     turnPlayer = player1;
     let playerPoint = document.getElementById(`point1`);
     playerPoint.insertAdjacentHTML('afterbegin', `${player1.name}のポイント<textarea id='textarea1'>${player1.point}</textarea>`)
