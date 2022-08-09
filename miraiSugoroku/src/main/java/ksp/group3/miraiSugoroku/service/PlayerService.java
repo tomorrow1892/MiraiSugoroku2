@@ -57,6 +57,18 @@ public class PlayerService {
     }
 
     /**
+     * プレイヤーの休みを解除する
+     * 
+     * @param playerId
+     * @return
+     */
+    public Player disableBreak(Long playerId) {
+        Player player = pRepo.findById(playerId).get();
+        player.setIsBreak(false);
+        return pRepo.save(player);
+    }
+
+    /**
      * プレイヤーの得点を更新する
      * 
      * @param playerId
