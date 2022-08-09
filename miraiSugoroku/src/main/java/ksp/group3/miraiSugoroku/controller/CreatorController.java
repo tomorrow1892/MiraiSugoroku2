@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ksp.group3.miraiSugoroku.entity.Square;
+import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.entity.SquareEvent;
+import ksp.group3.miraiSugoroku.form.SquareCreatorForm;
 import ksp.group3.miraiSugoroku.form.SquareForm;
 import ksp.group3.miraiSugoroku.service.CreatorService;
 import ksp.group3.miraiSugoroku.service.EventService;
+import ksp.group3.miraiSugoroku.service.SquareEventService;
 import ksp.group3.miraiSugoroku.service.SquareService;
 
 @Controller
@@ -25,6 +28,8 @@ public class CreatorController {
     CreatorService cService;
     @Autowired
     SquareService sService;
+    @Autowired
+    SquareEventService seService;
 
     @GetMapping("/loginpage")
     public String showcreatorLoginPage() {
@@ -58,42 +63,35 @@ public class CreatorController {
         return "creator_squarelist";
     }
 
-    @GetMapping("/{cid}/create")
+    @GetMapping("/{cid}/create") // マス作成画面を表示
     public String showSquareCreateFrom(@PathVariable String cid, Model model) {
         model.addAttribute("SquareForm", new SquareForm());
         // model.addAttribute("cid", cid);
-        // テスト用リストの作成
-        SquareEvent se1 = new SquareEvent((long) 1, 1, 1, "1マス進む");
-        SquareEvent se2 = new SquareEvent((long) 2, 1, 2, "2マス進む");
-        System.out.println(se1.getSquareEventID());
-        System.out.println(se2.getSquareEventID());
-        List<SquareEvent> SquareEventList = new ArrayList<>();
-        SquareEventList.add(se1);
-        SquareEventList.add(se2);
+        List<SquareEvent> SquareEventList = seService.getAllSquareEvent();
+        SquareEventList.remove(13);
         model.addAttribute("SquareEventList", SquareEventList);
         model.addAttribute("cid", "test");
         return "creator_create";
     }
 
-    @PostMapping("/{cid}/create/confirm")
+    @PostMapping("/{cid}/create/confirm") // マス作成確認画面
     public String showSquareCreateConfirm(@PathVariable String cid, SquareForm form, Model model) {
         model.addAttribute("SquareForm", form);
         model.addAttribute("cid", cid);
-        SquareEvent se1 = new SquareEvent((long) 1, 1, 1, "1マス進む");
-        SquareEvent se2 = new SquareEvent((long) 2, 1, 2, "2マス進む");
-        if (form.getSquareEventId() == 1) {
-            model.addAttribute("se", se1);
-        } else {
-            model.addAttribute("se", se2);
-        }
+
+        SquareEvent se = seService.getSquareEvent(form.getSquareEventId());
+        model.addAttribute("se", se);
 
         return "creator_create_confirm";
     }
 
-    @PostMapping("/{cid}/create/apply")
+    @PostMapping("/{cid}/create/apply") // マス作成申請完了画面
     public String showSquareCreateDonePag(SquareForm form) {
-        System.out.println(form.getTitle());
-        System.out.println(form.getDescription());
+        // System.out.println(form.getTitle());
+        // System.out.println(form.getDescription());
+        // System.out.println(form.getSquareEventId());
+        form.setApproved(true);
+        sService.createSquare(form);
         return "creator_create_done";
     }
 
