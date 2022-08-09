@@ -56,7 +56,7 @@ public class CreatorController {
         if (eRepo.count() == 0) {
             Calendar cl = Calendar.getInstance();
 
-            for (int i = 2020; i <= 2022; i++)
+            for (int i = 2022; i >= 2020; i--)
             {
                 cl.set(Calendar.YEAR, i);
                 Event e = new Event(null, 0, cl.getTime(), cl.getTime(), "Test event-" + String.valueOf(i), true);
@@ -89,7 +89,7 @@ public class CreatorController {
         return "creator_login";
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public String showEventList(@ModelAttribute("createrLoginForm") CreatorLoginForm form, RedirectAttributes redirectAttributes, Model model) {
         List<Event> events = eService.filterEventsByYear(form.getSelectedYear());
         
@@ -116,8 +116,10 @@ public class CreatorController {
         return years;
     }
 
-    @GetMapping("/login")
-    public String creatorLogin(@ModelAttribute("createrLoginForm") CreatorLoginForm form, Model model) {
+    @PostMapping("/login")
+    public String creatorLogin(@ModelAttribute("creatorLoginForm") CreatorLoginForm form, Model model) {
+        System.out.println(form.getSelectedEventId());
+        System.out.println(form.getLoginId());
         SquareCreator sc = cService.getSquareCreatorByEventIdAndLoginId(form.getSelectedEventId(), form.getLoginId());
 
         return "redirect:/" + sc.getCreatorId() + "/manu";

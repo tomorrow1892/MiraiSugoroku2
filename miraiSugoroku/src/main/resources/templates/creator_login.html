@@ -8,7 +8,7 @@
 <body>
     <h1>作成者ログイン</h1>
 
-    <form th:action="@{/search/}" method="get", th:object="${creatorLoginForm}">
+    <form th:action="@{/search/}" method="post", th:object="${creatorLoginForm}">
         <!--/* 年度選択のドロップダウン */-->
         <select id="selectedYear" name="selectedYear">
             <option th:each="y: ${years}"
@@ -21,7 +21,7 @@
         <p><input type="submit" value="検索" /></p>
     </form>
 
-    <form th:action="@{/login}" method="post" th:object="${creatorLoginForm}">
+    <form th:action="@{/login/}" method="post" th:object="${creatorLoginForm}">
         <!--/* イベント選択のドロップダウン */-->
         <select id="selectdEventId" name="selectdEventId">
 
@@ -34,7 +34,9 @@
         </select>
 
         <input type="text" th:field="*{loginId}" />
+
+        <p><input type="submit" value="ログイン" />
     </form>
-    <a th:href="@{/login}" class="link">ログイン</a>
+
 </body>
 </html>
