@@ -26,6 +26,8 @@ public class SquareEventService {
     public Player doEvent(SquareEvent e, Long playerId){
         Player p;
         switch(e.getActionNumber()){
+            case 0:
+                p = pService.getPlayer(playerId);
             case 1:
                 p = pService.move(playerId, e.getArgument());
                 break;
