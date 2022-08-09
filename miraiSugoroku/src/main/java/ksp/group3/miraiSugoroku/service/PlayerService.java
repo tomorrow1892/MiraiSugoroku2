@@ -32,15 +32,23 @@ public class PlayerService {
         Sugoroku game = sRepo.findById(player.getSugorokuId()).get();
         int length = game.getLength();
         int position = player.getPosition();
+        
         position = position + n;
         if (position < 0) {
             player.setPosition(0);
+            System.out.println("movetest");
         } else if (position > length + 1) {
             player.setPosition(length + 1);
             player.setIsGoaled(true);
+            System.out.println("movetest");
         } else {
             player.setPosition(position);
+            System.out.println("movetest");
         }
+        System.out.println("movetest2");
+    
+        System.out.println(player);
+
         return pRepo.save(player);
     }
 
