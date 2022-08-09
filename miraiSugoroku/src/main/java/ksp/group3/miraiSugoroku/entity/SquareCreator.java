@@ -16,9 +16,12 @@ import javax.persistence.Id;
 public class SquareCreator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long creatorID;
-    String loginID;
-    Long eventID;
+    Long creatorId;
+
+    String loginId;
+
+    Long eventId;
+
     int group;
     boolean isPermitted;
     String name;

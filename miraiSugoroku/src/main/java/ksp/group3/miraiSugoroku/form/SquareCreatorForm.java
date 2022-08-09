@@ -14,10 +14,10 @@ public class SquareCreatorForm {
     public SquareCreator toEntity() {
         SquareCreator sc = new SquareCreator();
 
-        sc.setLoginID(loginId);
+        sc.setLoginId(loginId);
         sc.setName(name);
         sc.setNickname(nickname);
-        sc.setEventID(eventId);
+        sc.setEventId(eventId);
         sc.setGroup(group);
         sc.setPermitted(true);
 

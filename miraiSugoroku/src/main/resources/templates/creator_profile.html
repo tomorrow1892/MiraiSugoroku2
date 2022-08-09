@@ -8,5 +8,21 @@
 <body>
     <h1>作成者詳細設定</h1>
     
+    <form th:action="@{/__${creatorId}__/update}" method="post" th:object="${updateSquareCreatorForm}">
+
+        <select id="selectedGroup" name="selectedGroup">
+
+            <option value="グループを選択">- グループを選択してください -</option>
+            <option th:each="g: ${groups}"
+                    th:value="${g}"
+                    th:text="${g}"
+                    th:selected="${g == updateSquareCreatorForm.selectedGroup}"></option>
+            </option>
+        </select>
+
+        <input type="text" th:field="*{nickname}" />
+
+        <p><input type="submit" value="登録" />
+    </form>
 </body>
 </html>
