@@ -12,13 +12,13 @@
     <h2>検索</h2>
     <form th:action="@{/squares/search/keyword}" method="get">
         <label for="keyword">キーワード：</label>
-        <input type="text" required name="keyword" id="keyword" />
+        <input type="text" name="keyword" id="keyword" />
         <input type="submit" value="検索する" />
     </form>
 
     <form th:action="@{/squares/search/nickname}" method="get">
         <label for="nickname">ニックネーム：</label>
-        <input type="text" required name="nickname" id="nickname" />
+        <input type="text" name="nickname" id="nickname" />
         <input type="submit" value="検索する" />
     </form>
 
@@ -29,7 +29,8 @@
             <th>タイトル</th>
         </tr>
         <tr th:each="square: ${square_list}">
-            <td>[[${title.seq}]]</td>
+            <td></td>
+            <td>[[${square.title}]]</td>
         </tr>
     </table>
 </body>

@@ -29,26 +29,26 @@ public class UserController {
 
     @GetMapping("/squares")
     public String showGuestSquareListPage(Model model) {
-        List<Square> square_list = sService.getAllSquare();
+        List<Square> square_list = sService.filterSquaresByIsApproved(false);
         model.addAttribute("square_list", square_list);
+        
         return "guest_squarelist";
     }
 
+    // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/squares/search/keyword")
-    public String searchSuaresByKeyword(@RequestParam("keyword") String keyword, Model model){
+    public String searchSquaresByKeyword(@RequestParam("keyword") String keyword, Model model){
         List<Square> square_list = sService.searchSquaresByKeyword(keyword);
         model.addAttribute("square_list", square_list);
 
         return "guest_squarelist";
     }
 
+    // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/squares/search/nickname")
     public String searchSquaresByNickname(@RequestParam("nickname") String nickname, Model model){
-        System.out.println("Mapping OK");
         List<Square> square_list = sService.searchSquaresByNickname(nickname);
-        System.out.println("list get OK");
         model.addAttribute("square_list", square_list);
-        System.out.println("addAttribute OK");
 
         return "guest_squarelist";
     }

@@ -59,11 +59,11 @@ public class SquareService {
     }
 
     public List<Square> searchSquaresByKeyword(String keyword) {
-        Iterable<Square> result_title = sRepo.findByTitleContaining("%" + keyword + "%");
+        Iterable<Square> result_title = sRepo.findByTitleContaining(keyword);
         ArrayList<Square> list_title = new ArrayList<>();
         result_title.forEach(list_title::add);
 
-        Iterable<Square> result_description = sRepo.findByTitleContaining("%" + keyword + "%");
+        Iterable<Square> result_description = sRepo.findByDescriptionContaining(keyword);
         ArrayList<Square> list_description = new ArrayList<>();
         result_description.forEach(list_description::add);
 
@@ -77,7 +77,7 @@ public class SquareService {
     }
 
     public List<Square> searchSquaresByNickname(String nickname) {
-        Iterable<SquareCreator> result = cRepo.findByNicknameContaining("%" + nickname + "%");
+        Iterable<SquareCreator> result = cRepo.findByNicknameContaining(nickname);
         ArrayList<SquareCreator> list_creator = new ArrayList<>();
         result.forEach(list_creator::add);
 
