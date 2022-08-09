@@ -8,5 +8,30 @@
 <body>
     <h1>作成者マス一覧</h1>
     <a th:href="@{/login}" class="link">戻る</a>
+
+    <h2>検索</h2>
+    <form th:action="@{/squares/search/keyword}" method="get">
+        <label for="keyword">キーワード：</label>
+        <input type="text" name="keyword" id="keyword" />
+        <input type="submit" value="検索する" />
+    </form>
+
+    <form th:action="@{/squares/search/nickname}" method="get">
+        <label for="nickname">ニックネーム：</label>
+        <input type="text" name="nickname" id="nickname" />
+        <input type="submit" value="検索する" />
+    </form>
+
+    <h2>マス一覧</h2>
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>タイトル</th>
+        </tr>
+        <tr th:each="square: ${square_list}">
+            <td></td>
+            <td>[[${square.title}]]</td>
+        </tr>
+    </table>
 </body>
 </html>

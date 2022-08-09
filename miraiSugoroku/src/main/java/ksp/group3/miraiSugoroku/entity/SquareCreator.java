@@ -23,10 +23,7 @@ public class SquareCreator {
     Long eventId;
 
     int group;
-
     boolean isPermitted;
-
     String name;
-
     String nickname;
 }

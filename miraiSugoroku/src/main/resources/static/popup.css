@@ -14,12 +14,14 @@
     visibility: visible;
   }
   .popup-inner {
-    position: absolute;
+    position: relative;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
     width: 80%;
+    height: 80%;
     max-width: 600px;
+    border-radius:30%;
     padding: 50px;
     background-color: #fff;
     z-index: 2;
