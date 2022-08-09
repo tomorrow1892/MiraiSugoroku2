@@ -1,7 +1,10 @@
 package ksp.group3.miraiSugoroku.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,11 +12,13 @@ import org.springframework.stereotype.Service;
 import ksp.group3.miraiSugoroku.entity.Board;
 import ksp.group3.miraiSugoroku.entity.Player;
 import ksp.group3.miraiSugoroku.entity.Square;
+import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.entity.SquareEvent;
 import ksp.group3.miraiSugoroku.entity.Sugoroku;
 import ksp.group3.miraiSugoroku.form.GameConfigForm;
 import ksp.group3.miraiSugoroku.form.SugorokuInfoDto;
 import ksp.group3.miraiSugoroku.repository.BoardRepository;
+import ksp.group3.miraiSugoroku.repository.CreatorRepository;
 import ksp.group3.miraiSugoroku.repository.PlayerRepository;
 import ksp.group3.miraiSugoroku.repository.SquareEventRepository;
 import ksp.group3.miraiSugoroku.repository.SquareRepository;
@@ -22,6 +27,7 @@ import ksp.group3.miraiSugoroku.repository.SugorokuRepository;
 @Service
 public class GameService {
 
+    int minusRate = 50;
     // Repository
     @Autowired
     PlayerRepository pRepo;
@@ -33,6 +39,8 @@ public class GameService {
     SquareRepository sqRepo;
     @Autowired
     SquareEventRepository seRepo;
+    @Autowired
+    CreatorRepository cRepo;
     // Service
     @Autowired
     PlayerService pService;
@@ -45,12 +53,45 @@ public class GameService {
      * @param form
      * @return
      */
-    public Sugoroku createSugoroku(GameConfigForm form) {
+    public Sugoroku createSugoroku(GameConfigForm form, boolean withGroupSquares, Long creatorId) {
         Sugoroku g = form.toSugorokuEntity();
         Sugoroku game = sgRepo.save(g);
         Long gameId = game.getSugorokuId();
         pService.createPlayers(form, gameId);
-        // boardを作成する
+
+        List<Square> goodSquares;
+        List<Square> badSquares;
+        List<Square> neutralSquares;
+        if (creatorId < 0) {
+            withGroupSquares = false;
+        }
+        if (withGroupSquares) {
+            SquareCreator creator = cRepo.findById(creatorId).get();
+            Long event = creator.getEventID();
+            int group = creator.getGroup();
+            goodSquares = sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, 1, true);
+            badSquares = sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, -1, true);
+            neutralSquares = sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, 0, true);
+        } else {
+            goodSquares = sqRepo.findBySquareEffectAndIsApproved(1, true);
+            badSquares = sqRepo.findBySquareEffectAndIsApproved(-1, true);
+            neutralSquares = sqRepo.findBySquareEffectAndIsApproved(0, true);
+        }
+        int length = game.getLength();
+        int nBadSquares = length * minusRate / 100;
+        int nGoodSquares = length - nBadSquares;
+        List<Square> squares = takeAtRandom(goodSquares, nGoodSquares, new Random());
+        List<Square> bSquares = takeAtRandom(badSquares, nBadSquares, new Random());
+
+        squares.addAll(bSquares);
+        Collections.shuffle(squares);
+        int i = 0;
+        for (Square square : squares) {
+            Board board = new Board(null, gameId, square.getSquareId(), i + 1);
+            bRepo.save(board);
+            i++;
+        }
+
         return game;
     }
 
@@ -68,13 +109,12 @@ public class GameService {
         if (players.size() != 1) {
             // exceptionを返す
         }
-       
+
         Player player = players.get(0);
         System.out.println("ddddddddddddddddddddddddd");
         System.out.println(player.getPlayerId());
         pService.move(player.getPlayerId(), n);
 
-       
         return player;
     }
 
@@ -137,6 +177,40 @@ public class GameService {
         }
         SugorokuInfoDto dto = new SugorokuInfoDto(nPlayers, players, squares, nowPlayer);
         return dto;
+    }
+
+    // ------ utility
+    public static List<Square> takeAtRandom(Collection<Square> list, int n, Random random) {
+        if (list == null) {
+            throw new IllegalArgumentException("引数 list の値が null です。");
+        }
+        if (n > list.size()) {
+            throw new IllegalArgumentException(
+                    String.format("引数 n の値 %d が引数 list のサイズ %d より大きいです。",
+                            n, list.size()));
+        }
+        if (random == null) {
+            throw new IllegalArgumentException("引数 random の値が null です。");
+        }
+
+        final List<Square> taken = new ArrayList<>(n); // ランダムに選択された要素を持たせるリスト
+
+        final List<Square> remaining = new ArrayList<>(list); // 残っている要素のリスト
+        for (int i = 0; i < n; i++) { // n 回繰り返す。
+            final int remainingCount = remaining.size(); // 残っている要素の数
+            final int index = random.nextInt(remainingCount); // ランダムに選択されたインデックス
+
+            final Square element = remaining.get(index); // ランダムに選択された要素
+            taken.add(element); // ランダムに選択された要素のリストの末尾にランダムに選択された要素を追加する。
+
+            final int lastIndex = remainingCount - 1; // 残っている要素のリストの末尾のインデックス
+            final Square lastElement = remaining.remove(lastIndex); // 残っている要素のリストから末尾を削除する。
+            if (index < lastIndex) { // ランダムに選択された要素が末尾以外なら…
+                remaining.set(index, lastElement); // それを末尾の要素で置換する。
+            }
+        }
+
+        return taken;
     }
 
 }

@@ -10,7 +10,7 @@ import ksp.group3.miraiSugoroku.entity.Square;
 @Repository
 public interface SquareRepository extends CrudRepository<Square, Long> {
     public List<Square> findAll();
-    
+
     public List<Square> findByIsApproved(boolean isApproved);
 
     public List<Square> findByTitleContaining(String keyword);
@@ -22,4 +22,9 @@ public interface SquareRepository extends CrudRepository<Square, Long> {
     public List<Square> findByEventIdAndGroupId(Long eventId, int groupId);
 
     public List<Square> findByEventIdAndIsApproved(Long eventId, boolean isApproved);
+
+    public List<Square> findByEventIdAndGroupIdAndSquareEffectAndIsApproved(Long eventId, int groupId, int squareEffect,
+            boolean isApproved);
+
+    public List<Square> findBySquareEffectAndIsApproved(int squareEffect, boolean isApproved);
 }
