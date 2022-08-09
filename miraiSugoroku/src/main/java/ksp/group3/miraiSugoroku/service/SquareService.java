@@ -31,6 +31,10 @@ public class SquareService {
         return sRepo.findById(squareId).get();
     }
 
+    public List<Square> getAllSquare(){
+        return sRepo.findAll();
+    }
+
     public Square updateSquare(Long squareId, SquareForm form) {
         Square square = getSquare(squareId);
         square.setTitle(form.getTitle());

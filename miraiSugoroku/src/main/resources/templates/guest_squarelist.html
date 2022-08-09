@@ -8,5 +8,16 @@
 <body>
     <h1>ゲストマス一覧</h1>
     <a th:href="@{/menu}" class="link">戻る</a>
+
+    <h2>マス一覧</h2>
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>タイトル</th>
+        </tr>
+        <tr th:each="square: ${square_list}">
+            <td>[[${title.seq}]]</td>
+        </tr>
+    </table>
 </body>
 </html>
