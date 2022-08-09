@@ -23,7 +23,7 @@
 
     <form th:action="@{/login/}" method="post" th:object="${creatorLoginForm}">
         <!--/* イベント選択のドロップダウン */-->
-        <select id="selectdEventId" name="selectdEventId">
+        <select id="selectedEventId" name="selectedEventId">
 
             <option value="イベントを選択">- イベントを選択してください -</option>
             <option th:each="e: ${events}"

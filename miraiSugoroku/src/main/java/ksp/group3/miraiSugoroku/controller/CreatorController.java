@@ -1,6 +1,7 @@
 package ksp.group3.miraiSugoroku.controller;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ksp.group3.miraiSugoroku.entity.Event;
 import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.form.CreatorLoginForm;
+import ksp.group3.miraiSugoroku.form.UpdateSquareCreatorForm;
 import ksp.group3.miraiSugoroku.repository.CreatorRepository;
 import ksp.group3.miraiSugoroku.repository.EventRepository;
 import ksp.group3.miraiSugoroku.service.CreatorService;
@@ -54,18 +56,20 @@ public class CreatorController {
 
         //Admin実装前の各種データ登録用
         if (eRepo.count() == 0) {
+            System.out.println("Created Events!");
             Calendar cl = Calendar.getInstance();
 
             for (int i = 2022; i >= 2020; i--)
             {
                 cl.set(Calendar.YEAR, i);
-                Event e = new Event(null, 0, cl.getTime(), cl.getTime(), "Test event-" + String.valueOf(i), true);
+                Event e = new Event(null, 5, cl.getTime(), cl.getTime(), "Test event-" + String.valueOf(i), true);
                 
                 eRepo.save(e);
             }
         }
 
         if (cRepo.count() == 0) {
+            System.out.println("Created SquareCreator!");
             SquareCreator sc1 = new SquareCreator(null, "taro", 1L, 0, true, "Taro", null);
             SquareCreator sc2 = new SquareCreator(null, "hanako", 2L, 0, true, "Hanako", null);
             SquareCreator sc3 = new SquareCreator(null, "mika", 3L, 0, true, "Mika", null);
@@ -90,7 +94,7 @@ public class CreatorController {
     }
 
     @PostMapping("/search")
-    public String showEventList(@ModelAttribute("createrLoginForm") CreatorLoginForm form, RedirectAttributes redirectAttributes, Model model) {
+    public String showEventList(@ModelAttribute("creatorLoginForm") CreatorLoginForm form, RedirectAttributes redirectAttributes, Model model) {
         List<Event> events = eService.filterEventsByYear(form.getSelectedYear());
         
         redirectAttributes.addFlashAttribute("events", events);
@@ -118,27 +122,40 @@ public class CreatorController {
 
     @PostMapping("/login")
     public String creatorLogin(@ModelAttribute("creatorLoginForm") CreatorLoginForm form, Model model) {
-        System.out.println(form.getSelectedEventId());
-        System.out.println(form.getLoginId());
         SquareCreator sc = cService.getSquareCreatorByEventIdAndLoginId(form.getSelectedEventId(), form.getLoginId());
 
-        return "redirect:/" + sc.getCreatorId() + "/manu";
+        if (Objects.isNull(sc.getNickname())) {
+            return "redirect:/" + sc.getCreatorId() + "/detail";
+        }
+
+        return "redirect:/" + sc.getCreatorId() + "/menu";
     }
 
-    @GetMapping("/{cid}/manu")
+    @GetMapping("/{creatorId}/menu")
     public String showcreatorMenu() {
         return "creator_menu";
     }
 
-    @GetMapping("/{cid}/detail")
-    public String showcreatorDetailForm() {
+    @GetMapping("/{creatorId}/detail")
+    public String showcreatorDetailForm(@ModelAttribute("updateSquareCreatorForm") UpdateSquareCreatorForm form, @PathVariable("creatorId") Long creatorId,Model model) {
+        SquareCreator sc = cService.getSquareCreator(creatorId);
+        Event e = eService.getEvent(sc.getEventId());
+        List<Integer> groups = new ArrayList<>();
+
+        for (int i = 1; i <= e.getNGroups(); i++) {
+            groups.add(i);
+        }
+
+        model.addAttribute("groups", groups);
+        
+
         return "creator_profile";
     }
 
-    @PostMapping("/{cid}/update")
-    public String updatecreatorDetail() {// (SquarecreatorForm form) {
-        String cid = "test";
-        return "redirect:/" + cid + "/menu";
+    @PostMapping("/{creatorId}/update")
+    public String updatecreatorDetail(@ModelAttribute("updateSquareCreatorForm") UpdateSquareCreatorForm form, @PathVariable("creatorId") Long creatorId, Model model) {
+        cService.updateSquareCreator(creatorId, form);
+        return "redirect:/" + creatorId + "/menu";
     }
 
     @GetMapping("/{cid}/squares")
