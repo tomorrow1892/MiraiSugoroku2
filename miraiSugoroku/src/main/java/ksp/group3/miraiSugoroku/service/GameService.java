@@ -1,5 +1,6 @@
 package ksp.group3.miraiSugoroku.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import ksp.group3.miraiSugoroku.entity.Square;
 import ksp.group3.miraiSugoroku.entity.SquareEvent;
 import ksp.group3.miraiSugoroku.entity.Sugoroku;
 import ksp.group3.miraiSugoroku.form.GameConfigForm;
+import ksp.group3.miraiSugoroku.form.SugorokuInfoDto;
 import ksp.group3.miraiSugoroku.repository.BoardRepository;
 import ksp.group3.miraiSugoroku.repository.PlayerRepository;
 import ksp.group3.miraiSugoroku.repository.SquareEventRepository;
@@ -94,6 +96,41 @@ public class GameService {
         SquareEvent squareEvent = seRepo.findById(square.getSquareEventId()).get();
         Player p = seService.doEvent(squareEvent, playerId);
         return p;
+    }
+
+    /**
+     * 中断復帰の際にフロントに渡すデータを取得する
+     * 
+     * @param sugorokuId
+     * @return
+     */
+    public SugorokuInfoDto getSugorokuInfo(Long sugorokuId) {
+        Sugoroku game = sgRepo.findById(sugorokuId).get();
+        int nPlayers = game.getNPlayers();
+        int turn = game.getNowPlayer();
+        List<Player> np = pRepo.findBySugorokuIdAndOrder(sugorokuId, turn);
+        if (np.size() != 1) {
+            // exceptionを投げる
+        }
+        Player nowPlayer = np.get(0);
+        ArrayList<Player> players = new ArrayList<Player>();
+        for (int i = 0; i < nPlayers; i++) {
+            List<Player> pls = pRepo.findBySugorokuIdAndOrder(sugorokuId, i + 1);
+            if (pls.size() != 1) {
+                // throw exception
+            }
+            players.add(pls.get(0));
+        }
+        ArrayList<Square> squares = new ArrayList<Square>();
+        for (int i = 0; i < game.getLength(); i++) {
+            List<Board> bs = bRepo.findBySugorokuIdAndSequence(sugorokuId, i + 1);
+            if (bs.size() != 1) {
+                // exceptionを投げる
+            }
+            squares.add(sqRepo.findById(bs.get(0).getSquareId()).get());
+        }
+        SugorokuInfoDto dto = new SugorokuInfoDto(nPlayers, players, squares, nowPlayer);
+        return dto;
     }
 
 }
