@@ -1,5 +1,7 @@
 package ksp.group3.miraiSugoroku.service;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +21,18 @@ public class SquareEventService {
     @Autowired
     PlayerService pService;
 
-    public SquareEvent getSquareEvent(Long squareEventId){
+    public SquareEvent getSquareEvent(Long squareEventId) {
         return seRepo.findById(squareEventId).get();
     }
 
-    public Player doEvent(SquareEvent e, Long playerId){
+    public List<SquareEvent> getAllSquareEvent() {
+        List<SquareEvent> seList = seRepo.findAll();
+        return seList;
+    }
+
+    public Player doEvent(SquareEvent e, Long playerId) {
         Player p;
-        switch(e.getActionNumber()){
+        switch (e.getActionNumber()) {
             case 1:
                 p = pService.move(playerId, e.getArgument());
                 break;
@@ -36,15 +43,15 @@ public class SquareEventService {
                 p = pService.updatePoints(playerId, e.getArgument());
                 break;
             default:
-                //　ここが呼ばれるのは不自然
+                // ここが呼ばれるのは不自然
                 p = pService.getPlayer(playerId);
-                
+
         }
         return p;
     }
 
     @PostConstruct
-    public void registerSquareEvent(){
+    public void registerSquareEvent() {
         SquareEvent se;
 
         se = new SquareEvent();

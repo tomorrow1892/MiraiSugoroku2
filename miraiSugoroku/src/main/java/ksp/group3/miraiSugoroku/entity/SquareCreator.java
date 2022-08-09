@@ -17,16 +17,10 @@ public class SquareCreator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long creatorID;
-
     String loginID;
-
     Long eventID;
-
     int group;
-
     boolean isPermitted;
-
     String name;
-
     String nickname;
 }
