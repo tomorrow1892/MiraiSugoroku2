@@ -61,7 +61,7 @@ public class CreatorController {
 
     @GetMapping("/{cid}/squares")
     public String showSquare(Model model) {
-        List<Square> square_list = sService.filterSquaresByIsApproved(false);
+        List<Square> square_list = sService.filterSquaresByIsApproved(true);
         model.addAttribute("square_list", square_list);
         return "creator_squarelist";
     }

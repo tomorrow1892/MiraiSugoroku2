@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/squares")
     public String showGuestSquareListPage(Model model) {
-        List<Square> square_list = sService.filterSquaresByIsApproved(false);
+        List<Square> square_list = sService.filterSquaresByIsApproved(true);
         model.addAttribute("square_list", square_list);
         
         return "guest_squarelist";
