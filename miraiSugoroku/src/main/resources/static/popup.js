@@ -39,17 +39,17 @@ function popupImage() {
     var popup = document.getElementById('js-popup');
     if(!popup) return;
     popup.classList.remove('is-show');
-    var popupinner = document.getElementById("popup-inner");
-    popupinner.removeChild(popupinner.firstElementChild);
+    var popupContents = document.getElementById("popup-contents");
+    popupContents.remove();
   }
 
   function setGoalPopup(){
     var popupinner = document.getElementById("popup-inner");
     if(!popupinner) return;
-    popupinner.insertAdjacentHTML('afterbegin','<div>ゴール!</div>');
+    popupinner.insertAdjacentHTML('afterbegin','<div id="popup-contents" style="position:absolute;left:50%;top:50%;">ゴール!</div>');
   }
   function setEventPopup(){
     var popupinner = document.getElementById("popup-inner");
     if(!popupinner) return;
-    popupinner.insertAdjacentHTML('afterbegin','<div>イベント内容</div>');
+    popupinner.insertAdjacentHTML('afterbegin','<div id="popup-contents" style="position:absolute;left=50%;top=50%;">イベント内容</div>');
   }

@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/popup.css}">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 </head>
+<script th:src="@{/Player.js}"></script>
 <script th:src="@{/GameController.js}"></script>
 
 
@@ -35,6 +36,7 @@
     <button type="button" onclick="playGame()" style="width: 200px;height: 200px; position: relative; border-radius: 50%;
     left:500px;top:-200px; background-color: rgba(165, 42, 42, 0.349);">ゲーム開始!!!</button>
     <section>
+        <img th:src="@{/img/sikaku.png}" id="masu_start">
         <img th:src="@{/img/sikaku.png}" id="masu1">
         <img th:src="@{/img/sikaku.png}" id="masu2">
         <img th:src="@{/img/sikaku.png}" id="masu3">
@@ -52,15 +54,16 @@
     <img th:src="@{/img/1.png}" class="coma" id="coma3" width="50px" height="50px">
     <img th:src="@{/img/1.png}" class="coma" id="coma4" width="50px" height="50px">
     <script>
+        //コマの初期配置を，スタートマスの上になるように設定
         for (let index = 0; index < 4; index++) {
-            let masu1_position_top = document.getElementById(`masu1`).getBoundingClientRect().top;
-            let masu1_position_left = document.getElementById("masu1").getBoundingClientRect().left;
-            let masu1_width = document.getElementById("masu1").getBoundingClientRect().width;
-            let masu1_height = document.getElementById("masu1").getBoundingClientRect().height;
+            let masu_start_position_top = document.getElementById(`masu_start`).getBoundingClientRect().top;
+            let masu_start_position_left = document.getElementById("masu_start").getBoundingClientRect().left;
+            let masu_start_width = document.getElementById("masu_start").getBoundingClientRect().width;
+            let masu_start_height = document.getElementById("masu_start").getBoundingClientRect().height;
             let element = document.getElementById(`coma${index + 1}`);
             element.style.position = "absolute";
-            element.style.top = masu1_position_top + masu1_height / 2 + index * 20;
-            element.style.left = masu1_position_left + masu1_width / 2 + index * 20;
+            element.style.top = masu_start_position_top + masu_start_height / 2 + index * 20;
+            element.style.left = masu_start_position_left + masu_start_width / 2 + index * 20;
         }
 
     </script>
@@ -71,11 +74,7 @@
 
     <div class="popup" id="js-popup">
         <div class="popup-inner" id="popup-inner">
-          <!-- <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div> -->
-          <!-- <a href="#"> -->
-            <!-- <img src="/img/1さいころ.jpg" alt="ポップアップ画像"> -->
-          <!-- </a> -->
-          <button id ="popupButton" >確認</button>
+          <button id ="popupButton" style="position: absolute;left:50%;top:80%;" >確認</button>
         </div>
         <div class="black-background" id="js-black-bg"></div>
       </div>
@@ -84,7 +83,7 @@
 </body>
 <script th:src = "@{/popup.js}"></script>
 <script>
-
+    //サイコロの見た目に関する設定
     let diceArry1 = ['./img/1さいころ.jpg',
         './img/2さいころ.jpg',
         './img/3さいころ.jpg',
@@ -97,18 +96,13 @@
     dice1.src = diceArry1[0];
     let diceIndex1;
 
-    function syncDelay(milliseconds) {
-        var start = new Date().getTime();
-        var end = 0;
-        while ((end - start) < milliseconds) {
-            end = new Date().getTime();
-        }
-    }
 
+    //サイコロを振るボタンを押したときの挙動を設定
     diceBtn1.addEventListener("click", function () {
         // const sleep = (second) => new Promise(resolve => setTimeout(resolve, second * 1000));
 
-        if (diceBtn1.textContent == 'さいころを振る') {
+        
+        if (diceBtn1.textContent == 'さいころを振る') {//サイコロが止まっている状態で，サイコロを振ったときの動作
             
             diceBtn1.textContent = 'ストップ';
             dice1.style.display = 'none'
@@ -118,7 +112,7 @@
                 dice1.src = diceArry1[diceIndex1];
             }, 50);
 
-        } else {
+        } else {//サイコロが回ってる状態で，サイコロを止めた時の動作
             diceBtn1.textContent = 'さいころを振る';
             clearInterval(timerId1);
             anidice1.style.display = 'none'
@@ -126,9 +120,8 @@
             btnDisabled("diceBtn1", true);
             document.getElementsByTagName("body")[0].insertAdjacentHTML("beforeend", `<div>出た目の数字:  ${diceIndex1 + 1}</div>`);
             
-            turnPlayer.requestDiceRoll(diceIndex1+1); //RestControllerが実装出来たら以下をこっちに変更
-            //turnPlayer.setMoveCount(diceIndex1+1);
-            //turnPlayer.move(); 
+            //バックエンドに出目を送信
+            turnPlayer.requestDiceRoll(diceIndex1+1); 
 
         }
     })
