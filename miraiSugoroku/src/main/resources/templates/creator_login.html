@@ -7,6 +7,34 @@
 </head>
 <body>
     <h1>作成者ログイン</h1>
+
+    <form th:action="@{/search/}" method="get", th:object="${creatorLoginForm}">
+        <!--/* 年度選択のドロップダウン */-->
+        <select id="selectedYear" name="selectedYear">
+            <option th:each="y: ${years}"
+                    th:value="${y}"
+                    th:text="${y}"
+                    th:selected="${y == creatorLoginForm.selectedYear}">
+            </option>
+        </select>
+
+        <p><input type="submit" value="検索" /></p>
+    </form>
+
+    <form th:action="@{/login}" method="post" th:object="${creatorLoginForm}">
+        <!--/* イベント選択のドロップダウン */-->
+        <select id="selectdEventId" name="selectdEventId">
+
+            <option value="イベントを選択">- イベントを選択してください -</option>
+            <option th:each="e: ${events}"
+                    th:value="${e.eventId}"
+                    th:text="${e.name}"
+                    th:selected="${e.eventId == creatorLoginForm.selectedEventId}"></option>
+            </option>
+        </select>
+
+        <input type="text" th:field="*{loginId}" />
+    </form>
     <a th:href="@{/login}" class="link">ログイン</a>
 </body>
 </html>

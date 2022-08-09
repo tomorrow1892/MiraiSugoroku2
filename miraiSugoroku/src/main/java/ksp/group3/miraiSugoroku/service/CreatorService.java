@@ -41,11 +41,15 @@ public class CreatorService {
         return cRepo.save(sc);
     }
 
-    void deleteSquareCreator(long creatorId) {
+    public void deleteSquareCreator(long creatorId) {
         cRepo.deleteById(creatorId);
     }
 
-    List<SquareCreator> getSquareCreatorsByEventId(long eventId) {
-        return cRepo.findByEventID(eventId);
+    public List<SquareCreator> getSquareCreatorsByEventId(long eventId) {
+        return cRepo.findByEventId(eventId);
+    }
+
+    public SquareCreator getSquareCreatorByEventIdAndLoginId(long eventId, String loginId) {
+        return cRepo.findByEventIdAndLoginId(eventId, loginId);
     }
 }

@@ -12,6 +12,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 @Service
 public class EventService {
     @Autowired
@@ -65,4 +67,5 @@ public class EventService {
     public List<Event> getActiveEvents(Date day) {
         return eRepo.findByLimitDateAfter(day);
     }
+
 }
