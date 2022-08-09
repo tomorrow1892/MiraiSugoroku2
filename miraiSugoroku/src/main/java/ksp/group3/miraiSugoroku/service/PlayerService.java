@@ -1,10 +1,14 @@
 package ksp.group3.miraiSugoroku.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ksp.group3.miraiSugoroku.entity.Player;
 import ksp.group3.miraiSugoroku.entity.Sugoroku;
+import ksp.group3.miraiSugoroku.form.GameConfigForm;
 import ksp.group3.miraiSugoroku.repository.PlayerRepository;
 import ksp.group3.miraiSugoroku.repository.SugorokuRepository;
 
@@ -33,6 +37,7 @@ public class PlayerService {
             player.setPosition(0);
         } else if (position > length + 1) {
             player.setPosition(length + 1);
+            player.setIsGoaled(true);
         } else {
             player.setPosition(position);
         }
@@ -68,6 +73,58 @@ public class PlayerService {
             player.setPoints(score);
         }
         return pRepo.save(player);
+    }
+
+    /**
+     * 指定されたすごろくの現在のプレイヤーの順番を返す
+     * 
+     * @param sugorokuId
+     * @return
+     */
+    public Player getTurnPlayer(Long sugorokuId) {
+        Sugoroku game = sRepo.findById(sugorokuId).get();
+        int turn = game.getNowPlayer();
+        List<Player> p = pRepo.findBySugorokuIdAndOrder(sugorokuId, turn);
+        if (p.size() != 1) {
+            // exceptionを返す
+        }
+        Player player = p.get(0);
+        return player;
+    }
+
+    /**
+     * GameConfigFormからプレイヤーを生成する
+     * 
+     * @param form
+     * @param sugorokuId プレイヤーの作成元となるすごろくのID
+     * @return
+     */
+    public List<Player> createPlayers(GameConfigForm form, Long sugorokuId) {
+        int nPlayers = form.getNPlayers();
+        List<String> names = form.getNames();
+        if (nPlayers == 0) {
+            nPlayers = names.size();
+        }
+
+        List<String> icons = form.getIcons();
+        List<Player> players = new ArrayList<Player>();
+        for (int i = 0; i < nPlayers; i++) {
+            Player player = new Player(null, sugorokuId, icons.get(i), names.get(i), i + 1, 0, 0, false, false);
+            players.add(player);
+            pRepo.save(player);
+        }
+        return players;
+    }
+
+    /**
+     * IDからプレイヤーを返す
+     * 
+     * @param playerId
+     * @return
+     */
+    public Player getPlayer(Long playerId) {
+        Player player = pRepo.findById(playerId).get();
+        return player;
     }
 
 }
