@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class GameController {
     
-    @GetMapping("/game/{sugorokuId}")
+    @GetMapping("/game/{sugorokuId}/")
     public String showSugorokuPage(@PathVariable String sugorokuId,Model model) {
         Long sId = Long.parseLong(sugorokuId);
         model.addAttribute("sugorokuId",sId);

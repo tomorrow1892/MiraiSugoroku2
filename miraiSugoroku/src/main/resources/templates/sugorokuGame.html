@@ -1,4 +1,4 @@
-<html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>dice3</title>
     <link rel="stylesheet" th:href="@{/Dice.css}">
@@ -17,7 +17,7 @@ var sugorokuId =1;
 <body>
 
     <div class="diceContent">
-        <img id="dice1" th:src="@{/img/1dice.jpg}" style="display: block;"></img>
+        <img id="dice1" src="@{/img/1dice.jpg}" style="display: block;"></img>
 
 
         <div class="dice1" style="display: none;">
@@ -86,12 +86,12 @@ var sugorokuId =1;
 <script th:src = "@{/popup.js}"></script>
 <script>
     //サイコロの見た目に関する設定
-    let diceArry1 = ['./img/1さいころ.jpg',
-        './img/2さいころ.jpg',
-        './img/3さいころ.jpg',
-        './img/4さいころ.jpg',
-        './img/5さいころ.jpg',
-        './img/6さいころ.jpg'];
+    let diceArry1 = ['./img/1dice.jpg',
+        './img/2dice.jpg',
+        './img/3dice.jpg',
+        './img/4dice.jpg',
+        './img/5dice.jpg',
+        './img/6dice.jpg'];
     const dice1 = document.getElementById("dice1");
     const anidice1 = document.querySelector(".dice1");
     const diceBtn1 = document.getElementById("diceBtn1");
