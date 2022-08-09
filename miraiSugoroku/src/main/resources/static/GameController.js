@@ -7,7 +7,7 @@ let turnPlayer;
 let phase = "diceRoll";
 
 class Player {
-    constructor(comaId, name, point, position, isBreak, isGoal,myPlayerIndex, nextPlayerIndex) {
+    constructor(comaId, name, point, position, isBreak, isGoal, myPlayerIndex, nextPlayerIndex) {
         this.comaId = comaId;
         this.name = name;
         this.point = point;
@@ -42,11 +42,11 @@ class Player {
             console.log("現在位置:" + this.position);
             if (this.moveCount == 0) {
                 if (phase == "diceRoll") { //サイコロによる移動が終わったとき
-                    
-                    if(this.isGoal == true){//ゴールした時,ゴールのポップアップを出す．
+
+                    if (this.isGoal == true) {//ゴールした時,ゴールのポップアップを出す．
                         showPopup(setGoalPopup);
                     }
-                    else{//ゴールしてないとき，イベントのポップアップを出す
+                    else {//ゴールしてないとき，イベントのポップアップを出す
                         showPopup(setEventPopup);
                     }
                 }
@@ -74,7 +74,7 @@ class Player {
         let newPoint = response.points;
         let newIsBreak = response.isBreak;
         let newIsGoal = response.isGoaled;
-        this.reflectStatus(newPosition, newPoint, newIsBreak,newIsGoal);
+        this.reflectStatus(newPosition, newPoint, newIsBreak, newIsGoal);
     }
 
     //イベント実行のリクエストをバックエンドに送って，帰ってきたプレイヤーのステータスをviewに反映
@@ -89,19 +89,14 @@ class Player {
         let newPoint = response.points;
         let newIsBreak = response.isBreak;
         let newIsGoal = response.isGoaled;
-        this.reflectStatus(newPosition, newPoint, newIsBreak,newIsGoal);
+        this.reflectStatus(newPosition, newPoint, newIsBreak, newIsGoal);
     }
 
-    reflectStatus(position, point, isBreak,isGoal) {
+    reflectStatus(position, point, isBreak, isGoal) {
         console.log(isGoal);
-         //ゴールしたとき
-         if(this.isGoal == false && isGoal == true){
+        //ゴールしたとき
+        if (this.isGoal == false && isGoal == true) {
             this.isGoal = true;
-        }
-        //バックエンドでプレイヤーの位置が変化している場合
-        if (this.position != position) {
-            this.moveCount = position - this.position;
-            this.move();
         }
         //バックエンドでポイントが変化している場合
         if (this.point != point) {
@@ -110,7 +105,13 @@ class Player {
             console.log(`textarea${this.myPlayerIndex}`);
             document.getElementById(`textarea${this.myPlayerIndex}`).innerText = point;
         }
-       
+
+        //移動
+        this.moveCount = position - this.position;
+        this.move();
+
+
+
     }
 
 
@@ -128,6 +129,10 @@ class Player {
             anim = 'moveLeft';
             this.position -= 1;
         }
+        if (this.moveCount == 0) {
+            anim = 'notMove';
+            console.log("notmove");
+        }
 
         objComa.style.animationName = anim;	// アニメ開始
     }
@@ -139,10 +144,10 @@ class Player {
 //ページが読み込まれて初めに実行される
 window.onload = function () {
     btnDisabled("diceBtn1", true);
-    player1 = new Player("coma1", "さんだろう", 0, 1, false, false,1, 2);
-    player2 = new Player("coma2", "よんだろう", 0, 1, false, false,2, 3);
-    player3 = new Player("coma3", "ごだろう", 0, 1, false, false,3, 4);
-    player4 = new Player("coma4", "ろくだろう", 0, 1, false, false,4, 1);
+    player1 = new Player("coma1", "さんだろう", 0, 1, false, false, 1, 2);
+    player2 = new Player("coma2", "よんだろう", 0, 1, false, false, 2, 3);
+    player3 = new Player("coma3", "ごだろう", 0, 1, false, false, 3, 4);
+    player4 = new Player("coma4", "ろくだろう", 0, 1, false, false, 4, 1);
     turnPlayer = player1;
     let playerPoint = document.getElementById(`point1`);
     playerPoint.insertAdjacentHTML('afterbegin', `${player1.name}のポイント<textarea id='textarea1'>${player1.point}</textarea>`)
