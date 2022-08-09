@@ -70,18 +70,17 @@
     <br><br><br><br><br>
 
     <div class="popup" id="js-popup">
-        <div class="popup-inner">
+        <div class="popup-inner" id="popup-inner">
           <!-- <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div> -->
-          <a href="#"><img src="/img/1さいころ.jpg" alt="ポップアップ画像"></a>
+          <!-- <a href="#"> -->
+            <!-- <img src="/img/1さいころ.jpg" alt="ポップアップ画像"> -->
+          <!-- </a> -->
           <button id ="popupButton" >確認</button>
         </div>
         <div class="black-background" id="js-black-bg"></div>
       </div>
 
-      
-
-
-      <button id="js-show-popup" >Show Popup</button>
+    
 </body>
 <script th:src = "@{/popup.js}"></script>
 <script>
@@ -110,7 +109,7 @@
         // const sleep = (second) => new Promise(resolve => setTimeout(resolve, second * 1000));
 
         if (diceBtn1.textContent == 'さいころを振る') {
-            phase = "diceRoll";
+            
             diceBtn1.textContent = 'ストップ';
             dice1.style.display = 'none'
             anidice1.style.display = 'block';
@@ -126,8 +125,10 @@
             dice1.style.display = 'block'
             btnDisabled("diceBtn1", true);
             document.getElementsByTagName("body")[0].insertAdjacentHTML("beforeend", `<div>出た目の数字:  ${diceIndex1 + 1}</div>`);
-            turnPlayer.setMoveCount(diceIndex1 + 1);
-            turnPlayer.move();
+            
+            turnPlayer.requestDiceRoll(diceIndex1+1); //RestControllerが実装出来たら以下をこっちに変更
+            //turnPlayer.setMoveCount(diceIndex1+1);
+            //turnPlayer.move(); 
 
         }
     })

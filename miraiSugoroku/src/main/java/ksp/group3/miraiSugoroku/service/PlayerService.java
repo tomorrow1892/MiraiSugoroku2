@@ -96,11 +96,11 @@ public class PlayerService {
     public Player getTurnPlayer(Long sugorokuId) {
         Sugoroku game = sRepo.findById(sugorokuId).get();
         int turn = game.getNowPlayer();
-        // List<Player> p = pRepo.findBySugorokuIdAndOrder(sugorokuId, turn);
-        // if (p.size() != 1) {
-        // // exceptionを返す
-        // }
-        Player player = new Player();// p.get(0);
+        List<Player> p = pRepo.findBySugorokuIdAndOrder(sugorokuId, turn);
+        if (p.size() != 1) {
+            // exceptionを返す
+        }
+        Player player = p.get(0);
         return player;
     }
 

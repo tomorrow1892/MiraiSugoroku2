@@ -10,8 +10,8 @@ import ksp.group3.miraiSugoroku.entity.Player;
 @Repository
 public interface PlayerRepository extends CrudRepository<Player, Long> {
 
-    // List<Player> findBySugorokuId(Long sugorokuId);
+    List<Player> findBySugorokuId(Long sugorokuId);
 
-    // List<Player> findBySugorokuIdAndOrder(Long sugorokuoId, int order);
+    List<Player> findBySugorokuIdAndOrder(Long sugorokuoId, int order);
 
 }

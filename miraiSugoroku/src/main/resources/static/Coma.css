@@ -17,3 +17,9 @@
 		transform:translateX(-200px);
 	}
 }
+
+@keyframes notMove {
+	to {
+		transform:translateX(0px);
+	}
+}
