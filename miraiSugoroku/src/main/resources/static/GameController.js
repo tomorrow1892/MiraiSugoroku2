@@ -9,6 +9,11 @@ let turnPlayer;
 
 
 //ページが読み込まれて初めに実行される
+// for (let index = 0; index < player_list.length; index++) {
+//     let 
+    
+// }
+
 
 window.onload = function () {
     btnDisabled("diceBtn1", true);

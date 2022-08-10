@@ -36,6 +36,7 @@ public class GameController {
         model.addAttribute("playerList",sugorokuInfoDto.getPlayers());
         model.addAttribute("squareList",sugorokuInfoDto.getSquares());
         model.addAttribute("nowPlayer",sugorokuInfoDto.getNowPlayer());
+        model.addAttribute("sugorokuId",sId);
 
         return "sugorokuGame";
     }
