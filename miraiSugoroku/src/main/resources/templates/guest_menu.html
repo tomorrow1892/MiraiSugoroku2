@@ -4,13 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>メニュー</title>
+    <link rel="stylesheet" th:href="@{/css/display.css}">
 </head>
 <body>
-    <h1>ゲストメニュー</h1>
-    <a th:href="@{/config}" class="link">すごろくで遊ぶ</a>
-    <a th:href="@{/squares}" class="link">マス一覧</a>
-    <a th:href="@{/}" class="link">トップページ</a>
-
+    <div class="parent">
+        <div>
+            <h1>ゲストメニュー</h1>
+        </div>
+        <div>
+            <button onclick="location.href='/config'">すごろくで遊ぶ</button>
+            <button onclick="location.href='/squares'">マス一覧</button>
+            <button onclick="location.href='/'">トップページ</button>
+        </div>
+    </div>
     
 </body>
 </html>

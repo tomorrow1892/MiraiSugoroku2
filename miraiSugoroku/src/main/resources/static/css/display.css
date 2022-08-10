@@ -7,6 +7,11 @@
     height: 100vh;
 }
 
+.back_button{
+    width: 5em;
+    height: 2em;
+}
+
 button{
     width: 20em;
     height: 10em;

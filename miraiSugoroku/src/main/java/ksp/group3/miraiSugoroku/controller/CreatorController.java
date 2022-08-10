@@ -71,6 +71,7 @@ public class CreatorController {
                 Event e = new Event(null, 5, cl.getTime(), cl.getTime(), "Test event-" + String.valueOf(i), true);
 
                 eRepo.save(e);
+                System.out.println("save OK");
             }
         }
 
@@ -140,7 +141,8 @@ public class CreatorController {
     }
 
     @GetMapping("/{creatorId}/menu")
-    public String showcreatorMenu() {
+    public String showcreatorMenu(@PathVariable("creatorId") String creatorId, Model model) {
+        model.addAttribute("cid", creatorId);
         return "creator_menu";
     }
 
@@ -168,9 +170,10 @@ public class CreatorController {
     }
 
     @GetMapping("/{cid}/squares")
-    public String showSquare(Model model) {
+    public String showSquare(@PathVariable("cid") String cid, Model model) {
         List<Square> square_list = sService.filterSquaresByIsApproved(true);
         model.addAttribute("square_list", square_list);
+        model.addAttribute("cid", cid);
         return "creator_squarelist";
     }
 
@@ -195,11 +198,10 @@ public class CreatorController {
     @GetMapping("/{cid}/create") // マス作成画面を表示
     public String showSquareCreateFrom(@PathVariable String cid, Model model) {
         model.addAttribute("SquareForm", new SquareForm());
-        // model.addAttribute("cid", cid);
+        model.addAttribute("cid", "Test");
         List<SquareEvent> SquareEventList = seService.getAllSquareEvent();
         SquareEventList.remove(13);
         model.addAttribute("SquareEventList", SquareEventList);
-        model.addAttribute("cid", "test");
         return "creator_create";
     }
 
