@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,11 +22,8 @@ public class Player {
     Long sugorokuId; // playerが参加するすごろくのID
     String icon; // アイコンの画像のパス情報
     String name; // playerの名前
-    @NotBlank
     int order; // playerがサイコロを振る順番
-    @NotBlank
     int points; // playerのスコア
-    @NotBlank
     int position; // playerの現在位置（何番目のマスにいるかを返す）
     Boolean isGoaled; // playerがすでにゴールしていたらTrueを返す
     Boolean isBreak; // playerが休み状態であるときTrueを返す

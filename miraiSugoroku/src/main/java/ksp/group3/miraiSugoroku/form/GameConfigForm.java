@@ -5,8 +5,12 @@ import java.util.List;
 
 import ksp.group3.miraiSugoroku.entity.Player;
 import ksp.group3.miraiSugoroku.entity.Sugoroku;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class GameConfigForm {
 
@@ -63,7 +67,7 @@ public class GameConfigForm {
         int nSquares = 0;
         switch (length) {
             case 0:
-                nSquares = 20;
+                nSquares = 7;
                 break;
             case 1:
                 nSquares = 35;

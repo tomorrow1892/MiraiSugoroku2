@@ -17,7 +17,7 @@ import java.util.Date;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long eventID;
+    Long eventId;
 
     int nGroups;
 
