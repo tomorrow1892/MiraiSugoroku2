@@ -4,11 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <title>未来すごろく(仮)</title>
+    <link rel="stylesheet" href="/css/display.css">
 </head>
     <body>
-        <h1>未来すごろく(仮)</h1>
-        <a th:href="@{/menu}" class="link">遊ぶ</a>
-        <a th:href="@{/loginpage}" class="link">作成者はこちら</a>
+        <div class="parent">
+            <div>
+                <h1>未来すごろく(仮)</h1>
+            </div>
+            <div>
+                <button onclick="location.href='/menu'">遊ぶ</button>
+                <button onclick="location.href='/loginpage'">作成者はこちら</button>
+            </div>
+        </div>
     </body>
 </html>
 

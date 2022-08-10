@@ -18,6 +18,7 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long playerId; // playerのID
+
     Long sugorokuId; // playerが参加するすごろくのID
     String icon; // アイコンの画像のパス情報
     String name; // playerの名前

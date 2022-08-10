@@ -1,5 +1,4 @@
-<html>
-
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>dice3</title>
     <link rel="stylesheet" th:href="@{/Dice.css}">
@@ -7,16 +6,71 @@
     <link rel="stylesheet" th:href="@{/Coma.css}">
     <link rel="stylesheet" th:href="@{/popup.css}">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-</head>
-<script th:src="@{/GameController.js}"></script>
+    <script th:inline="javascript" >
+        const n_players = /*[[${nPlayers}]]*/ null;
+        const dto_player_list = /*[[${playerList}]]*/ null;
+        const square_list = /*[[${squareList}]]*/ null;
+        const now_player =/*[[${nowPlayer}]]*/ null;
+        const sugorokuId = /*[[${sugorokuId}]]*/ null;;
+        const prefix =/*[[@{/img/}]]*/ null;
+        console.log(dto_player_list);
+    </script>
+    <style th:inline="css">
+        /* サイコロの面の設定 */
+        /* 1 */
+        .dice .item:nth-child(1),
+        .dice1 .item:nth-child(1) {
+            transform: translate3d(0, -50px, 0) rotateX(-90deg);
+            background: url([[@{/img/1dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
 
+        /* 2 */
+        .dice .item:nth-child(2),
+        .dice1 .item:nth-child(2) {
+            transform: translate3d(0, 0, 50px);
+            background: url([[@{/img/2dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 3 */
+        .dice .item:nth-child(3),
+        .dice1 .item:nth-child(3) {
+            transform: translate3d(50px, 0, 0) rotateY(90deg);
+            background: url([[@{/img/3dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 4 */
+        .dice .item:nth-child(4),
+        .dice1 .item:nth-child(4) {
+            transform: translate3d(-50px, 0, 0) rotateY(-90deg);
+            background: url([[@{/img/4dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 5 */
+        .dice .item:nth-child(5),
+        .dice1 .item:nth-child(5) {
+            transform: translate3d(0, 0, -50px) rotateY(180deg);
+            background: url([[@{/img/5dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 6 */
+        .dice .item:nth-child(6),
+        .dice1 .item:nth-child(6) {
+            transform: translate3d(0, 50px, 0) rotateX(-90deg);
+            background: url([[@{/img/6dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+    </style>
+</head>
+<script th:src="@{/Player.js}"></script>
+<script th:src="@{/GameController2.js}"></script>
 
 <body>
-
+   
+    <!-- 左上のさいころが表示されている部分 -->
     <div class="diceContent">
-        <img id="dice1" th:src="@{/img/1さいころ.jpg}" style="display: block;"></img>
+        <!-- 最初に表示されている１の目 -->
+        <img id="dice1" th:src="@{/img/1dice.jpg}" style="display: block;"></img>
 
-
+        <!-- 3Dさいころの部分 -->
         <div class="dice1" style="display: none;">
             <div class="item"></div>
             <div class="item"></div>
@@ -27,90 +81,79 @@
         </div>
         <button type="button" id="diceBtn1">さいころを振る</button>
     </div>
+
+    <!-- プレイヤーのポイントの部分中身はのちにjsによって追加 -->
     <div id="point1" style="position: absolute;left:500px;top:20px;"></div>
     <div id="point2" style="position: absolute;left:500px;top:40px;"></div>
     <div id="point3" style="position: absolute;left:500px;top:60px;"></div>
     <div id="point4" style="position: absolute;left:500px;top:80px;"></div>
 
+    <!-- ゲーム開始ボタン -->
     <button type="button" onclick="playGame()" style="width: 200px;height: 200px; position: relative; border-radius: 50%;
     left:500px;top:-200px; background-color: rgba(165, 42, 42, 0.349);">ゲーム開始!!!</button>
+
+    <!-- マスの部分 -->
     <section>
-        <img th:src="@{/img/sikaku.png}" id="masu1">
-        <img th:src="@{/img/sikaku.png}" id="masu2">
-        <img th:src="@{/img/sikaku.png}" id="masu3">
-        <img th:src="@{/img/sikaku.png}" id="masu4">
-        <img th:src="@{/img/sikaku.png}" id="masu5">
-        <img th:src="@{/img/sikaku.png}" id="masu6">
-        <img th:src="@{/img/sikaku.png}" id="masu7">
-        <img th:src="@{/img/sikaku.png}" id="masu8">
-        <img th:src="@{/img/sikaku.png}" id="masu9">
+        <img th:src="@{/img/sikaku.png}" id="masu_start">
+        <img th:src="@{/img/sikaku.png}" id="masu1" onclick="showSquarePopup(startSquarePopup, 1)">
+        <img th:src="@{/img/sikaku.png}" id="masu2" onclick="showSquarePopup(startSquarePopup, 2)">
+        <img th:src="@{/img/sikaku.png}" id="masu3" onclick="showSquarePopup(startSquarePopup, 3)">
+        <img th:src="@{/img/sikaku.png}" id="masu4" onclick="showSquarePopup(startSquarePopup, 4)">
+        <img th:src="@{/img/sikaku.png}" id="masu5" onclick="showSquarePopup(startSquarePopup, 5)">
+        <img th:src="@{/img/sikaku.png}" id="masu6" onclick="showSquarePopup(startSquarePopup, 6)">
+        <img th:src="@{/img/sikaku.png}" id="masu7" onclick="showSquarePopup(startSquarePopup, 7)">
+        <img th:src="@{/img/sikaku.png}" id="masu8" onclick="showSquarePopup(startSquarePopup, 8)">
+        <img th:src="@{/img/sikaku.png}" id="masu9" onclick="showSquarePopup(startSquarePopup, 9)">
     </section>
 
+  
+        <img th:each="p,pStat: ${playerList}" th:src="@{__${p.icon}__}" class="coma" th:id="coma__${pStat.index+1}__" width="50px" height="50px">
 
-    <img th:src="@{/img/1.png}" class="coma" id="coma1" width="50px" height="50px">
+    <!-- コマの部分 -->
+    <!-- <img th:src="@{/img/1.png}" class="coma" id="coma1" width="50px" height="50px">
     <img th:src="@{/img/1.png}" class="coma" id="coma2" width="50px" height="50px">
     <img th:src="@{/img/1.png}" class="coma" id="coma3" width="50px" height="50px">
-    <img th:src="@{/img/1.png}" class="coma" id="coma4" width="50px" height="50px">
-    <script>
-        for (let index = 0; index < 4; index++) {
-            let masu1_position_top = document.getElementById(`masu1`).getBoundingClientRect().top;
-            let masu1_position_left = document.getElementById("masu1").getBoundingClientRect().left;
-            let masu1_width = document.getElementById("masu1").getBoundingClientRect().width;
-            let masu1_height = document.getElementById("masu1").getBoundingClientRect().height;
-            let element = document.getElementById(`coma${index + 1}`);
-            element.style.position = "absolute";
-            element.style.top = masu1_position_top + masu1_height / 2 + index * 20;
-            element.style.left = masu1_position_left + masu1_width / 2 + index * 20;
-        }
+    <img th:src="@{/img/1.png}" class="coma" id="coma4" width="50px" height="50px"> -->
 
-    </script>
+    
     <script th:src="@{/coma.js}"></script>
-    <a href="javaScript:turnPlayer.setMoveCount(1);turnPlayer.move()">移動</a><br>
-    <a href="javaScript:turnPlayer.requestDiceRoll(3);">requestTest_サイコロ</a>
-    <br><br><br><br><br>
 
+    <br><br><br><br><br><br><br>
+
+    <!-- 移動後に表示されるポップアップのクラス -->
     <div class="popup" id="js-popup">
-        <div class="popup-inner">
-          <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div>
-          <a href="#"><img src="/img/1さいころ.jpg" alt="ポップアップ画像"></a>
-          <button id ="confirmButton" onclick="turnPlayer.doEvent();">確認</button>
+        <div class="popup-inner" id="popup-inner">
+          <button id ="popupButton" style="position: absolute;left:50%;top:80%;" >確認</button>
         </div>
         <div class="black-background" id="js-black-bg"></div>
       </div>
 
-      
-
-
-      <button id="js-show-popup" >Show Popup</button>
+    
 </body>
 <script th:src = "@{/popup.js}"></script>
-<script>
-
-    let diceArry1 = ['./img/1さいころ.jpg',
-        './img/2さいころ.jpg',
-        './img/3さいころ.jpg',
-        './img/4さいころ.jpg',
-        './img/5さいころ.jpg',
-        './img/6さいころ.jpg'];
+<script th:inline="javascript">
+    //サイコロの挙動
+    let imgPath = /*[[@{/img/}]]*/ null;
+    let diceArry1 = [imgPath+"1dice.jpg",
+        imgPath+"2dice.jpg",
+        imgPath+"3dice.jpg",
+        imgPath+"4dice.jpg",
+        imgPath+"5dice.jpg",
+        imgPath+"6dice.jpg"];
     const dice1 = document.getElementById("dice1");
     const anidice1 = document.querySelector(".dice1");
     const diceBtn1 = document.getElementById("diceBtn1");
     dice1.src = diceArry1[0];
     let diceIndex1;
 
-    function syncDelay(milliseconds) {
-        var start = new Date().getTime();
-        var end = 0;
-        while ((end - start) < milliseconds) {
-            end = new Date().getTime();
-        }
-    }
 
+    //サイコロを振るボタンを押したときの挙動を設定
     diceBtn1.addEventListener("click", function () {
         // const sleep = (second) => new Promise(resolve => setTimeout(resolve, second * 1000));
 
-        if (diceBtn1.textContent == 'さいころを振る') {
-            phase = "diceRoll";
+        
+        if (diceBtn1.textContent == 'さいころを振る') {//サイコロが止まっている状態で，サイコロを振ったときの動作
+            
             diceBtn1.textContent = 'ストップ';
             dice1.style.display = 'none'
             anidice1.style.display = 'block';
@@ -119,15 +162,18 @@
                 dice1.src = diceArry1[diceIndex1];
             }, 50);
 
-        } else {
+        } else {//サイコロが回ってる状態で，サイコロを止めた時の動作
             diceBtn1.textContent = 'さいころを振る';
             clearInterval(timerId1);
             anidice1.style.display = 'none'
             dice1.style.display = 'block'
             btnDisabled("diceBtn1", true);
             document.getElementsByTagName("body")[0].insertAdjacentHTML("beforeend", `<div>出た目の数字:  ${diceIndex1 + 1}</div>`);
-            turnPlayer.setMoveCount(diceIndex1 + 1);
-            turnPlayer.move();
+            
+            //バックエンドに出目を送信
+            console.log(turnPlayer);
+
+            turnPlayer.requestDiceRoll(diceIndex1+1,sugorokuId); 
 
         }
     })

@@ -4,9 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <title>マス作成確認</title>
+    <link rel="stylesheet" th:href="@{/css/display.css}">
 </head>
 <body>
-    <h1>マス作成確認</h1>
-    
+    <div class="parent">
+        <div>
+            <h1>マス作成確認</h1>
+        </div>
+        <div>
+            <form role="form" th:action="@{/{c}/create/apply(c=${cid})}" th:object="${SquareForm}" method="post">
+                <table>
+                    <tr>
+                        <td><label>タイトル: </label></td>
+                        <td>[[${SquareForm.title}]]</td>
+                    </tr>
+                    <tr>
+                        <td><label>説明: </label></td>
+                        <td>[[${SquareForm.description}]]</td>
+                    </tr>
+                    <tr>
+                        <td><label>マスイベント: </label></td>
+                        <td>[[${se.eventTitle}]]</td>
+                    </tr>
+            
+                </table>
+                <p style="text-align: center;"><input type="submit" value="申請" class="btn-submit"/></p>
+                <input type="hidden" th:field="*{title}" />
+                <input type="hidden" th:field="*{description}" />
+                <input type="hidden" th:field="*{squareEventId}" />
+            </form>
+        </div>
+    </div>
 </body>
 </html>

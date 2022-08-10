@@ -13,6 +13,8 @@ import ksp.group3.miraiSugoroku.repository.CreatorRepository;
 import ksp.group3.miraiSugoroku.repository.EventRepository;
 import ksp.group3.miraiSugoroku.repository.SquareRepository;
 
+import javax.annotation.PostConstruct;
+
 @Service
 public class SquareService {
     @Autowired
@@ -29,6 +31,10 @@ public class SquareService {
 
     public Square getSquare(Long squareId) {
         return sRepo.findById(squareId).get();
+    }
+
+    public List<Square> getAllSquare(){
+        return sRepo.findAll();
     }
 
     public Square updateSquare(Long squareId, SquareForm form) {
@@ -55,13 +61,11 @@ public class SquareService {
     }
 
     public List<Square> searchSquaresByKeyword(String keyword) {
-        Iterable<Square> result_title = sRepo.findByTitleContaining("%" + keyword +
-                "%");
+        Iterable<Square> result_title = sRepo.findByTitleContaining(keyword);
         ArrayList<Square> list_title = new ArrayList<>();
         result_title.forEach(list_title::add);
 
-        Iterable<Square> result_description = sRepo.findByTitleContaining("%" +
-                keyword + "%");
+        Iterable<Square> result_description = sRepo.findByDescriptionContaining(keyword);
         ArrayList<Square> list_description = new ArrayList<>();
         result_description.forEach(list_description::add);
 
@@ -75,15 +79,14 @@ public class SquareService {
     }
 
     public List<Square> searchSquaresByNickname(String nickname) {
-        Iterable<SquareCreator> result = cRepo.findByNicknameContaining("%" +
-                nickname + "%");
+        Iterable<SquareCreator> result = cRepo.findByNicknameContaining(nickname);
         ArrayList<SquareCreator> list_creator = new ArrayList<>();
         result.forEach(list_creator::add);
 
         ArrayList<Square> list = new ArrayList<>();
 
         for (SquareCreator creator : list_creator) {
-            Long creatorId = creator.getCreatorID();
+            Long creatorId = creator.getCreatorId();
 
             List<Square> list_tmp = sRepo.findByCreatorId(creatorId);
             list.addAll(list_tmp);
@@ -95,7 +98,7 @@ public class SquareService {
     public List<Square> searchSquaresByMyBroup(Long creatorId) {
         SquareCreator creator = cRepo.findById(creatorId).get();
 
-        return sRepo.findByEventIdAndGroupId(creator.getEventID(),
+        return sRepo.findByEventIdAndGroupId(creator.getEventId(),
                 creator.getGroup());
     }
 

@@ -4,9 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>マス作成申請完了</title>
+    <link rel="stylesheet" th:href="@{/css/display.css}">
 </head>
 <body>
-    <h1>申請完了</h1>
-    
+    <div class="parent">
+        <div>
+            <h1>申請完了</h1>
+        </div>
+        <div>
+            <button class="back_button" onclick="location.href='/__${cid}__/menu'">戻る</button>
+        </div>
+    </div>
 </body>
 </html>

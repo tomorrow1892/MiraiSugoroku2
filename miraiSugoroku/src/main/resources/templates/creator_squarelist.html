@@ -4,9 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <title>マス一覧</title>
+    <link rel="stylesheet" th:href="@{/css/display.css}">
 </head>
 <body>
-    <h1>作成者マス一覧</h1>
-    <a th:href="@{/login}" class="link">戻る</a>
+    <div class="parent">
+        <div>
+            <h1>作成者マス一覧</h1>
+        </div>
+        <div>
+            <button class="back_button" onclick="location.href='/__${cid}__/menu'">戻る</button>
+        </div>
+
+        <div>
+            <h2>検索</h2>
+        </div>
+        <div>
+            <form th:action="@{/__${cid}__/squares/search/keyword}" method="get">
+                <label for="keyword">&emsp;キーワード：</label>
+                <input type="text" name="keyword" id="keyword" />
+                <input type="submit" value="検索する" />
+            </form>
+
+            <form th:action="@{/__${cid}__/squares/search/nickname}" method="get">
+                <label for="nickname">ニックネーム：</label>
+                <input type="text" name="nickname" id="nickname" />
+                <input type="submit" value="検索する" />
+            </form>
+        </div>
+
+        <div>
+            <h2>マス一覧</h2>
+            <table border="1">
+                <tr>
+                    <th>#</th>
+                    <th>タイトル</th>
+                </tr>
+                <tr th:each="square: ${square_list}">
+                    <td></td>
+                    <td>[[${square.title}]]</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

@@ -14,6 +14,7 @@ git rebase "親ブランチ"
   - develop → game_base
   - game_base においてgame関連のissueに関するbranchを立てる
 
+
 ## 運用案　中橋
 ### 初めにやること
 - developブランチをmainにマージして、developブランチを消す
@@ -52,7 +53,4 @@ git rebase "親ブランチ"
 - 最後のとこでコンフリクトが起きたら、コンフリクトを解決してadd〜pushをやり直す
 
 4. pull requestを送る
-
-
-
 
