@@ -14,11 +14,11 @@ window.onload = function () {
 // ページが読み込まれて初めに実行される
 for (let index = 0; index < n_players; index++) {
    let dtoPlayer = dto_player_list[index];
-   let nextPlayerIndex = ((index + 1) % n_players) + 1;
+   let nextPlayerIndex = ((index + 1) % n_players);
 
    let comaId = "coma" + (index + 1);
    let player = new Player
-       (comaId, dtoPlayer.name, dtoPlayer.points, dtoPlayer.position, dtoPlayer.isBreak, dtoPlayer.isGoaled, index + 1, nextPlayerIndex);
+       (comaId, dtoPlayer.name, dtoPlayer.points, dtoPlayer.position, dtoPlayer.isBreak, dtoPlayer.isGoaled, index, nextPlayerIndex);
    playerList.push(player);
 }
 

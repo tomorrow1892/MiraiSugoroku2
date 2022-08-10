@@ -171,6 +171,8 @@
             document.getElementsByTagName("body")[0].insertAdjacentHTML("beforeend", `<div>出た目の数字:  ${diceIndex1 + 1}</div>`);
             
             //バックエンドに出目を送信
+            console.log(turnPlayer);
+
             turnPlayer.requestDiceRoll(diceIndex1+1,sugorokuId); 
 
         }

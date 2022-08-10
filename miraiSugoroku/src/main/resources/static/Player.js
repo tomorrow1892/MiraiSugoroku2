@@ -44,7 +44,7 @@ class Player {
                 }
                 else if (phase == "event") {
                     phase = "diceRoll";
-                    turnPlayer = eval("player" + this.nextPlayerIndex);
+                    turnPlayer = eval("playerList[" + this.nextPlayerIndex+"]");
                     console.log("ターンプレイヤー:" + turnPlayer.name);
                     btnDisabled("diceBtn1", false);
                 }
