@@ -141,6 +141,7 @@ public class GameService {
         Square square = sqRepo.findById(boards.get(0).getSquareId()).get();
         SquareEvent squareEvent = seRepo.findById(square.getSquareEventId()).get();
         Player p = seService.doEvent(squareEvent, playerId);
+        advanceTurn(sugorokuId);
         return p;
     }
 
