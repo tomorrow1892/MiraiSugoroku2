@@ -65,11 +65,12 @@ var sugorokuId =1;
 
 
 <body>
-
+    <!-- 左上のさいころが表示されている部分 -->
     <div class="diceContent">
-        <img id="dice1" src="@{/img/1dice.jpg}" style="display: block;"></img>
+        <!-- 最初に表示されている１の目 -->
+        <img id="dice1" th:src="@{/img/1dice.jpg}" style="display: block;"></img>
 
-
+        <!-- 3Dさいころの部分 -->
         <div class="dice1" style="display: none;">
             <div class="item"></div>
             <div class="item"></div>
@@ -80,13 +81,18 @@ var sugorokuId =1;
         </div>
         <button type="button" id="diceBtn1">さいころを振る</button>
     </div>
+
+    <!-- プレイヤーのポイントの部分中身はのちにjsによって追加 -->
     <div id="point1" style="position: absolute;left:500px;top:20px;"></div>
     <div id="point2" style="position: absolute;left:500px;top:40px;"></div>
     <div id="point3" style="position: absolute;left:500px;top:60px;"></div>
     <div id="point4" style="position: absolute;left:500px;top:80px;"></div>
 
+    <!-- ゲーム開始ボタン -->
     <button type="button" onclick="playGame()" style="width: 200px;height: 200px; position: relative; border-radius: 50%;
     left:500px;top:-200px; background-color: rgba(165, 42, 42, 0.349);">ゲーム開始!!!</button>
+
+    <!-- マスの部分 -->
     <section>
         <img th:src="@{/img/sikaku.png}" id="masu_start">
         <img th:src="@{/img/sikaku.png}" id="masu1">
@@ -100,11 +106,12 @@ var sugorokuId =1;
         <img th:src="@{/img/sikaku.png}" id="masu9">
     </section>
 
-
+    <!-- コマの部分 -->
     <img th:src="@{/img/1.png}" class="coma" id="coma1" width="50px" height="50px">
     <img th:src="@{/img/1.png}" class="coma" id="coma2" width="50px" height="50px">
     <img th:src="@{/img/1.png}" class="coma" id="coma3" width="50px" height="50px">
     <img th:src="@{/img/1.png}" class="coma" id="coma4" width="50px" height="50px">
+
     <script>
         //コマの初期配置を，スタートマスの上になるように設定
         for (let index = 0; index < 4; index++) {
@@ -117,13 +124,12 @@ var sugorokuId =1;
             element.style.top = masu_start_position_top + masu_start_height / 2 + index * 20;
             element.style.left = masu_start_position_left + masu_start_width / 2 + index * 20;
         }
-
     </script>
     <script th:src="@{/coma.js}"></script>
-    <a href="javaScript:turnPlayer.setMoveCount(1);turnPlayer.move()">移動</a><br>
-    <a href="javaScript:turnPlayer.requestDiceRoll(3);">requestTest_サイコロ</a>
-    <br><br><br><br><br>
 
+    <br><br><br><br><br><br><br>
+
+    <!-- 移動後に表示されるポップアップのクラス -->
     <div class="popup" id="js-popup">
         <div class="popup-inner" id="popup-inner">
           <button id ="popupButton" style="position: absolute;left:50%;top:80%;" >確認</button>
