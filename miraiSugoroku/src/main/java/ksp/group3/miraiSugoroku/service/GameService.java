@@ -61,7 +61,7 @@ public class GameService {
 
         List<Square> goodSquares;
         List<Square> badSquares;
-        List<Square> neutralSquares;
+        // List<Square> neutralSquares;
         if (creatorId < 0) {
             withGroupSquares = false;
         }
@@ -71,14 +71,15 @@ public class GameService {
             int group = creator.getGroup();
             goodSquares = sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, 1, true);
             badSquares = sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, -1, true);
-            neutralSquares = sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, 0, true);
+            // neutralSquares =
+            // sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, 0,
+            // true);
         } else {
             goodSquares = sqRepo.findBySquareEffectAndIsApproved(1, true);
             badSquares = sqRepo.findBySquareEffectAndIsApproved(-1, true);
-            neutralSquares = sqRepo.findBySquareEffectAndIsApproved(0, true);
+            // neutralSquares = sqRepo.findBySquareEffectAndIsApproved(0, true);
         }
         int length = game.getLength();
-    
         int nBadSquares = length * minusRate / 100;
         int nGoodSquares = length - nBadSquares;
         List<Square> squares = takeAtRandom(goodSquares, nGoodSquares, new Random());
@@ -103,7 +104,6 @@ public class GameService {
      * @param n          出目の値
      */
     public Player moveByDice(Long sugorokuId, int n) {
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa");
         Sugoroku game = sgRepo.findById(sugorokuId).get();
         int turn = game.getNowPlayer();
         List<Player> players = pRepo.findBySugorokuIdAndOrder(sugorokuId, turn);
@@ -112,7 +112,6 @@ public class GameService {
         }
 
         Player player = players.get(0);
-        System.out.println("ddddddddddddddddddddddddd");
         System.out.println(player.getPlayerId());
         pService.move(player.getPlayerId(), n);
 
@@ -142,6 +141,7 @@ public class GameService {
         Square square = sqRepo.findById(boards.get(0).getSquareId()).get();
         SquareEvent squareEvent = seRepo.findById(square.getSquareEventId()).get();
         Player p = seService.doEvent(squareEvent, playerId);
+        advanceTurn(sugorokuId);
         return p;
     }
 
@@ -178,6 +178,28 @@ public class GameService {
         }
         SugorokuInfoDto dto = new SugorokuInfoDto(nPlayers, players, squares, nowPlayer);
         return dto;
+    }
+
+    public Player advanceTurn(Long sugorokuId) {
+        Sugoroku game = sgRepo.findById(sugorokuId).get();
+        int turn = game.getNowPlayer();
+        int nPlayer = game.getNPlayers();
+
+        int nextTurn;
+        if (turn == nPlayer) {
+            nextTurn = 1;
+        } else {
+            nextTurn = turn + 1;
+        }
+        game.setNowPlayer(nextTurn);
+        sgRepo.save(game);
+        List<Player> players = pRepo.findBySugorokuIdAndOrder(sugorokuId, nextTurn);
+        if (players.size() != 1) {
+            // exception
+        }
+        Player player = players.get(0);
+        return player;
+
     }
 
     // ------ utility
