@@ -78,6 +78,7 @@ public class GameService {
             neutralSquares = sqRepo.findBySquareEffectAndIsApproved(0, true);
         }
         int length = game.getLength();
+    
         int nBadSquares = length * minusRate / 100;
         int nGoodSquares = length - nBadSquares;
         List<Square> squares = takeAtRandom(goodSquares, nGoodSquares, new Random());

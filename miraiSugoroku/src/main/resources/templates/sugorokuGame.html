@@ -6,12 +6,62 @@
     <link rel="stylesheet" th:href="@{/Coma.css}">
     <link rel="stylesheet" th:href="@{/popup.css}">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <script th:inline="javascript" >
+        const n_players = /*[[${nPlayers}]]*/ null;
+        const dto_player_list = /*[[${playerList}]]*/ null;
+        const square_list = /*[[${squareList}]]*/ null;
+        const now_player =/*[[${nowPlayer}]]*/ null;
+        const sugorokuId = /*[[${sugorokuId}]]*/ null;
+        console.log(dto_player_list);
+    </script>
+    <style th:inline="css">
+        /* サイコロの面の設定 */
+        /* 1 */
+        .dice .item:nth-child(1),
+        .dice1 .item:nth-child(1) {
+            transform: translate3d(0, -50px, 0) rotateX(-90deg);
+            background: url([[@{/img/1dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 2 */
+        .dice .item:nth-child(2),
+        .dice1 .item:nth-child(2) {
+            transform: translate3d(0, 0, 50px);
+            background: url([[@{/img/2dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 3 */
+        .dice .item:nth-child(3),
+        .dice1 .item:nth-child(3) {
+            transform: translate3d(50px, 0, 0) rotateY(90deg);
+            background: url([[@{/img/3dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 4 */
+        .dice .item:nth-child(4),
+        .dice1 .item:nth-child(4) {
+            transform: translate3d(-50px, 0, 0) rotateY(-90deg);
+            background: url([[@{/img/4dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 5 */
+        .dice .item:nth-child(5),
+        .dice1 .item:nth-child(5) {
+            transform: translate3d(0, 0, -50px) rotateY(180deg);
+            background: url([[@{/img/5dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 6 */
+        .dice .item:nth-child(6),
+        .dice1 .item:nth-child(6) {
+            transform: translate3d(0, 50px, 0) rotateX(-90deg);
+            background: url([[@{/img/6dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+    </style>
 </head>
 <script th:src="@{/Player.js}"></script>
-<script th:src="@{/GameController.js}"></script>
-<script th:inline="javascript">
-var sugorokuId =1;
-</script>
+<script th:src="@{/GameController2.js}"></script>
+
 
 
 <body>
@@ -90,14 +140,15 @@ var sugorokuId =1;
     
 </body>
 <script th:src = "@{/popup.js}"></script>
-<script>
-    //サイコロの見た目に関する設定
-    let diceArry1 = ['./img/1dice.jpg',
-        './img/2dice.jpg',
-        './img/3dice.jpg',
-        './img/4dice.jpg',
-        './img/5dice.jpg',
-        './img/6dice.jpg'];
+<script th:inline="javascript">
+    //サイコロの挙動
+    let imgPath = /*[[@{/img/}]]*/ null;
+    let diceArry1 = [imgPath+"1dice.jpg",
+        imgPath+"2dice.jpg",
+        imgPath+"3dice.jpg",
+        imgPath+"4dice.jpg",
+        imgPath+"5dice.jpg",
+        imgPath+"6dice.jpg"];
     const dice1 = document.getElementById("dice1");
     const anidice1 = document.querySelector(".dice1");
     const diceBtn1 = document.getElementById("diceBtn1");

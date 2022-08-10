@@ -7,8 +7,10 @@ import ksp.group3.miraiSugoroku.entity.Player;
 import ksp.group3.miraiSugoroku.entity.Sugoroku;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class GameConfigForm {
 

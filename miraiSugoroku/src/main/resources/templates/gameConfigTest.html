@@ -1,0 +1,17 @@
+<html>
+    <body>
+
+
+        <form th:action="@{/game/createSugoroku}" method="POST" th:object = "${gameConfigForm}">
+            <p>人数<input type="text" th:field="*{nPlayers}"></p>
+            <p>すごろくの長さ<input type="text" th:field="*{length}"></p>
+            <p>名前1<input type="text" th:field="*{names[0]}"></p>
+            <p>名前2<input type="text" th:field="*{names[1]}"></p>
+            <p>名前3<input type="text" th:field="*{names[2]}"></p>
+            <p>アイコン1<input type="text" th:field="*{icons[0]}"></p>
+            <p>アイコン2<input type="text" th:field="*{icons[1]}"></p>
+            <p>アイコン3<input type="text" th:field="*{icons[2]}"></p>
+            <input type="submit" value="送信">
+        </form>
+    </body>
+</html>
