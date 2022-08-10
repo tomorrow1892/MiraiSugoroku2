@@ -6,15 +6,65 @@
     <link rel="stylesheet" th:href="@{/Coma.css}">
     <link rel="stylesheet" th:href="@{/popup.css}">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <script th:inline="javascript" >
+        const n_players = /*[[${nPlayers}]]*/ null;
+        const dto_player_list = /*[[${playerList}]]*/ null;
+        const square_list = /*[[${squareList}]]*/ null;
+        const now_player =/*[[${nowPlayer}]]*/ null;
+        const sugorokuId = /*[[${sugorokuId}]]*/ null;;
+        const prefix =/*[[@{/img/}]]*/ null;
+        console.log(dto_player_list);
+    </script>
+    <style th:inline="css">
+        /* サイコロの面の設定 */
+        /* 1 */
+        .dice .item:nth-child(1),
+        .dice1 .item:nth-child(1) {
+            transform: translate3d(0, -50px, 0) rotateX(-90deg);
+            background: url([[@{/img/1dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 2 */
+        .dice .item:nth-child(2),
+        .dice1 .item:nth-child(2) {
+            transform: translate3d(0, 0, 50px);
+            background: url([[@{/img/2dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 3 */
+        .dice .item:nth-child(3),
+        .dice1 .item:nth-child(3) {
+            transform: translate3d(50px, 0, 0) rotateY(90deg);
+            background: url([[@{/img/3dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 4 */
+        .dice .item:nth-child(4),
+        .dice1 .item:nth-child(4) {
+            transform: translate3d(-50px, 0, 0) rotateY(-90deg);
+            background: url([[@{/img/4dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 5 */
+        .dice .item:nth-child(5),
+        .dice1 .item:nth-child(5) {
+            transform: translate3d(0, 0, -50px) rotateY(180deg);
+            background: url([[@{/img/5dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+
+        /* 6 */
+        .dice .item:nth-child(6),
+        .dice1 .item:nth-child(6) {
+            transform: translate3d(0, 50px, 0) rotateX(-90deg);
+            background: url([[@{/img/6dice.jpg}]]) no-repeat center center / 100% 100%;
+        }
+    </style>
 </head>
 <script th:src="@{/Player.js}"></script>
-<script th:src="@{/GameController.js}"></script>
-<script th:inline="javascript">
-var sugorokuId =1;
-</script>
-
+<script th:src="@{/GameController2.js}"></script>
 
 <body>
+   
     <!-- 左上のさいころが表示されている部分 -->
     <div class="diceContent">
         <!-- 最初に表示されている１の目 -->
@@ -56,25 +106,16 @@ var sugorokuId =1;
         <img th:src="@{/img/sikaku.png}" id="masu9">
     </section>
 
+  
+        <img th:each="p,pStat: ${playerList}" th:src="@{__${p.icon}__}" class="coma" th:id="coma__${pStat.index+1}__" width="50px" height="50px">
+
     <!-- コマの部分 -->
-    <img th:src="@{/img/1.png}" class="coma" id="coma1" width="50px" height="50px">
+    <!-- <img th:src="@{/img/1.png}" class="coma" id="coma1" width="50px" height="50px">
     <img th:src="@{/img/1.png}" class="coma" id="coma2" width="50px" height="50px">
     <img th:src="@{/img/1.png}" class="coma" id="coma3" width="50px" height="50px">
-    <img th:src="@{/img/1.png}" class="coma" id="coma4" width="50px" height="50px">
+    <img th:src="@{/img/1.png}" class="coma" id="coma4" width="50px" height="50px"> -->
 
-    <script>
-        //コマの初期配置を，スタートマスの上になるように設定
-        for (let index = 0; index < 4; index++) {
-            let masu_start_position_top = document.getElementById(`masu_start`).getBoundingClientRect().top;
-            let masu_start_position_left = document.getElementById("masu_start").getBoundingClientRect().left;
-            let masu_start_width = document.getElementById("masu_start").getBoundingClientRect().width;
-            let masu_start_height = document.getElementById("masu_start").getBoundingClientRect().height;
-            let element = document.getElementById(`coma${index + 1}`);
-            element.style.position = "absolute";
-            element.style.top = masu_start_position_top + masu_start_height / 2 + index * 20;
-            element.style.left = masu_start_position_left + masu_start_width / 2 + index * 20;
-        }
-    </script>
+    
     <script th:src="@{/coma.js}"></script>
 
     <br><br><br><br><br><br><br>
@@ -90,14 +131,15 @@ var sugorokuId =1;
     
 </body>
 <script th:src = "@{/popup.js}"></script>
-<script>
-    //サイコロの見た目に関する設定
-    let diceArry1 = ['./img/1dice.jpg',
-        './img/2dice.jpg',
-        './img/3dice.jpg',
-        './img/4dice.jpg',
-        './img/5dice.jpg',
-        './img/6dice.jpg'];
+<script th:inline="javascript">
+    //サイコロの挙動
+    let imgPath = /*[[@{/img/}]]*/ null;
+    let diceArry1 = [imgPath+"1dice.jpg",
+        imgPath+"2dice.jpg",
+        imgPath+"3dice.jpg",
+        imgPath+"4dice.jpg",
+        imgPath+"5dice.jpg",
+        imgPath+"6dice.jpg"];
     const dice1 = document.getElementById("dice1");
     const anidice1 = document.querySelector(".dice1");
     const diceBtn1 = document.getElementById("diceBtn1");
@@ -129,6 +171,8 @@ var sugorokuId =1;
             document.getElementsByTagName("body")[0].insertAdjacentHTML("beforeend", `<div>出た目の数字:  ${diceIndex1 + 1}</div>`);
             
             //バックエンドに出目を送信
+            console.log(turnPlayer);
+
             turnPlayer.requestDiceRoll(diceIndex1+1,sugorokuId); 
 
         }

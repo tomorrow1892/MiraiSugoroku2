@@ -1,11 +1,11 @@
 class Player {
-    constructor(comaId, name, point, position, isBreak, isGoal, myPlayerIndex, nextPlayerIndex) {
+    constructor(comaId, name, point, position, isBreak, isGoaled, myPlayerIndex, nextPlayerIndex) {
         this.comaId = comaId;
         this.name = name;
         this.point = point;
         this.position = position;
         this.isBreak = isBreak;
-        this.isGoal = isGoal;
+        this.isGoal = isGoaled;
         this.moveCount = 0;
         this.nextPlayerIndex = nextPlayerIndex;
         this.myPlayerIndex = myPlayerIndex;
@@ -44,7 +44,7 @@ class Player {
                 }
                 else if (phase == "event") {
                     phase = "diceRoll";
-                    turnPlayer = eval("player" + this.nextPlayerIndex);
+                    turnPlayer = eval("playerList[" + this.nextPlayerIndex+"]");
                     console.log("ターンプレイヤー:" + turnPlayer.name);
                     btnDisabled("diceBtn1", false);
                 }
@@ -72,7 +72,7 @@ class Player {
     //イベント実行のリクエストをバックエンドに送って，帰ってきたプレイヤーのステータスをviewに反映
     doEvent() {
         var xhr = new XMLHttpRequest();
-        var URI = "/api/doEvent?sugorokuId=1";
+        var URI = "/api/doEvent?sugorokuId="+sugorokuId;
         xhr.open("GET", URI, false);
         xhr.send();
         var response = JSON.parse(xhr.responseText);

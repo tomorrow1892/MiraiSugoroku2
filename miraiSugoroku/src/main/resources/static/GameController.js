@@ -5,7 +5,16 @@ let player3;
 let player4;
 let turnPlayer;
 
+
+
+
 //ページが読み込まれて初めに実行される
+// for (let index = 0; index < player_list.length; index++) {
+//     let 
+    
+// }
+
+
 window.onload = function () {
     btnDisabled("diceBtn1", true);
     player1 = new Player("coma1", "さんだろう", 0, 0, false, false, 1, 2);

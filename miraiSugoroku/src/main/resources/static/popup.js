@@ -16,7 +16,6 @@ function popupImage() {
           turnPlayer.doEvent();
           phase = "event";
         }
-        
       });
     }
   }
