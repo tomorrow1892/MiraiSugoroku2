@@ -1,11 +1,11 @@
 class Player {
-    constructor(comaId, name, point, position, isBreak, isGoal, myPlayerIndex, nextPlayerIndex) {
+    constructor(comaId, name, point, position, isBreak, isGoaled, myPlayerIndex, nextPlayerIndex) {
         this.comaId = comaId;
         this.name = name;
         this.point = point;
         this.position = position;
         this.isBreak = isBreak;
-        this.isGoal = isGoal;
+        this.isGoal = isGoaled;
         this.moveCount = 0;
         this.nextPlayerIndex = nextPlayerIndex;
         this.myPlayerIndex = myPlayerIndex;

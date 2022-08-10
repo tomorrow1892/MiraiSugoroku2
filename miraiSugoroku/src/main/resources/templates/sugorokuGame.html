@@ -11,7 +11,8 @@
         const dto_player_list = /*[[${playerList}]]*/ null;
         const square_list = /*[[${squareList}]]*/ null;
         const now_player =/*[[${nowPlayer}]]*/ null;
-        const sugorokuId = /*[[${sugorokuId}]]*/ null;
+        const sugorokuId = /*[[${sugorokuId}]]*/ null;;
+        const prefix =/*[[@{/img/}]]*/ null;
         console.log(dto_player_list);
     </script>
     <style th:inline="css">
@@ -62,9 +63,8 @@
 <script th:src="@{/Player.js}"></script>
 <script th:src="@{/GameController2.js}"></script>
 
-
-
 <body>
+   
     <!-- 左上のさいころが表示されている部分 -->
     <div class="diceContent">
         <!-- 最初に表示されている１の目 -->
@@ -106,25 +106,16 @@
         <img th:src="@{/img/sikaku.png}" id="masu9">
     </section>
 
+  
+        <img th:each="p,pStat: ${playerList}" th:src="@{__${p.icon}__}" class="coma" th:id="coma__${pStat.index+1}__" width="50px" height="50px">
+
     <!-- コマの部分 -->
-    <img th:src="@{/img/1.png}" class="coma" id="coma1" width="50px" height="50px">
+    <!-- <img th:src="@{/img/1.png}" class="coma" id="coma1" width="50px" height="50px">
     <img th:src="@{/img/1.png}" class="coma" id="coma2" width="50px" height="50px">
     <img th:src="@{/img/1.png}" class="coma" id="coma3" width="50px" height="50px">
-    <img th:src="@{/img/1.png}" class="coma" id="coma4" width="50px" height="50px">
+    <img th:src="@{/img/1.png}" class="coma" id="coma4" width="50px" height="50px"> -->
 
-    <script>
-        //コマの初期配置を，スタートマスの上になるように設定
-        for (let index = 0; index < 4; index++) {
-            let masu_start_position_top = document.getElementById(`masu_start`).getBoundingClientRect().top;
-            let masu_start_position_left = document.getElementById("masu_start").getBoundingClientRect().left;
-            let masu_start_width = document.getElementById("masu_start").getBoundingClientRect().width;
-            let masu_start_height = document.getElementById("masu_start").getBoundingClientRect().height;
-            let element = document.getElementById(`coma${index + 1}`);
-            element.style.position = "absolute";
-            element.style.top = masu_start_position_top + masu_start_height / 2 + index * 20;
-            element.style.left = masu_start_position_left + masu_start_width / 2 + index * 20;
-        }
-    </script>
+    
     <script th:src="@{/coma.js}"></script>
 
     <br><br><br><br><br><br><br>
