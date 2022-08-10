@@ -4,37 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <title>マス作成</title>
+    <link rel="stylesheet" th:href="@{/css/display.css}">
 </head>
 <body>
-    <h1>マス作成</h1>
-    <h2>[[${cid}]]</h2>
-    <form role="form" th:action="@{/{c}/create/confirm(c=${cid})}" th:object="${SquareForm}" method="post">
-        <table>
-        <tr>
-            <td><label>タイトル: </label></td>
-            <td><input type="text" required th:field="*{title}" /></td>
-        </tr>
-        <tr>
-            <td><label>説明: </label></td>
-            <td><input type="text" required th:field="*{description}" /></td>
-        </tr>
-        <tr>
-            <td><label>マスイベント: </label></td>
-            <td>
-                <select required th:field="*{squareEventId}">
-                    
-                    <option
-                        required
-                        th:each="se:${SquareEventList}"
-                        th:value="${se.squareEventID}"
-                        th:text="${se.eventTitle}"
-                        th:selected="${se.squareEventID == selectedValue}">
-                    </option>
-                </select>
-            </td>
-        </tr>
-</table>
-<p><input type="submit" value="確認" class="btn-submit"/></p>
-</form>
+    <div class="parent">
+        <div>
+            <h1>マス作成</h1>
+            <h2>[[${cid}]]</h2>
+        </div>
+        <div>
+            <form role="form" th:action="@{/{c}/create/confirm(c=${cid})}" th:object="${SquareForm}" method="post">
+                <table>
+                <tr>
+                    <td><label>タイトル: </label></td>
+                    <td><input type="text" required th:field="*{title}" /></td>
+                </tr>
+                <tr>
+                    <td><label>説明: </label></td>
+                    <td><input type="text" required th:field="*{description}" /></td>
+                </tr>
+                <tr>
+                    <td><label>マスイベント: </label></td>
+                    <td>
+                        <select required th:field="*{squareEventId}">
+                        
+                            <option
+                                required
+                                th:each="se:${SquareEventList}"
+                                th:value="${se.squareEventID}"
+                                th:text="${se.eventTitle}"
+                                th:selected="${se.squareEventID == selectedValue}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                </table>
+                <p style="text-align: center;"><input type="submit" value="確認" class="btn-submit"/></p>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

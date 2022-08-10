@@ -4,25 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <title>詳細設定</title>
+    <link rel="stylesheet" href="/css/display.css">
 </head>
 <body>
-    <h1>作成者詳細設定</h1>
-    
-    <form th:action="@{/__${creatorId}__/update}" method="post" th:object="${updateSquareCreatorForm}">
+    <div class="parent">
+        <div>
+            <h1>作成者詳細設定</h1>
+        </div>
+        <div>
+            <form th:action="@{/__${creatorId}__/update}" method="post" th:object="${updateSquareCreatorForm}">
 
-        <select id="selectedGroup" name="selectedGroup">
+                <select id="selectedGroup" name="selectedGroup">
 
-            <option value="グループを選択">- グループを選択してください -</option>
-            <option th:each="g: ${groups}"
-                    th:value="${g}"
-                    th:text="${g}"
-                    th:selected="${g == updateSquareCreatorForm.selectedGroup}"></option>
-            </option>
-        </select>
+                <option value="グループを選択">- グループを選択してください -</option>
+                <option th:each="g: ${groups}"
+                        th:value="${g}"
+                        th:text="${g}"
+                        th:selected="${g == updateSquareCreatorForm.selectedGroup}"></option>
+                </option>
+            </select>
 
-        <input type="text" th:field="*{nickname}" />
+            <input type="text" th:field="*{nickname}" />
 
-        <p><input type="submit" value="登録" />
-    </form>
+            <p><input type="submit" value="登録" />
+            </form>
+        </div>
+    </div>
 </body>
 </html>
