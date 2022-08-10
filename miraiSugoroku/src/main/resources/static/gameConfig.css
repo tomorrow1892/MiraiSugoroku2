@@ -1,0 +1,52 @@
+input[type=radio]+label:before{
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 70px;
+}
+
+input[type=radio][value="/img/dog.png"]+label:before{
+    background-image: url(./img/dog.png);
+}
+input[type=radio][value="/img/cat.png"]+label:before{
+    background-image: url(./img/cat.png);
+}
+input[type=radio][value="/img/hiyoko.png"]+label:before{
+    background-image: url(./img/hiyoko.png);
+}
+input[type=radio][value="/img/hamster.png"]+label:before{
+    background-image: url(./img/hamster.png);
+}
+input[type=radio][value="/img/zo.png"]+label:before{
+    background-image: url(./img/zo.png);
+}
+input[type=radio][value="/img/penguin.png"]+label:before{
+    background-image: url(./img/penguin.png);
+}
+
+input[type=radio]:checked+label::before{
+    border: 3px solid #000;
+    box-sizing: border-box;
+}
+
+input[type=radio][value="/img/dog.png"]{
+    display: none;
+} 
+input[type=radio][value="/img/cat.png"]{
+    display: none;
+} 
+input[type=radio][value="/img/hiyoko.png"]{
+    display: none;
+} 
+input[type=radio][value="/img/hamster.png"]{
+    display: none;
+} 
+input[type=radio][value="/img/zo.png"]{
+    display: none;
+} 
+input[type=radio][value="/img/penguin.png"]{
+    display: none;
+} 
+
