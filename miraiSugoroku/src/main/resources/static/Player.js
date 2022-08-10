@@ -72,7 +72,7 @@ class Player {
     //イベント実行のリクエストをバックエンドに送って，帰ってきたプレイヤーのステータスをviewに反映
     doEvent() {
         var xhr = new XMLHttpRequest();
-        var URI = "/api/doEvent?sugorokuId=1";
+        var URI = "/api/doEvent?sugorokuId="+sugorokuId;
         xhr.open("GET", URI, false);
         xhr.send();
         var response = JSON.parse(xhr.responseText);
