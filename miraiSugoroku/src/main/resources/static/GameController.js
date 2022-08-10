@@ -5,16 +5,10 @@ let player3;
 let player4;
 let turnPlayer;
 
-player_list.forEach(player => {
-    player1 = new Player("coma1", "さんだろう", 0, 0, false, false, 1, 2);
-});
-
 
 
 
 //ページが読み込まれて初めに実行される
-
-
 
 window.onload = function () {
     btnDisabled("diceBtn1", true);

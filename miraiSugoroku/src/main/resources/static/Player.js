@@ -1,13 +1,15 @@
 class Player {
-    constructor(myPlayerId, nextPlayerId, name, point, position, isBreak, isGoal ) {
-        this.myPlayerId = myPlayerId;
-        this.nextPlayerId = nextPlayerId;
+    constructor(comaId, name, point, position, isBreak, isGoal, myPlayerIndex, nextPlayerIndex) {
+        this.comaId = comaId;
         this.name = name;
         this.point = point;
         this.position = position;
         this.isBreak = isBreak;
         this.isGoal = isGoal;
         this.moveCount = 0;
+        this.nextPlayerIndex = nextPlayerIndex;
+        this.myPlayerIndex = myPlayerIndex;
+
 
         // animation 終了時の処理
         document.getElementById(comaId).addEventListener('animationend', () => {
@@ -31,7 +33,7 @@ class Player {
             console.log(this.comaId + "のmoveCount:" + this.moveCount);
             console.log("現在位置:" + this.position);
             if (this.moveCount == 0) {
-                if (phase == "diceRoll") { //サイコロによる移動が終わったときの処理
+                if (phase == "diceRoll") { //サイコロによる移動が終わったとき
 
                     if (this.isGoal == true) {//ゴールした時,ゴールのポップアップを出す．
                         showPopup(setGoalPopup);
@@ -40,11 +42,8 @@ class Player {
                         showPopup(setEventPopup);
                     }
                 }
-                else if (phase == "event") {// イベントを実行した後の処理
+                else if (phase == "event") {
                     phase = "diceRoll";
-                    // while(true){
-                    //     if()
-                    // };
                     turnPlayer = eval("player" + this.nextPlayerIndex);
                     console.log("ターンプレイヤー:" + turnPlayer.name);
                     btnDisabled("diceBtn1", false);
@@ -91,9 +90,6 @@ class Player {
         if (this.isGoal == false && isGoal == true) {
             this.isGoal = true;
         }
-        //一回休み
-        this.isBreak = isBreak;
-        
         //バックエンドでポイントが変化している場合
         if (this.point != point) {
             console.log("現在ポイントの値:" + this.point);
