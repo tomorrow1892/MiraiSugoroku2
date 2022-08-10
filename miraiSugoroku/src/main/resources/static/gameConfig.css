@@ -2,31 +2,51 @@ input[type=radio]+label:before{
     content: "";
     display: inline-block;
     background-size: contain;
-    width: 80px;
-    height: 80px;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 70px;
 }
 
 input[type=radio][value="1"]+label:before{
-    background-image: url(./img/1.png);
+    background-image: url(./img/dog.png);
 }
 input[type=radio][value="2"]+label:before{
-    background-image: url(./img/2.png);
+    background-image: url(./img/cat.png);
 }
 input[type=radio][value="3"]+label:before{
-    background-image: url(./img/3.jpeg);
+    background-image: url(./img/hiyoko.png);
 }
 input[type=radio][value="4"]+label:before{
-    background-image: url(./img/4.png);
+    background-image: url(./img/hamster.png);
 }
 input[type=radio][value="5"]+label:before{
-    background-image: url(./img/5.png);
+    background-image: url(./img/zo.png);
 }
 input[type=radio][value="6"]+label:before{
-    background-image: url(./img/6.png);
+    background-image: url(./img/penguin.png);
 }
 
 input[type=radio]:checked+label::before{
     border: 3px solid #000;
     box-sizing: border-box;
 }
+
+input[type=radio][value="1"]{
+    display: none;
+} 
+input[type=radio][value="2"]{
+    display: none;
+} 
+input[type=radio][value="3"]{
+    display: none;
+} 
+input[type=radio][value="4"]{
+    display: none;
+} 
+input[type=radio][value="5"]{
+    display: none;
+} 
+input[type=radio][value="6"]{
+    display: none;
+} 
 

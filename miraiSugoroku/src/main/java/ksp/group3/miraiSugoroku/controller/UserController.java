@@ -63,6 +63,7 @@ public class UserController {
 
     @PostMapping("/sugoroku/confirm")
     public String showSugorokuConfirm(GameConfigForm form, Model model) {
+        form.addNameAndIcon();
         model.addAttribute("GameConfigForm", form);
         return "guest_sugoroku_confirm";
     }

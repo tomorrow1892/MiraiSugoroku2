@@ -32,6 +32,8 @@ public class GameConfigForm {
     ArrayList<String> icons; // playerが使用するアイコンのパス情報
 
     public void addNameAndIcon() {
+        this.names = new ArrayList<>();
+        this.icons = new ArrayList<>();
         if (this.p1 != null && this.i1 != null) {
             this.names.add(p1);
             this.icons.add(i1);
