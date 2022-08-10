@@ -2,13 +2,13 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" http-equiv="Content-Type">
     <title>すごろく設定</title>
     <link rel="stylesheet" th:href="@{/gameConfig.css}">
 </head>
 <body>
     <h1>ゲストすごろく設定</h1>
-    <form role="form" th:action="@{/sugoroku/confirm}" th:object="${GameConfigForm}" method="post">
+    <form role="form" name="gcform" th:action="@{/sugoroku/confirm}" th:object="${GameConfigForm}" method="post">
         <table >
         <tr id="0">
             <td><label>すごろくの長さ: </label></td>
@@ -23,37 +23,74 @@
             <td><label>プレイヤー1 : 名前 </label></td>
             <td><input type="txet" required th:field="*{p1}" /></td>
             <td><label>　アイコン</label></td>
-            <td><input type="txet" required th:field="*{i1}" /></td>
+            <td>
+                <input type="radio" name='RadioGroup01' required th:field="*{i1}" value="1" id="11p"><label for="11p"></label>
+                <input type="radio" name='RadioGroup01' required th:field="*{i1}" value="2" id="21p"><label for="21p"></label>
+                <input type="radio" name='RadioGroup01' required th:field="*{i1}" value="3" id="31p"><label for="31p"></label>
+                <input type="radio" name='RadioGroup01' required th:field="*{i1}" value="4" id="41p"><label for="41p"></label>
+                <input type="radio" name='RadioGroup01' required th:field="*{i1}" value="5" id="51p"><label for="51p"></label>
+                <input type="radio" name='RadioGroup01' required th:field="*{i1}" value="6" id="61p"><label for="61p"></label>
+            </td>
         </tr>
         <tr id="2">
             <td><label>プレイヤー2 : 名前 </label></td>
             <td><input type="txet" required th:field="*{p2}" /></td>
             <td><label>　アイコン</label></td>
-            <td><input type="txet" required th:field="*{i2}" /></td>
+            <td><input type="radio" required th:field="*{i2}" value="1" id="12p"><label for="12p"></label>
+                <input type="radio" required th:field="*{i2}" value="2" id="22p"><label for="22p"></label>
+                <input type="radio" required th:field="*{i2}" value="3" id="32p"><label for="32p"></label>
+                <input type="radio" required th:field="*{i2}" value="4" id="42p"><label for="42p"></label>
+                <input type="radio" required th:field="*{i2}" value="5" id="52p"><label for="52p"></label>
+                <input type="radio" required th:field="*{i2}" value="6" id="62p"><label for="62p"></label>
+            </td>
         </tr>
         <tr id="3" >
             <td><label>プレイヤー3 : 名前 </label></td>
             <td><input type="txet" th:field="*{p3}" /></td>
             <td><label>　アイコン</label></td>
-            <td><input type="txet" th:field="*{i3}" /></td>
+            <td><input type="radio" required th:field="*{i3}" value="1" id="13p"><label for="13p"></label>
+                <input type="radio" required th:field="*{i3}" value="2" id="23p"><label for="23p"></label>
+                <input type="radio" required th:field="*{i3}" value="3" id="33p"><label for="33p"></label>
+                <input type="radio" required th:field="*{i3}" value="4" id="43p"><label for="43p"></label>
+                <input type="radio" required th:field="*{i3}" value="5" id="53p"><label for="53p"></label>
+                <input type="radio" required th:field="*{i3}" value="6" id="63p"><label for="63p"></label>
+            </td>
         </tr>
         <tr id="4">
             <td><label>プレイヤー4 : 名前 </label></td>
             <td><input type="txet" th:field="*{p4}" /></td>
             <td><label>　アイコン</label></td>
-            <td><input type="txet" th:field="*{i4}" /></td>
+            <td><input type="radio" required th:field="*{i4}" value="1" id="14p"><label for="14p"></label>
+                <input type="radio" required th:field="*{i4}" value="2" id="24p"><label for="24p"></label>
+                <input type="radio" required th:field="*{i4}" value="3" id="34p"><label for="34p"></label>
+                <input type="radio" required th:field="*{i4}" value="4" id="44p"><label for="44p"></label>
+                <input type="radio" required th:field="*{i4}" value="5" id="54p"><label for="54p"></label>
+                <input type="radio" required th:field="*{i4}" value="6" id="64p"><label for="64p"></label>
+            </td>
         </tr>
         <tr id="5">
             <td><label>プレイヤー5 : 名前 </label></td>
             <td><input type="txet"  th:field="*{p5}" /></td>
             <td><label>　アイコン</label></td>
-            <td><input type="txet"  th:field="*{i5}" /></td>
+            <td><input type="radio" required th:field="*{i5}" value="1" id="15p"><label for="15p"></label>
+                <input type="radio" required th:field="*{i5}" value="2" id="25p"><label for="25p"></label>
+                <input type="radio" required th:field="*{i5}" value="3" id="35p"><label for="35p"></label>
+                <input type="radio" required th:field="*{i5}" value="4" id="45p"><label for="45p"></label>
+                <input type="radio" required th:field="*{i5}" value="5" id="55p"><label for="55p"></label>
+                <input type="radio" required th:field="*{i5}" value="6" id="65p"><label for="65p"></label>
+            </td>
         </tr>
         <tr id="6">
             <td><label>プレイヤー6 : 名前 </label></td>
             <td><input type="txet" th:field="*{p6}" /></td>
             <td><label>　アイコン</label></td>
-            <td><input type="txet" th:field="*{i6}" /></td>
+            <td><input type="radio" required th:field="*{i6}" value="1" id="16p"><label for="16p"></label>
+                <input type="radio" required th:field="*{i6}" value="2" id="26p"><label for="26p"></label>
+                <input type="radio" required th:field="*{i6}" value="3" id="36p"><label for="36p"></label>
+                <input type="radio" required th:field="*{i6}" value="4" id="46p"><label for="46p"></label>
+                <input type="radio" required th:field="*{i6}" value="5" id="56p"><label for="56p"></label>
+                <input type="radio" required th:field="*{i6}" value="6" id="66p"><label for="66p"></label>
+            </td>
         </tr>
 
         
@@ -69,7 +106,10 @@
 </form>
     <a th:href="@{/menu}" class="link">戻る</a>
 </body>
+
 <script>
+
+    //プレイヤーの追加に関する部分
     document.getElementById("0").style.display = 'none';
     document.getElementById("1").style.display = 'none';
     document.getElementById("2").style.display = 'none';
@@ -91,8 +131,6 @@
     var b6 = document.getElementById('b6');
 
         b3.addEventListener('click', function(){
-     
-        
         document.getElementById("b3").style.display = 'none';
         document.getElementById("3").style.display = 'inline';
         document.getElementById("b4").style.display = 'inline';
@@ -117,10 +155,49 @@
         
         }, false);
 
-        // クリックイベントを発火
-       
-        
+        //アイコン選択の制御
+        var p11 = document.getElementById('11p');
+        var p21 = document.getElementById('21p');
+        var p31 = document.getElementById('31p');
+        var p41 = document.getElementById('41p');
+        var p51 = document.getElementById('51p');
+        var p61 = document.getElementById('61p');
 
+        var p12 = document.getElementById('12p');
+        var p22 = document.getElementById('22p');
+        var p32 = document.getElementById('32p');
+        var p42 = document.getElementById('42p');
+        var p52 = document.getElementById('52p');
+        var p62 = document.getElementById('62p');
+
+        var p13 = document.getElementById('13p');
+        var p23 = document.getElementById('23p');
+        var p33 = document.getElementById('33p');
+        var p43 = document.getElementById('43p');
+        var p53 = document.getElementById('53p');
+        var p63 = document.getElementById('63p');
+
+        var p14 = document.getElementById('14p');
+        var p24 = document.getElementById('24p');
+        var p34 = document.getElementById('34p');
+        var p44 = document.getElementById('44p');
+        var p54 = document.getElementById('54p');
+        var p64 = document.getElementById('64p');
+
+        var p15 = document.getElementById('15p');
+        var p25 = document.getElementById('25p');
+        var p35 = document.getElementById('35p');
+        var p45 = document.getElementById('45p');
+        var p55 = document.getElementById('55p');
+        var p65 = document.getElementById('65p');
+
+        var p16 = document.getElementById('16p');
+        var p26 = document.getElementById('26p');
+        var p36 = document.getElementById('36p');
+        var p46 = document.getElementById('46p');
+        var p56 = document.getElementById('56p');
+        var p66 = document.getElementById('66p');
     </script>
+  
 
 </html>
