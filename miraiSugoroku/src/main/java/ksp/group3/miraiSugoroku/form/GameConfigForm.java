@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class GameConfigForm {
 
@@ -36,12 +35,12 @@ public class GameConfigForm {
         this.names = new ArrayList<>();
         this.icons = new ArrayList<>();
         if (this.p1 != null && this.i1 != null) {
-            this.names.add(p1);
-            this.icons.add(i1);
+            this.names.add(this.p1);
+            this.icons.add(this.i1);
         }
         if (this.p2 != null && this.i2 != null) {
-            this.names.add(p2);
-            this.icons.add(i2);
+            this.names.add(this.p2);
+            this.icons.add(this.i2);
         }
         if (this.p3 != null && this.i3 != null) {
             this.names.add(p3);

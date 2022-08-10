@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>ゲストすごろく設定</h1>
-    <form role="form" name="gcform" th:action="@{/sugoroku/confirm}" th:object="${GameConfigForm}" method="post">
+    <form role="form" th:action="@{/game/createSugoroku}" th:object="${GameConfigForm}" method="post">
         <table >
         <tr id="0">
             <td><label>すごろくの長さ: </label></td>
@@ -21,75 +21,75 @@
         <tr></tr>
         <tr id="1">
             <td><label>プレイヤー1 : 名前 </label></td>
-            <td><input type="txet" required th:field="*{p1}" /></td>
+            <td><input type="text" required th:field="*{p1}" /></td>
             <td><label>　アイコン</label></td>
             <td>
-                <input type="radio" name="g1" required th:field="*{i1}" value="1" id="11p"><label for="11p"></label>
-                <input type="radio" name="g1" required th:field="*{i1}" value="2" id="21p"><label for="21p"></label>
-                <input type="radio" name="g1" required th:field="*{i1}" value="3" id="31p"><label for="31p"></label>
-                <input type="radio" name="g1" required th:field="*{i1}" value="4" id="41p"><label for="41p"></label>
-                <input type="radio" name="g1" required th:field="*{i1}" value="5" id="51p"><label for="51p"></label>
-                <input type="radio" name="g1" required th:field="*{i1}" value="6" id="61p"><label for="61p"></label>
+                <input type="radio" name="g1" required th:field="*{i1}" value="/img/dog.png" id="11p"><label for="11p"></label>
+                <input type="radio" name="g1" required th:field="*{i1}" value="/img/cat.png" id="21p"><label for="21p"></label>
+                <input type="radio" name="g1" required th:field="*{i1}" value="/img/hiyoko.png" id="31p"><label for="31p"></label>
+                <input type="radio" name="g1" required th:field="*{i1}" value="/img/hamster.png" id="41p"><label for="41p"></label>
+                <input type="radio" name="g1" required th:field="*{i1}" value="/img/zo.png" id="51p"><label for="51p"></label>
+                <input type="radio" name="g1" required th:field="*{i1}" value="/img/penguin.png" id="61p"><label for="61p"></label>
             </td>
         </tr>
         <tr id="2">
             <td><label>プレイヤー2 : 名前 </label></td>
-            <td><input type="txet" required th:field="*{p2}" /></td>
+            <td><input type="text" required th:field="*{p2}" /></td>
             <td><label>　アイコン</label></td>
-            <td><input type="radio" name="g2" required th:field="*{i2}" value="1" id="12p"><label for="12p"></label>
-                <input type="radio" name="g2" required th:field="*{i2}" value="2" id="22p"><label for="22p"></label>
-                <input type="radio" name="g2" required th:field="*{i2}" value="3" id="32p"><label for="32p"></label>
-                <input type="radio" name="g2" required th:field="*{i2}" value="4" id="42p"><label for="42p"></label>
-                <input type="radio" name="g2" required th:field="*{i2}" value="5" id="52p"><label for="52p"></label>
-                <input type="radio" name="g2" required th:field="*{i2}" value="6" id="62p"><label for="62p"></label>
+            <td><input type="radio" name="g2" required th:field="*{i2}" value="/img/dog.png" id="12p"><label for="12p"></label>
+                <input type="radio" name="g2" required th:field="*{i2}" value="/img/cat.png" id="22p"><label for="22p"></label>
+                <input type="radio" name="g2" required th:field="*{i2}" value="/img/hiyoko.png" id="32p"><label for="32p"></label>
+                <input type="radio" name="g2" required th:field="*{i2}" value="/img/hamster.png" id="42p"><label for="42p"></label>
+                <input type="radio" name="g2" required th:field="*{i2}" value="/img/zo.png" id="52p"><label for="52p"></label>
+                <input type="radio" name="g2" required th:field="*{i2}" value="/img/penguin.png" id="62p"><label for="62p"></label>
             </td>
         </tr>
         <tr id="3" >
             <td><label>プレイヤー3 : 名前 </label></td>
-            <td><input type="txet" th:field="*{p3}" /></td>
+            <td><input type="text" th:field="*{p3}" /></td>
             <td><label>　アイコン</label></td>
-            <td><input type="radio"  name="g3" th:field="*{i3}" value="1" id="13p"><label for="13p"></label>
-                <input type="radio"  name="g3" th:field="*{i3}" value="2" id="23p"><label for="23p"></label>
-                <input type="radio"  name="g3" th:field="*{i3}" value="3" id="33p"><label for="33p"></label>
-                <input type="radio"  name="g3" th:field="*{i3}" value="4" id="43p"><label for="43p"></label>
-                <input type="radio"  name="g3" th:field="*{i3}" value="5" id="53p"><label for="53p"></label>
-                <input type="radio"  name="g3" th:field="*{i3}" value="6" id="63p"><label for="63p"></label>
+            <td><input type="radio"  name="g3" th:field="*{i3}" value="/img/dog.png" id="13p"><label for="13p"></label>
+                <input type="radio"  name="g3" th:field="*{i3}" value="/img/cat.png" id="23p"><label for="23p"></label>
+                <input type="radio"  name="g3" th:field="*{i3}" value="/img/hiyoko.png" id="33p"><label for="33p"></label>
+                <input type="radio"  name="g3" th:field="*{i3}" value="/img/hamster.png" id="43p"><label for="43p"></label>
+                <input type="radio"  name="g3" th:field="*{i3}" value="/img/zo.png" id="53p"><label for="53p"></label>
+                <input type="radio"  name="g3" th:field="*{i3}" value="/img/penguin.png" id="63p"><label for="63p"></label>
             </td>
         </tr>
         <tr id="4">
             <td><label>プレイヤー4 : 名前 </label></td>
-            <td><input type="txet" th:field="*{p4}" /></td>
+            <td><input type="text" th:field="*{p4}" /></td>
             <td><label>　アイコン</label></td>
-            <td><input type="radio"  name="g4" th:field="*{i4}" value="1" id="14p"><label for="14p"></label>
-                <input type="radio"  name="g4" th:field="*{i4}" value="2" id="24p"><label for="24p"></label>
-                <input type="radio"  name="g4" th:field="*{i4}" value="3" id="34p"><label for="34p"></label>
-                <input type="radio"  name="g4" th:field="*{i4}" value="4" id="44p"><label for="44p"></label>
-                <input type="radio"  name="g4" th:field="*{i4}" value="5" id="54p"><label for="54p"></label>
-                <input type="radio"  name="g4" th:field="*{i4}" value="6" id="64p"><label for="64p"></label>
+            <td><input type="radio"  name="g4" th:field="*{i4}" value="/img/dog.png" id="14p"><label for="14p"></label>
+                <input type="radio"  name="g4" th:field="*{i4}" value="/img/cat.png" id="24p"><label for="24p"></label>
+                <input type="radio"  name="g4" th:field="*{i4}" value="/img/hiyoko.png" id="34p"><label for="34p"></label>
+                <input type="radio"  name="g4" th:field="*{i4}" value="/img/hamster.png" id="44p"><label for="44p"></label>
+                <input type="radio"  name="g4" th:field="*{i4}" value="/img/zo.png" id="54p"><label for="54p"></label>
+                <input type="radio"  name="g4" th:field="*{i4}" value="/img/penguin.png" id="64p"><label for="64p"></label>
             </td>
         </tr>
         <tr id="5">
             <td><label>プレイヤー5 : 名前 </label></td>
-            <td><input type="txet"  th:field="*{p5}" /></td>
+            <td><input type="text"  th:field="*{p5}" /></td>
             <td><label>　アイコン</label></td>
-            <td><input type="radio"  name="g5" th:field="*{i5}" value="1" id="15p"><label for="15p"></label>
-                <input type="radio"  name="g5" th:field="*{i5}" value="2" id="25p"><label for="25p"></label>
-                <input type="radio"  name="g5" th:field="*{i5}" value="3" id="35p"><label for="35p"></label>
-                <input type="radio"  name="g5" th:field="*{i5}" value="4" id="45p"><label for="45p"></label>
-                <input type="radio"  name="g5" th:field="*{i5}" value="5" id="55p"><label for="55p"></label>
-                <input type="radio"  name="g5" th:field="*{i5}" value="6" id="65p"><label for="65p"></label>
+            <td><input type="radio"  name="g5" th:field="*{i5}" value="/img/dog.png" id="15p"><label for="15p"></label>
+                <input type="radio"  name="g5" th:field="*{i5}" value="/img/cat.png" id="25p"><label for="25p"></label>
+                <input type="radio"  name="g5" th:field="*{i5}" value="/img/hiyoko.png" id="35p"><label for="35p"></label>
+                <input type="radio"  name="g5" th:field="*{i5}" value="/img/hamster.png" id="45p"><label for="45p"></label>
+                <input type="radio"  name="g5" th:field="*{i5}" value="/img/zo.png" id="55p"><label for="55p"></label>
+                <input type="radio"  name="g5" th:field="*{i5}" value="/img/penguin.png" id="65p"><label for="65p"></label>
             </td>
         </tr>
         <tr id="6">
             <td><label>プレイヤー6 : 名前 </label></td>
-            <td><input type="txet" th:field="*{p6}" /></td>
+            <td><input type="text" th:field="*{p6}" /></td>
             <td><label>　アイコン</label></td>
-            <td><input type="radio" name="g6" th:field="*{i6}" value="1" id="16p"><label for="16p"></label>
-                <input type="radio" name="g6" th:field="*{i6}" value="2" id="26p"><label for="26p"></label>
-                <input type="radio" name="g6" th:field="*{i6}" value="3" id="36p"><label for="36p"></label>
-                <input type="radio" name="g6" th:field="*{i6}" value="4" id="46p"><label for="46p"></label>
-                <input type="radio" name="g6" th:field="*{i6}" value="5" id="56p"><label for="56p"></label>
-                <input type="radio" name="g6" th:field="*{i6}" value="6" id="66p"><label for="66p"></label>
+            <td><input type="radio" name="g6" th:field="*{i6}" value="/img/dog.png" id="16p"><label for="16p"></label>
+                <input type="radio" name="g6" th:field="*{i6}" value="/img/cat.png" id="26p"><label for="26p"></label>
+                <input type="radio" name="g6" th:field="*{i6}" value="/img/hiyoko.png" id="36p"><label for="36p"></label>
+                <input type="radio" name="g6" th:field="*{i6}" value="/img/hamster.png" id="46p"><label for="46p"></label>
+                <input type="radio" name="g6" th:field="*{i6}" value="/img/zo.png" id="56p"><label for="56p"></label>
+                <input type="radio" name="g6" th:field="*{i6}" value="/img/penguin.png" id="66p"><label for="66p"></label>
             </td>
         </tr>
 
