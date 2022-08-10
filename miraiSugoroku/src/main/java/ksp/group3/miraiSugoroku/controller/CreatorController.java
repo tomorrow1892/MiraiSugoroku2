@@ -42,7 +42,7 @@ public class CreatorController {
         return "redirect:/" + cid + "/manu";
     }
 
-    @GetMapping("/{cid}/manu")
+    @GetMapping("/{cid}/menu")
     public String showcreatorMenu() {
         return "creator_menu";
     }

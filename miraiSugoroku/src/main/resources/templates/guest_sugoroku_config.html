@@ -4,9 +4,123 @@
 <head>
     <meta charset="UTF-8">
     <title>すごろく設定</title>
+    <link rel="stylesheet" th:href="@{/gameConfig.css}">
 </head>
 <body>
     <h1>ゲストすごろく設定</h1>
+    <form role="form" th:action="@{/sugoroku/confirm}" th:object="${GameConfigForm}" method="post">
+        <table >
+        <tr id="0">
+            <td><label>すごろくの長さ: </label></td>
+            <td>
+                <input type="radio" required th:field="*{length}" value=1>短
+                <input type="radio" required th:field="*{length}" value=2>中
+                <input type="radio" required th:field="*{length}" value=3>長
+            </td>
+        </tr>
+        <tr></tr>
+        <tr id="1">
+            <td><label>プレイヤー1 : 名前 </label></td>
+            <td><input type="txet" required th:field="*{p1}" /></td>
+            <td><label>　アイコン</label></td>
+            <td><input type="txet" required th:field="*{i1}" /></td>
+        </tr>
+        <tr id="2">
+            <td><label>プレイヤー2 : 名前 </label></td>
+            <td><input type="txet" required th:field="*{p2}" /></td>
+            <td><label>　アイコン</label></td>
+            <td><input type="txet" required th:field="*{i2}" /></td>
+        </tr>
+        <tr id="3" >
+            <td><label>プレイヤー3 : 名前 </label></td>
+            <td><input type="txet" th:field="*{p3}" /></td>
+            <td><label>　アイコン</label></td>
+            <td><input type="txet" th:field="*{i3}" /></td>
+        </tr>
+        <tr id="4">
+            <td><label>プレイヤー4 : 名前 </label></td>
+            <td><input type="txet" th:field="*{p4}" /></td>
+            <td><label>　アイコン</label></td>
+            <td><input type="txet" th:field="*{i4}" /></td>
+        </tr>
+        <tr id="5">
+            <td><label>プレイヤー5 : 名前 </label></td>
+            <td><input type="txet"  th:field="*{p5}" /></td>
+            <td><label>　アイコン</label></td>
+            <td><input type="txet"  th:field="*{i5}" /></td>
+        </tr>
+        <tr id="6">
+            <td><label>プレイヤー6 : 名前 </label></td>
+            <td><input type="txet" th:field="*{p6}" /></td>
+            <td><label>　アイコン</label></td>
+            <td><input type="txet" th:field="*{i6}" /></td>
+        </tr>
+
+        
+        
+</table>
+<p>
+    <button id="b3" type="button">プレイヤー3を追加</button>
+    <button id="b4" type="button">プレイヤー4を追加</button>
+    <button id="b5" type="button">プレイヤー5を追加</button>
+    <button id="b6" type="button">プレイヤー6を追加</button>
+    <input type="submit" value="遊ぶ" class="btn-submit"/>
+</p>
+</form>
     <a th:href="@{/menu}" class="link">戻る</a>
 </body>
+<script>
+    document.getElementById("0").style.display = 'none';
+    document.getElementById("1").style.display = 'none';
+    document.getElementById("2").style.display = 'none';
+    document.getElementById("3").style.display = 'none';
+    document.getElementById("4").style.display = 'none';
+    document.getElementById("5").style.display = 'none';
+    document.getElementById("6").style.display = 'none';
+    document.getElementById("b4").style.display = 'none';
+    document.getElementById("b5").style.display = 'none';
+    document.getElementById("b6").style.display = 'none';
+
+    document.getElementById("0").style.display = 'inline';
+    document.getElementById("1").style.display = 'inline';
+    document.getElementById("2").style.display = 'inline';
+
+    var b3 = document.getElementById('b3');
+    var b4 = document.getElementById('b4');
+    var b5 = document.getElementById('b5');
+    var b6 = document.getElementById('b6');
+
+        b3.addEventListener('click', function(){
+     
+        
+        document.getElementById("b3").style.display = 'none';
+        document.getElementById("3").style.display = 'inline';
+        document.getElementById("b4").style.display = 'inline';
+        }, false);
+
+
+        b4.addEventListener('click', function(){
+        document.getElementById("b4").style.display = 'none';
+        document.getElementById("4").style.display = 'inline';
+        document.getElementById("b5").style.display = 'inline';
+        }, false);
+        
+        b5.addEventListener('click', function(){
+        document.getElementById("b5").style.display = 'none';
+        document.getElementById("5").style.display = 'inline';
+        document.getElementById("b6").style.display = 'inline';
+        }, false);
+
+        b6.addEventListener('click', function(){
+        document.getElementById("b6").style.display = 'none';
+        document.getElementById("6").style.display = 'inline';
+        
+        }, false);
+
+        // クリックイベントを発火
+       
+        
+
+    </script>
+
 </html>

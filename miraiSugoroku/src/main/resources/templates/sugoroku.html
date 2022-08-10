@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>すごろく</title>
+</head>
+    <body>
+        <h1>すごろく設定を受け取ったよ</h1>
+        <form role="form" th:object="${GameConfigForm}">
+            <table>
+                <tr>
+                    <td><label>長さ: </label></td>
+                    <td>[[${GameConfigForm.length}]]</td>
+                </tr>
+                <tr><td><label>1:短 2:中 3:長</label></td></tr>
+        </table>
+    </form>
+    </body>
+</html>
