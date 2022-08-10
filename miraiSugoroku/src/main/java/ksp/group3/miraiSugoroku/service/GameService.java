@@ -184,7 +184,13 @@ public class GameService {
         Sugoroku game = sgRepo.findById(sugorokuId).get();
         int turn = game.getNowPlayer();
         int nPlayer = game.getNPlayers();
-        int nextTurn = (turn + 1) % nPlayer + 1;
+
+        int nextTurn;
+        if (turn == nPlayer) {
+            nextTurn = 1;
+        } else {
+            nextTurn = turn + 1;
+        }
         game.setNowPlayer(nextTurn);
         sgRepo.save(game);
         List<Player> players = pRepo.findBySugorokuIdAndOrder(sugorokuId, nextTurn);
