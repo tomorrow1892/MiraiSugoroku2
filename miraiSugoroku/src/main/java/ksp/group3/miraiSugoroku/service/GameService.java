@@ -67,7 +67,7 @@ public class GameService {
         }
         if (withGroupSquares) {
             SquareCreator creator = cRepo.findById(creatorId).get();
-            Long event = creator.getEventID();
+            Long event = creator.getEventId();
             int group = creator.getGroup();
             goodSquares = sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, 1, true);
             badSquares = sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, -1, true);

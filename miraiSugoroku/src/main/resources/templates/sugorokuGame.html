@@ -6,6 +6,13 @@
     <link rel="stylesheet" th:href="@{/Coma.css}">
     <link rel="stylesheet" th:href="@{/popup.css}">
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <script th:inline="javascript" >
+        const n_players = /*[[${nPlayers}]]*/ null;
+        const player_list = /*[[${playerList}]]*/ null;
+        const square_list = /*[[${squareList}]]*/ null;
+        const now_player =/*[[${nowPlayer}]]*/ null;
+        console.log(now_player);
+    </script>
     <style th:inline="css">
         /* 1 */
         .dice .item:nth-child(1),
@@ -131,11 +138,11 @@ var sugorokuId =1;
     //サイコロの見た目に関する設定
     let imgPath = /*[[@{/img/}]]*/ null;
     let diceArry1 = [imgPath+"1dice.jpg",
-        imgPath+"1dice.jpg",
-        imgPath+"1dice.jpg",
-        imgPath+"1dice.jpg",
-        imgPath+"1dice.jpg",
-        imgPath+"1dice.jpg"];
+        imgPath+"2dice.jpg",
+        imgPath+"3dice.jpg",
+        imgPath+"4dice.jpg",
+        imgPath+"5dice.jpg",
+        imgPath+"6dice.jpg"];
     const dice1 = document.getElementById("dice1");
     const anidice1 = document.querySelector(".dice1");
     const diceBtn1 = document.getElementById("diceBtn1");

@@ -1,15 +1,13 @@
 class Player {
-    constructor(comaId, name, point, position, isBreak, isGoal, myPlayerIndex, nextPlayerIndex) {
-        this.comaId = comaId;
+    constructor(myPlayerId, nextPlayerId, name, point, position, isBreak, isGoal ) {
+        this.myPlayerId = myPlayerId;
+        this.nextPlayerId = nextPlayerId;
         this.name = name;
         this.point = point;
         this.position = position;
         this.isBreak = isBreak;
         this.isGoal = isGoal;
         this.moveCount = 0;
-        this.nextPlayerIndex = nextPlayerIndex;
-        this.myPlayerIndex = myPlayerIndex;
-
 
         // animation 終了時の処理
         document.getElementById(comaId).addEventListener('animationend', () => {
