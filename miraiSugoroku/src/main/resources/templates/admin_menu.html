@@ -26,6 +26,7 @@
                 <td>[[${#dates.format(event.startDate, 'yyyy/MM/dd')}]]</td>
                 <td>[[${#dates.format(event.limitDate, 'yyyy/MM/dd')}]]</td>
                 <td>[[${event.nGroups}]]</td>
+                <td><a th:href=@{/admin/event/{num}(num=${event.eventId})}>選択</a></td>
             </tr>
             
         </table>

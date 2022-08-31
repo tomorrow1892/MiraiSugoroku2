@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>イベント詳細</title>
+</head>
+<body>
+    <h1>イベント詳細</h1>
+    <h2>[[${event.name}]]</h2>
+    <div>
+        <a th:href=@{/admin/event/{eventId}/approve(eventId=${eventid})}>マスを承認する</a>
+        <h3>[[${str}]]</h3>
+    </div>
+    <h2>参加者を追加する</h2>
+    <form role="form" th:action="@{/admin/event/{eventId}/creator/register(eventId=${eventid})}" th:object="${scform}" method="post">
+        <table>
+            <tr>
+                <td><label>名前: </label></td>
+                <td><input type="text" required th:field="*{name}" /></td>
+            </tr>
+            <tr>
+                <td><label>ログインID: </label></td>
+                <td><input type="text" required th:field="*{loginId}" /></td>
+            </tr>
+        </table>
+        <input type="submit" value="追加" class="btn-submit"/>
+    </form>
+    <h2>参加者一覧</h2>
+        <table border="1">
+            <tr>
+                <th>名前</th>
+                <th>ログインID</th>
+                <th>操作</th>
+            </tr>
+            <tr th:each="clist: ${clist}">
+                <td>[[${clist.name}]]</td>
+                <td>[[${clist.loginId}]]</td>
+                <td><a th:href=@{/admin/event/{eventId}/creator/delete/{creatorId}(eventId=${eventid},creatorId=${clist.creatorId})}>削除</a></td>
+            </tr>
+        </table>
+        <br>
+        <button onclick="location.href='/admin/menu'">管理者メニューに戻る</button>
+</body>
+</html>

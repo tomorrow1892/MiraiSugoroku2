@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>マス承認</title>
+</head>
+<body>
+    <h1>マス承認</h1>
+    <h2>未承認マス一覧</h2>
+        <table border="1">
+            <tr>
+                <th>作成者</th>
+                <th>タイトル</th>
+                <th>操作</th>
+            </tr>
+            <tr>
+                <td th:each="clist: ${clist}">[[${clist.name}]]</td>
+                <td th:each="slist: ${slist}">[[${slist.title}]]</td>
+                
+            </tr>
+            
+        </table>
+</body>
+</html>

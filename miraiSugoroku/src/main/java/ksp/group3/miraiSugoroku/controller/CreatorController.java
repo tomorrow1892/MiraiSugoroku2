@@ -222,10 +222,7 @@ public class CreatorController {
 
     @PostMapping("/{cid}/create/apply") // マス作成申請完了画面
     public String showSquareCreateDonePag(SquareForm form) {
-        // System.out.println(form.getTitle());
-        // System.out.println(form.getDescription());
-        // System.out.println(form.getSquareEventId());
-        form.setApproved(true);
+        form.setApproved(false);
         sService.createSquare(form);
         return "creator_create_done";
     }
