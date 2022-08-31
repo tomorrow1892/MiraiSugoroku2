@@ -62,29 +62,33 @@ public class CreatorController {
         model.addAttribute("selectedYear", form.getSelectedYear());
 
         // Admin実装前の各種データ登録用
-        if (eRepo.count() == 0) {
-            System.out.println("Created Events!");
-            Calendar cl = Calendar.getInstance();
+        // if (eRepo.count() == 0) {
+        // System.out.println("Created Events!");
+        // Calendar cl = Calendar.getInstance();
 
-            for (int i = 2022; i >= 2020; i--) {
-                cl.set(Calendar.YEAR, i);
-                Event e = new Event(null, 5, cl.getTime(), cl.getTime(), "Test event-" + String.valueOf(i), true);
+        // for (int i = 2022; i >= 2020; i--) {
+        // cl.set(Calendar.YEAR, i);
+        // Event e = new Event(null, 5, cl.getTime(), cl.getTime(), "Test event-" +
+        // String.valueOf(i), true);
 
-                eRepo.save(e);
-                System.out.println("save OK");
-            }
-        }
+        // eRepo.save(e);
+        // System.out.println("save OK");
+        // }
+        // }
 
-        if (cRepo.count() == 0) {
-            System.out.println("Created SquareCreator!");
-            SquareCreator sc1 = new SquareCreator(null, "taro", 1L, 0, true, "Taro", null);
-            SquareCreator sc2 = new SquareCreator(null, "hanako", 2L, 0, true, "Hanako", null);
-            SquareCreator sc3 = new SquareCreator(null, "mika", 3L, 0, true, "Mika", null);
+        // if (cRepo.count() == 0) {
+        // System.out.println("Created SquareCreator!");
+        // SquareCreator sc1 = new SquareCreator(null, "taro", 1L, 0, true, "Taro",
+        // null);
+        // SquareCreator sc2 = new SquareCreator(null, "hanako", 2L, 0, true, "Hanako",
+        // null);
+        // SquareCreator sc3 = new SquareCreator(null, "mika", 3L, 0, true, "Mika",
+        // null);
 
-            cRepo.save(sc1);
-            cRepo.save(sc2);
-            cRepo.save(sc3);
-        }
+        // cRepo.save(sc1);
+        // cRepo.save(sc2);
+        // cRepo.save(sc3);
+        // }
 
         return "creator_login";
     }

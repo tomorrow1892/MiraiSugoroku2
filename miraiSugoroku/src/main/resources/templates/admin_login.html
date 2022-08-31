@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理者ログイン</title>
+</head>
+<body>
+    <h1>管理者ログイン</h1>
+    <h2>パスワード機能は未実装</h2>
+    <h2>テキトーに文字列を入力してログイン</h2>
+    <form role="form" th:action="@{/admin/login}" th:object="${AdminLoginForm}" method="post">
+        <table>
+            <tr>
+                <td><label>パスワード: </label></td>
+                <td><input type="text" required th:field="*{password}" /></td>
+            </tr>
+        </table>
+        <input type="submit" value="ログイン" class="btn-submit"/>
+    </form>
+    
+
+</body>
+</html>
