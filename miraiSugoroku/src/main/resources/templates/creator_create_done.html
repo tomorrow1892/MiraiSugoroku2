@@ -12,7 +12,9 @@
             <h1>申請完了</h1>
         </div>
         <div>
-            <button class="back_button" onclick="location.href='/__${cid}__/menu'">戻る</button>
+            <form th:action="@{/__${cid}__/menu}" method="get">
+                <input type="submit" class="button" value="メニューへ戻る">
+            </form>
         </div>
     </div>
 </body>

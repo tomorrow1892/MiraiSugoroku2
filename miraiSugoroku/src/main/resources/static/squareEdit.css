@@ -1,0 +1,5 @@
+select:disabled, input:disabled {
+    color: black;
+    background-color: rgb(255, 253, 253);
+    opacity: 1;
+}

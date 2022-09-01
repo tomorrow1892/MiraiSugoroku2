@@ -14,12 +14,14 @@
                 <th>タイトル</th>
                 <th>操作</th>
             </tr>
-            <tr>
-                <td th:each="clist: ${clist}">[[${clist.name}]]</td>
-                <td th:each="slist: ${slist}">[[${slist.title}]]</td>
-                
+            <tr th:each="dto: ${dtolist}">
+                <td>[[${dto.name}]]</td>
+                <td>[[${dto.title}]]</td>
+                <td><a th:href=@{/admin/event/{eventId}/approve/{squareId}(eventId=${eventId},squareId=${dto.squareId})}>選択</a></td>
             </tr>
             
         </table>
+        <br>
+        <button onclick="location.href='./'">イベント詳細に戻る</button>
 </body>
 </html>

@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ksp.group3.miraiSugoroku.entity.Event;
 import ksp.group3.miraiSugoroku.entity.Square;
 import ksp.group3.miraiSugoroku.entity.SquareCreator;
+import ksp.group3.miraiSugoroku.entity.SquareEvent;
 import ksp.group3.miraiSugoroku.form.AdminLoginForm;
+import ksp.group3.miraiSugoroku.form.CreatorAndSquareDTO;
 import ksp.group3.miraiSugoroku.form.EventForm;
 import ksp.group3.miraiSugoroku.form.SquareCreatorForm;
+import ksp.group3.miraiSugoroku.form.SquareForm;
 import ksp.group3.miraiSugoroku.service.CreatorService;
 import ksp.group3.miraiSugoroku.service.EventService;
+import ksp.group3.miraiSugoroku.service.SquareEventService;
 import ksp.group3.miraiSugoroku.service.SquareService;
 
 @Controller
@@ -30,6 +34,8 @@ public class AdminController {
     CreatorService cService;
     @Autowired
     SquareService sService;
+    @Autowired
+    SquareEventService seService;
 
     // 管理者ログインページ
     // パスワード未実装
@@ -121,16 +127,65 @@ public class AdminController {
         return "redirect:/admin/event/" + eventId;
     }
 
+    // 未承認マス一覧
     @GetMapping("/admin/event/{eventId}/approve")
-    public String approveSquare(@PathVariable Long eventId, Model model) {
+    public String approveSquareList(@PathVariable Long eventId, Model model) {
+        List<CreatorAndSquareDTO> dtolist = new ArrayList<CreatorAndSquareDTO>();
         List<Square> slist = sService.filterSquaresByEventIdAndIsApproved(eventId, false);
-        List<SquareCreator> clist = new ArrayList<SquareCreator>();
         for (int i = 0; i < slist.size(); i++) {
-            clist.add(cService.getSquareCreator(slist.get(i).getCreatorId()));
+            CreatorAndSquareDTO dto = new CreatorAndSquareDTO();
+
+            String name = cService.getSquareCreator(slist.get(i).getCreatorId()).getName();
+            dto.setName(name);
+            dto.setTitle(slist.get(i).getTitle());
+            dto.setSquareId(slist.get(i).getSquareId());
+            dtolist.add(dto);
         }
-        model.addAttribute("slist", slist);
-        model.addAttribute("clist", clist);
-        return "admin_approve_Square";
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("dtolist", dtolist);
+        return "admin_approve_square";
+    }
+
+    // 未承認マス詳細
+    @GetMapping("/admin/event/{eventId}/approve/{squareId}")
+    public String approveSquare(@PathVariable Long eventId, @PathVariable Long squareId, Model model) {
+        Square s = sService.getSquare(squareId);
+        SquareForm sf = new SquareForm();
+        sf.setTitle(s.getTitle());
+        sf.setDescription(s.getDescription());
+        sf.setSquareEventId(s.getSquareEventId());
+        model.addAttribute("sf", sf);
+        List<SquareEvent> SquareEventList = seService.getAllSquareEvent();
+        SquareEventList.remove(13);
+        model.addAttribute("SquareEventList", SquareEventList);
+
+        String name = cService.getSquareCreator(s.getCreatorId()).getName();
+        model.addAttribute("name", name);
+        model.addAttribute("squareId", squareId);
+        model.addAttribute("eventId", eventId);
+        return "admin_edit_square";
+    }
+
+    // マス承認確認
+    @PostMapping("/admin/event/{eventId}/approve/{squareId}/confirm")
+    public String confirmSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
+        model.addAttribute("sf", sf);
+        List<SquareEvent> SquareEventList = seService.getAllSquareEvent();
+        SquareEventList.remove(13);
+        model.addAttribute("SquareEventList", SquareEventList);
+        Square s = sService.getSquare(squareId);
+        String name = cService.getSquareCreator(s.getCreatorId()).getName();
+        model.addAttribute("name", name);
+        model.addAttribute("squareId", squareId);
+        model.addAttribute("eventId", eventId);
+        return "admin_confirm_square";
+    }
+
+    @PostMapping("/admin/event/{eventId}/approve/{squareId}/done")
+    public String doneSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
+        sf.setApproved(true);
+        sService.updateSquare(squareId, sf);
+        return "admin_done_square";
     }
 
 }

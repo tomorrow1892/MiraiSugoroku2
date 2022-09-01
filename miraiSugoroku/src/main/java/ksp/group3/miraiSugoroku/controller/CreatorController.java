@@ -202,7 +202,6 @@ public class CreatorController {
     @GetMapping("/{cid}/create") // マス作成画面を表示
     public String showSquareCreateFrom(@PathVariable String cid, Model model) {
         model.addAttribute("SquareForm", new SquareForm());
-        model.addAttribute("cid", "Test");
         List<SquareEvent> SquareEventList = seService.getAllSquareEvent();
         SquareEventList.remove(13);
         model.addAttribute("SquareEventList", SquareEventList);
@@ -221,8 +220,10 @@ public class CreatorController {
     }
 
     @PostMapping("/{cid}/create/apply") // マス作成申請完了画面
-    public String showSquareCreateDonePag(SquareForm form) {
-        form.setApproved(false);
+    public String showSquareCreateDonePag(@PathVariable Long cid, SquareForm form) {
+        form.setCreatorId(cid);
+        form.setEventId(cService.getSquareCreator(cid).getEventId());
+        form.setGroupId(cService.getSquareCreator(cid).getGroup());
         sService.createSquare(form);
         return "creator_create_done";
     }

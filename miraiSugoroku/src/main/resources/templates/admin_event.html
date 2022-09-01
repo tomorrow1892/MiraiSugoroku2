@@ -9,8 +9,8 @@
     <h1>イベント詳細</h1>
     <h2>[[${event.name}]]</h2>
     <div>
-        <a th:href=@{/admin/event/{eventId}/approve(eventId=${eventid})}>マスを承認する</a>
         <h3>[[${str}]]</h3>
+        <a th:href=@{/admin/event/{eventId}/approve(eventId=${eventid})}>マスを承認する</a>
     </div>
     <h2>参加者を追加する</h2>
     <form role="form" th:action="@{/admin/event/{eventId}/creator/register(eventId=${eventid})}" th:object="${scform}" method="post">

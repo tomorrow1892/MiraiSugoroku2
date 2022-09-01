@@ -20,7 +20,7 @@ public class Square {
     String title;
     Long squareEventId;
     Long eventId;
-    Long groupId;
+    int groupId;
     String description;
     Long creatorId;
     int squareEffect; // マスの効果が良い（1）か悪い（2）かを返す
