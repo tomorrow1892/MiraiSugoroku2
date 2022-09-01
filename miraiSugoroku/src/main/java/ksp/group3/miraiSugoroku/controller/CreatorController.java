@@ -179,18 +179,20 @@ public class CreatorController {
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/{cid}/squares/search/keyword")
-    public String searchSquaresByKeyword(@RequestParam("keyword") String keyword, Model model) {
+    public String searchSquaresByKeyword(@PathVariable("cid") String cid,@RequestParam("keyword") String keyword, Model model) {
         List<Square> square_list = sService.searchSquaresByKeyword(keyword);
         model.addAttribute("square_list", square_list);
+        model.addAttribute("cid",cid);
 
         return "creator_squarelist";
     }
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/{cid}/squares/search/nickname")
-    public String searchSquaresByNickname(@RequestParam("nickname") String nickname, Model model) {
+    public String searchSquaresByNickname(@PathVariable("cid") String cid,@RequestParam("nickname") String nickname, Model model) {
         List<Square> square_list = sService.searchSquaresByNickname(nickname);
         model.addAttribute("square_list", square_list);
+        model.addAttribute("cid",cid);
 
         return "creator_squarelist";
     }
@@ -198,7 +200,7 @@ public class CreatorController {
     @GetMapping("/{cid}/create") // マス作成画面を表示
     public String showSquareCreateFrom(@PathVariable String cid, Model model) {
         model.addAttribute("SquareForm", new SquareForm());
-        model.addAttribute("cid", "Test");
+        model.addAttribute("cid", cid);
         List<SquareEvent> SquareEventList = seService.getAllSquareEvent();
         SquareEventList.remove(13);
         model.addAttribute("SquareEventList", SquareEventList);
@@ -217,12 +219,14 @@ public class CreatorController {
     }
 
     @PostMapping("/{cid}/create/apply") // マス作成申請完了画面
-    public String showSquareCreateDonePag(SquareForm form) {
+    public String showSquareCreateDonePag(@PathVariable String cid, SquareForm form, Model model) {
         // System.out.println(form.getTitle());
         // System.out.println(form.getDescription());
         // System.out.println(form.getSquareEventId());
         form.setApproved(true);
+        model.addAttribute("cid",cid);
         sService.createSquare(form);
+
         return "creator_create_done";
     }
 
