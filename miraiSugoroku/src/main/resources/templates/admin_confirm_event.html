@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>イベント作成確認</title>
+</head>
+<body>
+    <h1>イベント作成確認</h1>
+    <form role="form" th:action="@{/admin/registerEvent}" th:object="${Eventform}" method="post">
+        <table>
+            <tr>
+                <td><label>イベント名: </label></td>
+                <td>[[${Eventform.name}]]</td>
+            </tr>
+            <tr>
+                <td><label>期限: </label></td>
+                <td>[[${Eventform.limitDate}]]</td>
+            </tr>
+            <tr>
+                <td><label>グループ数: </label></td>
+                <td>[[${Eventform.nGroups}]]</td>
+            </tr>
+        </table>
+        <input type="submit" value="作成" class="btn-submit"/>
+        <td><input type="hidden" required th:field="*{name}"/></td>
+        <td><input type="hidden" required th:field="*{limitDate}"/></td>
+        <td><input type="hidden" required th:field="*{nGroups}"/></td>
+    </form>
+    
+
+</body>
+</html>
