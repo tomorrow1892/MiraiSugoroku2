@@ -5,11 +5,11 @@ import lombok.Data;
 
 @Data
 public class SquareCreatorForm {
-    String loginId = null;
-    String name = null;
-    String nickname = null;
-    long eventId = 0;
-    int group = 0;
+    String loginId;
+    String name;
+    String nickname;
+    long eventId;
+    int group;
 
     public SquareCreator toEntity() {
         SquareCreator sc = new SquareCreator();

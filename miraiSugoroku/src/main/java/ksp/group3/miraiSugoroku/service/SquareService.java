@@ -33,7 +33,7 @@ public class SquareService {
         return sRepo.findById(squareId).get();
     }
 
-    public List<Square> getAllSquare(){
+    public List<Square> getAllSquare() {
         return sRepo.findAll();
     }
 
@@ -42,7 +42,6 @@ public class SquareService {
         square.setTitle(form.getTitle());
         square.setSquareEventId(form.getSquareEventId());
         square.setDescription(form.getDescription());
-        square.setCreatorId(form.getCreatorId());
         square.setApproved(form.isApproved());
 
         return sRepo.save(square);

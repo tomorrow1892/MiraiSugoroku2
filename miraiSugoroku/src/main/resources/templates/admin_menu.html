@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理者メニュー</title>
+    <link rel="stylesheet" href="/css/display.css">
+</head>
+<body>
+    <h1>管理者メニュー</h1>
+    <div>
+        <button onclick="location.href='/admin/createEvent'">イベントを作成する</button>
+    </div>
+    <div>
+        <h2>イベント一覧</h2>
+        <table border="1">
+            <tr>
+                <th>イベント名</th>
+                <th>作成日</th>
+                <th>期限</th>
+                <th>グループ数</th>
+                <th>操作</th>
+            </tr>
+            <tr th:each="event: ${eventList}">
+                <td>[[${event.name}]]</td>
+                <td>[[${#dates.format(event.startDate, 'yyyy/MM/dd')}]]</td>
+                <td>[[${#dates.format(event.limitDate, 'yyyy/MM/dd')}]]</td>
+                <td>[[${event.nGroups}]]</td>
+                <td><a th:href=@{/admin/event/{num}(num=${event.eventId})}>選択</a></td>
+            </tr>
+            
+        </table>
+    </div>
+</body>
+</html>

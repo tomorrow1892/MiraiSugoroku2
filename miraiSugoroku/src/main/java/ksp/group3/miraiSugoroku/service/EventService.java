@@ -37,7 +37,9 @@ public class EventService {
         Event e = getEvent(eventId);
 
         e.setNGroups(eventForm.getNGroups());
-        e.setLimitDate(eventForm.getLimitDate());
+        long timeInMilliSeconds = eventForm.changeLimitDate().getTime();
+        java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
+        e.setLimitDate(date1);
         e.setName(eventForm.getName());
 
         return eRepo.save(e);
