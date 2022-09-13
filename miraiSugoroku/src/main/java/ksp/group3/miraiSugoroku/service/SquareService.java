@@ -74,7 +74,14 @@ public class SquareService {
             }
         }
 
-        return list_title;
+        ArrayList<Square> result = new ArrayList<>();
+        for(Square square : list_title){
+            if(square.isApproved()){
+                result.add(square);
+            }
+        }
+
+        return result;
     }
 
     public List<Square> searchSquaresByNickname(String nickname) {
@@ -91,7 +98,14 @@ public class SquareService {
             list.addAll(list_tmp);
         }
 
-        return list;
+        ArrayList<Square> result_list = new ArrayList<>();
+        for(Square square : list){
+            if(square.isApproved()){
+                result_list.add(square);
+            }
+        }
+
+        return result_list;
     }
 
     public List<Square> searchSquaresByMyBroup(Long creatorId) {
