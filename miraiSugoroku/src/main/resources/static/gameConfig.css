@@ -7,22 +7,22 @@ input[type=radio]+label:before{
     height: 70px;
 }
 
-input[type=radio][value="/img/dog.png"]+label:before{
+input[type=radio][value="dog"]+label:before{
     background-image: url(./img/dog.png);
 }
-input[type=radio][value="/img/cat.png"]+label:before{
+input[type=radio][value="cat"]+label:before{
     background-image: url(./img/cat.png);
 }
-input[type=radio][value="/img/hiyoko.png"]+label:before{
+input[type=radio][value="hiyoko"]+label:before{
     background-image: url(./img/hiyoko.png);
 }
-input[type=radio][value="/img/hamster.png"]+label:before{
+input[type=radio][value="hamster"]+label:before{
     background-image: url(./img/hamster.png);
 }
-input[type=radio][value="/img/zo.png"]+label:before{
+input[type=radio][value="zo"]+label:before{
     background-image: url(./img/zo.png);
 }
-input[type=radio][value="/img/penguin.png"]+label:before{
+input[type=radio][value="penguin"]+label:before{
     background-image: url(./img/penguin.png);
 }
 
@@ -31,22 +31,22 @@ input[type=radio]:checked+label::before{
     box-sizing: border-box;
 }
 
-input[type=radio][value="/img/dog.png"]{
+input[type=radio][value="dog"]{
     display: none;
 } 
-input[type=radio][value="/img/cat.png"]{
+input[type=radio][value="cat"]{
     display: none;
 } 
-input[type=radio][value="/img/hiyoko.png"]{
+input[type=radio][value="hiyoko"]{
     display: none;
 } 
-input[type=radio][value="/img/hamster.png"]{
+input[type=radio][value="hamster"]{
     display: none;
 } 
-input[type=radio][value="/img/zo.png"]{
+input[type=radio][value="zo"]{
     display: none;
 } 
-input[type=radio][value="/img/penguin.png"]{
+input[type=radio][value="penguin"]{
     display: none;
 } 
 
