@@ -13,8 +13,6 @@ import ksp.group3.miraiSugoroku.repository.CreatorRepository;
 import ksp.group3.miraiSugoroku.repository.EventRepository;
 import ksp.group3.miraiSugoroku.repository.SquareRepository;
 
-import javax.annotation.PostConstruct;
-
 @Service
 public class SquareService {
     @Autowired
@@ -75,8 +73,8 @@ public class SquareService {
         }
 
         ArrayList<Square> result = new ArrayList<>();
-        for(Square square : list_title){
-            if(square.isApproved()){
+        for (Square square : list_title) {
+            if (square.isApproved()) {
                 result.add(square);
             }
         }
@@ -99,8 +97,8 @@ public class SquareService {
         }
 
         ArrayList<Square> result_list = new ArrayList<>();
-        for(Square square : list){
-            if(square.isApproved()){
+        for (Square square : list) {
+            if (square.isApproved()) {
                 result_list.add(square);
             }
         }
