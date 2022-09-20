@@ -3,10 +3,7 @@ package ksp.group3.miraiSugoroku.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Calendar;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,35 +57,7 @@ public class CreatorController {
         model.addAttribute("creatorLoginForm", form);
         model.addAttribute("years", years);
         model.addAttribute("selectedYear", form.getSelectedYear());
-
-        // Admin実装前の各種データ登録用
-        // if (eRepo.count() == 0) {
-        // System.out.println("Created Events!");
-        // Calendar cl = Calendar.getInstance();
-
-        // for (int i = 2022; i >= 2020; i--) {
-        // cl.set(Calendar.YEAR, i);
-        // Event e = new Event(null, 5, cl.getTime(), cl.getTime(), "Test event-" +
-        // String.valueOf(i), true);
-
-        // eRepo.save(e);
-        // System.out.println("save OK");
-        // }
-        // }
-
-        // if (cRepo.count() == 0) {
-        // System.out.println("Created SquareCreator!");
-        // SquareCreator sc1 = new SquareCreator(null, "taro", 1L, 0, true, "Taro",
-        // null);
-        // SquareCreator sc2 = new SquareCreator(null, "hanako", 2L, 0, true, "Hanako",
-        // null);
-        // SquareCreator sc3 = new SquareCreator(null, "mika", 3L, 0, true, "Mika",
-        // null);
-
-        // cRepo.save(sc1);
-        // cRepo.save(sc2);
-        // cRepo.save(sc3);
-        // }
+        model.addAttribute("events",eService.getAllEvents());
 
         return "creator_login";
     }
@@ -183,20 +152,22 @@ public class CreatorController {
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/{cid}/squares/search/keyword")
-    public String searchSquaresByKeyword(@PathVariable("cid") String cid,@RequestParam("keyword") String keyword, Model model) {
+    public String searchSquaresByKeyword(@PathVariable("cid") String cid, @RequestParam("keyword") String keyword,
+            Model model) {
         List<Square> square_list = sService.searchSquaresByKeyword(keyword);
         model.addAttribute("square_list", square_list);
-        model.addAttribute("cid",cid);
+        model.addAttribute("cid", cid);
 
         return "creator_squarelist";
     }
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/{cid}/squares/search/nickname")
-    public String searchSquaresByNickname(@PathVariable("cid") String cid,@RequestParam("nickname") String nickname, Model model) {
+    public String searchSquaresByNickname(@PathVariable("cid") String cid, @RequestParam("nickname") String nickname,
+            Model model) {
         List<Square> square_list = sService.searchSquaresByNickname(nickname);
         model.addAttribute("square_list", square_list);
-        model.addAttribute("cid",cid);
+        model.addAttribute("cid", cid);
 
         return "creator_squarelist";
     }
@@ -223,11 +194,11 @@ public class CreatorController {
     }
 
     @PostMapping("/{cid}/create/apply") // マス作成申請完了画面
-    public String showSquareCreateDonePag(@PathVariable Long cid, SquareForm form,Model model) {
+    public String showSquareCreateDonePag(@PathVariable Long cid, SquareForm form, Model model) {
         form.setCreatorId(cid);
         form.setEventId(cService.getSquareCreator(cid).getEventId());
         form.setGroupId(cService.getSquareCreator(cid).getGroup());
-        model.addAttribute("cid",cid);
+        model.addAttribute("cid", cid);
         sService.createSquare(form);
 
         return "creator_create_done";
