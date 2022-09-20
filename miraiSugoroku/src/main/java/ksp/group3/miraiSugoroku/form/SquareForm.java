@@ -12,6 +12,7 @@ public class SquareForm {
     Long eventId;
     int groupId;
     boolean isApproved;
+    String picture;
 
     public Square toEntity() {
         Square square = new Square();
@@ -22,6 +23,7 @@ public class SquareForm {
         square.setApproved(false);
         square.setGroupId(groupId);
         square.setEventId(eventId);
+        square.setPicture(picture);
 
         return square;
     }
