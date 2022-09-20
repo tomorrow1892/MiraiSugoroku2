@@ -1,6 +1,5 @@
 package ksp.group3.miraiSugoroku.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -154,6 +153,7 @@ public class AdminController {
         sf.setTitle(s.getTitle());
         sf.setDescription(s.getDescription());
         sf.setSquareEventId(s.getSquareEventId());
+        sf.setPicture(s.getPicture());
         model.addAttribute("sf", sf);
         List<SquareEvent> SquareEventList = seService.getAllSquareEvent();
         SquareEventList.remove(13);
