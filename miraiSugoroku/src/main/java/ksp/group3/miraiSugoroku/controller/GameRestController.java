@@ -1,6 +1,7 @@
 package ksp.group3.miraiSugoroku.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,9 +10,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ksp.group3.miraiSugoroku.entity.Player;
+import ksp.group3.miraiSugoroku.form.SugorokuInfoDto;
 import ksp.group3.miraiSugoroku.service.GameService;
 
 @RestController
+@CrossOrigin
 public class GameRestController {
     @Autowired
     GameService gameService;
@@ -35,5 +38,12 @@ public class GameRestController {
         Player player = gameService.executeSquareEvent(Long.parseLong(sugorokuId));
 
         return objectMapper.writeValueAsString(player);
+    }
+
+    @GetMapping("/api/sugorokuInfo")
+    String getSugorokuInfo(@RequestParam String sugorokuId) throws JsonProcessingException{
+        SugorokuInfoDto sugorokuInfoDto = gameService.getSugorokuInfo(Long.parseLong(sugorokuId));
+    
+        return objectMapper.writeValueAsString(sugorokuInfoDto);
     }
 }
