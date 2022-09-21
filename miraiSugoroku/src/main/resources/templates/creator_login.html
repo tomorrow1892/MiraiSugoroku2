@@ -5,38 +5,61 @@
     <meta charset="UTF-8">
     <title>ログイン</title>
 </head>
+
 <body>
     <h1>作成者ログイン</h1>
 
-    <form th:action="@{/search/}" method="post", th:object="${creatorLoginForm}">
-        <!--/* 年度選択のドロップダウン */-->
-        <select id="selectedYear" name="selectedYear">
-            <option th:each="y: ${years}"
-                    th:value="${y}"
-                    th:text="${y}"
-                    th:selected="${y == creatorLoginForm.selectedYear}">
-            </option>
-        </select>
 
-        <p><input type="submit" value="検索" /></p>
-    </form>
+    <!--/* 年度選択のドロップダウン */-->
+    <select id="selectedYear" name="selectedYear">
+        <option th:each="y: ${years}" th:value="${y}" th:text="${y}"
+            th:selected="${y == creatorLoginForm.selectedYear}">
+        </option>
+    </select>
+
+
 
     <form th:action="@{/login/}" method="post" th:object="${creatorLoginForm}">
         <!--/* イベント選択のドロップダウン */-->
         <select id="selectedEventId" name="selectedEventId">
 
             <option value="イベントを選択">- イベントを選択してください -</option>
-            <option th:each="e: ${events}"
-                    th:value="${e.eventId}"
-                    th:text="${e.name}"
-                    th:selected="${e.eventId == creatorLoginForm.selectedEventId}"></option>
-            </option>
+
         </select>
 
         <input type="text" th:field="*{loginId}" />
 
         <p><input type="submit" value="ログイン" />
     </form>
-
 </body>
+<script th:inline="javascript">
+    const dropdownYear = document.getElementById("selectedYear");
+    const dropdownEvent = document.getElementById("selectedEventId");
+    const eventDropDownChange = () => {
+        const selectedYear = dropdownYear.value;
+        const allEvents = /*[[${events}]]*/ null;
+
+        while (dropdownEvent.children[1]) {//"イベントを選択してください"以外の要素をすべて削除
+            dropdownEvent.removeChild(dropdownEvent.children[1]);
+        }
+        console.log(allEvents);
+        allEvents.forEach(event => {
+            let option = document.createElement("option");
+            let date = new Date(event["startDate"]);
+            if (date.getFullYear() == selectedYear) {//年度選択のドロップダウンの年度に該当するイベントをリストに入れる
+                console.log(event["name"]);
+                option.text = event["name"];
+                option.value = event["eventId"];
+                dropdownEvent.appendChild(option);
+            }
+        });
+    }
+    eventDropDownChange();//最初に一回実行
+    dropdownYear.addEventListener("change", (event) => eventDropDownChange());
+
+
+
+</script>
+
+
 </html>
