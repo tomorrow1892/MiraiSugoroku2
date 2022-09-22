@@ -12,9 +12,16 @@
             <h1>ゲストメニュー</h1>
         </div>
         <div>
-            <button onclick="location.href='/config'">すごろくで遊ぶ</button>
-            <button onclick="location.href='/squares'">マス一覧</button>
-            <button onclick="location.href='/'">トップページ</button>
+            <form th:action="@{/config}" method="get" >
+                <input class="button" type="submit" value="すごろくで遊ぶ" />
+            </form>
+            <form th:action="@{/squares}" method="get" >
+                <input class="button" type="submit" value="マス一覧" />
+            </form>
+            <form th:action="@{/}" method="get" >
+                <input class="button" type="submit" value="トップページに戻る" />
+            </form>
+     
         </div>
     </div>
     

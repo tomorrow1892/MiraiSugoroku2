@@ -12,7 +12,9 @@
             <h1>ゲストマス一覧</h1>
         </div>
         <div>
-            <button class="back_button" onclick="location.href='/menu'">戻る</button>
+            <form th:action="@{/menu}" method="get" >
+                <input class="back_button" type="submit" value="戻る" />
+            </form>
         </div>
 
         <div>

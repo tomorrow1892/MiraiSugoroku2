@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>未来すごろく(仮)</title>
-    <link rel="stylesheet" href="/css/display.css">
+    <link rel="stylesheet" th:href="@{/css/display.css}">
 </head>
     <body>
         <div class="parent">
@@ -12,8 +12,13 @@
                 <h1>未来すごろく(仮)</h1>
             </div>
             <div>
-                <button onclick="location.href='/menu'">遊ぶ</button>
-                <button onclick="location.href='/loginpage'">作成者はこちら</button>
+                <form th:action="@{/menu}" method="get" >
+                    <input class="button" type="submit" value="遊ぶ" />
+                </form>
+                <form th:action="@{/loginpage}" method="get" >
+                    <input class="button" type="submit" value="作成者はこちら" />
+                </form>
+            
             </div>
             <div>
                 <h2><td><a th:href=@{/admin/}>管理者画面へのリンク（開発中のみ）</a></td></h2>

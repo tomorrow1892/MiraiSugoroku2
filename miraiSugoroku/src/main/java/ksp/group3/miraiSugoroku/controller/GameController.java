@@ -45,7 +45,7 @@ public class GameController {
         System.out.println(form.getNPlayers());
         Sugoroku sugoroku = gameService.createSugoroku(form, false, Long.parseLong("-1"));
         Long sugorokuId = sugoroku.getSugorokuId();
-        return "redirect:/game/" + sugorokuId;
+        return "redirect:http://localhost:3000/" + sugorokuId;
     }
 
     @GetMapping("/game/config")
