@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>マス承認確認</title>
+    <link rel="stylesheet" th:href="@{/squareEdit.css}">
+</head>
+<body>
+        <h1>マス承認確認</h1>
+        <h2>作成者：[[${name}]]</h2>
+        <div>
+            <form role="form" th:action="@{/admin/event/{eventId}/approve/{squareId}/done(eventId=${eventId},squareId=${squareId})}" th:object="${sf}" method="post">
+                <table>
+                <tr>
+                    <td><label>タイトル: </label></td>
+                    <td><input type="text" required th:field="*{title}" readonly/></td>
+                </tr>
+                <tr>
+                    <td><label>説明: </label></td>
+                    <td><input type="text" required th:field="*{description}" readonly/></td>
+                </tr>
+                <tr>
+                    <td><label>マスイベント: </label></td>
+                    <td>
+                        <select required th:field="*{squareEventId}" disabled>
+                            <option
+                                required
+                                th:each="se:${SquareEventList}"
+                                th:value="${se.squareEventID}"
+                                th:text="${se.eventTitle}"
+                                th:selected="${se.squareEventID == selectedValue}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>画像: </label></td>
+                    <td><img th:src=${sf.picture}></td>
+                </tr>
+                </table>
+                <input type="hidden" th:field="*{squareEventId}" />
+                <input type="submit" value="承認" class="btn-submit"/>
+            </form>
+        </div>
+        
+    
+    </body>
+    
+    
+
+</body>
+</html>

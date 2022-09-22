@@ -16,21 +16,26 @@ public class EventForm {
         Event e = new Event();
 
         Date startDate = new Date();
-        Date d_limitDate = getLimitDate();
+        Date d_limitDate = changeLimitDate();
 
         e.setName(name);
-        e.setStartDate(startDate);
-        e.setLimitDate(d_limitDate);
+        long timeInMilliSeconds = startDate.getTime();
+        java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
+        e.setStartDate(date1);
+        timeInMilliSeconds = d_limitDate.getTime();
+        java.sql.Date date2 = new java.sql.Date(timeInMilliSeconds);
+        e.setLimitDate(date2);
         e.setNGroups(nGroups);
+        e.setApproved(true);
 
         return e;
     }
 
-    public Date getLimitDate() {
+    public Date changeLimitDate() {
         SimpleDateFormat limitFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date d_limitDate = null;
 
-        //TODO 例外処理をする
+        // TODO 例外処理をする
         try {
             d_limitDate = limitFormat.parse(limitDate);
         } catch (Exception exception) {

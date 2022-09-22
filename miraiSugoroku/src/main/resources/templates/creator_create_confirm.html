@@ -26,12 +26,17 @@
                         <td><label>マスイベント: </label></td>
                         <td>[[${se.eventTitle}]]</td>
                     </tr>
+                    <tr>
+                        <td><label>画像: </label></td>
+                        <td><img th:src=${SquareForm.picture}></td>
+                    </tr>
             
                 </table>
                 <p style="text-align: center;"><input type="submit" value="申請" class="btn-submit"/></p>
                 <input type="hidden" th:field="*{title}" />
                 <input type="hidden" th:field="*{description}" />
                 <input type="hidden" th:field="*{squareEventId}" />
+                <input type="hidden" th:field="*{picture}" />
             </form>
         </div>
     </div>

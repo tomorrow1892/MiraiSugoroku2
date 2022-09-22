@@ -13,8 +13,6 @@ import ksp.group3.miraiSugoroku.repository.CreatorRepository;
 import ksp.group3.miraiSugoroku.repository.EventRepository;
 import ksp.group3.miraiSugoroku.repository.SquareRepository;
 
-import javax.annotation.PostConstruct;
-
 @Service
 public class SquareService {
     @Autowired
@@ -33,7 +31,7 @@ public class SquareService {
         return sRepo.findById(squareId).get();
     }
 
-    public List<Square> getAllSquare(){
+    public List<Square> getAllSquare() {
         return sRepo.findAll();
     }
 
@@ -42,7 +40,6 @@ public class SquareService {
         square.setTitle(form.getTitle());
         square.setSquareEventId(form.getSquareEventId());
         square.setDescription(form.getDescription());
-        square.setCreatorId(form.getCreatorId());
         square.setApproved(form.isApproved());
 
         return sRepo.save(square);
@@ -75,7 +72,14 @@ public class SquareService {
             }
         }
 
-        return list_title;
+        ArrayList<Square> result = new ArrayList<>();
+        for (Square square : list_title) {
+            if (square.isApproved()) {
+                result.add(square);
+            }
+        }
+
+        return result;
     }
 
     public List<Square> searchSquaresByNickname(String nickname) {
@@ -92,7 +96,14 @@ public class SquareService {
             list.addAll(list_tmp);
         }
 
-        return list;
+        ArrayList<Square> result_list = new ArrayList<>();
+        for (Square square : list) {
+            if (square.isApproved()) {
+                result_list.add(square);
+            }
+        }
+
+        return result_list;
     }
 
     public List<Square> searchSquaresByMyBroup(Long creatorId) {

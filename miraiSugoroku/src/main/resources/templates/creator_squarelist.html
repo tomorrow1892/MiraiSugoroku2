@@ -12,7 +12,9 @@
             <h1>作成者マス一覧</h1>
         </div>
         <div>
-            <button class="back_button" onclick="location.href='/__${cid}__/menu'">戻る</button>
+            <form th:action="@{/__${cid}__/menu}" method="get">
+                <input type="submit" class="back_button" value="戻る">
+            </form>
         </div>
 
         <div>
@@ -24,7 +26,7 @@
                 <input type="text" name="keyword" id="keyword" />
                 <input type="submit" value="検索する" />
             </form>
-
+            
             <form th:action="@{/__${cid}__/squares/search/nickname}" method="get">
                 <label for="nickname">ニックネーム：</label>
                 <input type="text" name="nickname" id="nickname" />
