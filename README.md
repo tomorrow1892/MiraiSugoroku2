@@ -3,7 +3,7 @@
 ## ローカルでMiraiSugorokuをテストする手順
 
 ### 0. 事前準備
-- MiraiSugoroku2プロジェクトの\src\main\resourcesにある"sugoroku.sql"ファイルを，c:\mysql\bin(いつもmysqlやmysqldを立ち上げている場所)にコピーする．
+- MiraiSugoroku2プロジェクトの\src\main\resourcesにある"sugoroku.sql"ファイルを，c:\TAMP\mysql\bin(いつもmysqlやmysqldを立ち上げている場所)にコピーする．
 - mysqldを立ち上げる
 ```
 cd c:\mysql\bin
