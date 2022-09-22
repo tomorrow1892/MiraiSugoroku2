@@ -43,8 +43,8 @@ mysql> source sugoroku.sql;
 - ログインページのURL
   - http://localhost:2289/
 - マス作成者ログイン
--- イベント: 公民未来イベント1
--- ユーザID: taro
+  - イベント: 公民未来イベント1
+  - ユーザID: taro
 
 
 ## git pushまでにやること
