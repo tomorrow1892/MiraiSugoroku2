@@ -37,7 +37,7 @@ public class PlayerService {
         if (position < 0) {
             player.setPosition(0);
             System.out.println("movetest");
-        } else if (position > length + 1) {
+        } else if (position >= length + 1) {
             player.setPosition(length + 1);
             player.setIsGoaled(true);
             System.out.println("movetest");
