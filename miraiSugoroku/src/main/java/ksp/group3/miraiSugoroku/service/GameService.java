@@ -189,7 +189,13 @@ public class GameService {
         Sugoroku game = sgRepo.findById(sugorokuId).get();
         int turn = game.getNowPlayer();
         int nPlayer = game.getNPlayers();
-
+        SugorokuInfoDto dto = getSugorokuInfo(sugorokuId);
+        //全員がゴールしていた場合，何もせずnullを返す
+        int goalCount=0;
+        for (Player p : dto.getPlayers()) {
+            if(p.getIsGoaled()) goalCount++;
+        }
+        if(goalCount == nPlayer) return null;
         boolean flag = false;
         Player next;
         do {
