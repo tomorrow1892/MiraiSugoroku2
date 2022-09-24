@@ -147,10 +147,19 @@ public class CreatorController {
         List<Square> square_list = sService.filterSquaresByIsApproved(true);
         model.addAttribute("square_list", square_list);
         model.addAttribute("cid", cid);
+
         return "creator_squarelist";
     }
 
-    // 検索結果の内承認済みのやつだけ表示できるように今後修正
+    @GetMapping("/{cid}/squares/mysquares")
+    public String showMySquare(@PathVariable("cid") Long cid, Model model) {
+        List<Square> square_list = sService.searchMySquares(cid);
+        model.addAttribute("square_list", square_list);
+        model.addAttribute("cid", cid);
+        
+        return "creator_squarelist";
+    }
+
     @GetMapping("/{cid}/squares/search/keyword")
     public String searchSquaresByKeyword(@PathVariable("cid") String cid, @RequestParam("keyword") String keyword,
             Model model) {
@@ -161,7 +170,6 @@ public class CreatorController {
         return "creator_squarelist";
     }
 
-    // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/{cid}/squares/search/nickname")
     public String searchSquaresByNickname(@PathVariable("cid") String cid, @RequestParam("nickname") String nickname,
             Model model) {
