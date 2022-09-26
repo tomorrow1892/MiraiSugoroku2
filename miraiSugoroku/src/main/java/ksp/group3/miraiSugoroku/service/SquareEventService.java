@@ -152,5 +152,75 @@ public class SquareEventService {
         se.setEventTitle("一回休み");
         seRepo.save(se);
 
+        se = new SquareEvent();
+        se.setSquareEventID((long) 15);
+        se.setActionNumber(3);
+        se.setArgument(100);
+        se.setEventTitle("+100ポイント");
+        seRepo.save(se);
+
+        se = new SquareEvent();
+        se.setSquareEventID((long) 16);
+        se.setActionNumber(3);
+        se.setArgument(200);
+        se.setEventTitle("+200ポイント");
+        seRepo.save(se);
+
+        se = new SquareEvent();
+        se.setSquareEventID((long) 17);
+        se.setActionNumber(3);
+        se.setArgument(300);
+        se.setEventTitle("+300ポイント");
+        seRepo.save(se);
+
+        se = new SquareEvent();
+        se.setSquareEventID((long) 18);
+        se.setActionNumber(3);
+        se.setArgument(400);
+        se.setEventTitle("+400ポイント");
+        seRepo.save(se);
+
+        se = new SquareEvent();
+        se.setSquareEventID((long) 19);
+        se.setActionNumber(3);
+        se.setArgument(500);
+        se.setEventTitle("+500ポイント");
+        seRepo.save(se);
+
+        se = new SquareEvent();
+        se.setSquareEventID((long) 20);
+        se.setActionNumber(3);
+        se.setArgument(-100);
+        se.setEventTitle("-100ポイント");
+        seRepo.save(se);
+
+        se = new SquareEvent();
+        se.setSquareEventID((long) 21);
+        se.setActionNumber(3);
+        se.setArgument(-200);
+        se.setEventTitle("-200ポイント");
+        seRepo.save(se);
+
+        se = new SquareEvent();
+        se.setSquareEventID((long) 22);
+        se.setActionNumber(3);
+        se.setArgument(-300);
+        se.setEventTitle("-300ポイント");
+        seRepo.save(se);
+
+        se = new SquareEvent();
+        se.setSquareEventID((long) 23);
+        se.setActionNumber(3);
+        se.setArgument(-400);
+        se.setEventTitle("-400ポイント");
+        seRepo.save(se);
+
+        se = new SquareEvent();
+        se.setSquareEventID((long) 24);
+        se.setActionNumber(3);
+        se.setArgument(-500);
+        se.setEventTitle("-500ポイント");
+        seRepo.save(se);
+
     }
 }
