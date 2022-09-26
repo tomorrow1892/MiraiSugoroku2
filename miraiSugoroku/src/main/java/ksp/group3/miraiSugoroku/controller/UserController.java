@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import ksp.group3.miraiSugoroku.service.SquareEventService;
 import ksp.group3.miraiSugoroku.service.SquareService;
 import ksp.group3.miraiSugoroku.entity.Square;
 import ksp.group3.miraiSugoroku.form.GameConfigForm;
@@ -18,9 +18,12 @@ import ksp.group3.miraiSugoroku.form.GameConfigForm;
 public class UserController {
     @Autowired
     SquareService sService;
+    @Autowired
+    SquareEventService seService;
 
     @GetMapping("/")
     public String showIndexPage() {
+        seService.registerSquareEvent();
         return "index";
     }
 

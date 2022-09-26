@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
 
 @Service
 public class EventService {
@@ -37,7 +35,9 @@ public class EventService {
         Event e = getEvent(eventId);
 
         e.setNGroups(eventForm.getNGroups());
-        e.setLimitDate(eventForm.getLimitDate());
+        long timeInMilliSeconds = eventForm.changeLimitDate().getTime();
+        java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
+        e.setLimitDate(date1);
         e.setName(eventForm.getName());
 
         return eRepo.save(e);
@@ -68,4 +68,12 @@ public class EventService {
         return eRepo.findByLimitDateAfter(day);
     }
 
+    public List<Event> getAllEvents(){
+        List<Event> allEvents = new ArrayList<>();
+        for(Event e: eRepo.findAll()){
+            allEvents.add(e);
+        }
+
+        return allEvents;
+    }
 }

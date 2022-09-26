@@ -12,10 +12,22 @@
             <h1>作成者メニュー</h1>
         </div>
         <div>
-            <button onclick="location.href='/config'">すごろくで遊ぶ</button>
+            <form th:action="@{/config}" method="get">
+                <input type="submit" class="button" value="すごろくで遊ぶ">
+            </form>
+            <form th:action="@{/__${cid}__/squares}" method="get">
+                <input type="submit" class="button" value="マス一覧">
+            </form>
+            <form th:action="@{/__${cid}__/create}" method="get">
+                <input type="submit" class="button" value="マス作成">
+            </form>
+            <form th:action="@{/}" method="get">
+                <input type="submit" class="button" value="トップページに戻る">
+            </form>
+            <!-- <button onclick="location.href='/config'">すごろくで遊ぶ</button>
             <button onclick="location.href='/__${cid}__/squares'">マス一覧</button>
             <button onclick="location.href='/__${cid}__/create'">マス作成</button>
-            <button onclick="location.href='/'">トップページ</button>
+            <button onclick="location.href='/'">トップページ</button> -->
         </div>
     </div>
 </body>

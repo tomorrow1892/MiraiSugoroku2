@@ -8,11 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import ksp.group3.miraiSugoroku.entity.Player;
 import ksp.group3.miraiSugoroku.entity.Square;
-import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.entity.Sugoroku;
 import ksp.group3.miraiSugoroku.form.GameConfigForm;
 import ksp.group3.miraiSugoroku.form.SugorokuInfoDto;

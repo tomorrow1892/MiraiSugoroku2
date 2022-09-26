@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>マス承認</title>
+</head>
+<body>
+    <h1>マス承認</h1>
+    <h2>未承認マス一覧</h2>
+        <table border="1">
+            <tr>
+                <th>作成者</th>
+                <th>タイトル</th>
+                <th>操作</th>
+            </tr>
+            <tr th:each="dto: ${dtolist}">
+                <td>[[${dto.name}]]</td>
+                <td>[[${dto.title}]]</td>
+                <td><a th:href=@{/admin/event/{eventId}/approve/{squareId}(eventId=${eventId},squareId=${dto.squareId})}>選択</a></td>
+            </tr>
+            
+        </table>
+        <br>
+        <button onclick="location.href='../'">イベント詳細に戻る</button>
+</body>
+</html>

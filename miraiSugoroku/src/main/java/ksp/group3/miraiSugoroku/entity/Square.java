@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,9 +21,11 @@ public class Square {
     String title;
     Long squareEventId;
     Long eventId;
-    Long groupId;
+    int groupId;
     String description;
     Long creatorId;
-    int squareEffect; // マスの効果が良い（1）か悪い（2）かを返す
+    int squareEffect; // マスの効果が良い（1）か悪い（-1）かを返す
     boolean isApproved;
+    @Lob
+    String picture;
 }

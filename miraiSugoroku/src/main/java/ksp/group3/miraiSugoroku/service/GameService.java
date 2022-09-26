@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -132,6 +133,10 @@ public class GameService {
             // exceptionを返す
         }
         Player player = players.get(0);
+        if (player.getIsGoaled()) {
+            advanceTurn(sugorokuId);
+            return player;
+        }
         Long playerId = player.getPlayerId();
         int position = player.getPosition();
         List<Board> boards = bRepo.findBySugorokuIdAndSequence(sugorokuId, position);
@@ -184,21 +189,32 @@ public class GameService {
         Sugoroku game = sgRepo.findById(sugorokuId).get();
         int turn = game.getNowPlayer();
         int nPlayer = game.getNPlayers();
-
-        int nextTurn;
-        if (turn == nPlayer) {
-            nextTurn = 1;
-        } else {
-            nextTurn = turn + 1;
+        //全員がゴールしていた場合，何もせずnullを返す
+        SugorokuInfoDto dto = getSugorokuInfo(sugorokuId);
+        int goalCount=0;
+        for (Player p : dto.getPlayers()) {
+            if(p.getIsGoaled()) goalCount++;
         }
-        game.setNowPlayer(nextTurn);
+        if(goalCount == nPlayer) return null;
+        boolean flag = false;
+        Player next;
+        do {
+            if (turn == nPlayer) {
+                turn = 1;
+            } else {
+                turn = turn + 1;
+            }
+            List<Player> nexts = pRepo.findBySugorokuIdAndOrder(sugorokuId, turn);
+            if (nexts.size() != 1) {
+                // Exception
+            }
+            next = nexts.get(0);
+            flag = next.getIsBreak() || next.getIsGoaled();
+            pService.disableBreak(next.getPlayerId());
+        } while (flag);
+        game.setNowPlayer(turn);
         sgRepo.save(game);
-        List<Player> players = pRepo.findBySugorokuIdAndOrder(sugorokuId, nextTurn);
-        if (players.size() != 1) {
-            // exception
-        }
-        Player player = players.get(0);
-        return player;
+        return next;
 
     }
 
