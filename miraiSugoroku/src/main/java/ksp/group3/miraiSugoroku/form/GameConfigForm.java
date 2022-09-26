@@ -72,10 +72,10 @@ public class GameConfigForm {
                 nSquares = 7;
                 break;
             case 1:
-                nSquares = 35;
+                nSquares = 14;
                 break;
             case 2:
-                nSquares = 50;
+                nSquares = 30;
                 break;
             default:
                 // exceptionを返す
