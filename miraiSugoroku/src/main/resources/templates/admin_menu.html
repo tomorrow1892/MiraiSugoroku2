@@ -30,6 +30,24 @@
             </tr>
             
         </table>
+        <h2>終了済みイベント一覧</h2>
+        <table border="1">
+            <tr>
+                <th>イベント名</th>
+                <th>作成日</th>
+                <th>期限</th>
+                <th>グループ数</th>
+                <th>操作</th>
+            </tr>
+            <tr th:each="end: ${endList}">
+                <td>[[${end.name}]]</td>
+                <td>[[${#dates.format(end.startDate, 'yyyy/MM/dd')}]]</td>
+                <td>[[${#dates.format(end.limitDate, 'yyyy/MM/dd')}]]</td>
+                <td>[[${end.nGroups}]]</td>
+                <td><a th:href=@{/admin/event/{num}(num=${end.eventId})}>選択</a></td>
+            </tr>
+            
+        </table>
     </div>
 </body>
 </html>

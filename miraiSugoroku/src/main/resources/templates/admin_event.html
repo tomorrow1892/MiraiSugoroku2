@@ -8,8 +8,9 @@
 <body>
     <h1>イベント詳細</h1>
     <h2>[[${event.name}]]</h2>
+    <h3>期限:[[${event.limitDate}]]</h3>
     <div>
-        <h3>[[${str}]]</h3>
+        <h3>[[${str1}]]</h3>
         <a th:href=@{/admin/event/{eventId}/approve(eventId=${eventid})}>マスを承認する</a>
     </div>
     <h2>参加者を追加する</h2>
@@ -27,15 +28,21 @@
         <input type="submit" value="追加" class="btn-submit"/>
     </form>
     <h2>参加者一覧</h2>
+    <h3>[[${str2}]]</h3>
+    <h3>未設定の場合：ニックネームは空欄、グループは0と表示されます。</h3>
         <table border="1">
             <tr>
                 <th>名前</th>
+                <th>ニックネーム</th>
                 <th>ログインID</th>
+                <th>グループ</th>
                 <th>操作</th>
             </tr>
             <tr th:each="clist: ${clist}">
                 <td>[[${clist.name}]]</td>
+                <td>[[${clist.nickname}]]</td>
                 <td>[[${clist.loginId}]]</td>
+                <td>[[${clist.group}]]</td>
                 <td><a th:href=@{/admin/event/{eventId}/creator/delete/{creatorId}(eventId=${eventid},creatorId=${clist.creatorId})}>削除</a></td>
             </tr>
         </table>

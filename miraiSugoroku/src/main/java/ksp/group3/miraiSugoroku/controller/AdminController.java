@@ -59,6 +59,10 @@ public class AdminController {
         Date date = new Date();
         List<Event> eventList = eService.getActiveEvents(date);
         model.addAttribute("eventList", eventList);
+
+        // 終了済イベント
+        List<Event> endList = eService.getNotActiveEvents(date);
+        model.addAttribute("endList", endList);
         return "admin_menu";
     }
 
@@ -100,8 +104,10 @@ public class AdminController {
         model.addAttribute("scform", scform);
 
         List<Square> slist = sService.filterSquaresByEventIdAndIsApproved(eventId, false);
-        String str = "未承認マス" + slist.size() + "個";
-        model.addAttribute("str", str);
+        String str1 = "未承認マス" + slist.size() + "個";
+        model.addAttribute("str1", str1);
+        String str2 = "グループ数：" + event.getNGroups();
+        model.addAttribute("str2", str2);
 
         return "admin_event";
     }
