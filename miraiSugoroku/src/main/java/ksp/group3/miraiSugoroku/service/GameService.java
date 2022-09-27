@@ -82,6 +82,9 @@ public class GameService {
         }
         int length = game.getLength();
         int nBadSquares = length * minusRate / 100;
+        if (badSquares.size() < nBadSquares) {
+            nBadSquares = badSquares.size();
+        }
         int nGoodSquares = length - nBadSquares;
         List<Square> squares = takeAtRandom(goodSquares, nGoodSquares, new Random());
         List<Square> bSquares = takeAtRandom(badSquares, nBadSquares, new Random());
