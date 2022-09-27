@@ -39,10 +39,14 @@
                 <tr>
                     <th>#</th>
                     <th>タイトル</th>
+                    <th></th>
                 </tr>
                 <tr th:each="square: ${square_list}">
                     <td></td>
                     <td>[[${square.title}]]</td>
+                    <td>
+                        <a th:href="@{/square/{squareId}(squareId=${square.squareId})}">確認</a>
+                    </td>
                 </tr>
             </table>
         </div>
