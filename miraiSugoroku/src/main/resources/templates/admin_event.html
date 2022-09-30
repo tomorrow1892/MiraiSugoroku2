@@ -13,7 +13,9 @@
         <h3>[[${str1}]]</h3>
         <a th:href=@{/admin/event/{eventId}/approve(eventId=${eventid})}>マスを承認する</a>
     </div>
+    
     <h2>参加者を追加する</h2>
+    <div th:if="${bool}">
     <form role="form" th:action="@{/admin/event/{eventId}/creator/register(eventId=${eventid})}" th:object="${scform}" method="post">
         <table>
             <tr>
@@ -27,6 +29,10 @@
         </table>
         <input type="submit" value="追加" class="btn-submit"/>
     </form>
+</div>
+<div th:if="${bool eq false}"><font color="red">
+    <h2>終了済みイベントのため参加者を追加出来ません</h2></font>
+</div>
     <h2>参加者一覧</h2>
     <h3>[[${str2}]]</h3>
     <h3>未設定の場合：ニックネームは空欄、グループは0と表示されます。</h3>
@@ -43,10 +49,12 @@
                 <td>[[${clist.nickname}]]</td>
                 <td>[[${clist.loginId}]]</td>
                 <td>[[${clist.group}]]</td>
-                <td><a th:href=@{/admin/event/{eventId}/creator/delete/{creatorId}(eventId=${eventid},creatorId=${clist.creatorId})}>削除</a></td>
+                <td><a th:href=@{/admin/event/{eventId}/creator/delete/confirm/{creatorId}(eventId=${eventid},creatorId=${clist.creatorId})}>削除</a>
+                </td>
             </tr>
         </table>
         <br>
-        <button onclick="location.href='/admin/menu'">管理者メニューに戻る</button>
+        <a th:href=@{/admin/event/{eventId}/edit(eventId=${eventid})}>イベント情報を修正する</a>
+        <a th:href=@{../../menu}>管理者メニューに戻る</a>
 </body>
 </html>
