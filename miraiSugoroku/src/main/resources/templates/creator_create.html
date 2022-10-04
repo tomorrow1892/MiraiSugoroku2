@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <title>マス作成</title>
     <link rel="stylesheet" th:href="@{/css/display.css}">
+    <script src="https://cdn.jsdelivr.net/gh/fengyuanchen/compressorjs/dist/compressor.min.js"></script>
 </head>
+
 <body>
     <div class="parent">
         <div>
@@ -14,123 +16,139 @@
         <div>
             <form role="form" th:action="@{/{c}/create/confirm(c=${cid})}" th:object="${SquareForm}" method="post">
                 <table>
-                <tr>
-                    <td><label>タイトル: </label></td>
-                    <td><input type="text" required th:field="*{title}" /></td>
-                </tr>
-                <tr>
-                    <td><label>説明: </label></td>
-                    <td><input type="text" required th:field="*{description}" /></td>
-                </tr>
-                <tr>
-                    <td><label>マスイベント: </label></td>
-                    <td>
-                        <select required th:field="*{squareEventId}">
+                    <tr>
+                        <td><label>タイトル: </label></td>
+                        <td><input type="text" required th:field="*{title}" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>説明: </label></td>
+                        <td><input type="text" required th:field="*{description}" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>マスイベント: </label></td>
+                        <td>
+                            <select required th:field="*{squareEventId}">
 
-                            <option
-                                required
-                                th:each="se:${SquareEventList}"
-                                th:value="${se.squareEventID}"
-                                th:text="${se.eventTitle}"
-                                th:selected="${se.squareEventID == selectedValue}">
-                            </option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label>画像: </label></td>
-                <td id="dragDropArea">
-                    <div class="drag-drop-inside">
-                        <p class="drag-drop-info">ここにファイルをドロップ</p>
-                        <p>または</p>
-                        <p class="drag-drop-buttons">
-                            <input id="fileInput" type="file" accept="image/*" value="ファイルを選択" name="photo" onChange="photoPreview(event)">
-                        </p>
-                        <div id="previewArea"></div>
-                    </div>
-                </td>
-                <td><input type="text"  th:field="*{picture}"  id="pic" hidden/></td>
-            </tr>
+                                <option required th:each="se:${SquareEventList}" th:value="${se.squareEventID}"
+                                    th:text="${se.eventTitle}" th:selected="${se.squareEventID == selectedValue}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>画像: </label></td>
+                        <td id="dragDropArea">
+                            <div class="drag-drop-inside">
+                                <p class="drag-drop-info">ここにファイルをドロップ</p>
+                                <p>または</p>
+                                <p class="drag-drop-buttons">
+                                    <input id="fileInput" type="file" accept="image/*" value="ファイルを選択" name="photo"
+                                        onChange="photoPreview(event)">
+                                </p>
+                                <div id="previewArea"></div>
+                            </div>
+                        </td>
+                        <td><input type="text" th:field="*{picture}" id="pic" hidden /></td>
+                    </tr>
 
                 </table>
-                <p style="text-align: center;"><input type="submit" value="確認" class="btn-submit"/></p>
+                <p style="text-align: center;"><input type="submit" value="確認" class="btn-submit" /></p>
             </form>
         </div>
     </div>
 </body>
 <script>
-    window.addEventListener('DOMContentLoaded', function(){
-        var img_element = document.createElement('img');
-        var blob = document.createElement('text');
-    
-    // ファイルが選択されたら実行
-    document.getElementById("upload_file").addEventListener('change', function(e){
-    
-      var file_reader = new FileReader();
-    
-      file_reader.addEventListener('load', function(e) {
-    
-        // img要素を作成
-        
-        img_element.src = e.target.result;
-        blob= e.target.result;
-      
-    
-        // img要素をページに挿入
-        var article_element = document.getElementById('content1');
-        article_element.append(img_element);
+    // window.addEventListener('DOMContentLoaded', function () {
+    //     var img_element = document.createElement('img');
+    //     var blob = document.createElement('text');
 
-        var blob_element = document.getElementById('pic');
-        blob_element.append(blob);
-        document.getElementById("pic").value = blob;
+    //     // ファイルが選択されたら実行
+    //     document.getElementById("upload_file").addEventListener('change', function (e) {
 
-      });
-    
-      // ファイル内容をBase64にエンコードし、「data:〜」で始まるURL形式で取得
-      file_reader.readAsDataURL(e.target.files[0]);
-    });
-    });
+    //         var file_reader = new FileReader();
+
+    //         file_reader.addEventListener('load', function (e) {
+
+    //             // img要素を作成
+
+    //             img_element.src = e.target.result;
+    //             blob = e.target.result;
+
+
+    //             // img要素をページに挿入
+    //             var article_element = document.getElementById('content1');
+    //             article_element.append(img_element);
+
+    //             var blob_element = document.getElementById('pic');
+    //             blob_element.append(blob);
+    //             document.getElementById("pic").value = blob;
+
+    //         });
+
+    //         // ファイル内容をBase64にエンコードし、「data:〜」で始まるURL形式で取得
+    //         file_reader.readAsDataURL(e.target.files[0]);
+    //     });
+    // });
 
     var fileArea = document.getElementById('dragDropArea');
-var fileInput = document.getElementById('fileInput');
-fileArea.addEventListener('dragover', function(evt){
-  evt.preventDefault();
-  fileArea.classList.add('dragover');
-});
-fileArea.addEventListener('dragleave', function(evt){
-    evt.preventDefault();
-    fileArea.classList.remove('dragover');
-});
-fileArea.addEventListener('drop', function(evt){
-    evt.preventDefault();
-    fileArea.classList.remove('dragenter');
-    var files = evt.dataTransfer.files;
-    console.log("DRAG & DROP");
-    console.table(files);
-    fileInput.files = files;
-    photoPreview('onChenge',files[0]);
-});
-function photoPreview(event, f = null) {
-  var file = f;
-  if(file === null){
-      file = event.target.files[0];
-  }
-  var reader = new FileReader();
-  var preview = document.getElementById("previewArea");
-  var previewImage = document.getElementById("previewImage");
+    var fileInput = document.getElementById('fileInput');
+    fileArea.addEventListener('dragover', function (evt) {
+        evt.preventDefault();
+        fileArea.classList.add('dragover');
+    });
+    fileArea.addEventListener('dragleave', function (evt) {
+        evt.preventDefault();
+        fileArea.classList.remove('dragover');
+    });
+    fileArea.addEventListener('drop', function (evt) {
+        evt.preventDefault();
+        fileArea.classList.remove('dragenter');
+        var files = evt.dataTransfer.files;
+        console.log("DRAG & DROP");
+        console.table(files);
+        fileInput.files = files;
+        photoPreview('onChenge', files[0]);
+    });
+    function photoPreview(event, f = null) {
+        var file = f;
+        if (file === null) {
+            file = event.target.files[0];
+        }
+        var reader = new FileReader();
+        var preview = document.getElementById("previewArea");
+        var previewImage = document.getElementById("previewImage");
 
-  if(previewImage != null) {
-    preview.removeChild(previewImage);
-  }
-  reader.onload = function(event) {
-    var img = document.createElement("img");
-    img.setAttribute("src", reader.result);
-    img.setAttribute("id", "previewImage");
-    preview.appendChild(img);
-    document.getElementById("pic").value = img.src;
-  };
+        if (previewImage != null) {
+            preview.removeChild(previewImage);
+        }
+        //画像ファイルを圧縮する
+        const pressQuality = 0.8;
+        const compressedImg = new Compressor(file, {
+            quality: pressQuality,
+            success(result) {
+                var img = document.createElement("img");
 
-  reader.readAsDataURL(file);
-}
-    </script>
+                const reader = new FileReader()
+                reader.onload = (event) => {
+                    img.setAttribute("src", reader.result);
+                    img.setAttribute("id", "previewImage");
+                    img.setAttribute("width","400");
+                    preview.appendChild(img);
+                    document.getElementById("pic").value = img.src;
+                    console.log("圧縮率:"+pressQuality)
+                    console.log(result)
+                }
+                reader.readAsDataURL(result)
+            },
+            maxWidth: 400,//画像の横幅
+            maxHeight: Infinity,
+            mimeType: "auto",
+            error(err) {
+                console.log(file);
+                console.log(err.message);
+            }
+        })
+    }
+</script>
+
 </html>
