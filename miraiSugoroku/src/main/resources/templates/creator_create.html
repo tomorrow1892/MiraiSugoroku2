@@ -132,7 +132,7 @@
                 reader.onload = (event) => {
                     img.setAttribute("src", reader.result);
                     img.setAttribute("id", "previewImage");
-                    img.setAttribute("width","400");
+                    img.setAttribute("width","300");//画像の幅を300に固定
                     preview.appendChild(img);
                     document.getElementById("pic").value = img.src;
                     console.log("圧縮率:"+pressQuality)
@@ -140,7 +140,7 @@
                 }
                 reader.readAsDataURL(result)
             },
-            maxWidth: 400,//画像の横幅
+            maxWidth: 300,
             maxHeight: Infinity,
             mimeType: "auto",
             error(err) {
