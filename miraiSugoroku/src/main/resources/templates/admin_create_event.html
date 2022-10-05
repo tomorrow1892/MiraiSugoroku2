@@ -13,9 +13,11 @@
                 <td><label>イベント名: </label></td>
                 <td><input type="text" required th:field="*{name}" /></td>
             </tr>
+            <font color="red">
+            <h5>イベント名は1度決めると修正出来ません。</h2></font>
             <tr>
                 <td><label>期限: </label></td>
-                <td><input type="date" required th:field="*{limitDate}" /></td>
+                <td><input type="date" required th:field="*{limitDate}" id="today" /></td>
             </tr>
             <tr>
                 <td><label>グループ数: </label></td>
@@ -27,4 +29,31 @@
     
 
 </body>
+
+<script type="text/javascript">
+    //今日の日時を表示
+        window.onload = function () {
+            //今日の日時を表示
+            var date = new Date()
+            var year = date.getFullYear()
+            var month = date.getMonth() + 1
+            var day = date.getDate()
+          
+            var toTwoDigits = function (num, digit) {
+              num += ''
+              if (num.length < digit) {
+                num = '0' + num
+              }
+              return num
+            }
+            
+            var yyyy = toTwoDigits(year, 4)
+            var mm = toTwoDigits(month, 2)
+            var dd = toTwoDigits(day, 2)
+            var ymd = yyyy + "-" + mm + "-" + dd;
+            
+            document.getElementById("today").min = ymd;
+        }
+</script>
+
 </html>

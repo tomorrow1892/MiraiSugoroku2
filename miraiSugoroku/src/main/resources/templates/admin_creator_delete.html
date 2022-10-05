@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>参加者削除確認</title>
+</head>
+<body>
+<h2>この参加者を削除しますか？
+    <h3>名前:[[${sc.name}]]
+    <h3>ニックネーム:[[${sc.nickname}]]
+    <h3>ログインID:[[${sc.loginId}]]
+    <h3>グループ:[[${sc.group}]]
+    <a th:href=@{../../../}><br><br>戻る</a>
+    <a th:href=@{/admin/event/{eventId}/creator/delete/{creatorId}(eventId=${eventid},creatorId=${sc.creatorId})}>    削除</a>
+</body>
+</html>
