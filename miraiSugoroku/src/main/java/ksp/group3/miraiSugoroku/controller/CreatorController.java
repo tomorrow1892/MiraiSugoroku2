@@ -19,6 +19,7 @@ import ksp.group3.miraiSugoroku.entity.Square;
 import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.entity.SquareEvent;
 import ksp.group3.miraiSugoroku.form.CreatorLoginForm;
+import ksp.group3.miraiSugoroku.form.GameConfigForm;
 import ksp.group3.miraiSugoroku.form.UpdateSquareCreatorForm;
 import ksp.group3.miraiSugoroku.repository.CreatorRepository;
 import ksp.group3.miraiSugoroku.repository.EventRepository;
@@ -57,7 +58,7 @@ public class CreatorController {
         model.addAttribute("creatorLoginForm", form);
         model.addAttribute("years", years);
         model.addAttribute("selectedYear", form.getSelectedYear());
-        model.addAttribute("events",eService.getAllEvents());
+        model.addAttribute("events", eService.getAllEvents());
 
         return "creator_login";
     }
@@ -114,7 +115,14 @@ public class CreatorController {
     }
 
     @GetMapping("/{creatorId}/menu")
-    public String showcreatorMenu(@PathVariable("creatorId") String creatorId, Model model) {
+    public String showcreatorMenu(@PathVariable("creatorId") Long creatorId, Model model) {
+
+        // 作成権限があるかを確認
+        Long eventId = cService.getSquareCreator(creatorId).getEventId();
+        boolean bool = eService.getBoolean(eventId);
+
+        model.addAttribute("bool", bool);
+        model.addAttribute("event", eService.getEvent(eventId));
         model.addAttribute("cid", creatorId);
         return "creator_menu";
     }
@@ -156,7 +164,7 @@ public class CreatorController {
         List<Square> square_list = sService.searchMySquares(cid);
         model.addAttribute("square_list", square_list);
         model.addAttribute("cid", cid);
-        
+
         return "creator_squarelist";
     }
 
@@ -213,7 +221,9 @@ public class CreatorController {
     }
 
     @GetMapping("/{cid}/config")
-    public String showSugorokuManu() {
+    public String showSugorokuManu(@PathVariable Long cid, Model model) {
+        model.addAttribute("GameConfigForm", new GameConfigForm());
+        model.addAttribute("cid", cid);
         return "creator_sugoroku_config";
     }
 

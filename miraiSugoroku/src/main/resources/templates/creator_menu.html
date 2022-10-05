@@ -10,17 +10,28 @@
     <div class="parent">
         <div>
             <h1>作成者メニュー</h1>
+            <div th:if="${bool}"><h2>マス作成は[[${event.limitDate}]]まで出来ます</h2></div>
+            <div th:if="${bool eq false}"><font color="red">
+                <h2>マス作成期限([[${event.limitDate}]])を超えたためマス作成出来ません</h2></font>
+            </div>
         </div>
         <div>
-            <form th:action="@{/config}" method="get">
+            <form th:action="@{/__${cid}__/config}" method="get">
                 <input type="submit" class="button" value="すごろくで遊ぶ">
             </form>
             <form th:action="@{/__${cid}__/squares}" method="get">
                 <input type="submit" class="button" value="マス一覧">
             </form>
-            <form th:action="@{/__${cid}__/create}" method="get">
-                <input type="submit" class="button" value="マス作成">
-            </form>
+            <div th:if="${bool}">
+                <form th:action="@{/__${cid}__/create}" method="get">
+                    <input type="submit" class="button" value="マス作成">
+                </form>
+            </div>
+            <div th:if="${bool eq false}">
+                <form th:action="@{/__${cid}__/create}" method="get">
+                    <input type="submit" class="button" value="マス作成" disabled="disabled">
+                </form>
+            </div>
             <form th:action="@{/}" method="get">
                 <input type="submit" class="button" value="トップページに戻る">
             </form>

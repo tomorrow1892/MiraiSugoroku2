@@ -13,6 +13,8 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     List<Event> findByLimitDateAfter(Date date);
 
+    List<Event> findByLimitDateBefore(Date date);
+
     List<Event> findByEventId(Long eventId);
 
     List<Event> findByStartDateBetween(Date since, Date until);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -65,15 +66,40 @@ public class EventService {
     }
 
     public List<Event> getActiveEvents(Date day) {
-        return eRepo.findByLimitDateAfter(day);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(day);
+        cal.add(Calendar.DAY_OF_MONTH, -1);
+        return eRepo.findByLimitDateAfter(cal.getTime());
     }
 
-    public List<Event> getAllEvents(){
+    public List<Event> getNotActiveEvents(Date day) {
+        return eRepo.findByLimitDateBefore(day);
+    }
+
+    public List<Event> getAllEvents() {
         List<Event> allEvents = new ArrayList<>();
-        for(Event e: eRepo.findAll()){
+        for (Event e : eRepo.findAll()) {
             allEvents.add(e);
         }
 
         return allEvents;
+    }
+
+    public boolean getBoolean(Long eventId) {
+        Event e = getEvent(eventId);
+        Date d = e.getLimitDate();
+        Date today = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        cal.add(Calendar.DAY_OF_MONTH, -1);
+
+        int compare = d.compareTo(cal.getTime());
+        if (compare > 0) {
+            e.setApproved(true);
+        } else {
+            e.setApproved(false);
+        }
+
+        return e.isApproved();
     }
 }

@@ -59,6 +59,10 @@ public class AdminController {
         Date date = new Date();
         List<Event> eventList = eService.getActiveEvents(date);
         model.addAttribute("eventList", eventList);
+
+        // 終了済イベント
+        List<Event> endList = eService.getNotActiveEvents(date);
+        model.addAttribute("endList", endList);
         return "admin_menu";
     }
 
@@ -98,12 +102,23 @@ public class AdminController {
         model.addAttribute("eventid", eventId);
         model.addAttribute("clist", creator_list);
         model.addAttribute("scform", scform);
-
+        boolean bool = eService.getBoolean(eventId);
+        model.addAttribute("bool", bool);
         List<Square> slist = sService.filterSquaresByEventIdAndIsApproved(eventId, false);
-        String str = "未承認マス" + slist.size() + "個";
-        model.addAttribute("str", str);
+        String str1 = "未承認マス" + slist.size() + "個";
+        model.addAttribute("str1", str1);
+        String str2 = "グループ数：" + event.getNGroups();
+        model.addAttribute("str2", str2);
 
         return "admin_event";
+    }
+
+    // イベント情報編集
+    @GetMapping("/admin/event/{eventId}/edit")
+    public String editEvent(@PathVariable Long eventId, Model model) {
+
+        return "admin_event_edit";
+
     }
 
     // 参加者（作成者）の追加
@@ -117,6 +132,16 @@ public class AdminController {
             cService.createSquareCreator(scform);
         }
         return "redirect:/admin/event/" + eventId;
+    }
+
+    // 参加者（作成者）の削除の確認
+    @GetMapping("/admin/event/{eventId}/creator/delete/confirm/{creatorId}")
+    public String deleteConfirmSquareCreator(@PathVariable Long eventId, @PathVariable Long creatorId, Model model) {
+        model.addAttribute("eventid", eventId);
+        SquareCreator sc = cService.getSquareCreator(creatorId);
+        model.addAttribute("sc", sc);
+        // cService.deleteSquareCreator(creatorId);
+        return "admin_creator_delete";
     }
 
     // 参加者（作成者）の削除
