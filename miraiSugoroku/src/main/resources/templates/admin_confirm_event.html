@@ -30,7 +30,10 @@
         <td><input type="hidden" required th:field="*{limitDate}"/></td>
         <td><input type="hidden" required th:field="*{nGroups}"/></td>
     </form>
-    
+
+    <form th:action="@{/admin/createEvent}" method="get">
+        <input type="submit" class="button" value="戻る">
+    </form>
 
 </body>
 </html>
