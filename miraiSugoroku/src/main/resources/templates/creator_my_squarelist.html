@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>マス一覧</title>
+    <link rel="stylesheet" th:href="@{/css/display.css}">
+</head>
+<body>
+    <div class="parent">
+        <div>
+            <h1>自分が作成したマス一覧</h1>
+        </div>
+        <div>
+            <form th:action="@{/__${cid}__/menu}" method="get">
+                <input type="submit" class="back_button" value="戻る">
+            </form>
+        </div>
+
+        <div>
+            <h2>検索</h2>
+        </div>
+        <div>
+            <form th:action="@{/__${cid}__/squares/search/keyword}" method="get">
+                <label for="keyword">&emsp;キーワード：</label>
+                <input type="text" name="keyword" id="keyword" />
+                <input type="submit" value="検索する" />
+            </form>
+            
+            <form th:action="@{/__${cid}__/squares/search/nickname}" method="get">
+                <label for="nickname">ニックネーム：</label>
+                <input type="text" name="nickname" id="nickname" />
+                <input type="submit" value="検索する" />
+            </form>
+
+            <form th:action="@{/__${cid}__/squares}" method="get">
+                <input type="submit" value="全てのマスを表示" />
+            </form>
+        </div>
+
+        <div>
+            <h2>承認済みマス一覧</h2>
+            <table border="1">
+                <tr>
+                    <th>#</th>
+                    <th>タイトル</th>
+                </tr>
+                <tr th:each="square: ${approved_square_list}">
+                    <td></td>
+                    <td>[[${square.title}]]</td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <h2>未承認マス一覧</h2>
+            <table border="1">
+                <tr>
+                    <th>#</th>
+                    <th>タイトル</th>
+                </tr>
+                <tr th:each="square: ${not_approved_square_list}">
+                    <td></td>
+                    <td>[[${square.title}]]</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
