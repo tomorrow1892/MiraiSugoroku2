@@ -161,11 +161,13 @@ public class CreatorController {
 
     @GetMapping("/{cid}/squares/mysquares")
     public String showMySquare(@PathVariable("cid") Long cid, Model model) {
-        List<Square> square_list = sService.searchMySquares(cid);
-        model.addAttribute("square_list", square_list);
+        List<Square> approved_square_list = sService.filterCreatorIdAndIsApproved(cid, true);
+        List<Square> not_approved_square_list = sService.filterCreatorIdAndIsApproved(cid, false);
+        model.addAttribute("approved_square_list", approved_square_list);
+        model.addAttribute("not_approved_square_list", not_approved_square_list);
         model.addAttribute("cid", cid);
 
-        return "creator_squarelist";
+        return "creator_my_squarelist";
     }
 
     @GetMapping("/{cid}/squares/search/keyword")

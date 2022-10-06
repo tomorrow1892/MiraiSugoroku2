@@ -116,4 +116,8 @@ public class SquareService {
     public List<Square> searchMySquares(Long creatorId) {
         return sRepo.findByCreatorId(creatorId);
     }
+
+    public List<Square> filterCreatorIdAndIsApproved(Long creatorId, boolean isApproved){
+        return sRepo.findByCreatorIdAndIsApproved(creatorId, isApproved);
+    }
 }
