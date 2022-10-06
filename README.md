@@ -1,5 +1,7 @@
 # MiraiSugoroku2
 
+##デプロイ日時
+
 ## ローカルでMiraiSugorokuをテストする手順
 
 ### 0. 事前準備

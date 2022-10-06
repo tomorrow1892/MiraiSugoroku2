@@ -26,7 +26,7 @@ public class MiraiSugorokuErrorHandler {
      */
     @ExceptionHandler(Exception.class)
     public String handleException(Exception ex, Model model) {
-        model.addAttribute("advice", "深刻なエラーが発生しました．管理者にお問い合わせください");
+        model.addAttribute("advice", "エラーが発生しました．前のページに戻ってください");
         model.addAttribute("exception", ex);
         log.error(ex.getMessage(), ex.getCause());
         return "error";
