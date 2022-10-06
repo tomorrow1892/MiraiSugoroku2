@@ -34,27 +34,27 @@ public class GameConfigForm {
     public void addNameAndIcon() {
         this.names = new ArrayList<>();
         this.icons = new ArrayList<>();
-        if (this.p1 != null && this.i1 != null) {
+        if (this.p1 != "" && this.i1 != null) {
             this.names.add(this.p1);
             this.icons.add(this.i1);
         }
-        if (this.p2 != null && this.i2 != null) {
+        if (this.p2 != "" && this.i2 != null) {
             this.names.add(this.p2);
             this.icons.add(this.i2);
         }
-        if (this.p3 != null && this.i3 != null) {
+        if (this.p3 != "" && this.i3 != null) {
             this.names.add(p3);
             this.icons.add(i3);
         }
-        if (this.p4 != null && this.i4 != null) {
+        if (this.p4 != "" && this.i4 != null) {
             this.names.add(p4);
             this.icons.add(i4);
         }
-        if (this.p5 != null && this.i5 != null) {
+        if (this.p5 != "" && this.i5 != null) {
             this.names.add(p5);
             this.icons.add(i5);
         }
-        if (this.p6 != null && this.i6 != null) {
+        if (this.p6 != "" && this.i6 != null) {
             this.names.add(p6);
             this.icons.add(i6);
         }

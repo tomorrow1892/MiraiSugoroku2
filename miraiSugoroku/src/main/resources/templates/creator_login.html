@@ -31,6 +31,10 @@
 
         <p><input type="submit" value="ログイン" />
     </form>
+
+    <form th:action="@{/}" method="get">
+        <input type="submit" class="button" value="トップページに戻る">
+    </form>
 </body>
 <script th:inline="javascript">
     const dropdownYear = document.getElementById("selectedYear");
