@@ -39,6 +39,10 @@ button{
     display: inline-block;
 }
 
+.search-center{
+    text-align: center;
+}
+
 #dragDropArea{
     background-color: #f4f4f4;
     margin: 10px;
