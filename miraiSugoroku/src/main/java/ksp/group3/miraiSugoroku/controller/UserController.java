@@ -2,16 +2,21 @@ package ksp.group3.miraiSugoroku.controller;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import ksp.group3.miraiSugoroku.service.CreatorService;
 import ksp.group3.miraiSugoroku.service.SquareEventService;
 import ksp.group3.miraiSugoroku.service.SquareService;
 import ksp.group3.miraiSugoroku.entity.Square;
+import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.form.GameConfigForm;
 
 @Controller
@@ -20,6 +25,9 @@ public class UserController {
     SquareService sService;
     @Autowired
     SquareEventService seService;
+    @Autowired
+    CreatorService cService;
+    
 
     @GetMapping("/")
     public String showIndexPage() {
@@ -38,6 +46,16 @@ public class UserController {
         model.addAttribute("square_list", square_list);
 
         return "guest_squarelist";
+    }
+
+    @GetMapping("square/{squareId}")
+    public String showSquareDetail(@PathVariable Long squareId, Model model) {
+        Square square = sService.getSquare(squareId);
+        model.addAttribute("square", square);
+        SquareCreator creator = cService.getSquareCreator(square.getCreatorId());
+        model.addAttribute("creator", creator);
+
+        return "square_detail";
     }
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
