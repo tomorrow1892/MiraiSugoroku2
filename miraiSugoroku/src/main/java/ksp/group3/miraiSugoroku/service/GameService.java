@@ -28,7 +28,7 @@ import ksp.group3.miraiSugoroku.repository.SugorokuRepository;
 @Service
 public class GameService {
 
-    int minusRate = 50;
+    int minusRate = 50; //--- すごろくにどれだけマイナスなマスを選択するべきか
     // Repository
     @Autowired
     PlayerRepository pRepo;
@@ -62,11 +62,13 @@ public class GameService {
 
         List<Square> goodSquares;
         List<Square> badSquares;
-        // List<Square> neutralSquares;
+
+        //--- ゲストログインの時、グループ選択を強制的に不可能にする
         if (creatorId < 0) {
             withGroupSquares = false;
         }
-        if (withGroupSquares) {
+
+        if (withGroupSquares) { //--- グループ選択時のマス選択戦略
             SquareCreator creator = cRepo.findById(creatorId).get();
             Long event = creator.getEventId();
             int group = creator.getGroup();
@@ -80,9 +82,23 @@ public class GameService {
             badSquares = sqRepo.findBySquareEffectAndIsApproved(-1, true);
             // neutralSquares = sqRepo.findBySquareEffectAndIsApproved(0, true);
         }
+
+        //--- マス生成ロジック
         int length = game.getLength();
         int nBadSquares = length * minusRate / 100;
+        //-- * マイナスマスが規定数に満たない場合、合計のマイナスマスを設定する
+        if (badSquares.size() < nBadSquares) {
+            nBadSquares = badSquares.size();
+        }
         int nGoodSquares = length - nBadSquares;
+        if (goodSquares.size() < nGoodSquares) {
+            nGoodSquares = goodSquares.size();
+            nBadSquares = length - nGoodSquares;
+            if (badSquares.size() < nBadSquares) {
+                //--- * throw error
+                //--- * 登録されているマス数が必要なマス数に足りていません
+            }
+        }
         List<Square> squares = takeAtRandom(goodSquares, nGoodSquares, new Random());
         List<Square> bSquares = takeAtRandom(badSquares, nBadSquares, new Random());
 
@@ -114,7 +130,11 @@ public class GameService {
 
         Player player = players.get(0);
         System.out.println(player.getPlayerId());
-        pService.move(player.getPlayerId(), n);
+        player = pService.move(player.getPlayerId(), n);
+        if (player.getIsGoaled()) {
+            int pts = calcurateGoalPoints(sugorokuId);
+            pService.updatePoints(player.getPlayerId(), pts);
+        }
 
         return player;
     }
@@ -216,6 +236,15 @@ public class GameService {
         sgRepo.save(game);
         return next;
 
+    }
+
+    public int calcurateGoalPoints(Long sugorokuId) {
+        Sugoroku game = sgRepo.findById(sugorokuId).get();
+        int nPlayersGoaled = game.getNPlayersGoaled();
+        game.setNPlayersGoaled(nPlayersGoaled + 1);
+        int points = (6 - nPlayersGoaled - 1) * 100;
+        sgRepo.save(game);
+        return points;
     }
 
     // ------ utility

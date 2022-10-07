@@ -81,7 +81,7 @@ public class GameConfigForm {
                 // exceptionを返す
                 break;
         }
-        Sugoroku game = new Sugoroku(null, 1, nPlayers, nSquares);
+        Sugoroku game = new Sugoroku(null, 1, nPlayers, nSquares, 0);
         return game;
 
     }
