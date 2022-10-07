@@ -32,7 +32,7 @@ public class PlayerService {
         Sugoroku game = sRepo.findById(player.getSugorokuId()).get();
         int length = game.getLength();
         int position = player.getPosition();
-        
+
         position = position + n;
         if (position < 0) {
             player.setPosition(0);
