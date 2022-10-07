@@ -14,78 +14,71 @@
     <!-- ヘッダー -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="#">Navbar</a>
-       
 
-        
-            <ul class="navbar-nav ">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-            
-       
+        <ul class="navbar-nav ">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
     </nav>
 
-    <div class="parent">
-        <div>
-            <h1>ゲストマス一覧</h1>
-        </div>
-        <div>
-            <button class="back_button" onclick="location.href='/menu'">戻る</button>
-        </div>
+    <div class="title-center">
+        <h1 class="title-underline">みんなが作ったマス</h1>
+    </div>
 
-        <div>
-            <h2>検索</h2>
-        </div>
-        <div>
-            <form th:action="@{/squares/search/keyword}" method="get">
-                <label for="keyword">&emsp;キーワード：</label>
-                <input type="text" name="keyword" id="keyword" />
-                <input type="submit" value="検索する" />
-            </form>
+    <div>
+        <button class="back_button" onclick="location.href='/menu'">戻る</button>
+    </div>
 
-            <form th:action="@{/squares/search/nickname}" method="get">
-                <label for="nickname">ニックネーム：</label>
-                <input type="text" name="nickname" id="nickname" />
-                <input type="submit" value="検索する" />
-            </form>
-        </div>
-
-        <div>
-            <h2>マス一覧</h2>
-            <table border="1">
-                <tr>
-                    <th>#</th>
-                    <th>タイトル</th>
-                    <th></th>
-                </tr>
-                <tr th:each="square: ${square_list}">
-                    <td></td>
-                    <td>[[${square.title}]]</td>
-                    <td>
-                        <a th:href="@{/square/{squareId}(squareId=${square.squareId})}">確認</a>
-                    </td>
-                </tr>
-            </table>
-        </div>
+    <div>
+        <h2>検索</h2>
+    </div>
+    <div>
+        <form th:action="@{/squares/search/keyword}" method="get">
+            <label for="keyword">&emsp;キーワード：</label>
+            <input type="text" name="keyword" id="keyword" />
+            <input type="submit" value="検索する" />
+        </form>
+        <form th:action="@{/squares/search/nickname}" method="get">
+            <label for="nickname">ニックネーム：</label>
+            <input type="text" name="nickname" id="nickname" />
+            <input type="submit" value="検索する" />
+        </form>
+    </div>
+    <div>
+        <h2>マス一覧</h2>
+        <table border="1">
+            <tr>
+                <th>#</th>
+                <th>タイトル</th>
+                <th></th>
+            </tr>
+            <tr th:each="square: ${square_list}">
+                <td></td>
+                <td>[[${square.title}]]</td>
+                <td>
+                    <a th:href="@{/square/{squareId}(squareId=${square.squareId})}">確認</a>
+                </td>
+            </tr>
+        </table>
     </div>
 </body>
 
