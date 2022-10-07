@@ -71,24 +71,11 @@
 
         <div>
             <h2>マス一覧</h2>
-            <table border="1">
-                <tr>
-                    <th>#</th>
-                    <th>タイトル</th>
-                    <th></th>
-                </tr>
-                <tr th:each="square: ${square_list}">
-                    <td></td>
-                    <td>[[${square.title}]]</td>
-                    <td>
-                        <a th:href="@{/square/{squareId}(squareId=${square.squareId})}">確認</a>
-                    </td>
-                </tr>
-            </table>
+
         </div>
     </div>
 
-    <div class="d-flex flex-wrap ">
+    <div class="d-flex flex-wrap justify-content-center">
         <div th:each="square: ${square_list}" class="card mb-3 ms-3" style="width: 18rem;">
             <img th:src="${square.picture}" class="card-img-top" alt="...">
             <div class="card-body">
