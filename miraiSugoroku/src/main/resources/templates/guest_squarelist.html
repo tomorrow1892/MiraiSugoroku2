@@ -87,6 +87,17 @@
             </table>
         </div>
     </div>
+
+    <div class="d-flex flex-wrap ">
+        <div th:each="square: ${square_list}" class="card mb-3 ms-3" style="width: 18rem;">
+            <img th:src="${square.picture}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">[[${square.title}]]</h5>
+              <p class="card-text">[[${square.description}]]</p>
+            </div>
+          </div>
+    </div>
+    
 </body>
 
 </html>
