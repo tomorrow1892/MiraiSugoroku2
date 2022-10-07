@@ -130,7 +130,11 @@ public class GameService {
 
         Player player = players.get(0);
         System.out.println(player.getPlayerId());
-        pService.move(player.getPlayerId(), n);
+        player = pService.move(player.getPlayerId(), n);
+        if (player.getIsGoaled()) {
+            int pts = calcurateGoalPoints(sugorokuId);
+            pService.updatePoints(player.getPlayerId(), pts);
+        }
 
         return player;
     }
@@ -232,6 +236,15 @@ public class GameService {
         sgRepo.save(game);
         return next;
 
+    }
+
+    public int calcurateGoalPoints(Long sugorokuId) {
+        Sugoroku game = sgRepo.findById(sugorokuId).get();
+        int nPlayersGoaled = game.getNPlayersGoaled();
+        game.setNPlayersGoaled(nPlayersGoaled + 1);
+        int points = (6 - nPlayersGoaled - 1) * 100;
+        sgRepo.save(game);
+        return points;
     }
 
     // ------ utility

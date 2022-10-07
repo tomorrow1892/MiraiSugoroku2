@@ -21,5 +21,6 @@ public class Sugoroku {
     int nowPlayer; // 現在行動しているplayerの順番
     int nPlayers; // playerの数
     int length; // すごろくが持っているマスの数（ゴール・スタートは除く）
+    int nPlayersGoaled; // ゴールしているプレイヤー数
 
 }
