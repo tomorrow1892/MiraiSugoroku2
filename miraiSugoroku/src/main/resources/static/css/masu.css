@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
+
+.masu{
+    width: 18rem;
+    height: 22rem;
+    
+}
+.masu .masu-header{
+    height:10rem;
+    background-color: rgb(192, 255, 121);
+}
+    .masu-header .masu-img{
+        
+        max-height: 100%;
+        width: auto;
+    }
+
+.masu .masu-body{
+    height:11rem;
+    width: 100%;
+}
+
+    .masu-body .masu-title{
+        height: 5rem;
+        width: auto;
+        text-align: center;
+    }
+        .masu-title p{
+            height: 4rem;
+            overflow: auto;
+            font-family: 'Zen Maru Gothic', sans-serif;
+        }
+
+    .masu-body .masu-description{
+        height: 6rem;
+        width: 100%;
+    }
+        .masu-description p{
+            font-size: 0.8rem;
+            height: 6rem;
+            width: 100%;
+            overflow: auto;
+        }
