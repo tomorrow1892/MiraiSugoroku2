@@ -1,4 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
+
+@font-face {
+    font-family: 'myfont'; /* フォント名 */
+    /* フォーマットごとにパスを指定 */
+    src: url('../fonts/myfont.ttf') format('truetype');
+    src: url('../fonts/myfont.woff') format('woff');
+  }
+  
 
 .font-comic{
     font-family: "Hannotate SC", "游ゴシック", Georgia, Times, 'Times New Roman', sans-serif;
+}
+
+.font-wght700{
+    font-family: 'Zen Maru Gothic', sans-serif;
 }

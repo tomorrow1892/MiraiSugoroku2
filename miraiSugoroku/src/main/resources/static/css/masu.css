@@ -1,43 +1,75 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
 
 .masu{
-    width: 18rem;
-    height: 22rem;
+    width: 25rem;
+    height: 30rem;
+    position: relative;
+    
     
 }
 .masu .masu-header{
-    height:10rem;
-    background-color: rgb(192, 255, 121);
+    height:50%;
+    background-color: rgba(193, 255, 121, 0.327);
 }
     .masu-header .masu-img{
         
         max-height: 100%;
-        width: auto;
+        max-width: 100%;
     }
 
 .masu .masu-body{
-    height:11rem;
+    height:50%;
     width: 100%;
 }
-
+    .masu-body ul{
+        height: 100%;
+    }
     .masu-body .masu-title{
-        height: 5rem;
+        height: 40%;
         width: auto;
         text-align: center;
+        
     }
         .masu-title p{
-            height: 4rem;
+            height: 100%;
+            font-size: 1.2rem;
             overflow: auto;
             font-family: 'Zen Maru Gothic', sans-serif;
         }
 
     .masu-body .masu-description{
-        height: 6rem;
+        height: 60%;
         width: 100%;
     }
         .masu-description p{
             font-size: 0.8rem;
-            height: 6rem;
+            height: 100%;
             width: 100%;
             overflow: auto;
         }
+
+.masu .masu-event{
+    position: absolute;
+    width:25%;
+    right: 0%; 
+    top: 40%;
+}
+
+    .masu-event img{
+        position: absolute;
+        box-sizing:content-box;
+        top: 50%;
+        left: 50%;
+        transform:translateX(-50%) translateY(-50%);
+        width: 100%;
+    }
+    .masu-event p{
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        transform:translateX(-50%) translateY(-50%);
+        white-space: normal;
+    
+    }

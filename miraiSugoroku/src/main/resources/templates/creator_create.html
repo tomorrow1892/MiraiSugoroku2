@@ -109,33 +109,32 @@
             </div>
         </div>
         <div class="bd-highlight mb-3 ms-5 lb-3 ls-3">
-            <h2 class="font-comic">でき上がるマス</h2>
+            <h2 class="font-wght700">でき上がるマス</h2>
             <!-- マス -->
             <div class="masu card border border-success border-3 shadow-sm ">
-                <div class="masu-header d-flex justify-content-center">
-                    <img th:src="@{/img/cat.png}" class="masu-img" id="imgMasu">
-                    <div class="border rounded-circle position-absolute"
-                        style="background-color: rgb(175, 186, 255); width:4rem;height:4rem;right: 0rem; top: 6rem;">
-                        <span class="position-absolute top-50 start-50 translate-middle text-nowrap" id="eventMasu">
-                            aaa
-                        </span>
-                    </div>
+                
+                <div class="masu-header d-flex justify-content-center" id="headerMasu">
+                    <img class="masu-img" id="imgMasu">
+                    
                 </div>
-
                 <div class="masu-body">
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group ">
                         <li class="masu-title list-group-item">
-                            <p id="titleMasu">マスのタイトル</p>
+                            <p class="align-items-center" id="titleMasu"></p>
                         </li>
                         <li class="masu-description list-group-item ">
-                            <p class="card-text" id="textMasu">詳しい説明</p>
+                            <p class="card-text" id="textMasu"></p>
                         </li>
                     </ul>
-
                 </div>
-
-
+                <div class="masu-event"  >
+                    <img th:src="@{/img/dice.png}" id="eventImgMasu">
+                    <p class="font-wght700" id="eventMasu">
+                        a
+                    </p>
+                </div>
             </div>
+            <!-- マスここまで -->
         </div>
 
     </div>
@@ -152,11 +151,11 @@
     })
     titleInput.addEventListener("focus", (e) => {
         //枠線の有無，色，太さ，パディング，破線,角丸
-        titleMasu.classList.add("border", "border-danger", "border-2", "p-1", "dashed", "rounded");
+        titleMasu.classList.add("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
         titleLine.show("fade", { duration: 100 });
     })
     titleInput.addEventListener("blur", (e) => {
-        titleMasu.classList.remove("border", "border-danger", "border-5", "p-1", "dashed", "rounded");
+        titleMasu.classList.remove("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
         titleLine.hide("fade", { duration: 100 });
     })
     //説明
@@ -168,11 +167,11 @@
     })
     textInput.addEventListener("focus", (e) => {
         //枠線の有無，色，太さ，パディング，破線,角丸
-        textMasu.classList.add("border", "border-danger", "border-5", "p-1", "dashed", "rounded");
+        textMasu.classList.add("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
         textLine.show("fade", { duration: 100 });
     })
     textInput.addEventListener("blur", (e) => {
-        textMasu.classList.remove("border", "border-danger", "border-5", "p-1", "dashed", "rounded");
+        textMasu.classList.remove("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
         textLine.hide("fade", { duration: 100 });
     })
 
@@ -180,13 +179,14 @@
     let eventLine = new LeaderLine(document.getElementById("eventInput"), document.getElementById("eventMasu"), { hide: true });
     const eventInput = document.getElementById("eventInput");
     const eventMasu = document.getElementById("eventMasu");
+    const eventImgMasu = document.getElementById("eventImgMasu");
     eventInput.addEventListener("focus", (e) => {
         //枠線の有無，色，太さ，パディング，破線,角丸
-        eventMasu.classList.add("border", "border-danger", "border-5", "p-1", "dashed", "rounded");
+        eventImgMasu.classList.add("border", "border-danger", "border-3", "p-1", "rounded");
         eventLine.show("fade", { duration: 100 });
     })
     eventInput.addEventListener("blur", (e) => {
-        eventMasu.classList.remove("border", "border-danger", "border-5", "p-1", "dashed", "rounded");
+        eventImgMasu.classList.remove("border", "border-danger", "border-3", "p-1", "rounded");
         eventLine.hide("fade", { duration: 100 });
     })
     eventInput.addEventListener("change", (e) => {
@@ -198,21 +198,22 @@
     let imgLine = new LeaderLine(document.getElementById("dragDropArea"), document.getElementById("imgMasu"), { hide: true });
     const imgInput = document.getElementById("dragDropArea");
     const imgMasu = document.getElementById("imgMasu");
+    const headerMasu = document.getElementById("headerMasu");
     imgInput.addEventListener("click", (e) => {
         //枠線の有無，色，太さ，パディング，破線,角丸
-        imgMasu.classList.add("border", "border-danger", "border-5", "p-1", "dashed", "rounded");
+        headerMasu.classList.add("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
         imgLine.show("fade", { duration: 100 });
     })
     document.addEventListener("click", (e) => {
         if (!e.target.closest("#dragDropArea")) {
-            imgMasu.classList.remove("border", "border-danger", "border-5", "p-1", "dashed", "rounded");
+            headerMasu.classList.remove("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
             imgLine.hide("fade", { duration: 100 });
         }
     })
 
     //マスプレビューの画像が読み込まれた時の処理
     imgMasu.addEventListener("load", (e) => {
-        imgMasu.classList.remove("border", "border-danger", "border-5", "p-1", "dashed", "rounded");
+        imgMasu.classList.remove("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
         //要素の位置が変わるため，線を新しく作る
         console.log("1111");
         titleLine.remove();
