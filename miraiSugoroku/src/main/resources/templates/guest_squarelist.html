@@ -10,13 +10,16 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
 
+    <link rel="stylesheet" th:href="@{/css/masu.css}">
+
     <style th:inline="text">
         body {
             background: url([[@{/img/baloon.png}]]);
             background-size: cover;
             background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0.5);
+            background-blend-mode: lighten;
         }
-
     </style>
 </head>
 
@@ -28,7 +31,9 @@
         <a class="navbar-brand" href="/">
             <img src="/img/logo.png" width="150" height="50" class="d-inline-block align-top" alt="">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width: auto; height: auto">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"
+            style="width: auto; height: auto">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -43,7 +48,8 @@
                     <a class="nav-link" href="">マス作成</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         Dropdown link
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -64,40 +70,77 @@
         <button class="back_button" onclick="location.href='/menu'">戻る</button>
     </div>
 
-        <div>
-            <h2>検索</h2>
-        </div>
-        <div>
-            <form th:action="@{/squares/search/keyword}" method="get">
-                <label for="keyword">&emsp;キーワード：</label>
-                <input type="text" name="keyword" id="keyword" />
-                <input type="submit" value="検索する" />
-            </form>
-
-            <form th:action="@{/squares/search/nickname}" method="get">
-                <label for="nickname">ニックネーム：</label>
-                <input type="text" name="nickname" id="nickname" />
-                <input type="submit" value="検索する" />
-            </form>
-        </div>
-
-        <div>
-            <h2>マス一覧</h2>
-
-        </div>
+    <div>
+        <h2>検索</h2>
     </div>
+    <div>
+        <form th:action="@{/squares/search/keyword}" method="get">
+            <label for="keyword">&emsp;キーワード：</label>
+            <input type="text" name="keyword" id="keyword" />
+            <input type="submit" value="検索する" />
+        </form>
+
+        <form th:action="@{/squares/search/nickname}" method="get">
+            <label for="nickname">ニックネーム：</label>
+            <input type="text" name="nickname" id="nickname" />
+            <input type="submit" value="検索する" />
+        </form>
+    </div>
+
+    <div>
+        <h2>マス一覧</h2>
+
+    </div>
+    </div>
+
 
     <div class="d-flex flex-wrap justify-content-center">
-        <div th:each="square: ${square_list}" class="card mb-3 ms-3 lb-3 ls-3" style="width: 18rem;">
-            <img th:src="${square.picture}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">[[${square.title}]]</h5>
-              <p class="card-text">[[${square.description}]]</p>
+        <div th:each="square: ${square_list}"
+            class="masu card border border-success border-3 shadow-sm mb-3 ms-3 lb-3 ls-3">
+
+            <div class="masu-header d-flex justify-content-center">
+                <img th:src="${square.picture}" class="masu-img">
+
             </div>
-          </div>
+            <div class="masu-body">
+                <ul class="list-group ">
+                    <li class="masu-title list-group-item">
+                        <p class="align-items-center">[[${square.title}]]</p>
+                    </li>
+                    <li class="masu-description list-group-item ">
+                        <p class="card-text"> [[${square.description}]]</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="masu-event" th:switch="${square.squareEventId}">
+                <img th:src="@{/img/dice.png}">
+                <p th:case="1" class="font-wght700">1進む</p>
+                <p th:case="2" class="font-wght700">2進む</p>
+                <p th:case="3" class="font-wght700">3進む</p>
+                <p th:case="4" class="font-wght700">4進む</p>
+                <p th:case="5" class="font-wght700">5進む</p>
+                <p th:case="6" class="font-wght700">6進む</p>
+                <p th:case="7" class="font-wght700">1戻る</p>
+                <p th:case="8" class="font-wght700">2戻る</p>
+                <p th:case="9" class="font-wght700">3戻る</p>
+                <p th:case="10" class="font-wght700">4戻る</p>
+                <p th:case="11" class="font-wght700">5戻る</p>
+                <p th:case="12" class="font-wght700">6戻る</p>
+                <p th:case="13" class="font-wght700">1回休み</p>
+                <p th:case="15" class="font-wght700">+100<br>ポイント</p>
+                <p th:case="16" class="font-wght700">+200<br>ポイント</p>
+                <p th:case="17" class="font-wght700">+300<br>ポイント</p>
+                <p th:case="18" class="font-wght700">+400<br>ポイント</p>
+                <p th:case="19" class="font-wght700">+500<br>ポイント</p>
+                <p th:case="20" class="font-wght700">-100<br>ポイント</p>
+                <p th:case="21" class="font-wght700">-200<br>ポイント</p>
+                <p th:case="22" class="font-wght700">-300<br>ポイント</p>
+                <p th:case="23" class="font-wght700">-400<br>ポイント</p>
+                <p th:case="24" class="font-wght700">-500<br>ポイント</p>
+            </div>
+        </div>
     </div>
-    
+
 </body>
 
 </html>
-
