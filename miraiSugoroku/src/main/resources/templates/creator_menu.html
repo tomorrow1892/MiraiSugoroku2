@@ -10,6 +10,7 @@
     <div class="parent">
         <div>
             <h1>作成者メニュー</h1>
+            <h2>[[${nickname}]]さん、ようこそ！</h2>
             <div th:if="${bool}"><h2>マス作成は[[${event.limitDate}]]まで出来ます</h2></div>
             <div th:if="${bool eq false}"><font color="red">
                 <h2>マス作成期限([[${event.limitDate}]])を超えたためマス作成出来ません</h2></font>

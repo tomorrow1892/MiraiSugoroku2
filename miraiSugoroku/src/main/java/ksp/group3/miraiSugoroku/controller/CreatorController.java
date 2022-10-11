@@ -124,6 +124,8 @@ public class CreatorController {
         model.addAttribute("bool", bool);
         model.addAttribute("event", eService.getEvent(eventId));
         model.addAttribute("cid", creatorId);
+        String nickname = cService.getSquareCreator(creatorId).getNickname();
+        model.addAttribute("nickname", nickname);
         return "creator_menu";
     }
 
