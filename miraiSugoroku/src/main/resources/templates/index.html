@@ -15,6 +15,12 @@
             <div>
                 <img src="img/logo.png">
             </div>
+            <form th:action="@{/menu}" method="get" >
+                <input class="button" type="submit" value="遊ぶ" />
+            </form>
+            <form th:action="@{/loginpage}" method="get" >
+                <input class="button" type="submit" value="作成者はこちら" />
+            </form>
             <div>
                 <button class="btn btn-primary" onclick="location.href='/config'">すごろくで遊ぶ</button>
                 <button onclick="location.href='/squares'">みんなが作ったマスを見る</button>

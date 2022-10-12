@@ -36,3 +36,8 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+war {
+    enabled = true
+    archiveName='miraisugoroku.war' // <-ここはプロジェクトに合わせて書き換えてください
+}
