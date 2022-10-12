@@ -13,9 +13,13 @@
         <h3>[[${str1}]]</h3>
         <a th:href=@{/admin/event/{eventId}/approve(eventId=${eventid})}>マスを承認する</a>
     </div>
+   
     
     <h2>参加者を追加する</h2>
+    
     <div th:if="${bool}">
+        <font color="red">
+            <h5>同じログインIDは使用出来ません。</h5></font>
     <form role="form" th:action="@{/admin/event/{eventId}/creator/register(eventId=${eventid})}" th:object="${scform}" method="post">
         <table>
             <tr>
@@ -55,6 +59,6 @@
         </table>
         <br>
         <a th:href=@{/admin/event/{eventId}/edit(eventId=${eventid})}>イベント情報を修正する</a>
-        <a th:href=@{../../menu}>管理者メニューに戻る</a>
+        <a th:href=@{../menu}>管理者メニューに戻る</a>
 </body>
 </html>

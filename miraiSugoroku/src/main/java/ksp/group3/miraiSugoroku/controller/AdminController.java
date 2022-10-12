@@ -116,9 +116,23 @@ public class AdminController {
     // イベント情報編集
     @GetMapping("/admin/event/{eventId}/edit")
     public String editEvent(@PathVariable Long eventId, Model model) {
+        Event event = eService.getEvent(eventId);
+        model.addAttribute("event", event);
 
+        EventForm ef = new EventForm();
+        ef.setName(event.getName());
+        ef.setLimitDate(event.getLimitDate().toString());
+        ef.setNGroups(event.getNGroups());
+        model.addAttribute("ef", ef);
         return "admin_event_edit";
+    }
 
+    // イベント情報更新
+    @PostMapping("/admin/event/{eventId}/edit/confirm")
+    public String editDoneEvent(@PathVariable Long eventId, EventForm eventform, Model model) {
+
+        eService.updateEvent(eventId, eventform);
+        return "redirect:/admin/event/" + eventId;
     }
 
     // 参加者（作成者）の追加

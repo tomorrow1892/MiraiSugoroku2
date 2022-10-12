@@ -124,6 +124,8 @@ public class CreatorController {
         model.addAttribute("bool", bool);
         model.addAttribute("event", eService.getEvent(eventId));
         model.addAttribute("cid", creatorId);
+        String nickname = cService.getSquareCreator(creatorId).getNickname();
+        model.addAttribute("nickname", nickname);
         return "creator_menu";
     }
 
@@ -194,8 +196,7 @@ public class CreatorController {
     public String showSquareCreateFrom(@PathVariable String cid, Model model) {
         model.addAttribute("SquareForm", new SquareForm());
         model.addAttribute("cid", cid);
-        List<SquareEvent> SquareEventList = seService.getAllSquareEvent();
-        SquareEventList.remove(13);
+        List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
         model.addAttribute("SquareEventList", SquareEventList);
         return "creator_create";
     }
