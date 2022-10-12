@@ -9,7 +9,9 @@
 <body>
     <h1>管理者メニュー</h1>
     <div>
-        <button onclick="location.href='/admin/createEvent'">イベントを作成する</button>
+        <form th:action="@{/admin/createEvent}" method="get">
+            <input type="submit" class="button" value="イベントを作成する">
+        </form>
     </div>
     <div>
         <h2>イベント一覧</h2>

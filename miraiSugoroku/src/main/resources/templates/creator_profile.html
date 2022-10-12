@@ -13,8 +13,9 @@
         </div>
         <div>
             <form th:action="@{/__${creatorId}__/update}" method="post" th:object="${updateSquareCreatorForm}">
-
-                <select id="selectedGroup" name="selectedGroup">
+                <tr>
+                    <td><label>グループ: </label></td>
+                <select id="selectedGroup" name="selectedGroup" required>
 
                 <option value="グループを選択">- グループを選択してください -</option>
                 <option th:each="g: ${groups}"
@@ -23,8 +24,13 @@
                         th:selected="${g == updateSquareCreatorForm.selectedGroup}"></option>
                 </option>
             </select>
-
-            <input type="text" th:field="*{nickname}" />
+            </tr>
+            <br>
+            <tr>
+                <td><label>ニックネーム: </label></td>
+                <td><input type="text" th:field="*{nickname}" required/></td>
+            </tr>
+            
 
             <p><input type="submit" value="登録" />
             </form>
