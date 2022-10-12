@@ -94,6 +94,7 @@
     </div>
 
 
+    <!-- マスリスト -->
     <div class="d-flex flex-wrap justify-content-center">
         <div th:each="square: ${square_list}"
             class="masu card border border-success border-3 shadow-sm mb-3 ms-3 lb-3 ls-3">
@@ -113,19 +114,20 @@
                 </ul>
             </div>
             <div class="masu-event" th:switch="${square.squareEventId}">
-                <img th:src="@{/img/dice.png}">
-                <p th:case="1" class="font-wght700">1進む</p>
-                <p th:case="2" class="font-wght700">2進む</p>
-                <p th:case="3" class="font-wght700">3進む</p>
-                <p th:case="4" class="font-wght700">4進む</p>
-                <p th:case="5" class="font-wght700">5進む</p>
-                <p th:case="6" class="font-wght700">6進む</p>
-                <p th:case="7" class="font-wght700">1戻る</p>
-                <p th:case="8" class="font-wght700">2戻る</p>
-                <p th:case="9" class="font-wght700">3戻る</p>
-                <p th:case="10" class="font-wght700">4戻る</p>
-                <p th:case="11" class="font-wght700">5戻る</p>
-                <p th:case="12" class="font-wght700">6戻る</p>
+                <img th:if="${square.squareEffect > 0}" th:src="@{/img/dice_blue.png}">
+                <img th:if="${square.squareEffect < 0}" th:src="@{/img/dice_red.png}">
+                <p th:case="1" class="font-wght700">1マス進む</p>
+                <p th:case="2" class="font-wght700">2マス進む</p>
+                <p th:case="3" class="font-wght700">3マス進む</p>
+                <p th:case="4" class="font-wght700">4マス進む</p>
+                <p th:case="5" class="font-wght700">5マス進む</p>
+                <p th:case="6" class="font-wght700">6マス進む</p>
+                <p th:case="7" class="font-wght700">1マス戻る</p>
+                <p th:case="8" class="font-wght700">2マス戻る</p>
+                <p th:case="9" class="font-wght700">3マス戻る</p>
+                <p th:case="10" class="font-wght700">4マス戻る</p>
+                <p th:case="11" class="font-wght700">5マス戻る</p>
+                <p th:case="12" class="font-wght700">6マス戻る</p>
                 <p th:case="13" class="font-wght700">1回休み</p>
                 <p th:case="15" class="font-wght700">+100<br>ポイント</p>
                 <p th:case="16" class="font-wght700">+200<br>ポイント</p>
