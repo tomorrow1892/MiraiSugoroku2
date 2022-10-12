@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="/css/display.css">
     <link rel="stylesheet" href="/css/top.css">
     <!-- bootstrapを使用する際には下２行を追加 -->
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.0.0-beta3/css/bootstrap.min.css}">
-    <script th:src="@{/webjars/bootstrap/5.0.0-beta3/js/bootstrap.min.js}" type="text/javascript"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
+    <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
 </head>
     <body>
         <div class="parent">
@@ -16,7 +16,7 @@
                 <img src="img/logo.png">
             </div>
             <div>
-                <button onclick="location.href='/config'">すごろくで遊ぶ</button>
+                <button class="btn btn-primary" onclick="location.href='/config'">すごろくで遊ぶ</button>
                 <button onclick="location.href='/squares'">みんなが作ったマスを見る</button>
             </div>
             <div>
