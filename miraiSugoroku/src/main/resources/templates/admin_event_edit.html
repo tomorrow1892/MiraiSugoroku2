@@ -8,7 +8,71 @@
 <body>
     <h1>イベント情報修正</h1>
     <h3>変更前</h3>
-    
-
+    <div>
+        <form th:object="${event}">
+            <table>
+            <tr>
+                <td><label>イベント名: </label></td>
+                <td><input type="text" required th:field="*{name}" readonly/></td>
+            <tr>
+                <td><label>期限: </label></td>
+                <td><input type="text" required th:field="*{limitDate}" readonly/></td>
+            </tr>
+            <tr>
+                <td><label>グループ数: </label></td>
+                <td><input type="text" required th:field="*{nGroups}" readonly/></td>
+            </tr>
+            </table>
+        </form>
+    </div>
+    <h3>変更後</h3>
+    <div>
+        <form role="form" th:action="@{/admin/event/{eventId}/edit/confirm(eventId=${eventId})}" th:object="${ef}" method="post">
+            <table>
+            <tr>
+                <td><label>イベント名: </label></td>
+                <td><input type="text" required th:field="*{name}" readonly/></td>
+                <font color="red">
+                    <h5>イベント名は変更出来ません。</h5>
+                    <h5>グループ数は変更前より少なく出来ません。</h5>
+                </font>
+            </tr>
+            <tr>
+                <td><label>期限: </label></td>
+                <td><input type="date" required th:field="*{limitDate}" id="today" /></td>
+            </tr>
+            <tr>
+                <td><label>グループ数: </label></td>
+                <td><input type="number" th:min="*{nGroups}" required th:field="*{nGroups}" /></td>
+            </tr>
+            </table>
+            <input type="submit" value="確定" class="btn-submit"/>
+        </form>
+    </div>
 </body>
+<script type="text/javascript">
+    //今日の日時を表示
+        window.onload = function () {
+            //今日の日時を表示
+            var date = new Date()
+            var year = date.getFullYear()
+            var month = date.getMonth() + 1
+            var day = date.getDate()
+          
+            var toTwoDigits = function (num, digit) {
+              num += ''
+              if (num.length < digit) {
+                num = '0' + num
+              }
+              return num
+            }
+            
+            var yyyy = toTwoDigits(year, 4)
+            var mm = toTwoDigits(month, 2)
+            var dd = toTwoDigits(day, 2)
+            var ymd = yyyy + "-" + mm + "-" + dd;
+            
+            document.getElementById("today").min = ymd;
+        }
+</script>
 </html>

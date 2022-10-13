@@ -30,9 +30,22 @@ public class SquareEventService {
         return seList;
     }
 
+    // マス作成に必要なマスイベントのみを返す
+    public List<SquareEvent> getSquareEventForCreate() {
+        List<SquareEvent> selist = getAllSquareEvent();
+        selist.remove(13);
+        selist.remove(11);
+        selist.remove(10);
+        selist.remove(9);
+        selist.remove(5);
+        selist.remove(4);
+        selist.remove(3);
+        return selist;
+    }
+
     public Player doEvent(SquareEvent e, Long playerId) {
         Player p;
-        switch(e.getActionNumber()){
+        switch (e.getActionNumber()) {
             case 0:
                 p = pService.getPlayer(playerId);
             case 1:
