@@ -1,5 +1,6 @@
 package ksp.group3.miraiSugoroku.service;
 
+import ksp.group3.miraiSugoroku.exception.MiraiSugorokuException;
 import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.form.SquareCreatorForm;
 import ksp.group3.miraiSugoroku.form.UpdateSquareCreatorForm;
@@ -61,6 +62,10 @@ public class CreatorService {
     }
 
     public SquareCreator getSquareCreatorByEventIdAndLoginId(Long eventId, String loginId) {
+        if(cRepo.findByEventIdAndLoginId(eventId, loginId) == null) {
+            throw new MiraiSugorokuException(MiraiSugorokuException.NO_SUCH_USER, "");
+        }
+
         return cRepo.findByEventIdAndLoginId(eventId, loginId);
     }
 }
