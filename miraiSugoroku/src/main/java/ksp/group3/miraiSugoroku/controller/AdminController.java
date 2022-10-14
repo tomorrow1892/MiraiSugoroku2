@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import ksp.group3.miraiSugoroku.exception.MiraiSugorokuException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,6 +50,14 @@ public class AdminController {
     @PostMapping("/admin/login")
     public String adminLogin(AdminLoginForm loginform, Model model) {
         // パスワード未設定
+        // パスワード設定した際に下記例外を追加する
+        // throw new MiraiSugorokuException(MiraiSugorokuException.WRONG_PASSWORD, "");
+        System.out.println(loginform.getPassword());
+
+        if (!(loginform.getPassword().equals("miraisanda"))) {
+            System.out.println(loginform.getPassword());
+            throw new MiraiSugorokuException(MiraiSugorokuException.ADMIN_PASSWORD_WRONG, "");
+        }
         return "redirect:/admin/menu";
     }
 

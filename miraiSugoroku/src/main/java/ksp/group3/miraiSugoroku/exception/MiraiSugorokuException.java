@@ -1,7 +1,10 @@
 package ksp.group3.miraiSugoroku.exception;
 
-public class MiraiSugorokuException extends RuntimeException{
+public class MiraiSugorokuException extends RuntimeException {
     private static final long serialVersionUID = -161631335611992421L;
+    public static final int NO_SUCH_USER = 10;
+    public static final int WRONG_PASSWORD = 11;
+    public static final int ADMIN_PASSWORD_WRONG = 12;
     public static final int ERROR = 99;
 
     int code;
