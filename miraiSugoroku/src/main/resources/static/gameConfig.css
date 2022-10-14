@@ -50,3 +50,70 @@ input[type=radio][value="penguin"]{
     display: none;
 } 
 
+.nagasa {
+    background-color: rgb(255, 255, 255);
+    /*margin-bottom: 1rem;*/
+    text-align: center;
+    width: 500px;
+    height: auto;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px 5px;
+}
+
+.nagasabotan {
+    background-color: rgb(255, 255, 255);
+    /*margin-bottom: 1rem;*/
+    position: fixed;
+    left: 50%;
+}
+
+input[type=radio][value="0"]+label:before{
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 140px;
+    height: 48px;
+}
+
+input[type=radio][value="1"]+label:before{
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 140px;
+    height: 48px;
+}
+
+input[type=radio][value="2"]+label:before{
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 140px;
+    height: 48px;
+}
+
+input[type=radio][value="0"]{
+    display: none;
+} 
+
+input[type=radio][value="1"]{
+    display: none;
+} 
+
+input[type=radio][value="2"]{
+    display: none;
+} 
+
+input[type=radio][value="0"]+label:before{
+    background-image: url(./img/mijikame.png);
+}
+input[type=radio][value="1"]+label:before{
+    background-image: url(./img/hutu.png);
+}
+input[type=radio][value="2"]+label:before{
+    background-image: url(./img/nagame.png);
+}
