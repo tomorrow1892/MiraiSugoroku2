@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>未来すごろく(仮)</title>
+    <title>さんだみらいすごろく</title>
     <link rel="stylesheet" href="/css/display.css">
     <link rel="stylesheet" href="/css/top.css">
     <!-- bootstrapを使用する際には下4行を追加 -->
@@ -50,27 +50,45 @@
         </div>
     </nav>
 
-        <div class="parent">
-            <div>
-                <img th:src="@{img/logo.png}">
-            </div>
-            
-            <div>
-                <form th:action="@{/config}" method="get">
-                    <input type="submit" class="button" value="すごろくで遊ぶ">
-                </form>
-                <form th:action="@{/squares}" method="get">
-                    <input type="submit" class="button" value="みんなが作ったマスを見る">
-                </form>
-            </div>
-            <div>
-                <form th:action="@{/loginpage}" method="get">
-                    <input type="submit" class="button" value="作成者はこちら">
-                </form>
-            </div>
-            <div>
-                <h2><td><a th:href=@{/admin/}>管理者画面へのリンク（開発中のみ）</a></td></h2>
-            </div>
+
+    <div class="toppage_img">
+        <img th:src="@{img/logo.png}" style="width: 100vw;">
+    </div>
+
+    <div class="discription_top">
+        三田公民未来塾の生徒が作成した三田市に関する「すごろく」遊ぶことができるWebページです<br>
+        すごろく上の各マスにおいて生徒が調べた三田市のスポットや歴史などを知ることができます
+    </div>
+
+    <div class="toppage_btn" style="margin-top: 20px;">
+        <form th:action="@{/config}" method="get" style="margin-right: 20px; width: 30vw;">
+            <input type="submit" class="btn btn--orange btn--cubic btn--shadow" value="すごろくで遊ぶ">
+        </form>
+        <form th:action="@{/squares}" method="get" style="margin-left: 20px; margin-right: 20px; width: 30vw;">
+            <input type="submit" class="btn btn--orange btn--cubic btn--shadow" value="みんなが作ったマスを見る">
+        </form>
+        <form th:action="@{/loginpage}" method="get" style="margin-left: 20px; width: 30vw;">
+            <input type="submit" class="btn btn--orange btn--cubic btn--shadow" value="作成者はこちら">
+        </form>
+    </div>
+
+    <div class="btn_discription">
+        <div class="btn_discription_child">
+            公民未来塾の生徒が作成したマスを使ってすごろくを遊ぶことができます
         </div>
-    </body>
+        <div class="btn_discription_child">
+            公民未来塾の生徒が作成したマスを見ることができます
+        </div>
+        <div class="btn_discription_child">
+            三田公民未来塾の生徒はこちらからログイン
+        </div>
+    </div>
+    <div class="parent">
+        <h2>
+            <td><a th:href=@{/admin/}>管理者画面へのリンク（開発中のみ）</a></td>
+        </h2>
+    </div>
+
+</body>
+
 </html>
