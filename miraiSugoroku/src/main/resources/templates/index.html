@@ -22,7 +22,6 @@
 
 
     </style>
-
 </head>
 
 <body>
@@ -49,14 +48,21 @@
 
         <div class="parent">
             <div>
-                <img src="img/logo.png">
+                <img th:src="@{img/logo.png}">
+            </div>
+            
+            <div>
+                <form th:action="@{/config}" method="get">
+                    <input type="submit" class="button" value="すごろくで遊ぶ">
+                </form>
+                <form th:action="@{/squares}" method="get">
+                    <input type="submit" class="button" value="みんなが作ったマスを見る">
+                </form>
             </div>
             <div>
-                <button onclick="location.href='/config'">すごろくで遊ぶ</button>
-                <button onclick="location.href='/squares'">みんなが作ったマスを見る</button>
-            </div>
-            <div>
-            <button onclick="location.href='/loginpage'">作成者はこちら</button>
+                <form th:action="@{/loginpage}" method="get">
+                    <input type="submit" class="button" value="作成者はこちら">
+                </form>
             </div>
             <div>
                 <h2><td><a th:href=@{/admin/}>管理者画面へのリンク（開発中のみ）</a></td></h2>

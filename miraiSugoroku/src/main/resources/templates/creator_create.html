@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <title>マス作成</title>
     <link rel="stylesheet" th:href="@{/css/display.css}">
+    <link rel="stylesheet" th:href="@{/css/border.css}">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+    <link rel="stylesheet" th:href="@{/css/masu.css}">
+    <script th:src="@{/module/leader-line.min.js}" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/gh/fengyuanchen/compressorjs/dist/compressor.min.js"></script>
     <link rel="stylesheet" href="/css/header.css">
     <!-- bootstrapを使用する際には下4行を追加 -->
@@ -107,40 +111,185 @@
 
             <a th:href=@{/__${cid}__/menu}>メニューへ戻る</a>
         </div>
+    </nav>
+    <div class="title-center">
+        <h1 class="title-underline">マス作成</h1>
     </div>
+    <div class="d-flex align-items-start justify-content-center   flex-wrap">
+        <div class=" bd-highlight ">
+            <div class="card">
+                <div class="card-header">
+                    <form role="form" th:action="@{/{c}/create/confirm(c=${cid})}" th:object="${SquareForm}"
+                        method="post">
+                        <table>
+                            <tr>
+                                <td><label>タイトル: </label></td>
+                                <td><input type="text" size="40" placeholder="例)フルーツ狩りを楽しんだ!" maxlength="50"
+                                        id="titleInput" required th:field="*{title}" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>説明: </label></td>
+
+                                <td><textarea id="textInput" placeholder="例)三田市にはフルーツショップがいっぱいあります" rows="5" cols="50"
+                                        maxlength="256" required th:field="*{description}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>マスイベント: </label></td>
+                                <td>
+                                    <select required th:field="*{squareEventId}" id="eventInput">
+
+                                        <option required th:each="se:${SquareEventList}" th:value="${se.squareEventID}"
+                                            th:text="${se.eventTitle}"
+                                            th:selected="${se.squareEventID == selectedValue}">
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>画像: </label></td>
+                                <td id="dragDropArea">
+                                    <div class="drag-drop-inside">
+                                        <p class="drag-drop-info">ここにファイルをドロップ</p>
+                                        <p>または</p>
+                                        <p class="drag-drop-buttons">
+                                            <input id="fileInput" type="file" accept="image/*" value="ファイルを選択"
+                                                name="photo" onChange="photoPreview(event)">
+                                        </p>
+                                        <div id="previewArea"></div>
+                                    </div>
+                                </td>
+                                <td><input type="text" th:field="*{picture}" id="pic" hidden /></td>
+                            </tr>
+
+                        </table>
+                        <p style="text-align: center;"><input type="submit" value="確認" class="btn-submit" /></p>
+                    </form>
+                    <a th:href=@{/__${cid}__/menu}>メニューへ戻る</a>
+                </div>
+            </div>
+        </div>
+        <div class="bd-highlight mb-3 ms-5 lb-3 ls-3">
+            <h2 class="font-wght700">でき上がるマス</h2>
+            <!-- マス -->
+            <div class="masu card border border-success border-3 shadow-sm ">
+                
+                <div class="masu-header d-flex justify-content-center" id="headerMasu">
+                    <img th:src="@{/img/kominLogo.png}" class="masu-img" id="imgMasu">
+                    
+                </div>
+                <div class="masu-body">
+                    <ul class="list-group ">
+                        <li class="masu-title list-group-item">
+                            <p class="align-items-center" id="titleMasu"></p>
+                        </li>
+                        <li class="masu-description list-group-item ">
+                            <p class="card-text" id="textMasu"></p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="masu-event"  >
+                    <img th:src="@{/img/dice.png}" id="eventImgMasu">
+                    <p class="font-wght700" id="eventMasu">
+                        a
+                    </p>
+                </div>
+            </div>
+            <!-- マスここまで -->
+        </div>
+
+    </div>
+    <script th:src="@{/module/fitty.min.js}"></script>
 </body>
+<!-- 作成マスのプレビューに関するスクリプト -->
 <script>
-    // window.addEventListener('DOMContentLoaded', function () {
-    //     var img_element = document.createElement('img');
-    //     var blob = document.createElement('text');
+    // タイトル
+    let titleLine = new LeaderLine(document.getElementById("titleInput"), document.getElementById("titleMasu"), { hide: true });
+    const titleInput = document.getElementById("titleInput");
+    const titleMasu = document.getElementById("titleMasu");
+    titleInput.addEventListener("input", (e) => {
+        titleMasu.textContent = e.target.value;
+    })
+    titleInput.addEventListener("focus", (e) => {
+        //枠線の有無，色，太さ，パディング，破線,角丸
+        titleMasu.classList.add("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
+        titleLine.show("fade", { duration: 100 });
+    })
+    titleInput.addEventListener("blur", (e) => {
+        titleMasu.classList.remove("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
+        titleLine.hide("fade", { duration: 100 });
+    })
+    //説明
+    let textLine = new LeaderLine(document.getElementById("textInput"), document.getElementById("textMasu"), { hide: true });
+    const textInput = document.getElementById("textInput");
+    const textMasu = document.getElementById("textMasu");
+    textInput.addEventListener("input", (e) => {
+        textMasu.textContent = e.target.value;
+    })
+    textInput.addEventListener("focus", (e) => {
+        //枠線の有無，色，太さ，パディング，破線,角丸
+        textMasu.classList.add("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
+        textLine.show("fade", { duration: 100 });
+    })
+    textInput.addEventListener("blur", (e) => {
+        textMasu.classList.remove("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
+        textLine.hide("fade", { duration: 100 });
+    })
 
-    //     // ファイルが選択されたら実行
-    //     document.getElementById("upload_file").addEventListener('change', function (e) {
+    //マスイベント
+    let eventLine = new LeaderLine(document.getElementById("eventInput"), document.getElementById("eventMasu"), { hide: true });
+    const eventInput = document.getElementById("eventInput");
+    const eventMasu = document.getElementById("eventMasu");
+    const eventImgMasu = document.getElementById("eventImgMasu");
+    eventInput.addEventListener("focus", (e) => {
+        //枠線の有無，色，太さ，パディング，破線,角丸
+        eventImgMasu.classList.add("border", "border-danger", "border-3", "p-1", "rounded");
+        eventLine.show("fade", { duration: 100 });
+    })
+    eventInput.addEventListener("blur", (e) => {
+        eventImgMasu.classList.remove("border", "border-danger", "border-3", "p-1", "rounded");
+        eventLine.hide("fade", { duration: 100 });
+    })
+    eventInput.addEventListener("change", (e) => {
 
-    //         var file_reader = new FileReader();
+        eventMasu.textContent = eventInput.options[eventInput.selectedIndex].text;
+    })
 
-    //         file_reader.addEventListener('load', function (e) {
+    //画像
+    let imgLine = new LeaderLine(document.getElementById("dragDropArea"), document.getElementById("imgMasu"), { hide: true });
+    const imgInput = document.getElementById("dragDropArea");
+    const imgMasu = document.getElementById("imgMasu");
+    const headerMasu = document.getElementById("headerMasu");
+    imgInput.addEventListener("click", (e) => {
+        //枠線の有無，色，太さ，パディング，破線,角丸
+        headerMasu.classList.add("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
+        imgLine.show("fade", { duration: 100 });
+    })
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest("#dragDropArea")) {
+            headerMasu.classList.remove("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
+            imgLine.hide("fade", { duration: 100 });
+        }
+    })
 
-    //             // img要素を作成
+    //マスプレビューの画像が読み込まれた時の処理
+    imgMasu.addEventListener("load", (e) => {
+        imgMasu.classList.remove("border", "border-danger", "border-3", "p-1", "dashed", "rounded");
+        //要素の位置が変わるため，線を新しく作る
+        console.log("1111");
+        titleLine.remove();
+        textLine.remove();
+        eventLine.remove();
+        imgLine.remove();
+        titleLine = new LeaderLine(document.getElementById("titleInput"), document.getElementById("titleMasu"), { hide: true });
+        textLine = new LeaderLine(document.getElementById("textInput"), document.getElementById("textMasu"), { hide: true });
+        eventLine = new LeaderLine(document.getElementById("eventInput"), document.getElementById("eventMasu"), { hide: true });
+        imgLine = new LeaderLine(document.getElementById("dragDropArea"), document.getElementById("imgMasu"), { hide: true });
+    })
+</script>
 
-    //             img_element.src = e.target.result;
-    //             blob = e.target.result;
-
-
-    //             // img要素をページに挿入
-    //             var article_element = document.getElementById('content1');
-    //             article_element.append(img_element);
-
-    //             var blob_element = document.getElementById('pic');
-    //             blob_element.append(blob);
-    //             document.getElementById("pic").value = blob;
-
-    //         });
-
-    //         // ファイル内容をBase64にエンコードし、「data:〜」で始まるURL形式で取得
-    //         file_reader.readAsDataURL(e.target.files[0]);
-    //     });
-    // });
+<!-- 画像アップロードに関するスクリプト -->
+<script>
 
     var fileArea = document.getElementById('dragDropArea');
     var fileInput = document.getElementById('fileInput');
@@ -169,6 +318,7 @@
         var reader = new FileReader();
         var preview = document.getElementById("previewArea");
         var previewImage = document.getElementById("previewImage");
+        var imgMasu = document.getElementById("imgMasu");
 
         if (previewImage != null) {
             preview.removeChild(previewImage);
@@ -184,10 +334,16 @@
                 reader.onload = (event) => {
                     img.setAttribute("src", reader.result);
                     img.setAttribute("id", "previewImage");
-                    img.setAttribute("width","300");//画像の幅を300に固定
+                    img.setAttribute("width", "300");//画像の幅を300に固定
                     preview.appendChild(img);
                     document.getElementById("pic").value = img.src;
-                    console.log("圧縮率:"+pressQuality)
+
+                    //作成マスプレビューの画像を設定
+                    imgMasu.setAttribute("src", reader.result);
+
+
+
+                    console.log("圧縮率:" + pressQuality)
                     console.log(result)
                 }
                 reader.readAsDataURL(result)
