@@ -3,8 +3,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
 
+}
+
+.toppage_img{
+    margin-top: 60px;
+    text-align: center;
 }
 
 .back_button{
