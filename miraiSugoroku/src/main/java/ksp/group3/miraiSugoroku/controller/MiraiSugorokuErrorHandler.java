@@ -15,15 +15,20 @@ public class MiraiSugorokuErrorHandler {
      */
     @ExceptionHandler(MiraiSugorokuException.class)
     public String handleToDoException(MiraiSugorokuException ex, Model model) {
-//        model.addAttribute("advice", "アプリケーション例外が発生しました．メッセージを確認してください");
-//        model.addAttribute("exception", ex);
+        // model.addAttribute("advice", "アプリケーション例外が発生しました．メッセージを確認してください");
+        // model.addAttribute("exception", ex);
         String message;
 
         switch (ex.getCode()) {
             case MiraiSugorokuException.NO_SUCH_USER:
-                message = "参加イベントかユーザIDが間違っています。ブラウザバックし、再度入力してください。"; break;
+                message = "参加イベントかユーザIDが間違っています。ブラウザバックし、再度入力してください。";
+                break;
+            case MiraiSugorokuException.ADMIN_PASSWORD_WRONG:
+                message = "パスワードが間違っています。ブラウザバックし、再度入力してください。";
+                break;
             case 11:
-                message = "パスワードが間違っています。ブラウザバックし、再度入力してください。"; break;
+                message = "パスワードが間違っています。ブラウザバックし、再度入力してください。";
+                break;
             default:
                 message = "アプリケーション例外が発生しました．メッセージを確認してください";
                 model.addAttribute("exception", ex);
