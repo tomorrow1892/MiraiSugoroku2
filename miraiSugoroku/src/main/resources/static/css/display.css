@@ -7,6 +7,11 @@
 
 }
 
+.toppage_img{
+    margin-top: 60px;
+    text-align: center;
+}
+
 .back_button{
     width: 5em;
     height: 2em;
@@ -74,6 +79,9 @@ button{
     padding: 10px 5px;
 }
 
+.search-center{
+    text-align: center;
+}
 
 #dragDropArea{
     background-color: #f4f4f4;
