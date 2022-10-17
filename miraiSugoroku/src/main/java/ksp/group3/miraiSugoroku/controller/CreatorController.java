@@ -193,9 +193,10 @@ public class CreatorController {
     }
 
     @GetMapping("/{cid}/create") // マス作成画面を表示
-    public String showSquareCreateFrom(@PathVariable String cid, Model model) {
+    public String showSquareCreateFrom(@PathVariable Long cid, Model model) {
         model.addAttribute("SquareForm", new SquareForm());
         model.addAttribute("cid", cid);
+        model.addAttribute("creatorName", cService.getSquareCreator(cid).getName());
         List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
         model.addAttribute("SquareEventList", SquareEventList);
         return "creator_create";
@@ -217,6 +218,7 @@ public class CreatorController {
         form.setCreatorId(cid);
         form.setEventId(cService.getSquareCreator(cid).getEventId());
         form.setGroupId(cService.getSquareCreator(cid).getGroup());
+        form.setCreatorName(cService.getSquareCreator(cid).getName());
         model.addAttribute("cid", cid);
         sService.createSquare(form);
 
