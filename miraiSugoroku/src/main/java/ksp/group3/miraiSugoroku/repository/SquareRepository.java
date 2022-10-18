@@ -2,6 +2,9 @@ package ksp.group3.miraiSugoroku.repository;
 
 import java.util.List;
 
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +13,9 @@ import ksp.group3.miraiSugoroku.entity.Square;
 @Repository
 public interface SquareRepository extends CrudRepository<Square, Long> {
     public List<Square> findAll();
+
+    
+
 
     public List<Square> findByIsApproved(boolean isApproved);
 
@@ -29,4 +35,13 @@ public interface SquareRepository extends CrudRepository<Square, Long> {
             boolean isApproved);
 
     public List<Square> findBySquareEffectAndIsApproved(int squareEffect, boolean isApproved);
+
+    public Page<Square> findAll(Pageable pageable);
+
+    public Page<Square> findByIsApproved(Pageable pageable,boolean isApproved);
+
+    public Page<Square> findByTitleContainingAndIsApprovedOrDescriptionContainingAndIsApproved(Pageable pageable,String title,boolean isApproved1, String description,boolean isApproved2);
+
+    
+   
 }

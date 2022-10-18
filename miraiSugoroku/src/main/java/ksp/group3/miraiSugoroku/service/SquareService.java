@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ksp.group3.miraiSugoroku.entity.Square;
@@ -34,6 +36,8 @@ public class SquareService {
     public List<Square> getAllSquare() {
         return sRepo.findAll();
     }
+
+    
 
     public Square updateSquare(Long squareId, SquareForm form) {
         Square square = getSquare(squareId);
@@ -120,4 +124,22 @@ public class SquareService {
     public List<Square> filterCreatorIdAndIsApproved(Long creatorId, boolean isApproved){
         return sRepo.findByCreatorIdAndIsApproved(creatorId, isApproved);
     }
+
+    ///////////以下，ページング込みのマス取得クエリ
+
+    public Page<Square> getPageSquare(Pageable pageable){
+        return sRepo.findAll(pageable);
+    }
+
+    public Page<Square> getPageApprovedSquare(Pageable pageable,boolean isApproved){
+        return sRepo.findByIsApproved(pageable,isApproved);
+    }
+
+    public Page<Square> searchPageSquaresByKeyword(Pageable pageable,String keyword){
+        
+        return sRepo.findByTitleContainingAndIsApprovedOrDescriptionContainingAndIsApproved(pageable,keyword,true,keyword,true);
+    }
+
+
+    
 }
