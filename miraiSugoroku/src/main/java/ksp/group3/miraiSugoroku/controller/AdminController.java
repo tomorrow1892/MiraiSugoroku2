@@ -149,6 +149,7 @@ public class AdminController {
     public String registerSquareCreator(@PathVariable Long eventId, SquareCreatorForm scform, Model model) {
         // 一応イベント内のログインIDが重複しないように
         // ただし重複した場合のエラー文の表示なし
+        System.out.println("てすと");
         SquareCreator sc = cService.getSquareCreatorByEventIdAndLoginId(eventId, scform.getLoginId());
         System.out.println(sc);
         if (sc == null) {

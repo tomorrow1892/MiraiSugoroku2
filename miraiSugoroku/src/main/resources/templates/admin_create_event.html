@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>イベント作成</title>
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/display.css}">
    <!-- bootstrapを使用する際には下２行を追加 -->
    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
    <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -51,8 +52,9 @@
     イベント名、マス作成権限の有効期限、最大グループ数を設定してください。<br>
     <font color="red">イベント名は一度設定すると修正できません。</font>
 </div>
+<div class="admin-menu">
     <form role="form" th:action="@{/admin/confirmEvent}" th:object="${EventForm}" method="post">
-        <table>
+        <table class="table">
             <tr>
                 <td><label>イベント名: </label></td>
                 <td><input type="text" required th:field="*{name}" /></td>
@@ -68,8 +70,9 @@
         </table>
         <input type="submit" value="確認" class="btn-submit"/>
     </form>
+
     <a th:href=@{/admin/menu}>メニュー画面へ戻る</a>
-    
+</div>
 
 </body>
 
