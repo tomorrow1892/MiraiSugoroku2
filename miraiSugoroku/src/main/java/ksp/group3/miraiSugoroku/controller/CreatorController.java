@@ -196,7 +196,7 @@ public class CreatorController {
     public String showSquareCreateFrom(@PathVariable Long cid, Model model) {
         model.addAttribute("SquareForm", new SquareForm());
         model.addAttribute("cid", cid);
-        model.addAttribute("nickName", cService.getSquareCreator(cid).getName());
+        model.addAttribute("nickName", cService.getSquareCreator(cid).getNickname());
         List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
         model.addAttribute("SquareEventList", SquareEventList);
         return "creator_create";
