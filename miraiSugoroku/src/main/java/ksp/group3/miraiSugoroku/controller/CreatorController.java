@@ -218,7 +218,7 @@ public class CreatorController {
         form.setCreatorId(cid);
         form.setEventId(cService.getSquareCreator(cid).getEventId());
         form.setGroupId(cService.getSquareCreator(cid).getGroup());
-        form.setCreatorName(cService.getSquareCreator(cid).getName());
+        form.setCreatorName(cService.getSquareCreator(cid).getNickname());
         model.addAttribute("cid", cid);
         sService.createSquare(form);
 
