@@ -5,6 +5,8 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,10 +43,14 @@ public class UserController {
     }
 
     @GetMapping("/squares")
-    public String showGuestSquareListPage(Model model) {
-        List<Square> square_list = sService.filterSquaresByIsApproved(true);
-        model.addAttribute("square_list", square_list);
+    public String showGuestSquareListPage(Model model,Pageable pageable) {
+        // List<Square> square_list = sService.filterSquaresByIsApproved(true);
+        // model.addAttribute("square_list", square_list);
 
+        Page<Square> page = sService.getPageApprovedSquare(pageable, true);
+        model.addAttribute("square_list",page.getContent());
+        model.addAttribute("page",page);
+        model.addAttribute("path","/squares");
         return "guest_squarelist";
     }
 
@@ -60,18 +66,28 @@ public class UserController {
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/squares/search/keyword")
-    public String searchSquaresByKeyword(@RequestParam("keyword") String keyword, Model model) {
-        List<Square> square_list = sService.searchSquaresByKeyword(keyword);
-        model.addAttribute("square_list", square_list);
+    public String searchSquaresByKeyword(@RequestParam("keyword") String keyword, Model model,Pageable pageable) {
+        // List<Square> square_list = sService.searchSquaresByKeyword(keyword);
+        // model.addAttribute("square_list", square_list);
+
+        Page<Square> page = sService.searchPageSquaresByKeyword(pageable, keyword);
+        model.addAttribute("square_list",page.getContent());
+        model.addAttribute("page",page);
+        model.addAttribute("path","/squares/search/keyword?keyword="+keyword);
 
         return "guest_squarelist";
     }
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/squares/search/nickname")
-    public String searchSquaresByNickname(@RequestParam("nickname") String nickname, Model model) {
-        List<Square> square_list = sService.searchSquaresByNickname(nickname);
-        model.addAttribute("square_list", square_list);
+    public String searchSquaresByNickname(@RequestParam("nickname") String nickname, Model model,Pageable pageable) {
+        // List<Square> square_list = sService.searchSquaresByNickname(nickname);
+        // model.addAttribute("square_list", square_list);
+
+        Page<Square> page = sService.searchPageSquaresByNickname(pageable, nickname);
+        model.addAttribute("square_list",page.getContent());
+        model.addAttribute("page",page);
+        model.addAttribute("path","/squares/search/nickname?nickname="+nickname);
 
         return "guest_squarelist";
     }
