@@ -10,7 +10,7 @@ input.btn--orange {
 
 
 input.btn--orange:hover {
-    margin-top: 3px;
+    margin-top: 0px;
     color: #fff;
     background: #da5b00;
     border-bottom: 2px solid #a14300;
