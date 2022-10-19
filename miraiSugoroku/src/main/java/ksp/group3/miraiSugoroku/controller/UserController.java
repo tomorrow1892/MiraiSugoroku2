@@ -73,16 +73,21 @@ public class UserController {
         Page<Square> page = sService.searchPageSquaresByKeyword(pageable, keyword);
         model.addAttribute("square_list",page.getContent());
         model.addAttribute("page",page);
-        model.addAttribute("path","/squares/search/keyword");
+        model.addAttribute("path","/squares/search/keyword?keyword="+keyword);
 
         return "guest_squarelist";
     }
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/squares/search/nickname")
-    public String searchSquaresByNickname(@RequestParam("nickname") String nickname, Model model) {
-        List<Square> square_list = sService.searchSquaresByNickname(nickname);
-        model.addAttribute("square_list", square_list);
+    public String searchSquaresByNickname(@RequestParam("nickname") String nickname, Model model,Pageable pageable) {
+        // List<Square> square_list = sService.searchSquaresByNickname(nickname);
+        // model.addAttribute("square_list", square_list);
+
+        Page<Square> page = sService.searchPageSquaresByNickname(pageable, nickname);
+        model.addAttribute("square_list",page.getContent());
+        model.addAttribute("page",page);
+        model.addAttribute("path","/squares/search/nickname?nickname="+nickname);
 
         return "guest_squarelist";
     }

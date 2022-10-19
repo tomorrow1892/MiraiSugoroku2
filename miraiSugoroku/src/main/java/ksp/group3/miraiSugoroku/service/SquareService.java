@@ -140,6 +140,10 @@ public class SquareService {
         return sRepo.findByTitleContainingAndIsApprovedOrDescriptionContainingAndIsApproved(pageable,keyword,true,keyword,true);
     }
 
+    public Page<Square> searchPageSquaresByNickname(Pageable pageable, String nickname) {
+        return sRepo.findByNickNameContainingAndIsApproved(pageable, nickname, true);
+    }
+
 
     
 }

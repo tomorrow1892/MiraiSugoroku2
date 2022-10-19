@@ -68,4 +68,12 @@ public class CreatorService {
 
         return cRepo.findByEventIdAndLoginId(eventId, loginId);
     }
+
+    public SquareCreator login(Long eventId, String loginId) {
+        if (cRepo.findByEventIdAndLoginId(eventId, loginId) == null) {
+            throw new MiraiSugorokuException(MiraiSugorokuException.WRONG_PASSWORD, "");
+        }
+
+        return cRepo.findByEventIdAndLoginId(eventId, loginId);
+    }
 }
