@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>マス承認</title>
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/display.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -58,8 +59,9 @@
     未承認マスの一覧画面です。<br>
     対象のマスを選択して承認作業を行ってください。<br>
 </div>
+<div class="admin-menu">
     <h2>未承認マス一覧</h2>
-        <table border="1">
+        <table border="2" class="table">
             <tr>
                 <th>作成者</th>
                 <th>タイトル</th>
@@ -73,6 +75,9 @@
             
         </table>
         <br>
-        <button onclick="location.href='../'">イベント詳細に戻る</button>
+        <form th:action="@{/admin/event/{eventId}(eventId=${eventId})}" method="get">
+            <input type="submit" value="イベント詳細に戻る">
+        </form>
+    </div>
 </body>
 </html>

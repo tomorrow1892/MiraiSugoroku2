@@ -53,15 +53,16 @@
     イベント一覧から対象のイベントを選択し、各種操作を行ってください。<br>
     イベントが存在しない場合は、まずイベントを作成してください。<br>
 </div>
+<div class="admin-menu">
     <div>
         <form th:action="@{/admin/createEvent}" method="get">
-            <input type="submit" class="button" value="イベントを作成する">
+            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="イベントを作成する">
         </form>
     </div>
     <div>
-        <h2>イベント一覧</h2>
-        <table border="1">
-            <tr>
+        <h2><br>イベント一覧</h2>
+        <table border="2" class="table">
+            <tr  class="table-warning">
                 <th>イベント名</th>
                 <th>作成日</th>
                 <th>期限</th>
@@ -75,11 +76,11 @@
                 <td>[[${event.nGroups}]]</td>
                 <td><a th:href=@{/admin/event/{num}(num=${event.eventId})}>選択</a></td>
             </tr>
-            
+
         </table>
         <h2>終了済みイベント一覧</h2>
-        <table border="1">
-            <tr>
+        <table border="2" class="table">
+            <tr  class="table-danger">
                 <th>イベント名</th>
                 <th>作成日</th>
                 <th>期限</th>
@@ -93,8 +94,8 @@
                 <td>[[${end.nGroups}]]</td>
                 <td><a th:href=@{/admin/event/{num}(num=${end.eventId})}>選択</a></td>
             </tr>
-            
         </table>
     </div>
+</div>
 </body>
 </html>

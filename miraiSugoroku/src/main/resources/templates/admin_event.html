@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>イベント詳細</title>
-    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">]
+    <link rel="stylesheet" th:href="@{/css/display.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -59,20 +60,22 @@
     参加者の編集、マス承認を行うことができます。<br>
     マス作成権限の有効期限は、[[${event.limitDate}]]です。<br>
 </div>
-
+<div class="admin-menu">
     <div>
-        <h3>[[${str1}]]</h3>
-        <a th:href=@{/admin/event/{eventId}/approve(eventId=${eventid})}>マスを承認する</a>
+        <h2>[[${str1}]]</h3>
+        <form th:action="@{/admin/event/{eventId}/approve(eventId=${eventid})}" method="get">
+            <input type="submit" value="マスを承認する">
+        </form>
     </div>
    
     
-    <h2>参加者を追加する</h2>
+    <h2><br>参加者を追加する</h2>
     
     <div th:if="${bool}">
         <font color="red">
             <h5>同じログインIDは使用出来ません。</h5></font>
     <form role="form" th:action="@{/admin/event/{eventId}/creator/register(eventId=${eventid})}" th:object="${scform}" method="post">
-        <table>
+        <table class="table">
             <tr>
                 <td><label>名前: </label></td>
                 <td><input type="text" required th:field="*{name}" /></td>
@@ -86,12 +89,12 @@
     </form>
 </div>
 <div th:if="${bool eq false}"><font color="red">
-    <h2>終了済みイベントのため参加者を追加出来ません</h2></font>
+    <h4>終了済みイベントのため参加者を追加出来ません</h2></font>
 </div>
-    <h2>参加者一覧</h2>
+    <h2><br>参加者一覧</h2>
     <h3>[[${str2}]]</h3>
-    <h3>未設定の場合：ニックネームは空欄、グループは0と表示されます。</h3>
-        <table border="1">
+    <h5>未設定の場合：ニックネームは空欄、<br>グループは0と表示されます。</h3>
+        <table border="2" class="table">
             <tr>
                 <th>名前</th>
                 <th>ニックネーム</th>
@@ -109,7 +112,13 @@
             </tr>
         </table>
         <br>
-        <a th:href=@{/admin/event/{eventId}/edit(eventId=${eventid})}>イベント情報を修正する</a>
-        <a th:href=@{../menu}>管理者メニューに戻る</a>
+        <form th:action="@{/admin/event/{eventId}/edit(eventId=${eventid})}" method="get">
+            <input type="submit" value="イベント情報を修正する">
+        </form>
+        <form th:action="@{../menu}" method="get">
+            <input type="submit" value="管理者メニューに戻る">
+        </form>
+
+    </div>
 </body>
 </html>

@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/squareEdit.css}">
     <title>マス承認完了</title>
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/display.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -59,7 +60,13 @@
     マスの承認が完了しました。<br>
    メニュー画面へ戻るか、続けてほかのマスの承認を行ってください。<br>
 </div>
-    <button onclick="location.href='../'">続けてマスを承認する</button>
-    <button onclick="location.href='../../'">イベント詳細に戻る</button>
+<div class="admin-menu">
+    <form th:action="@{/admin/event/{eventId}/approve(eventId=${eventId})}" method="get">
+        <input type="submit" value="続けてマスを承認する">
+    </form>
+    <form th:action="@{/admin/event/{eventId}(eventId=${eventId})}" method="get">
+        <input type="submit" value="イベント詳細に戻る">
+    </form>
+</div>
 </body>
 </html>

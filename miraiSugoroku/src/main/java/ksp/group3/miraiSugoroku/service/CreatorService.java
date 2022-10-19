@@ -45,7 +45,7 @@ public class CreatorService {
 
     public SquareCreator updateSquareCreator(Long creatorId, UpdateSquareCreatorForm form) {
         SquareCreator sc = cRepo.findById(creatorId).get();
-        
+
         sc.setNickname(form.getNickname());
 
         sc.setGroup(form.getSelectedGroup());
@@ -62,8 +62,8 @@ public class CreatorService {
     }
 
     public SquareCreator getSquareCreatorByEventIdAndLoginId(Long eventId, String loginId) {
-        if(cRepo.findByEventIdAndLoginId(eventId, loginId) == null) {
-            throw new MiraiSugorokuException(MiraiSugorokuException.NO_SUCH_USER, "");
+        if (cRepo.findByEventIdAndLoginId(eventId, loginId) != null) {
+            throw new MiraiSugorokuException(MiraiSugorokuException.USED_LOGINID, "");
         }
 
         return cRepo.findByEventIdAndLoginId(eventId, loginId);

@@ -6,6 +6,7 @@
     <title>マス承認確認</title>
     <link rel="stylesheet" th:href="@{/squareEdit.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/display.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -42,10 +43,11 @@
     まだマスは承認されていません。<br>
     承認する内容を確認し、承認ボタンを押してください。
 </div>
+<div class="admin-menu">
         <h2>作成者：[[${name}]]</h2>
         <div>
             <form role="form" th:action="@{/admin/event/{eventId}/approve/{squareId}/done(eventId=${eventId},squareId=${squareId})}" th:object="${sf}" method="post">
-                <table>
+                <table class="table">
                 <tr>
                     <td><label>タイトル: </label></td>
                     <td><input type="text" required th:field="*{title}" readonly/></td>
@@ -77,7 +79,7 @@
                 <input type="submit" value="承認" class="btn-submit"/>
             </form>
         </div>
-        
+    </div>
     
     </body>
     
