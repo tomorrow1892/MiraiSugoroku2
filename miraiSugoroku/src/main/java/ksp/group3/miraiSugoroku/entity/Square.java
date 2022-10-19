@@ -24,7 +24,7 @@ public class Square {
     int groupId;
     String description;
     Long creatorId;
-    String creatorName;
+    String nickName;
     int squareEffect; // マスの効果が良い（1）か悪い（-1）かを返す
     boolean isApproved;
     @Lob

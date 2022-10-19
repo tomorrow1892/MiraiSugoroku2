@@ -21,7 +21,7 @@ public class SquareForm {
         square.setSquareEventId(squareEventId);
         square.setDescription(description);
         square.setCreatorId(creatorId);
-        square.setCreatorName(creatorName);
+        square.setNickName(creatorName);
         square.setApproved(false);
         square.setGroupId(groupId);
         square.setEventId(eventId);
