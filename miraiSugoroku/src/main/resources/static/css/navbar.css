@@ -1,0 +1,15 @@
+.navbar{
+    background-color: white; 
+    border-bottom: darkblue medium solid;
+    height: 120px;
+}
+
+    .navbar .navImg{
+        width: 110px; 
+        height: 110px; 
+        margin-left: 20px;
+    }
+
+    .navbar .nav-link{
+        
+    }

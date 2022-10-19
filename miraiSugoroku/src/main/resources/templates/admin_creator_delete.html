@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>参加者削除確認</title>
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/display.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -40,6 +41,7 @@
 <div class="discription">
     削除する参加者の情報を確認してください。
 </div>
+<div class="admin-menu">
 <h2>この参加者を削除しますか？
     <h3>名前:[[${sc.name}]]
     <h3>ニックネーム:[[${sc.nickname}]]
@@ -47,5 +49,6 @@
     <h3>グループ:[[${sc.group}]]
     <a th:href=@{../../../}><br><br>戻る</a>
     <a th:href=@{/admin/event/{eventId}/creator/delete/{creatorId}(eventId=${eventid},creatorId=${sc.creatorId})}>    削除</a>
+</div>
 </body>
 </html>
