@@ -110,7 +110,7 @@ public class CreatorController {
         SquareCreator sc = cService.login(form.getSelectedEventId(), form.getLoginId());
 
         if (Objects.isNull(sc.getNickname())) {
-            return "redirect:/" + sc.getCreatorId() + "/detail";
+            return "redirect:/" + sc.getCreatorId() + "/detailFirst";
         }
 
         return "redirect:/" + sc.getCreatorId() + "/menu";
@@ -128,6 +128,7 @@ public class CreatorController {
         model.addAttribute("cid", creatorId);
         String nickname = cService.getSquareCreator(creatorId).getNickname();
         model.addAttribute("nickname", nickname);
+        model.addAttribute("roll","creator");
         return "creator_menu";
     }
 
@@ -143,8 +144,24 @@ public class CreatorController {
         }
 
         model.addAttribute("groups", groups);
-
+        model.addAttribute("roll","creator");
         return "creator_profile";
+    }
+
+    @GetMapping("/{creatorId}/detailFirst")
+    public String showcreatorDetailFormFirst(@ModelAttribute("updateSquareCreatorForm") UpdateSquareCreatorForm form,
+            @PathVariable("creatorId") Long creatorId, Model model) {
+        SquareCreator sc = cService.getSquareCreator(creatorId);
+        Event e = eService.getEvent(sc.getEventId());
+        List<Integer> groups = new ArrayList<>();
+
+        for (int i = 1; i <= e.getNGroups(); i++) {
+            groups.add(i);
+        }
+
+        model.addAttribute("groups", groups);
+        model.addAttribute("roll", "user");
+        return "creator_profile_first";
     }
 
     @PostMapping("/{creatorId}/update")
@@ -164,7 +181,7 @@ public class CreatorController {
         model.addAttribute("square_list",page.getContent());
         model.addAttribute("page",page);
         model.addAttribute("path","/"+cid+ "/squares");
-
+        model.addAttribute("roll","creator");
         return "creator_squarelist";
     }
 
@@ -175,7 +192,7 @@ public class CreatorController {
         model.addAttribute("approved_square_list", approved_square_list);
         model.addAttribute("not_approved_square_list", not_approved_square_list);
         model.addAttribute("cid", cid);
-
+        model.addAttribute("roll","creator");
         return "creator_my_squarelist";
     }
 
@@ -185,7 +202,7 @@ public class CreatorController {
         List<Square> square_list = sService.searchSquaresByKeyword(keyword);
         model.addAttribute("square_list", square_list);
         model.addAttribute("cid", cid);
-
+        model.addAttribute("roll","creator");
         return "creator_squarelist";
     }
 
@@ -195,7 +212,7 @@ public class CreatorController {
         List<Square> square_list = sService.searchSquaresByNickname(nickname);
         model.addAttribute("square_list", square_list);
         model.addAttribute("cid", cid);
-
+        model.addAttribute("roll","creator");
         return "creator_squarelist";
     }
 
@@ -206,6 +223,7 @@ public class CreatorController {
         model.addAttribute("nickName", cService.getSquareCreator(cid).getNickname());
         List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
         model.addAttribute("SquareEventList", SquareEventList);
+        model.addAttribute("roll","creator");
         return "creator_create";
     }
 
@@ -216,7 +234,7 @@ public class CreatorController {
 
         SquareEvent se = seService.getSquareEvent(form.getSquareEventId());
         model.addAttribute("se", se);
-
+        model.addAttribute("roll","creator");
         return "creator_create_confirm";
     }
 
@@ -228,7 +246,7 @@ public class CreatorController {
         form.setCreatorName(cService.getSquareCreator(cid).getNickname());
         model.addAttribute("cid", cid);
         sService.createSquare(form);
-
+        model.addAttribute("roll","creator");
         return "creator_create_done";
     }
 
@@ -236,6 +254,7 @@ public class CreatorController {
     public String showSugorokuManu(@PathVariable Long cid, Model model) {
         model.addAttribute("GameConfigForm", new GameConfigForm());
         model.addAttribute("cid", cid);
+        model.addAttribute("roll","creator");
         return "creator_sugoroku_config";
     }
 
