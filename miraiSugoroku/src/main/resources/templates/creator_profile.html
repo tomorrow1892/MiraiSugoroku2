@@ -27,27 +27,50 @@
 
 <body>
 <!-- ヘッダー -->
-<!--  マス作成画面へのリンクは未実装  -->
-<nav class="navbar navbar-expand navbar-light fixed-top" style="background-color: white; border-bottom: darkblue medium solid">
+<nav class="navbar navbar-expand navbar-light ">
     <a class="navbar-brand" th:href="@{/}">
-        <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
+        <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="">
+
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width: auto; height: auto">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"
+        style="width: auto; height: auto">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/config} class="nav-link">すごろくで遊ぶ</a>
+            <!-- 以下，一般ユーザ・管理者の選択肢 -->
+            <li th:if="${roll == 'user'}" class="nav-item active">
+                <a class="nav-link" th:href="@{/config}">
+                    <img th:src="@{/img/header_sugoroku.png}">
+                    <div>すごろくで遊ぶ</div>
+                </a>
             </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/squares} class="nav-link">マス一覧</a>
+            <li th:if="${roll == 'user'}" class="nav-item active">
+                <a class="nav-link" th:href="@{/squares}">
+                    <img th:src="@{/img/header_masulist.png}">
+                    <div>マスを見る</div>
+                </a>
             </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/create} class="nav-link">マス作成</a>
+
+            <!-- 以下，マス作成者の選択肢 -->
+            <li th:if="${roll == 'creator'}" class="nav-item active">
+                <a class="nav-link" th:href="@{/__{cid}__/config}">
+                    <img th:src="@{/img/header_sugoroku.png}">
+                    <div>すごろくで遊ぶ</div>
+                </a>
             </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/menu} class="nav-link">メニュー</a>
+            <li th:if="${roll == 'creator'}" class="nav-item active">
+                <a class="nav-link" th:href="@{/__{cid}__/squares}">
+                    <img th:src="@{/img/header_masulist.png}">
+                    <div>マスを見る</div>
+                </a>
+            </li>
+            <li th:if="${roll == 'creator'}" class="nav-item active">
+                <a class="nav-link" th:href="@{/__{cid}__/create}">
+                    <img th:src="@{/img/header_create.png}">
+                    <div>マスを作る</div>
+                </a>
             </li>
         </ul>
     </div>

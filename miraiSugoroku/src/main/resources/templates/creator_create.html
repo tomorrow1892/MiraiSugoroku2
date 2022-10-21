@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/display.css}">
     <link rel="stylesheet" th:href="@{/css/font.css}">
     <link rel="stylesheet" th:href="@{/css/masu.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <script th:src="@{/module/leader-line.min.js}" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/gh/fengyuanchen/compressorjs/dist/compressor.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/header.css}">
@@ -21,49 +22,23 @@
             background-size: cover;
             background-attachment: fixed;
         }
-
-
     </style>
 
 </head>
 
 <body>
-<!-- ヘッダー -->
-<!--  マス作成画面へのリンクは未実装  -->
-<nav class="navbar navbar-expand navbar-light fixed-top" style="background-color: white; border-bottom: darkblue medium solid">
-    <a class="navbar-brand" th:href="@{/}">
-        <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width: auto; height: auto">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/config} class="nav-link">すごろくで遊ぶ</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/squares} class="nav-link">マス一覧</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/create} class="nav-link">マス作成</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/menu} class="nav-link">メニュー</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+    <!-- ヘッダー -->
+    <div th:replace="header :: header"></div>
 
-<div class="title-center">
-    <h1 class="sample_h_14">マス作成</h1>
-</div>
-<div class="discription">
-   マスの作成画面です。<br>
-    マスのタイトル、詳細説明、マスのイベント、マスを説明する画像を設定することができます。<br>
-    作成したマスは、管理者の承認を得た後に公開されます。
-</div>
-    
+    <div class="title-center">
+        <h1 class="sample_h_14">マス作成</h1>
+    </div>
+    <div class="discription">
+        マスの作成画面です。<br>
+        マスのタイトル、詳細説明、マスのイベント、マスを説明する画像を設定することができます。<br>
+        作成したマスは、管理者の承認を得た後に公開されます。
+    </div>
+
     <div class="d-flex align-items-start justify-content-center   flex-wrap">
         <div class=" bd-highlight ">
             <div class="card">
@@ -80,7 +55,7 @@
                                 <td><label>説明: </label></td>
 
                                 <td><textarea id="textInput" placeholder="例)三田市にはフルーツショップがいっぱいあります" rows="5" cols="50"
-                                        maxlength="256" required th:field="*{description}" />
+                                        maxlength="255" required th:field="*{description}" />
                                 </td>
                             </tr>
                             <tr>
@@ -112,6 +87,7 @@
                             </tr>
 
                         </table>
+                        <input type="hidden" name="creatorName" th:value="${nickName}">
                         <p style="text-align: center;"><input type="submit" value="確認" class="btn-submit" /></p>
                     </form>
                     <a th:href=@{/__${cid}__/menu}>メニューへ戻る</a>
@@ -122,10 +98,10 @@
             <h2 class="font-wght700">でき上がるマス</h2>
             <!-- マス -->
             <div class="masu card border border-success border-3 shadow-sm ">
-                
+
                 <div class="masu-header d-flex justify-content-center" id="headerMasu">
                     <img th:src="@{/img/kominLogo.png}" class="masu-img" id="imgMasu">
-                    
+
                 </div>
                 <div class="masu-body">
                     <ul class="list-group ">
@@ -133,16 +109,16 @@
                             <p class="align-items-center" id="titleMasu"></p>
                         </li>
                         <li class="masu-contents list-group-item ">
-                            <p  class="masu-description" id="textMasu"></p>
+                            <p class="masu-description" id="textMasu"></p>
                             <p class="masu-creator">作者: [[${nickName}]]</p>
                         </li>
-                        
+
                     </ul>
                 </div>
                 <div class="masu-event">
                     <img th:src="@{/img/dice.png}" id="eventImgMasu">
                     <p class="font-wght700" id="eventMasu">
-                    
+
                     </p>
                 </div>
             </div>

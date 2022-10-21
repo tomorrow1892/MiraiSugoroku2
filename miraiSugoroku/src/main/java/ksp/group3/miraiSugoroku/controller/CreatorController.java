@@ -61,6 +61,7 @@ public class CreatorController {
         model.addAttribute("years", years);
         model.addAttribute("selectedYear", form.getSelectedYear());
         model.addAttribute("events", eService.getAllEvents());
+        model.addAttribute("roll","user");
 
         return "creator_login";
     }
@@ -73,6 +74,7 @@ public class CreatorController {
         model.addAttribute("creatorLoginForm", form);
         model.addAttribute("years", years);
         model.addAttribute("selectedYear", selectedYear);
+        model.addAttribute("roll","user");
 
         return "creator_login";
     }

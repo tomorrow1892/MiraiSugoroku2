@@ -27,32 +27,8 @@
 
 <body>
 
-<!-- ヘッダー -->
-<!--  マス作成画面へのリンクは未実装  -->
-<nav class="navbar navbar-expand navbar-light fixed-top" style="background-color: white; border-bottom: darkblue medium solid">
-    <a class="navbar-brand" th:href="@{/}">
-        <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width: auto; height: auto">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/config} class="nav-link">すごろくで遊ぶ</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/squares} class="nav-link">マス一覧</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/create} class="nav-link">マス作成</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/menu} class="nav-link">メニュー</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+    <!-- ヘッダー -->
+    <div th:replace="header :: header"></div>
 
     <div class="title-center">
         <h1 class="sample_h_14">みんなのマス</h1>
@@ -82,7 +58,7 @@
         </form>
     </div>
 
-   
+
 
     <div th:fragment='paginationbar'>
         <ul>
@@ -90,7 +66,8 @@
                 <span th:if="${page.first}">←先頭</span>
                 <a th:if="${not page.first}" th:href="@{${path}(page=0)}">←先頭</a>
             </li>
-            <li th:each='i : ${#numbers.sequence(0, page.totalPages-1)}' th:class="(${i}==${page.number})? 'active' : ''" style="display:inline">
+            <li th:each='i : ${#numbers.sequence(0, page.totalPages-1)}'
+                th:class="(${i}==${page.number})? 'active' : ''" style="display:inline">
                 <span th:if='${i}==${page.number}' th:text='${i+1}'>1</span>
                 <a th:if='${i}!=${page.number}' th:href="@{${path}(page=${i+1})}">
                     <span th:text='${i+1}'>1</span>
@@ -117,7 +94,7 @@
                         <p class="align-items-center">[[${square.title}]]</p>
                     </li>
                     <li class="masu-contents list-group-item ">
-                        <p  class="masu-description" id="textMasu"></p>
+                        <p class="masu-description" id="textMasu"></p>
                         <p class="masu-creator">作者: [[${square.nickName}]]</p>
                     </li>
                 </ul>
