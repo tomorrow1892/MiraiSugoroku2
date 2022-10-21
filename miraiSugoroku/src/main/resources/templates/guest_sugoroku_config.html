@@ -6,22 +6,23 @@
     <title>すごろく設定</title>
     <link rel="stylesheet" th:href="@{/gameConfig.css}">
     <link rel="stylesheet" th:href="@{/css/masu.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
 
     <!--アイコンの重複がないようにする-->
     <script src="https://code.jquery.com/jquery-3.3.1.js"
-integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
-</script>
-<script>
-$(function() {
-    var col, el;
-    $("input[type=radio]").click(function() {
-       el = $(this);
-       col = el.data("col");
-       $("input[data-col=" + col + "]").prop("checked", false);
-       el.prop("checked", true);
-    });
-});
-</script>
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+        </script>
+    <script>
+        $(function () {
+            var col, el;
+            $("input[type=radio]").click(function () {
+                el = $(this);
+                col = el.data("col");
+                $("input[data-col=" + col + "]").prop("checked", false);
+                el.prop("checked", true);
+            });
+        });
+    </script>
 
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <!-- bootstrapを使用する際には下2行を追加 -->
@@ -36,191 +37,196 @@ $(function() {
             background-size: cover;
             background-attachment: fixed;
         }
-
-
     </style>
 
 </head>
 
 <body>
-<!-- ヘッダー -->
-<!--  マス作成画面へのリンクは未実装  -->
-<nav class="navbar navbar-expand navbar-light fixed-top" style="background-color: white; border-bottom: darkblue medium solid">
-    <a class="navbar-brand" th:href="@{/}">
-        <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width: auto; height: auto">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/config}">すごろくで遊ぶ<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/squares}">マス一覧</a>
-            </li>
-        </ul>
-    </div>
-</nav>
 
-<div class="title-center">
-    <h1 class="sample_h_14">すごろく設定</h1>
-</div>
-<div class="discription">
-    すごろくの設定画面です。<br>
-    すごろくの長さ、プレイヤーの名前とアイコンを設定してください。
-</div>
+    <body>
+        <!-- ヘッダー -->
+        <div th:replace="header :: header"></div>
 
-    <form role="form" th:action="@{/game/createSugoroku}" th:object="${GameConfigForm}" method="post">
-        <table>
-            <tr id="0">
-                <div class="nagasa">
-                    コースの長さ
-                </div>
-                <td>
-                    <div class="d-flex justify-content-center">
-                    <input  type="radio" required th:field="*{length}" value=0 id="00"><label for="00"></label>
-                    <input  type="radio" required th:field="*{length}" value=1 id="11"><label for="11"></label>
-                    <input  type="radio" required th:field="*{length}" value=2 id="22"><label for="22"></label>
+        <div class="title-center">
+            <h1 class="sample_h_14">すごろく設定</h1>
+        </div>
+        <div class="discription">
+            すごろくの設定画面です。<br>
+            すごろくの長さ、プレイヤーの名前とアイコンを設定してください。
+        </div>
+
+        <form role="form" th:action="@{/game/createSugoroku}" th:object="${GameConfigForm}" method="post">
+            <table>
+                <tr id="0">
+                    <div class="nagasa">
+                        コースの長さ
                     </div>
-                </td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr></tr>
-            <tr id="1">
-                <td><label>プレイヤー1 : 名前 </label></td>
-                <td><input type="text" required th:field="*{p1}" /></td>
-                <td><label>　アイコン</label></td>
-                <td>
-                    <input type="radio"  required th:field="*{i1}" value="dog" id="11p" data-col="1"><label for="11p"></label>
-                    <input type="radio"  required th:field="*{i1}" value="cat" id="21p"data-col="2"><label for="21p"></label>
-                    <input type="radio"  required th:field="*{i1}" value="hiyoko" id="31p"data-col="3"><label for="31p"></label>
-                    <input type="radio"  required th:field="*{i1}" value="hamster" id="41p"data-col="4"><label for="41p"></label>
-                    <input type="radio"  required th:field="*{i1}" value="zo" id="51p"data-col="5"><label for="51p"></label>
-                    <input type="radio"  required th:field="*{i1}" value="penguin" id="61p"data-col="6"><label for="61p"></label>
-                </td>
-            </tr>
-            <tr id="2">
-                <td><label>プレイヤー2 : 名前 </label></td>
-                <td><input type="text" required th:field="*{p2}" /></td>
-                <td><label>　アイコン</label></td>
-                <td><input type="radio"  required th:field="*{i2}" value="dog" id="12p" data-col="1"><label for="12p"></label>
-                    <input type="radio"  required th:field="*{i2}" value="cat" id="22p"data-col="2"><label for="22p"></label>
-                    <input type="radio"  required th:field="*{i2}" value="hiyoko" id="32p"data-col="3"><label for="32p"></label>
-                    <input type="radio"  required th:field="*{i2}" value="hamster" id="42p"data-col="4"><label for="42p"></label>
-                    <input type="radio"  required th:field="*{i2}" value="zo" id="52p"data-col="5"><label for="52p"></label>
-                    <input type="radio"  required th:field="*{i2}" value="penguin" id="62p"data-col="6"><label for="62p"></label>
-                </td>
-            </tr>
-            <tr id="3">
-                <td><label>プレイヤー3 : 名前 </label></td>
-                <td><input type="text" th:field="*{p3}" /></td>
-                <td><label>　アイコン</label></td>
-                <td><input type="radio"  th:field="*{i3}" value="dog" id="13p" data-col="1"><label for="13p"></label>
-                    <input type="radio"  th:field="*{i3}" value="cat" id="23p"data-col="2"><label for="23p"></label>
-                    <input type="radio"  th:field="*{i3}" value="hiyoko" id="33p"data-col="3"><label for="33p"></label>
-                    <input type="radio"  th:field="*{i3}" value="hamster" id="43p"data-col="4"><label for="43p"></label>
-                    <input type="radio"  th:field="*{i3}" value="zo" id="53p"data-col="5"><label for="53p"></label>
-                    <input type="radio"  th:field="*{i3}" value="penguin" id="63p"data-col="6"><label for="63p"></label>
-                </td>
-            </tr>
-            <tr id="4">
-                <td><label>プレイヤー4 : 名前 </label></td>
-                <td><input type="text" th:field="*{p4}" /></td>
-                <td><label>　アイコン</label></td>
-                <td><input type="radio"  th:field="*{i4}" value="dog" id="14p" data-col="1"><label for="14p"></label>
-                    <input type="radio"  th:field="*{i4}" value="cat" id="24p"data-col="2"><label for="24p"></label>
-                    <input type="radio"  th:field="*{i4}" value="hiyoko" id="34p"data-col="3"><label for="34p"></label>
-                    <input type="radio"  th:field="*{i4}" value="hamster" id="44p"data-col="4"><label for="44p"></label>
-                    <input type="radio"  th:field="*{i4}" value="zo" id="54p"data-col="5"><label for="54p"></label>
-                    <input type="radio"  th:field="*{i4}" value="penguin" id="64p"data-col="6"><label for="64p"></label>
-                </td>
-            </tr>
-            <tr id="5">
-                <td><label>プレイヤー5 : 名前 </label></td>
-                <td><input type="text" th:field="*{p5}" /></td>
-                <td><label>　アイコン</label></td>
-                <td><input type="radio"  th:field="*{i5}" value="dog" id="15p" data-col="1"><label for="15p"></label>
-                    <input type="radio"  th:field="*{i5}" value="cat" id="25p"data-col="2"><label for="25p"></label>
-                    <input type="radio"  th:field="*{i5}" value="hiyoko" id="35p"data-col="3"><label for="35p"></label>
-                    <input type="radio"  th:field="*{i5}" value="hamster" id="45p"data-col="4"><label for="45p"></label>
-                    <input type="radio"  th:field="*{i5}" value="zo" id="55p"data-col="5"><label for="55p"></label>
-                    <input type="radio"  th:field="*{i5}" value="penguin" id="65p"data-col="6"><label for="65p"></label>
-                </td>
-            </tr>
-            <tr id="6">
-                <td><label>プレイヤー6 : 名前 </label></td>
-                <td><input type="text" th:field="*{p6}" /></td>
-                <td><label>　アイコン</label></td>
-                <td><input type="radio"  th:field="*{i6}" value="dog" id="16p" data-col="1"><label for="16p"></label>
-                    <input type="radio"  th:field="*{i6}" value="cat" id="26p" data-col="2"><label for="26p"></label>
-                    <input type="radio"  th:field="*{i6}" value="hiyoko" id="36p"data-col="3"><label for="36p"></label>
-                    <input type="radio"  th:field="*{i6}" value="hamster" id="46p"data-col="4"><label for="46p"></label>
-                    <input type="radio"  th:field="*{i6}" value="zo" id="56p"data-col="5"><label for="56p"></label>
-                    <input type="radio"  th:field="*{i6}" value="penguin" id="66p"data-col="6"><label for="66p"></label>
-                </td>
-            </tr>
-        </table>
-        <p>
-            <button id="b3" type="button">プレイヤー3を追加</button>
-            <button id="b4" type="button">プレイヤー4を追加</button>
-            <button id="b5" type="button">プレイヤー5を追加</button>
-            <button id="b6" type="button">プレイヤー6を追加</button>
-            <input type="submit" value="遊ぶ" class="btn-submit" />
-        </p>
-    </form>
-    <a th:href="@{/menu}" class="link">戻る</a>
-</body>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <input type="radio" required th:field="*{length}" value=0 id="00"><label for="00"></label>
+                            <input type="radio" required th:field="*{length}" value=1 id="11"><label for="11"></label>
+                            <input type="radio" required th:field="*{length}" value=2 id="22"><label for="22"></label>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr></tr>
+                <tr id="1">
+                    <td><label>プレイヤー1 : 名前 </label></td>
+                    <td><input type="text" required th:field="*{p1}" /></td>
+                    <td><label>　アイコン</label></td>
+                    <td>
+                        <input type="radio" required th:field="*{i1}" value="dog" id="11p" data-col="1"><label
+                            for="11p"></label>
+                        <input type="radio" required th:field="*{i1}" value="cat" id="21p" data-col="2"><label
+                            for="21p"></label>
+                        <input type="radio" required th:field="*{i1}" value="hiyoko" id="31p" data-col="3"><label
+                            for="31p"></label>
+                        <input type="radio" required th:field="*{i1}" value="hamster" id="41p" data-col="4"><label
+                            for="41p"></label>
+                        <input type="radio" required th:field="*{i1}" value="zo" id="51p" data-col="5"><label
+                            for="51p"></label>
+                        <input type="radio" required th:field="*{i1}" value="penguin" id="61p" data-col="6"><label
+                            for="61p"></label>
+                    </td>
+                </tr>
+                <tr id="2">
+                    <td><label>プレイヤー2 : 名前 </label></td>
+                    <td><input type="text" required th:field="*{p2}" /></td>
+                    <td><label>　アイコン</label></td>
+                    <td><input type="radio" required th:field="*{i2}" value="dog" id="12p" data-col="1"><label
+                            for="12p"></label>
+                        <input type="radio" required th:field="*{i2}" value="cat" id="22p" data-col="2"><label
+                            for="22p"></label>
+                        <input type="radio" required th:field="*{i2}" value="hiyoko" id="32p" data-col="3"><label
+                            for="32p"></label>
+                        <input type="radio" required th:field="*{i2}" value="hamster" id="42p" data-col="4"><label
+                            for="42p"></label>
+                        <input type="radio" required th:field="*{i2}" value="zo" id="52p" data-col="5"><label
+                            for="52p"></label>
+                        <input type="radio" required th:field="*{i2}" value="penguin" id="62p" data-col="6"><label
+                            for="62p"></label>
+                    </td>
+                </tr>
+                <tr id="3">
+                    <td><label>プレイヤー3 : 名前 </label></td>
+                    <td><input type="text" th:field="*{p3}" /></td>
+                    <td><label>　アイコン</label></td>
+                    <td><input type="radio" th:field="*{i3}" value="dog" id="13p" data-col="1"><label for="13p"></label>
+                        <input type="radio" th:field="*{i3}" value="cat" id="23p" data-col="2"><label for="23p"></label>
+                        <input type="radio" th:field="*{i3}" value="hiyoko" id="33p" data-col="3"><label
+                            for="33p"></label>
+                        <input type="radio" th:field="*{i3}" value="hamster" id="43p" data-col="4"><label
+                            for="43p"></label>
+                        <input type="radio" th:field="*{i3}" value="zo" id="53p" data-col="5"><label for="53p"></label>
+                        <input type="radio" th:field="*{i3}" value="penguin" id="63p" data-col="6"><label
+                            for="63p"></label>
+                    </td>
+                </tr>
+                <tr id="4">
+                    <td><label>プレイヤー4 : 名前 </label></td>
+                    <td><input type="text" th:field="*{p4}" /></td>
+                    <td><label>　アイコン</label></td>
+                    <td><input type="radio" th:field="*{i4}" value="dog" id="14p" data-col="1"><label for="14p"></label>
+                        <input type="radio" th:field="*{i4}" value="cat" id="24p" data-col="2"><label for="24p"></label>
+                        <input type="radio" th:field="*{i4}" value="hiyoko" id="34p" data-col="3"><label
+                            for="34p"></label>
+                        <input type="radio" th:field="*{i4}" value="hamster" id="44p" data-col="4"><label
+                            for="44p"></label>
+                        <input type="radio" th:field="*{i4}" value="zo" id="54p" data-col="5"><label for="54p"></label>
+                        <input type="radio" th:field="*{i4}" value="penguin" id="64p" data-col="6"><label
+                            for="64p"></label>
+                    </td>
+                </tr>
+                <tr id="5">
+                    <td><label>プレイヤー5 : 名前 </label></td>
+                    <td><input type="text" th:field="*{p5}" /></td>
+                    <td><label>　アイコン</label></td>
+                    <td><input type="radio" th:field="*{i5}" value="dog" id="15p" data-col="1"><label for="15p"></label>
+                        <input type="radio" th:field="*{i5}" value="cat" id="25p" data-col="2"><label for="25p"></label>
+                        <input type="radio" th:field="*{i5}" value="hiyoko" id="35p" data-col="3"><label
+                            for="35p"></label>
+                        <input type="radio" th:field="*{i5}" value="hamster" id="45p" data-col="4"><label
+                            for="45p"></label>
+                        <input type="radio" th:field="*{i5}" value="zo" id="55p" data-col="5"><label for="55p"></label>
+                        <input type="radio" th:field="*{i5}" value="penguin" id="65p" data-col="6"><label
+                            for="65p"></label>
+                    </td>
+                </tr>
+                <tr id="6">
+                    <td><label>プレイヤー6 : 名前 </label></td>
+                    <td><input type="text" th:field="*{p6}" /></td>
+                    <td><label>　アイコン</label></td>
+                    <td><input type="radio" th:field="*{i6}" value="dog" id="16p" data-col="1"><label for="16p"></label>
+                        <input type="radio" th:field="*{i6}" value="cat" id="26p" data-col="2"><label for="26p"></label>
+                        <input type="radio" th:field="*{i6}" value="hiyoko" id="36p" data-col="3"><label
+                            for="36p"></label>
+                        <input type="radio" th:field="*{i6}" value="hamster" id="46p" data-col="4"><label
+                            for="46p"></label>
+                        <input type="radio" th:field="*{i6}" value="zo" id="56p" data-col="5"><label for="56p"></label>
+                        <input type="radio" th:field="*{i6}" value="penguin" id="66p" data-col="6"><label
+                            for="66p"></label>
+                    </td>
+                </tr>
+            </table>
+            <p>
+                <button id="b3" type="button">プレイヤー3を追加</button>
+                <button id="b4" type="button">プレイヤー4を追加</button>
+                <button id="b5" type="button">プレイヤー5を追加</button>
+                <button id="b6" type="button">プレイヤー6を追加</button>
+                <input type="submit" value="遊ぶ" class="btn-submit" />
+            </p>
+        </form>
+    </body>
 
-<script>
-    //プレイヤーの追加に関する部分
-    document.getElementById("0").style.display = 'none';
-    document.getElementById("1").style.display = 'none';
-    document.getElementById("2").style.display = 'none';
-    document.getElementById("3").style.display = 'none';
-    document.getElementById("4").style.display = 'none';
-    document.getElementById("5").style.display = 'none';
-    document.getElementById("6").style.display = 'none';
-    document.getElementById("b4").style.display = 'none';
-    document.getElementById("b5").style.display = 'none';
-    document.getElementById("b6").style.display = 'none';
-
-    document.getElementById("0").style.display = 'inline';
-    document.getElementById("1").style.display = 'inline';
-    document.getElementById("2").style.display = 'inline';
-
-    var b3 = document.getElementById('b3');
-    var b4 = document.getElementById('b4');
-    var b5 = document.getElementById('b5');
-    var b6 = document.getElementById('b6');
-
-    b3.addEventListener('click', function () {
-        document.getElementById("b3").style.display = 'none';
-        document.getElementById("3").style.display = 'inline';
-        document.getElementById("b4").style.display = 'inline';
-    }, false);
-
-
-    b4.addEventListener('click', function () {
+    <script>
+        //プレイヤーの追加に関する部分
+        document.getElementById("0").style.display = 'none';
+        document.getElementById("1").style.display = 'none';
+        document.getElementById("2").style.display = 'none';
+        document.getElementById("3").style.display = 'none';
+        document.getElementById("4").style.display = 'none';
+        document.getElementById("5").style.display = 'none';
+        document.getElementById("6").style.display = 'none';
         document.getElementById("b4").style.display = 'none';
-        document.getElementById("4").style.display = 'inline';
-        document.getElementById("b5").style.display = 'inline';
-    }, false);
-
-    b5.addEventListener('click', function () {
         document.getElementById("b5").style.display = 'none';
-        document.getElementById("5").style.display = 'inline';
-        document.getElementById("b6").style.display = 'inline';
-    }, false);
-
-    b6.addEventListener('click', function () {
         document.getElementById("b6").style.display = 'none';
-        document.getElementById("6").style.display = 'inline';
 
-    }, false);
-</script>
+        document.getElementById("0").style.display = 'inline';
+        document.getElementById("1").style.display = 'inline';
+        document.getElementById("2").style.display = 'inline';
+
+        var b3 = document.getElementById('b3');
+        var b4 = document.getElementById('b4');
+        var b5 = document.getElementById('b5');
+        var b6 = document.getElementById('b6');
+
+        b3.addEventListener('click', function () {
+            document.getElementById("b3").style.display = 'none';
+            document.getElementById("3").style.display = 'inline';
+            document.getElementById("b4").style.display = 'inline';
+        }, false);
+
+
+        b4.addEventListener('click', function () {
+            document.getElementById("b4").style.display = 'none';
+            document.getElementById("4").style.display = 'inline';
+            document.getElementById("b5").style.display = 'inline';
+        }, false);
+
+        b5.addEventListener('click', function () {
+            document.getElementById("b5").style.display = 'none';
+            document.getElementById("5").style.display = 'inline';
+            document.getElementById("b6").style.display = 'inline';
+        }, false);
+
+        b6.addEventListener('click', function () {
+            document.getElementById("b6").style.display = 'none';
+            document.getElementById("6").style.display = 'inline';
+
+        }, false);
+    </script>
 
 
 </html>

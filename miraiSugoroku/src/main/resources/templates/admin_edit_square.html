@@ -59,11 +59,12 @@
 <div class="discription">
     内容を確認し、適宜修正を加えてください。
 </div>
+<div class="admin-menu">
     <h2>作成者：[[${name}]]</h2>
     <h3>変更前</h3>
     <div>
         <form th:object="${sf}">
-            <table>
+            <table class="table">
             <tr>
                 <td><label>タイトル: </label></td>
                 <td><input type="text" required th:field="*{title}" readonly/></td>
@@ -96,7 +97,7 @@
     <h3>変更後</h3>
     <div>
         <form role="form" th:action="@{/admin/event/{eventId}/approve/{squareId}/confirm(eventId=${eventId},squareId=${squareId})}" th:object="${sf}" method="post">
-            <table>
+            <table class="table">
             <tr>
                 <td><label>タイトル: </label></td>
                 <td><input type="text" required th:field="*{title}" /></td>
@@ -139,7 +140,7 @@
             <input type="submit" value="確認" class="btn-submit"/>
         </form>
     </div>
-    
+</div>
 
 </body>
 

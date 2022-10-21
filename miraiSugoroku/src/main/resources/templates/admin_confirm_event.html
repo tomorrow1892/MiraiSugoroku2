@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>イベント作成確認</title>
     <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/display.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -45,9 +46,9 @@
     入力内容を確認してください。<br>
     <font color="red">イベント名は一度設定すると修正できません。</font>
 </div>
-    
+<div class="admin-menu">
     <form role="form" th:action="@{/admin/registerEvent}" th:object="${Eventform}" method="post">
-        <table>
+        <table class="table">
             <tr>
                 <td><label>イベント名: </label></td>
                 <td>[[${Eventform.name}]]</td>
@@ -61,15 +62,18 @@
                 <td>[[${Eventform.nGroups}]]</td>
             </tr>
         </table>
+      
         <input type="submit" value="作成" class="btn-submit"/>
         <td><input type="hidden" required th:field="*{name}"/></td>
         <td><input type="hidden" required th:field="*{limitDate}"/></td>
         <td><input type="hidden" required th:field="*{nGroups}"/></td>
+       
     </form>
-
+    <br>
     <form th:action="@{/admin/createEvent}" method="get">
-        <input type="submit" class="button" value="戻る">
+        <input type="submit" value="戻る">
     </form>
-
+    
+</div>
 </body>
 </html>

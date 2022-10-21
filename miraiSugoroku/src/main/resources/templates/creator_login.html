@@ -6,6 +6,7 @@
     <title>ログイン</title>
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -16,25 +17,15 @@
             background: url([[@{/img/baloon.png}]]);
             background-size: cover;
             background-attachment: fixed;
-            min-height: 100%;
-            margin: 100px auto;
-            padding: 0;
-            display: table-cell;
-            vertical-align: middle;
-        }
-
-        html {
-            height: 100%;
-            margin: 0 auto;
-            padding: 0;
-            display: table;
+            background-color: rgba(255, 255, 255, 0.5);
+            background-blend-mode: lighten;
         }
     </style>
 
     <script>
-        $(function(){
+        $(function () {
             var textfield = $("input[name=user]");
-            $('button[type="submit"]').click(function(e) {
+            $('button[type="submit"]').click(function (e) {
                 e.preventDefault();
                 //little validation just to check username
                 if (textfield.val() != "") {
@@ -42,21 +33,21 @@
                     $("#output").addClass("alert alert-success animated fadeInUp").html("Welcome back " + "<span style='text-transform:uppercase'>" + textfield.val() + "</span>");
                     $("#output").removeClass(' alert-danger');
                     $("input").css({
-                        "height":"0",
-                        "padding":"0",
-                        "margin":"0",
-                        "opacity":"0"
+                        "height": "0",
+                        "padding": "0",
+                        "margin": "0",
+                        "opacity": "0"
                     });
                     //change button text
                     $('button[type="submit"]').html("continue")
                         .removeClass("btn-info")
-                        .addClass("btn-default").click(function(){
-                        $("input").css({
-                            "height":"auto",
-                            "padding":"10px",
-                            "opacity":"1"
-                        }).val("");
-                    });
+                        .addClass("btn-default").click(function () {
+                            $("input").css({
+                                "height": "auto",
+                                "padding": "10px",
+                                "opacity": "1"
+                            }).val("");
+                        });
 
                     //show avatar
                     $(".avatar").css({
@@ -77,47 +68,35 @@
 </head>
 
 <body>
-    <div style="margin-top: 100px">
-        <!-- ヘッダー -->
-        <!--  マス作成画面へのリンクは未実装  -->
-        <nav class="navbar navbar-expand navbar-light fixed-top" style="background-color: white; border-bottom: darkblue medium solid">
-            <a class="navbar-brand" th:href="@{/}">
-                <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width: auto; height: auto">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            </div>
-        </nav>
-
-    </div>
+    <!-- ヘッダー -->
+    <div th:replace="header :: header"></div>
+    
     <div class="container">
         <div class="login-container">
             <div id="output"></div>
-<!--            <div class="avatar"></div>-->
+
             <div class="form-box">
                 <form th:action="@{/login/}" method="post" th:object="${creatorLoginForm}">
-                        <p style="    font-weight: bold; color: #6091d3;">年度を選択すると、対象年度のイベントを選択できるようになります。</p>
-                        <!--/* 年度選択のドロップダウン */-->
-                        <p>
-                            <select id="selectedYear" name="selectedYear">
-                                <option th:each="y: ${years}" th:value="${y}" th:text="${y}"
-                                        th:selected="${y == creatorLoginForm.selectedYear}">
-                                </option>
-                            </select>
-                        </p>
+                    <p style="    font-weight: bold; color: #6091d3;">年度を選択すると、対象年度のイベントを選択できるようになります。</p>
+                    <!--/* 年度選択のドロップダウン */-->
+                    <p>
+                        <select id="selectedYear" name="selectedYear">
+                            <option th:each="y: ${years}" th:value="${y}" th:text="${y}"
+                                th:selected="${y == creatorLoginForm.selectedYear}">
+                            </option>
+                        </select>
+                    </p>
                     <p style="    font-weight: bold; color: #6091d3;">参加イベントを選択してください。</p>
-                        <!--/* イベント選択のドロップダウン */-->
-                        <p>
-                            <select id="selectedEventId" name="selectedEventId" th:required="required">
+                    <!--/* イベント選択のドロップダウン */-->
+                    <p>
+                        <select id="selectedEventId" name="selectedEventId" th:required="required">
 
-                                <option value="" class="form-control">- イベントを選択してください -</option>
+                            <option value="" class="form-control">- イベントを選択してください -</option>
 
-                            </select>
-                        </p>
+                        </select>
+                    </p>
                     <p style="    font-weight: bold; color: #6091d3;">ログインIDを入力してください。</p>
-                        <p><input type="text" th:field="*{loginId}" class="form-control" th:required="required"/></p>
+                    <p><input type="text" th:field="*{loginId}" class="form-control" th:required="required" /></p>
 
                     <p><button class="btn btn-info btn-block login" type="submit">ログイン</button></p>
 
