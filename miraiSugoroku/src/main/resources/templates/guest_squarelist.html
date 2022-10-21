@@ -28,7 +28,7 @@
 
 <body>
     <!-- ヘッダー -->
-    <div th:replace="./component/header :: header"></div>
+    <div th:replace="header :: header"></div>
 
     <div class="title-center">
         <h1 class="sample_h_14">みんなのマス</h1>
@@ -58,35 +58,17 @@
 
 
 
-    <div class="paginationbar" th:fragment='paginationbar' style="text-align:center;">
-        <ul>
-            <li th:class="${page.first} ? 'disabled':''" style="display:inline">
-                <span th:if="${page.first}">←先頭</span>
-                <a th:if="${not page.first}" th:href="@{${path}(page=0)}">←先頭</a>
-            </li>
-            <li th:each='i : ${#numbers.sequence(0, page.totalPages-1)}'
-                th:class="(${i}==${page.number})? 'active' : ''" style="display:inline;">
-                <span th:if='${i}==${page.number}' th:text='${i+1}'></span>
-                <a th:if='${i}!=${page.number}' th:href="@{${path}(page=${i+1})}">
-                    <span th:text='${i+1}'></span>
-                </a>
-            </li>
-            <li th:class="${page.last} ? 'disabled':''" style="display:inline">
-                <span th:if="${page.last}">末尾➝</span>
-                <a th:if="${not page.last}" th:href="@{${path}(page=(${page.totalPages}))}">末尾➝</a>
-            </li>
-        </ul>
-    </div>
+    
 
     <!--/* ページネーションバー（Redmine参考） */-->
     <nav aria-label="Page navigation2">
-        <ul class="pagination">
+        <ul class="pagination pagination-lg justify-content-center">
             <!--/* 前のページ */-->
             <li class="page-item" th:classappend="${page.first} ? 'disabled'">
-                <a th:href="@{${path}(page=${page.number})}" class="page-link" th:tabindex="${page.first} ? -1"
+                <a th:href="@{${path}(page=${page.number})}" class=" page-link" th:tabindex="${page.first} ? -1"
                     aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
+                    <span class="sr-only">前のページ</span>
                 </a>
             </li>
 
@@ -114,7 +96,7 @@
 
             <!--/* 最後のページ */-->
             <li th:if="${page.totalPages gt (page.number + 3)}" class="page-item">
-                <a th:href="@{${path}(page=${page.totalPages - 1})}" th:text="${page.totalPages}" class="page-link"></a>
+                <a th:href="@{${path}(page=${page.totalPages})}" th:text="${page.totalPages}" class="page-link"></a>
             </li>
 
             <!--/* 次のページ */-->
@@ -122,7 +104,7 @@
                 <a th:href="@{${path}(page=${page.number + 2})}" class="page-link" th:tabindex="${page.last} ? -1"
                     aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
+                    <span class="sr-only">次のページ</span>
                 </a>
             </li>
         </ul>
