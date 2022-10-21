@@ -7,6 +7,7 @@ import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -174,7 +175,7 @@ public class CreatorController {
     }
 
     @GetMapping("/{cid}/squares")
-    public String showSquare(@PathVariable("cid") String cid, Model model,Pageable pageable) {
+    public String showSquare(@PathVariable("cid") String cid, Model model,@PageableDefault(60) Pageable pageable) {
         // List<Square> square_list = sService.filterSquaresByIsApproved(true);
         // model.addAttribute("square_list", square_list);
         model.addAttribute("cid", cid);

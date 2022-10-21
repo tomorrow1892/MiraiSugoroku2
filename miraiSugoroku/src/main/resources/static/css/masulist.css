@@ -82,3 +82,21 @@
               -1px 0 0 #FFF, 1px 0 0 #FFF;
     
     }
+
+.paginationbar{
+    text-align:center;
+    
+}
+    .paginationbar a{
+        text-decoration: none;
+    }
+    .paginationbar span{
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgb(236, 249, 152);
+        text-align:center;
+        line-height: 60px;
+        
+    }
