@@ -100,3 +100,19 @@
         line-height: 60px;
         
     }
+
+.pagination{
+
+}
+    .page-item .page-link{
+     
+        background: #ffffff;
+    }
+    .page-item.disabled .page-link{
+        background: #ffffff;
+    }
+    .page-item.active .page-link{
+        
+        color: blue;
+        background: rgb(185, 255, 145);
+    }
