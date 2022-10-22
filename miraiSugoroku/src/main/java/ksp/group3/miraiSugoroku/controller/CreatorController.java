@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,7 +107,7 @@ public class CreatorController {
 
     @PostMapping("/login")
     public String creatorLogin(@ModelAttribute("creatorLoginForm") CreatorLoginForm form, Model model) {
-        SquareCreator sc = cService.getSquareCreatorByEventIdAndLoginId(form.getSelectedEventId(), form.getLoginId());
+        SquareCreator sc = cService.login(form.getSelectedEventId(), form.getLoginId());
 
         if (Objects.isNull(sc.getNickname())) {
             return "redirect:/" + sc.getCreatorId() + "/detail";
@@ -153,10 +155,15 @@ public class CreatorController {
     }
 
     @GetMapping("/{cid}/squares")
-    public String showSquare(@PathVariable("cid") String cid, Model model) {
-        List<Square> square_list = sService.filterSquaresByIsApproved(true);
-        model.addAttribute("square_list", square_list);
+    public String showSquare(@PathVariable("cid") String cid, Model model,Pageable pageable) {
+        // List<Square> square_list = sService.filterSquaresByIsApproved(true);
+        // model.addAttribute("square_list", square_list);
         model.addAttribute("cid", cid);
+
+        Page<Square> page = sService.getPageApprovedSquare(pageable, true);
+        model.addAttribute("square_list",page.getContent());
+        model.addAttribute("page",page);
+        model.addAttribute("path","/"+cid+ "/squares");
 
         return "creator_squarelist";
     }
@@ -193,9 +200,10 @@ public class CreatorController {
     }
 
     @GetMapping("/{cid}/create") // マス作成画面を表示
-    public String showSquareCreateFrom(@PathVariable String cid, Model model) {
+    public String showSquareCreateFrom(@PathVariable Long cid, Model model) {
         model.addAttribute("SquareForm", new SquareForm());
         model.addAttribute("cid", cid);
+        model.addAttribute("nickName", cService.getSquareCreator(cid).getNickname());
         List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
         model.addAttribute("SquareEventList", SquareEventList);
         return "creator_create";
@@ -217,6 +225,7 @@ public class CreatorController {
         form.setCreatorId(cid);
         form.setEventId(cService.getSquareCreator(cid).getEventId());
         form.setGroupId(cService.getSquareCreator(cid).getGroup());
+        form.setCreatorName(cService.getSquareCreator(cid).getNickname());
         model.addAttribute("cid", cid);
         sService.createSquare(form);
 

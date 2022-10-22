@@ -9,6 +9,7 @@ public class SquareForm {
     Long squareEventId;
     String description;
     Long creatorId;
+    String creatorName;
     Long eventId;
     int groupId;
     boolean isApproved;
@@ -20,6 +21,7 @@ public class SquareForm {
         square.setSquareEventId(squareEventId);
         square.setDescription(description);
         square.setCreatorId(creatorId);
+        square.setNickName(creatorName);
         square.setApproved(false);
         square.setGroupId(groupId);
         square.setEventId(eventId);

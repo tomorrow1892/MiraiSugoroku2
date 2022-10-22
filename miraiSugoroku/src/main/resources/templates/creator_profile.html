@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>詳細設定</title>
-   <!-- <link rel="stylesheet" href="/css/display.css">-->
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" th:href="@{/css/display.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" href="/css/login.css">
-    <!-- bootstrapを使用する際には下4行を追加 -->
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
-    <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
+   <!-- bootstrapを使用する際には下２行を追加 -->
+   <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
+   <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
+
 
     <!-- 背景設定用CSS   -->
     <style th:inline="text">
@@ -28,8 +30,8 @@
 <!-- ヘッダー -->
 <!--  マス作成画面へのリンクは未実装  -->
 <nav class="navbar navbar-expand navbar-light fixed-top" style="background-color: white; border-bottom: darkblue medium solid">
-    <a class="navbar-brand" href="/">
-        <img src="/img/icon.png" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
+    <a class="navbar-brand" th:href="@{/}">
+        <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width: auto; height: auto">
         <span class="navbar-toggler-icon"></span>

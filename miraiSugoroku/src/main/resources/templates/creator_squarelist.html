@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title>マス一覧</title>
     <link rel="stylesheet" th:href="@{/css/display.css}">
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/search.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- bootstrapを使用する際には下2行を追加 -->
@@ -31,8 +32,8 @@
 <!-- ヘッダー -->
 <!--  マス作成画面へのリンクは未実装  -->
 <nav class="navbar navbar-expand navbar-light fixed-top" style="background-color: white; border-bottom: darkblue medium solid">
-    <a class="navbar-brand" href="/">
-        <img src="/img/icon.png" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
+    <a class="navbar-brand" th:href="@{/}">
+        <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width: auto; height: auto">
         <span class="navbar-toggler-icon"></span>
@@ -89,6 +90,24 @@
 
    
 
+    <div th:fragment='paginationbar'>
+        <ul>
+            <li th:class="${page.first} ? 'disabled':''" style="display:inline">
+                <span th:if="${page.first}">←先頭</span>
+                <a th:if="${not page.first}" th:href="@{${path}(page=0)}">←先頭</a>
+            </li>
+            <li th:each='i : ${#numbers.sequence(0, page.totalPages-1)}' th:class="(${i}==${page.number})? 'active' : ''" style="display:inline">
+                <span th:if='${i}==${page.number}' th:text='${i+1}'>1</span>
+                <a th:if='${i}!=${page.number}' th:href="@{${path}(page=${i+1})}">
+                    <span th:text='${i+1}'>1</span>
+                </a>
+            </li>
+            <li th:class="${page.last} ? 'disabled':''" style="display:inline">
+                <span th:if="${page.last}">末尾➝</span>
+                <a th:if="${not page.last}" th:href="@{${path}(page=(${page.totalPages}))}">末尾➝</a>
+            </li>
+        </ul>
+    </div>
     <!-- マスリスト -->
     <div class="d-flex flex-wrap justify-content-center">
         <div th:each="square: ${square_list}"
@@ -103,8 +122,9 @@
                     <li class="masu-title list-group-item">
                         <p class="align-items-center">[[${square.title}]]</p>
                     </li>
-                    <li class="masu-description list-group-item ">
-                        <p class="card-text"> [[${square.description}]]</p>
+                    <li class="masu-contents list-group-item ">
+                        <p  class="masu-description" id="textMasu"></p>
+                        <p class="masu-creator">作者: [[${square.nickName}]]</p>
                     </li>
                 </ul>
             </div>

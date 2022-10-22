@@ -26,6 +26,9 @@ public class MiraiSugorokuErrorHandler {
             case MiraiSugorokuException.ADMIN_PASSWORD_WRONG:
                 message = "パスワードが間違っています。ブラウザバックし、再度入力してください。";
                 break;
+            case MiraiSugorokuException.USED_LOGINID:
+                message = "このイベント内で既に使用されているログインIDです。別のログインIDを使用してください。";
+                break;
             case 11:
                 message = "パスワードが間違っています。ブラウザバックし、再度入力してください。";
                 break;
