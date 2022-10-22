@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/display.css}">
     <link rel="stylesheet" th:href="@{/css/font.css}">
     <link rel="stylesheet" th:href="@{/css/masu.css}">
+    <link rel="stylesheet" th:href="@{/css/search.css}">
     <script th:src="@{/module/leader-line.min.js}" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/gh/fengyuanchen/compressorjs/dist/compressor.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/header.css}">
@@ -22,6 +23,33 @@
             background-attachment: fixed;
         }
 
+        .border-mint {
+            border: 2px solid #b0ffe7;
+            border-radius: 4px;
+        }
+
+        #file {
+            position: absolute;
+            opacity: 0;
+            width: 10px;
+        }
+        .fileUploadBtn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #369;
+            color: #fff;
+            cursor: pointer;
+        }
+        .fileUploadBtn:hover,
+        .fileUploadBtn:focus {
+            filter: brightness(1.2);
+        }
+
+        label {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            font-weight: bold;
+            color: #414141;
+        }
 
     </style>
 
@@ -66,7 +94,7 @@
     
     <div class="d-flex align-items-start justify-content-center   flex-wrap">
         <div class=" bd-highlight ">
-            <div class="card">
+            <div class="card border-success  bg-white mb-3 ms-5 lb-3 ls-3 border-3 shadow-sm">
                 <div class="card-header">
                     <form role="form" th:action="@{/{c}/create/confirm(c=${cid})}" th:object="${SquareForm}"
                         method="post">
@@ -74,19 +102,19 @@
                             <tr>
                                 <td><label>タイトル: </label></td>
                                 <td><input type="text" size="40" placeholder="例)フルーツ狩りを楽しんだ!" maxlength="50"
-                                        id="titleInput" required th:field="*{title}" /></td>
+                                        id="titleInput" required th:field="*{title}" class="border-mint"/></td>
                             </tr>
                             <tr>
                                 <td><label>説明: </label></td>
 
                                 <td><textarea id="textInput" placeholder="例)三田市にはフルーツショップがいっぱいあります" rows="5" cols="50"
-                                        maxlength="256" required th:field="*{description}" />
+                                        maxlength="256" required th:field="*{description}" class="border-mint"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label>マスイベント: </label></td>
                                 <td>
-                                    <select required th:field="*{squareEventId}" id="eventInput">
+                                    <select required th:field="*{squareEventId}" id="eventInput" class="border-mint">
 
                                         <option required th:each="se:${SquareEventList}" th:value="${se.squareEventID}"
                                             th:text="${se.eventTitle}"
@@ -101,7 +129,7 @@
                                     <div class="drag-drop-inside">
                                         <p class="drag-drop-info">ここにファイルをドロップ</p>
                                         <p>または</p>
-                                        <p class="drag-drop-buttons">
+                                        <p class="drag-drop-buttons btn-green">
                                             <input id="fileInput" type="file" accept="image/*" value="ファイルを選択"
                                                 name="photo" onChange="photoPreview(event)">
                                         </p>
@@ -112,9 +140,9 @@
                             </tr>
 
                         </table>
-                        <p style="text-align: center;"><input type="submit" value="確認" class="btn-submit" /></p>
+                        <p style="text-align: center;"><input type="submit" value="確認" class="btn-submit" style="border: 2px dashed #15b01b; background-color: #b0ffe7"/></p>
                     </form>
-                    <a th:href=@{/__${cid}__/menu}>メニューへ戻る</a>
+<!--                   <--! <a th:href=@{/__${cid}__/menu}>メニューへ戻る</a>-->
                 </div>
             </div>
         </div>

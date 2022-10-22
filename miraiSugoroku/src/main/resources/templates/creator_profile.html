@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>詳細設定</title>
-    <link rel="stylesheet" th:href="@{/css/display.css}">
+
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" href="/css/login.css">
    <!-- bootstrapを使用する際には下２行を追加 -->
    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
    <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -59,14 +60,14 @@
 <div class="discription">
     ニックネームとグループ番号を設定してください。
 </div>
-    <div class="parent">
-        <div>
+    <div class="login-container">
+        <div  class="form-box">
             <form th:action="@{/__${creatorId}__/update}" method="post" th:object="${updateSquareCreatorForm}">
                 <tr>
-                    <td><label>グループ: </label></td>
+                    <td><label style="font-weight: bold; color: #6091d3;">グループ: </label></td>
                 <select id="selectedGroup" name="selectedGroup" required>
 
-                <option value="グループを選択">- グループを選択してください -</option>
+                <option value="グループを選択" style="font-weight: bold; color: #6091d3;">- グループを選択してください -</option>
                 <option th:each="g: ${groups}"
                         th:value="${g}"
                         th:text="${g}"
@@ -75,13 +76,14 @@
             </select>
             </tr>
             <br>
+                <br>
             <tr>
-                <td><label>ニックネーム: </label></td>
-                <td><input type="text" th:field="*{nickname}" required/></td>
+                <td><label style="font-weight: bold; color: #6091d3;">ニックネーム: </label></td>
+                <td><input type="text" th:field="*{nickname}" required class="form-control"/></td>
             </tr>
-            
 
-            <p><input type="submit" value="登録" />
+
+                <p><button class="btn btn-info btn-block login" type="submit">登録</button></p>
             </form>
         </div>
     </div>
