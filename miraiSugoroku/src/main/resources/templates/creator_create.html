@@ -38,13 +38,13 @@
         マスのタイトル、詳細説明、マスのイベント、マスを説明する画像を設定することができます。<br>
         作成したマスは、管理者の承認を得た後に公開されます。
     </div>
+    <form role="form" th:action="@{/{c}/create/confirm(c=${cid})}" th:object="${SquareForm}" method="post">
+        <div class="d-flex align-items-start justify-content-center   flex-wrap">
 
-    <div class="d-flex align-items-start justify-content-center   flex-wrap">
-        <div class=" bd-highlight ">
-            <div class="card">
-                <div class="card-header">
-                    <form role="form" th:action="@{/{c}/create/confirm(c=${cid})}" th:object="${SquareForm}"
-                        method="post">
+
+            <div class=" bd-highlight ">
+                <div class="card">
+                    <div class="card-header">
                         <table>
                             <tr>
                                 <td><label>タイトル: </label></td>
@@ -72,7 +72,7 @@
                             </tr>
                             <tr>
                                 <td><label>画像: </label></td>
-                                <td id="dragDropArea">
+                                <td id="dragDropArea" style="height: 300px;">
                                     <div class="drag-drop-inside">
                                         <p class="drag-drop-info">ここにファイルをドロップ</p>
                                         <p>または</p>
@@ -88,44 +88,48 @@
 
                         </table>
                         <input type="hidden" name="creatorName" th:value="${nickName}">
-                        <p style="text-align: center;"><input type="submit" value="確認" class="btn-submit" /></p>
-                    </form>
-                    <a th:href=@{/__${cid}__/menu}>メニューへ戻る</a>
+
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="bd-highlight mb-3 ms-5 lb-3 ls-3">
-            <h2 class="font-wght700">でき上がるマス</h2>
-            <!-- マス -->
-            <div class="masu card border border-success border-3 shadow-sm ">
+           
 
-                <div class="masu-header d-flex justify-content-center" id="headerMasu">
-                    <img th:src="@{/img/kominLogo.png}" class="masu-img" id="imgMasu">
 
+
+            <div class="bd-highlight mb-3 ms-5 lb-3 ls-3">
+                <h2 class="font-wght700">でき上がるマス</h2>
+                <!-- マス -->
+                <div class="masu card border border-success border-3 shadow-sm ">
+
+                    <div class="masu-header d-flex justify-content-center" id="headerMasu">
+                        <img class="masu-img" id="imgMasu">
+
+                    </div>
+                    <div class="masu-body">
+                        <ul class="list-group ">
+                            <li class="masu-title list-group-item">
+                                <p class="align-items-center" id="titleMasu"></p>
+                            </li>
+                            <li class="masu-contents list-group-item ">
+                                <p class="masu-description" id="textMasu"></p>
+                                <p class="masu-creator">作者: [[${nickName}]]</p>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="masu-event">
+                        <img th:src="@{/img/dice.png}" id="eventImgMasu">
+                        <p class="font-wght700" id="eventMasu">
+                            1マス進む
+                        </p>
+                    </div>
                 </div>
-                <div class="masu-body">
-                    <ul class="list-group ">
-                        <li class="masu-title list-group-item">
-                            <p class="align-items-center" id="titleMasu"></p>
-                        </li>
-                        <li class="masu-contents list-group-item ">
-                            <p class="masu-description" id="textMasu"></p>
-                            <p class="masu-creator">作者: [[${nickName}]]</p>
-                        </li>
-
-                    </ul>
-                </div>
-                <div class="masu-event">
-                    <img th:src="@{/img/dice.png}" id="eventImgMasu">
-                    <p class="font-wght700" id="eventMasu">
-
-                    </p>
-                </div>
+                <!-- マスここまで -->
             </div>
-            <!-- マスここまで -->
-        </div>
 
-    </div>
+        </div>
+        <p style="text-align: center;"><input type="submit" value="確認" class="btn btn-primary" /></p>
+    </form>
     <script th:src="@{/module/fitty.min.js}"></script>
 </body>
 <!-- 作成マスのプレビューに関するスクリプト -->
@@ -261,7 +265,8 @@
                 reader.onload = (event) => {
                     img.setAttribute("src", reader.result);
                     img.setAttribute("id", "previewImage");
-                    img.setAttribute("width", "300");//画像の幅を300に固定
+
+                    img.setAttribute("style", "height:100px;width:auto;")
                     preview.appendChild(img);
                     document.getElementById("pic").value = img.src;
 
