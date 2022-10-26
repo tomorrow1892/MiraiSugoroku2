@@ -56,7 +56,7 @@ button{
 }
 
 .title-center{
-    margin-top: 100px;
+    margin-top: 20px;
     /*margin-bottom: 1rem;*/
     text-align: center;
     width: 400px;
@@ -111,7 +111,7 @@ button{
     background-color: rgb(255, 237, 209);
     /*margin-bottom: 1rem;*/
     text-align: center;
-    width: 800px;
+    width: 60%; 
     height: auto;
     margin-top: 10px;
     margin-right: auto;

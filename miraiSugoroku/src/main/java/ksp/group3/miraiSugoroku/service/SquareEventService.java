@@ -79,84 +79,84 @@ public class SquareEventService {
         se.setSquareEventID((long) 1);
         se.setActionNumber(1);
         se.setArgument(1);
-        se.setEventTitle("1進む");
+        se.setEventTitle("1マス進む");
         seRepo.save(se);
 
         se = new SquareEvent();
         se.setSquareEventID((long) 2);
         se.setActionNumber(1);
         se.setArgument(2);
-        se.setEventTitle("2進む");
+        se.setEventTitle("2マス進む");
         seRepo.save(se);
 
         se = new SquareEvent();
         se.setSquareEventID((long) 3);
         se.setActionNumber(1);
         se.setArgument(3);
-        se.setEventTitle("3進む");
+        se.setEventTitle("3マス進む");
         seRepo.save(se);
 
         se = new SquareEvent();
         se.setSquareEventID((long) 4);
         se.setActionNumber(1);
         se.setArgument(4);
-        se.setEventTitle("4進む");
+        se.setEventTitle("4マス進む");
         seRepo.save(se);
 
         se = new SquareEvent();
         se.setSquareEventID((long) 5);
         se.setActionNumber(1);
         se.setArgument(5);
-        se.setEventTitle("5進む");
+        se.setEventTitle("5マス進む");
         seRepo.save(se);
 
         se = new SquareEvent();
         se.setSquareEventID((long) 6);
         se.setActionNumber(1);
         se.setArgument(6);
-        se.setEventTitle("6進む");
+        se.setEventTitle("6マス進む");
         seRepo.save(se);
 
         se = new SquareEvent();
         se.setSquareEventID((long) 7);
         se.setActionNumber(1);
         se.setArgument(-1);
-        se.setEventTitle("1戻る");
+        se.setEventTitle("1マス戻る");
         seRepo.save(se);
 
         se = new SquareEvent();
         se.setSquareEventID((long) 8);
         se.setActionNumber(1);
         se.setArgument(-2);
-        se.setEventTitle("2戻る");
+        se.setEventTitle("2マス戻る");
         seRepo.save(se);
 
         se = new SquareEvent();
         se.setSquareEventID((long) 9);
         se.setActionNumber(1);
         se.setArgument(-3);
-        se.setEventTitle("3戻る");
+        se.setEventTitle("3マス戻る");
         seRepo.save(se);
 
         se = new SquareEvent();
         se.setSquareEventID((long) 10);
         se.setActionNumber(1);
         se.setArgument(-4);
-        se.setEventTitle("4戻る");
+        se.setEventTitle("4マス戻る");
         seRepo.save(se);
 
         se = new SquareEvent();
         se.setSquareEventID((long) 11);
         se.setActionNumber(1);
         se.setArgument(-5);
-        se.setEventTitle("5戻る");
+        se.setEventTitle("5マス戻る");
         seRepo.save(se);
 
         se = new SquareEvent();
         se.setSquareEventID((long) 12);
         se.setActionNumber(1);
         se.setArgument(-6);
-        se.setEventTitle("6戻る");
+        se.setEventTitle("6マス戻る");
         seRepo.save(se);
 
         se = new SquareEvent();

@@ -7,6 +7,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,18 +33,14 @@ public class UserController {
     
 
     @GetMapping("/")
-    public String showIndexPage() {
+    public String showIndexPage(Model model) {
         seService.registerSquareEvent();
+        model.addAttribute("roll", "user");
         return "index";
     }
 
-    @GetMapping("/menu")
-    public String showGuestMenuPage() {
-        return "guest_menu.html";
-    }
-
     @GetMapping("/squares")
-    public String showGuestSquareListPage(Model model,Pageable pageable) {
+    public String showGuestSquareListPage(Model model,@PageableDefault(60) Pageable pageable) {
         // List<Square> square_list = sService.filterSquaresByIsApproved(true);
         // model.addAttribute("square_list", square_list);
 
@@ -51,6 +48,7 @@ public class UserController {
         model.addAttribute("square_list",page.getContent());
         model.addAttribute("page",page);
         model.addAttribute("path","/squares");
+        model.addAttribute("roll", "user");
         return "guest_squarelist";
     }
 
@@ -60,7 +58,7 @@ public class UserController {
         model.addAttribute("square", square);
         SquareCreator creator = cService.getSquareCreator(square.getCreatorId());
         model.addAttribute("creator", creator);
-
+        model.addAttribute("roll", "user");
         return "square_detail";
     }
 
@@ -74,7 +72,7 @@ public class UserController {
         model.addAttribute("square_list",page.getContent());
         model.addAttribute("page",page);
         model.addAttribute("path","/squares/search/keyword?keyword="+keyword);
-
+        model.addAttribute("roll", "user");
         return "guest_squarelist";
     }
 
@@ -88,13 +86,14 @@ public class UserController {
         model.addAttribute("square_list",page.getContent());
         model.addAttribute("page",page);
         model.addAttribute("path","/squares/search/nickname?nickname="+nickname);
-
+        model.addAttribute("roll", "user");
         return "guest_squarelist";
     }
 
     @GetMapping("/config")
     public String showGuestSugorokuConfigPage(Model model) {
         model.addAttribute("GameConfigForm", new GameConfigForm());
+        model.addAttribute("roll", "user");
         return "guest_sugoroku_config";
     }
 
@@ -102,12 +101,14 @@ public class UserController {
     public String showSugorokuConfirm(GameConfigForm form, Model model) {
         form.addNameAndIcon();
         model.addAttribute("GameConfigForm", form);
+        model.addAttribute("roll", "user");
         return "guest_sugoroku_confirm";
     }
 
     @PostMapping("/sugoroku")
     public String showSugorokuPage(GameConfigForm form, Model model) {
         model.addAttribute("GameConfigForm", form);
+        model.addAttribute("roll", "user");
         return "sugoroku";
     }
 
