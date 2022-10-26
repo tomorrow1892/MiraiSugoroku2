@@ -43,7 +43,7 @@
 
 
     <div class="search-center">
-        <form role="search" method="get" class="searchform" th:action="@{/squares/search/keyword}">
+        <form role="search" method="get" class="searchform" th:action="@{/__${cid}__/squares/search/keyword}">
             <div>
                 <label class="screen-reader-text" for="keyword">&emsp;キーワード：</label>
                 <input type="text" value=""  name="keyword" id="keyword" placeholder="キーワードで検索" >
@@ -51,7 +51,7 @@
             </div>
         </form>
 
-        <form role="search" method="get" class="searchform" th:action="@{/squares/search/nickname}">
+        <form role="search" method="get" class="searchform" th:action="@{/__${cid}__/squares/search/nickname}">
             <div>
                 <label class="screen-reader-text" for="nickname">&emsp;ニックネーム：</label>
                 <input type="text" value=""  name="nickname" id="nickname" placeholder="ニックネームで検索" >
