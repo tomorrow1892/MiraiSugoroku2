@@ -7,6 +7,8 @@
     <link rel="stylesheet" th:href="@{/gameConfig.css}">
     <link rel="stylesheet" th:href="@{/css/masu.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/display.css}">
 
     <!--アイコンの重複がないようにする-->
     <script src="https://code.jquery.com/jquery-3.3.1.js"
@@ -24,7 +26,6 @@
         });
     </script>
 
-    <link rel="stylesheet" th:href="@{/css/header.css}">
     <!-- bootstrapを使用する際には下2行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -54,9 +55,9 @@
             すごろくの設定画面です。<br>
             すごろくの長さ、プレイヤーの名前とアイコンを設定してください。
         </div>
-
+        <div class="config">
         <form role="form" th:action="@{/game/createSugoroku}" th:object="${GameConfigForm}" method="post">
-            <table>
+            <table class="table">
                 <tr id="0">
                     <div class="nagasa">
                         コースの長さ
@@ -171,13 +172,14 @@
                 </tr>
             </table>
             <p>
-                <button id="b3" type="button">プレイヤー3を追加</button>
-                <button id="b4" type="button">プレイヤー4を追加</button>
-                <button id="b5" type="button">プレイヤー5を追加</button>
-                <button id="b6" type="button">プレイヤー6を追加</button>
-                <input type="submit" value="遊ぶ" class="btn-submit" />
+                <button id="b3" type="button" class="b">プレイヤー3を追加</button>
+                <button id="b4" type="button" class="b">プレイヤー4を追加</button>
+                <button id="b5" type="button" class="b">プレイヤー5を追加</button>
+                <button id="b6" type="button" class="b">プレイヤー6を追加</button>
+                <input type="submit" value="遊ぶ" class="btn-submit b" />
             </p>
         </form>
+    </div>
     </body>
 
     <script>
