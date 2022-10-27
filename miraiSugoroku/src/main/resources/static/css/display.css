@@ -1,4 +1,4 @@
-input.btn--orange {
+input.btn--top {
     color: #fff;
     background-color: #e4782b;
     border-bottom: 5px solid #bd6120;
@@ -8,7 +8,7 @@ input.btn--orange {
     height: 100px;
 }
 
-input.btn--orange:hover {
+input.btn--top:hover {
     margin-top: 3px;
     color: #fff;
     background: #da5b00;
@@ -18,6 +18,31 @@ input.btn--orange:hover {
 input.btn--shadow {
     -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
     box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+}
+
+input.btn--menu{
+    color: #fff;
+    background-color: #e4782b;
+    border-bottom: 5px solid #bd6120;
+    font-size: 22px;
+    font-weight: 800;
+    width: 300px;
+    height: 100px;
+}
+
+input.btn--menu:hover {
+    margin-top: 3px;
+    color: #fff;
+    background: #da5b00;
+    border-bottom: 2px solid #a14300;
+}
+
+.menupage_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .toppage_btn{
