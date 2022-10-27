@@ -55,6 +55,12 @@ button{
     height: 10em;
 }
 
+.b{/*ゲーム設定画面のボタン*/
+    width: 10em;
+    height: 3em;
+    background-color: #ffc06b;
+}
+
 .title-center{
     margin-top: 20px;
     /*margin-bottom: 1rem;*/
@@ -185,3 +191,15 @@ input.btn--orange-ad {
     padding: 10px 5px;
 }
   /*ここまでadmin用*/
+
+  .config {
+    background-color: rgb(255, 255, 255);
+    /*margin-bottom: 1rem;*/
+    text-align: center;
+    width: 1000px;
+    height: auto;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px 5px;
+}
