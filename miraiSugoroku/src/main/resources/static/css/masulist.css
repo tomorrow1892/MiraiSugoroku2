@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
 
 .masu{
-    width: 25rem;
-    height: 30rem;
+    width: 20rem;
+    height: 24rem;
     position: relative;
 }
 .masu .masu-header{
@@ -41,7 +41,7 @@
     }
         .masu-contents .masu-description{
             font-size: 0.8rem;
-            height: 75%;
+            height: 70%;
             width: 100%;
             overflow: auto;
         }
@@ -50,7 +50,7 @@
             font-family: 'Zen Maru Gothic', sans-serif;
             height: 25%;
             text-align:end;
-            font-size: 1.2rem;
+            font-size: 1.0rem;
         }
 
 .masu .masu-event{
@@ -81,4 +81,38 @@
               0px 1px 0 #FFF,  0 -1px 0 #FFF,
               -1px 0 0 #FFF, 1px 0 0 #FFF;
     
+    }
+
+.paginationbar{
+    text-align:center;
+    
+}
+    .paginationbar a{
+        text-decoration: none;
+    }
+    .paginationbar span{
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgb(236, 249, 152);
+        text-align:center;
+        line-height: 60px;
+        
+    }
+
+.pagination{
+
+}
+    .page-item .page-link{
+     
+        background: #ffffff;
+    }
+    .page-item.disabled .page-link{
+        background: #ffffff;
+    }
+    .page-item.active .page-link{
+        
+        color: blue;
+        background: rgb(185, 255, 145);
     }

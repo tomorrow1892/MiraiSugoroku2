@@ -5,6 +5,9 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,21 +33,22 @@ public class UserController {
     
 
     @GetMapping("/")
-    public String showIndexPage() {
+    public String showIndexPage(Model model) {
         seService.registerSquareEvent();
+        model.addAttribute("roll", "user");
         return "index";
     }
 
-    @GetMapping("/menu")
-    public String showGuestMenuPage() {
-        return "guest_menu.html";
-    }
-
     @GetMapping("/squares")
-    public String showGuestSquareListPage(Model model) {
-        List<Square> square_list = sService.filterSquaresByIsApproved(true);
-        model.addAttribute("square_list", square_list);
+    public String showGuestSquareListPage(Model model,@PageableDefault(60) Pageable pageable) {
+        // List<Square> square_list = sService.filterSquaresByIsApproved(true);
+        // model.addAttribute("square_list", square_list);
 
+        Page<Square> page = sService.getPageApprovedSquare(pageable, true);
+        model.addAttribute("square_list",page.getContent());
+        model.addAttribute("page",page);
+        model.addAttribute("path","/squares");
+        model.addAttribute("roll", "user");
         return "guest_squarelist";
     }
 
@@ -54,31 +58,42 @@ public class UserController {
         model.addAttribute("square", square);
         SquareCreator creator = cService.getSquareCreator(square.getCreatorId());
         model.addAttribute("creator", creator);
-
+        model.addAttribute("roll", "user");
         return "square_detail";
     }
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/squares/search/keyword")
-    public String searchSquaresByKeyword(@RequestParam("keyword") String keyword, Model model) {
-        List<Square> square_list = sService.searchSquaresByKeyword(keyword);
-        model.addAttribute("square_list", square_list);
+    public String searchSquaresByKeyword(@RequestParam("keyword") String keyword, Model model,Pageable pageable) {
+        // List<Square> square_list = sService.searchSquaresByKeyword(keyword);
+        // model.addAttribute("square_list", square_list);
 
+        Page<Square> page = sService.searchPageSquaresByKeyword(pageable, keyword);
+        model.addAttribute("square_list",page.getContent());
+        model.addAttribute("page",page);
+        model.addAttribute("path","/squares/search/keyword?keyword="+keyword);
+        model.addAttribute("roll", "user");
         return "guest_squarelist";
     }
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/squares/search/nickname")
-    public String searchSquaresByNickname(@RequestParam("nickname") String nickname, Model model) {
-        List<Square> square_list = sService.searchSquaresByNickname(nickname);
-        model.addAttribute("square_list", square_list);
+    public String searchSquaresByNickname(@RequestParam("nickname") String nickname, Model model,Pageable pageable) {
+        // List<Square> square_list = sService.searchSquaresByNickname(nickname);
+        // model.addAttribute("square_list", square_list);
 
+        Page<Square> page = sService.searchPageSquaresByNickname(pageable, nickname);
+        model.addAttribute("square_list",page.getContent());
+        model.addAttribute("page",page);
+        model.addAttribute("path","/squares/search/nickname?nickname="+nickname);
+        model.addAttribute("roll", "user");
         return "guest_squarelist";
     }
 
     @GetMapping("/config")
     public String showGuestSugorokuConfigPage(Model model) {
         model.addAttribute("GameConfigForm", new GameConfigForm());
+        model.addAttribute("roll", "user");
         return "guest_sugoroku_config";
     }
 
@@ -86,12 +101,14 @@ public class UserController {
     public String showSugorokuConfirm(GameConfigForm form, Model model) {
         form.addNameAndIcon();
         model.addAttribute("GameConfigForm", form);
+        model.addAttribute("roll", "user");
         return "guest_sugoroku_confirm";
     }
 
     @PostMapping("/sugoroku")
     public String showSugorokuPage(GameConfigForm form, Model model) {
         model.addAttribute("GameConfigForm", form);
+        model.addAttribute("roll", "user");
         return "sugoroku";
     }
 

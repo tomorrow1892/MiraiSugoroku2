@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <title>マス作成</title>
     <link rel="stylesheet" th:href="@{/css/display.css}">
-    <link rel="stylesheet" th:href="@{/css/border.css}">
     <link rel="stylesheet" th:href="@{/css/font.css}">
     <link rel="stylesheet" th:href="@{/css/masu.css}">
+    <link rel="stylesheet" th:href="@{/css/search.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <script th:src="@{/module/leader-line.min.js}" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/gh/fengyuanchen/compressorjs/dist/compressor.min.js"></script>
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -23,71 +24,74 @@
             background-attachment: fixed;
         }
 
+        .border-mint {
+            border: 2px solid #b0ffe7;
+            border-radius: 4px;
+        }
+
+        #file {
+            position: absolute;
+            opacity: 0;
+            width: 10px;
+        }
+        .fileUploadBtn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #369;
+            color: #fff;
+            cursor: pointer;
+        }
+        .fileUploadBtn:hover,
+        .fileUploadBtn:focus {
+            filter: brightness(1.2);
+        }
+
+        label {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            font-weight: bold;
+            color: #414141;
+        }
 
     </style>
 
 </head>
 
 <body>
-<!-- ヘッダー -->
-<!--  マス作成画面へのリンクは未実装  -->
-<nav class="navbar navbar-expand navbar-light fixed-top" style="background-color: white; border-bottom: darkblue medium solid">
-    <a class="navbar-brand" href="/">
-        <img src="/img/icon.png" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width: auto; height: auto">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/config} class="nav-link">すごろくで遊ぶ</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/squares} class="nav-link">マス一覧</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/create} class="nav-link">マス作成</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/__${cid}__/menu} class="nav-link">メニュー</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+    <!-- ヘッダー -->
+    <div th:replace="header :: header"></div>
 
-<div class="title-center">
-    <h1 class="sample_h_14">マス作成</h1>
-</div>
-<div class="discription">
-   マスの作成画面です。<br>
-    マスのタイトル、詳細説明、マスのイベント、マスを説明する画像を設定することができます。<br>
-    作成したマスは、管理者の承認を得た後に公開されます。
-</div>
-    
-    <div class="d-flex align-items-start justify-content-center   flex-wrap">
-        <div class=" bd-highlight ">
-            <div class="card">
-                <div class="card-header">
-                    <form role="form" th:action="@{/{c}/create/confirm(c=${cid})}" th:object="${SquareForm}"
-                        method="post">
+    <div class="title-center">
+        <h1 class="sample_h_14">マス作成</h1>
+    </div>
+    <div class="discription">
+        マスの作成画面です。<br>
+        マスのタイトル、詳細説明、マスのイベント、マスを説明する画像を設定することができます。<br>
+        作成したマスは、管理者の承認を得た後に公開されます。
+    </div>
+    <form role="form" th:action="@{/{c}/create/confirm(c=${cid})}" th:object="${SquareForm}" method="post">
+        <div class="d-flex align-items-start justify-content-center   flex-wrap">
+
+
+            <div class=" bd-highlight ">
+                <div class="card border-success  bg-white mb-3 ms-5 lb-3 ls-3 border-3 shadow-sm">
+                    <div class="card-header">
                         <table>
                             <tr>
                                 <td><label>タイトル: </label></td>
                                 <td><input type="text" size="40" placeholder="例)フルーツ狩りを楽しんだ!" maxlength="50"
-                                        id="titleInput" required th:field="*{title}" /></td>
+                                        id="titleInput" required th:field="*{title}" class="border-mint"/></td>
                             </tr>
                             <tr>
                                 <td><label>説明: </label></td>
 
                                 <td><textarea id="textInput" placeholder="例)三田市にはフルーツショップがいっぱいあります" rows="5" cols="50"
-                                        maxlength="256" required th:field="*{description}" />
+                                        maxlength="255" required th:field="*{description}" class="border-mint" />
                                 </td>
                             </tr>
                             <tr>
                                 <td><label>マスイベント: </label></td>
                                 <td>
-                                    <select required th:field="*{squareEventId}" id="eventInput">
+                                    <select required th:field="*{squareEventId}" id="eventInput" class="border-mint">
 
                                         <option required th:each="se:${SquareEventList}" th:value="${se.squareEventID}"
                                             th:text="${se.eventTitle}"
@@ -98,11 +102,11 @@
                             </tr>
                             <tr>
                                 <td><label>画像: </label></td>
-                                <td id="dragDropArea">
+                                <td id="dragDropArea" style="height: 300px;">
                                     <div class="drag-drop-inside">
                                         <p class="drag-drop-info">ここにファイルをドロップ</p>
                                         <p>または</p>
-                                        <p class="drag-drop-buttons">
+                                        <p class="drag-drop-buttons btn-green">
                                             <input id="fileInput" type="file" accept="image/*" value="ファイルを選択"
                                                 name="photo" onChange="photoPreview(event)">
                                         </p>
@@ -113,42 +117,49 @@
                             </tr>
 
                         </table>
-                        <p style="text-align: center;"><input type="submit" value="確認" class="btn-submit" /></p>
-                    </form>
-                    <a th:href=@{/__${cid}__/menu}>メニューへ戻る</a>
-                </div>
-            </div>
-        </div>
-        <div class="bd-highlight mb-3 ms-5 lb-3 ls-3">
-            <h2 class="font-wght700">でき上がるマス</h2>
-            <!-- マス -->
-            <div class="masu card border border-success border-3 shadow-sm ">
-                
-                <div class="masu-header d-flex justify-content-center" id="headerMasu">
-                    <img th:src="@{/img/kominLogo.png}" class="masu-img" id="imgMasu">
-                    
-                </div>
-                <div class="masu-body">
-                    <ul class="list-group ">
-                        <li class="masu-title list-group-item">
-                            <p class="align-items-center" id="titleMasu"></p>
-                        </li>
-                        <li class="masu-description list-group-item ">
-                            <p class="card-text" id="textMasu"></p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="masu-event">
-                    <img th:src="@{/img/dice.png}" id="eventImgMasu">
-                    <p class="font-wght700" id="eventMasu">
-                    
-                    </p>
-                </div>
-            </div>
-            <!-- マスここまで -->
-        </div>
+                        <input type="hidden" name="creatorName" th:value="${nickName}">
 
-    </div>
+                    </div>
+                </div>
+            </div>
+           
+
+
+
+            <div class="bd-highlight mb-3 ms-5 lb-3 ls-3">
+                <h2 class="font-wght700">でき上がるマス</h2>
+                <!-- マス -->
+                <div class="masu card border border-success border-3 shadow-sm ">
+
+                    <div class="masu-header d-flex justify-content-center" id="headerMasu">
+                        <img class="masu-img" id="imgMasu">
+
+                    </div>
+                    <div class="masu-body">
+                        <ul class="list-group ">
+                            <li class="masu-title list-group-item">
+                                <p class="align-items-center" id="titleMasu"></p>
+                            </li>
+                            <li class="masu-contents list-group-item ">
+                                <p class="masu-description" id="textMasu"></p>
+                                <p class="masu-creator">作者: [[${nickName}]]</p>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="masu-event">
+                        <img th:src="@{/img/dice.png}" id="eventImgMasu">
+                        <p class="font-wght700" id="eventMasu">
+                            1マス進む
+                        </p>
+                    </div>
+                </div>
+                <!-- マスここまで -->
+            </div>
+
+        </div>
+        <p style="text-align: center;"><input type="submit" value="確認" class="btn btn-primary" style="border: 2px dashed #15b01b; background-color: #b0ffe7"/></p>
+    </form>
     <script th:src="@{/module/fitty.min.js}"></script>
 </body>
 <!-- 作成マスのプレビューに関するスクリプト -->
@@ -284,7 +295,8 @@
                 reader.onload = (event) => {
                     img.setAttribute("src", reader.result);
                     img.setAttribute("id", "previewImage");
-                    img.setAttribute("width", "300");//画像の幅を300に固定
+
+                    img.setAttribute("style", "height:100px;width:auto;")
                     preview.appendChild(img);
                     document.getElementById("pic").value = img.src;
 

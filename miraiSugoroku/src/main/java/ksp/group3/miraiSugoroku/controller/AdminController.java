@@ -43,6 +43,7 @@ public class AdminController {
     public String showAdminLodinPage(Model model) {
         AdminLoginForm adform = new AdminLoginForm();
         model.addAttribute("AdminLoginForm", adform);
+        model.addAttribute("roll", "user");
         return "admin_login";
     }
 
@@ -72,6 +73,7 @@ public class AdminController {
         // 終了済イベント
         List<Event> endList = eService.getNotActiveEvents(date);
         model.addAttribute("endList", endList);
+        model.addAttribute("roll", "admin");
         return "admin_menu";
     }
 
@@ -80,6 +82,8 @@ public class AdminController {
     public String showCreateEventForm(Model model) {
         EventForm eventform = new EventForm();
         model.addAttribute("EventForm", eventform);
+        model.addAttribute("roll", "admin");
+
         return "admin_create_event";
     }
 
@@ -91,6 +95,7 @@ public class AdminController {
         System.out.println(eventform.getName());
         System.out.println(eventform.getLimitDate());
         model.addAttribute("Eventform", eventform);
+        model.addAttribute("roll", "admin");
         return "admin_confirm_event";
     }
 
@@ -98,6 +103,7 @@ public class AdminController {
     @PostMapping("/admin/registerEvent")
     public String showRegistertEvent(EventForm eventform, Model model) {
         Event event = eService.createEvent(eventform);
+        model.addAttribute("roll", "admin");
         return "admin_register_event";
     }
 
@@ -119,6 +125,7 @@ public class AdminController {
         String str2 = "グループ数：" + event.getNGroups();
         model.addAttribute("str2", str2);
 
+        model.addAttribute("roll", "admin");
         return "admin_event";
     }
 
@@ -133,6 +140,7 @@ public class AdminController {
         ef.setLimitDate(event.getLimitDate().toString());
         ef.setNGroups(event.getNGroups());
         model.addAttribute("ef", ef);
+        model.addAttribute("roll", "admin");
         return "admin_event_edit";
     }
 
@@ -164,6 +172,7 @@ public class AdminController {
         SquareCreator sc = cService.getSquareCreator(creatorId);
         model.addAttribute("sc", sc);
         // cService.deleteSquareCreator(creatorId);
+        model.addAttribute("roll", "admin");
         return "admin_creator_delete";
     }
 
@@ -190,6 +199,7 @@ public class AdminController {
         }
         model.addAttribute("eventId", eventId);
         model.addAttribute("dtolist", dtolist);
+        model.addAttribute("roll", "admin");
         return "admin_approve_square";
     }
 
@@ -211,6 +221,7 @@ public class AdminController {
         model.addAttribute("name", name);
         model.addAttribute("squareId", squareId);
         model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
         return "admin_edit_square";
     }
 
@@ -226,6 +237,7 @@ public class AdminController {
         model.addAttribute("name", name);
         model.addAttribute("squareId", squareId);
         model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
         return "admin_confirm_square";
     }
 
@@ -233,6 +245,7 @@ public class AdminController {
     public String doneSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
         sf.setApproved(true);
         sService.updateSquare(squareId, sf);
+        model.addAttribute("roll", "admin");
         return "admin_done_square";
     }
 

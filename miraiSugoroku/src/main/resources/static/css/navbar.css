@@ -1,0 +1,28 @@
+.navbar{
+    background-color: rgb(230, 244, 217); 
+    
+    width: 100%;
+    height: 15vh;
+    max-height: 180px;
+    min-height: 120px;
+}
+
+    .navbar .navbar-brand img{
+        width: 110px; 
+        height: 110px; 
+        margin-left: 20px;
+    }
+    .navbar .navbar-nav{
+        height: 100%;
+        align-items: center;
+        text-align: center;
+    }
+        .navbar-nav .nav-item{
+            height: 100%;
+            padding-left:30px;
+  padding-right:30px;
+        }
+            .nav-item img{
+
+            height: 80px;
+            }
