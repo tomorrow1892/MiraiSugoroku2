@@ -39,33 +39,53 @@
     </div>
     <div class="menupage_btn">
         <div>
-            <form th:action="@{/__${cid}__/config}" method="get">
+            <form th:action="@{/__${cid}__/config}" method="get" style="margin-right: 20px; margin-left: 20px;">
                 <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="すごろくで遊ぶ">
             </form>
         </div>
         <div>
-            <form th:action="@{/__${cid}__/squares}" method="get">
+            <form th:action="@{/__${cid}__/squares}" method="get" style="margin-right: 20px; margin-left: 20px;">
                 <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="マス一覧">
             </form>
         </div>
         <div th:if="${bool}">
-            <form th:action="@{/__${cid}__/create}" method="get">
-                <input type="submit" class="btn--menu btn--cubic btn--menu" value="マス作成">
+            <form th:action="@{/__${cid}__/create}" method="get" style="margin-left: 20px; margin-right: 20px;">
+                <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="マス作成">
             </form>
         </div>
         <div th:if="${bool eq false}">
-            <form th:action="@{/__${cid}__/create}" method="get">
-                <input type="submit" class="btn--menu btn--cubic btn--shadow" value="マス作成" disabled="disabled">
+            <form th:action="@{/__${cid}__/create}" method="get" style="margin-left: 20px; margin-right: 20px;">
+                <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="マス作成" disabled="disabled">
+            </form>
+        </div>
+    </div>
+    <div class="btn_discription">
+        <div class="btn_discription_child">
+            みんなが作ったマスを使ってすごろくを遊ぶことができます
+        </div>
+        <div class="btn_discription_child">
+            みんなが作った三田市に関するマスを見ることができます
+        </div>
+        <div class="btn_discription_child">
+            三田市に関して調べた内容をもとにマスを作ることができます
+        </div>
+    </div>
+    <div class="menupage_btn">
+        <div>
+            <form th:action="@{/__${cid}__/detail}" method="get" style="margin-left: 20px; margin-right: 20px;">
+                <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="詳細設定">
             </form>
         </div>
         <div>
-            <form th:action="@{/__${cid}__/detail}" method="get">
-                <input type="submit" class="btn--menu btn--cubic btn--shadow" value="詳細設定">
-            </form>
+            <form th:action="@{/}" method="get" style="margin-right: 20px; margin-left: 20px">
+                <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="トップページに戻る">
         </div>
-        <div>
-            <form th:action="@{/}" method="get">
-                <input type="submit" class="btn--menu btn--cubic btn--shadow" value="トップページに戻る">
+    </div>
+    <div class="btn_discription">
+        <div class="btn_discription_child">
+            自分のプロフィールを確認・編集することができます
+        </div>
+        <div class="btn_discription_child">
         </div>
     </div>
 </body>
