@@ -94,11 +94,6 @@ button{
     margin-left: auto;
 }
 
-.title-center h1{
-    /*padding-left: 10px;*/
-    /*padding-right: 10px;*/
-}
-
 .sample_h_14{
     font-size: 1.5em;/* フォントサイズ */
     font-weight: bold;/* フォント太さ */
@@ -175,23 +170,23 @@ button{
     border: #ddd dashed 5px;
     min-height: 200px;
     text-align: center;
-  }
-  #dragDropArea p{
-      color: #999;
-      font-weight: bold;
-      font-size: 14px;
-      font-size: 1.4em;
-  }
-  #dragDropArea .drag-drop-buttons{
-      margin-top: 20px;
-      font-size: 12px;
-      font-size: 1.2em;
-  }
-  .drag-drop-buttons input{
-      margin: auto;
-  }
+}
+#dragDropArea p{
+    color: #999;
+    font-weight: bold;
+    font-size: 14px;
+    font-size: 1.4em;
+}
+#dragDropArea .drag-drop-buttons{
+    margin-top: 20px;
+    font-size: 12px;
+    font-size: 1.2em;
+}
+.drag-drop-buttons input{
+    margin: auto;
+}
 
-  /*ここからadmin用*/
+/*ここからadmin用*/
 input.btn--orange-ad {
     color: #fff;
     background-color: #e4782b;
@@ -215,7 +210,7 @@ input.btn--orange-ad {
 }
   /*ここまでadmin用*/
 
-  .config {
+.config {
     background-color: rgb(255, 255, 255);
     /*margin-bottom: 1rem;*/
     text-align: center;

@@ -26,11 +26,9 @@
             background-blend-mode: lighten;
         }
     </style>
-
 </head>
 
 <body>
-
     <!-- ヘッダー -->
     <div th:replace="header :: header"></div>
 
@@ -42,7 +40,6 @@
         興味のある場所やイベントについて調べてみてください。<br>
         自身が作成したマスを検索することもできます。
     </div>
-
 
     <div class="search-center">
         <form role="search" method="get" class="searchform" th:action="@{/__${cid}__/squares/search/keyword}">
@@ -65,8 +62,6 @@
             <input type="submit" value="自分が作成したマスを表示" />
         </form>
     </div>
-
-
 
     <!--/* ページネーションバー（Redmine参考） */-->
     <nav aria-label="Page navigation2">
@@ -126,7 +121,6 @@
 
                 <div class="masu-header d-flex justify-content-center">
                     <img th:src="${square.picture}" class="masu-img">
-
                 </div>
                 <div class="masu-body">
                     <ul class="list-group ">
