@@ -22,13 +22,13 @@
             <li th:if="${roll == 'user'|| roll == 'admin'}" class="nav-item active">
                 <a class="nav-link" th:href="@{/config}">
                     <img th:src="@{/img/header_sugoroku.png}">
-                    <div>すごろくで遊ぶ</div>
+                    <div style="color: black;">すごろくで遊ぶ</div>
                 </a>
             </li>
             <li th:if="${roll == 'user'|| roll == 'admin'}" class="nav-item active">
                 <a class="nav-link" th:href="@{/squares}">
                     <img th:src="@{/img/header_masulist.png}">
-                    <div>マスを見る</div>
+                    <div style="color: black;">マスを見る</div>
                 </a>
             </li>
 
@@ -36,19 +36,19 @@
             <li th:if="${roll == 'creator'}" class="nav-item active">
                 <a class="nav-link" th:href="@{/__${cid}__/config}">
                     <img th:src="@{/img/header_sugoroku.png}">
-                    <div>すごろくで遊ぶ</div>
+                    <div style="color: black;">すごろくで遊ぶ</div>
                 </a>
             </li>
             <li th:if="${roll == 'creator'}" class="nav-item active">
                 <a class="nav-link" th:href="@{/__${cid}__/squares}">
                     <img th:src="@{/img/header_masulist.png}">
-                    <div>マスを見る</div>
+                    <div style="color: black;">マスを見る</div>
                 </a>
             </li>
             <li th:if="${roll == 'creator'}" class="nav-item active">
                 <a class="nav-link" th:href="@{/__${cid}__/create}">
                     <img th:src="@{/img/header_create.png}">
-                    <div>マスを作る　</div>
+                    <div style="color: black;">マスを作る　</div>
                 </a>
             </li>
         </ul>
