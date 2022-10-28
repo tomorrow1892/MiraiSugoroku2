@@ -64,7 +64,7 @@
     </div>
     <div class="discription">
         マスの作成画面です。<br>
-        マスのタイトル、詳細説明、マスのイベント、マスを説明する画像を設定することができます。<br>
+        マスのタイトル、詳細説明、マスに止まったときのアクション、マスを説明する画像を設定することができます。<br>
         作成したマスは、管理者の承認を得た後に公開されます。
     </div>
     <form role="form" th:action="@{/{c}/create/confirm(c=${cid})}" th:object="${SquareForm}" method="post">
@@ -73,25 +73,27 @@
             <div class=" bd-highlight ">
                 <div class="card  bg-white mb-3 ms-5 lb-3 ls-3 border-3 shadow-sm " style="margin-top: 30px;">
                     <div class="card-header">
+                        <font color="red" style="font-size: 10;">*</font>は必ず入力してください
                         <table>
+                           
                             <tr>
-                                <td><label>タイトル: </label></td>
-                                <td><input type="text" size="40" placeholder="例)フルーツ狩りを楽しんだ!" maxlength="50"
+                                <td><label><font color="red">*</font>タイトル(50字まで): </label></td>
+                                <td><input type="text" size="40" placeholder="例)しい茸園有馬富士でBBQする" maxlength="50"
                                         id="titleInput" 
                                         required th:field="*{title}" 
                                         style="width: 300px;"/></td>
                             </tr>
                             <tr>
-                                <td><label>説明: </label></td>
+                                <td><label><font color="red">*</font>説明(255字まで): </label></td>
 
-                                <td><textarea id="textInput" placeholder="例)三田市にはフルーツショップがいっぱいあります" rows="5" cols="50"
+                                <td><textarea id="textInput" placeholder="例)しい茸園有馬富士では、しい茸狩りやBBQ、魚釣り、栗ひろいが体験できます。" rows="5" cols="50"
                                         maxlength="255" 
                                         required th:field="*{description}" 
                                         style="width: 300px;" />
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>マスイベント: </label></td>
+                                <td><label><font color="red">*</font>アクション: </label></td>
                                 <td>
                                     <select required th:field="*{squareEventId}" id="eventInput" class="">
 
@@ -103,7 +105,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label>画像: </label></td>
+                                <td><label>写真: </label></td>
                                 <td id="dragDropArea" style="height: 200px;">
                                     <div class="drag-drop-inside" style="width: 200px;">
                                         <p class="drag-drop-info">ここにファイルをドロップ</p>
@@ -196,7 +198,7 @@
         textLine.hide("fade", { duration: 100 });
     })
 
-    //マスイベント
+    //アクション
     let eventLine = new LeaderLine(document.getElementById("eventInput"), document.getElementById("eventMasu"), { hide: true });
     const eventInput = document.getElementById("eventInput");
     const eventMasu = document.getElementById("eventMasu");
