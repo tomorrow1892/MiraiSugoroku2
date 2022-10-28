@@ -229,8 +229,7 @@ public class AdminController {
     @PostMapping("/admin/event/{eventId}/approve/{squareId}/confirm")
     public String confirmSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
         model.addAttribute("sf", sf);
-        List<SquareEvent> SquareEventList = seService.getAllSquareEvent();
-        SquareEventList.remove(13);
+        List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
         model.addAttribute("SquareEventList", SquareEventList);
         Square s = sService.getSquare(squareId);
         String name = cService.getSquareCreator(s.getCreatorId()).getName();
