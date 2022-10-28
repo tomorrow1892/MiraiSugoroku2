@@ -7,7 +7,6 @@
     <link rel="stylesheet" th:href="@{/gameConfig.css}">
     <link rel="stylesheet" th:href="@{/css/masu.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
-    <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/display.css}">
 
     <!--アイコンの重複がないようにする-->
@@ -37,13 +36,13 @@
             background: url([[@{/img/baloon.png}]]);
             background-size: cover;
             background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0.5);
+            background-blend-mode: lighten;
         }
     </style>
-
 </head>
 
 <body>
-
     <body>
         <!-- ヘッダー -->
         <div th:replace="header :: header"></div>
@@ -229,6 +228,4 @@
 
         }, false);
     </script>
-
-
 </html>

@@ -37,13 +37,12 @@ public class SquareService {
         return sRepo.findAll();
     }
 
-    
-
     public Square updateSquare(Long squareId, SquareForm form) {
         Square square = getSquare(squareId);
         square.setTitle(form.getTitle());
         square.setSquareEventId(form.getSquareEventId());
         square.setDescription(form.getDescription());
+        square.setPicture(form.getPicture());
         square.setApproved(form.isApproved());
 
         return sRepo.save(square);
@@ -121,29 +120,28 @@ public class SquareService {
         return sRepo.findByCreatorId(creatorId);
     }
 
-    public List<Square> filterCreatorIdAndIsApproved(Long creatorId, boolean isApproved){
+    public List<Square> filterCreatorIdAndIsApproved(Long creatorId, boolean isApproved) {
         return sRepo.findByCreatorIdAndIsApproved(creatorId, isApproved);
     }
 
-    ///////////以下，ページング込みのマス取得クエリ
+    /////////// 以下，ページング込みのマス取得クエリ
 
-    public Page<Square> getPageSquare(Pageable pageable){
+    public Page<Square> getPageSquare(Pageable pageable) {
         return sRepo.findAll(pageable);
     }
 
-    public Page<Square> getPageApprovedSquare(Pageable pageable,boolean isApproved){
-        return sRepo.findByIsApproved(pageable,isApproved);
+    public Page<Square> getPageApprovedSquare(Pageable pageable, boolean isApproved) {
+        return sRepo.findByIsApproved(pageable, isApproved);
     }
 
-    public Page<Square> searchPageSquaresByKeyword(Pageable pageable,String keyword){
-        
-        return sRepo.findByTitleContainingAndIsApprovedOrDescriptionContainingAndIsApproved(pageable,keyword,true,keyword,true);
+    public Page<Square> searchPageSquaresByKeyword(Pageable pageable, String keyword) {
+
+        return sRepo.findByTitleContainingAndIsApprovedOrDescriptionContainingAndIsApproved(pageable, keyword, true,
+                keyword, true);
     }
 
     public Page<Square> searchPageSquaresByNickname(Pageable pageable, String nickname) {
         return sRepo.findByNickNameContainingAndIsApproved(pageable, nickname, true);
     }
 
-
-    
 }

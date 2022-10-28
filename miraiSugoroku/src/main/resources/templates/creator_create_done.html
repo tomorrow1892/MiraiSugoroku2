@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>マス作成申請完了</title>
     <link rel="stylesheet" th:href="@{/css/display.css}">
-    <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <!-- bootstrapを使用する際には下2行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
@@ -18,6 +17,8 @@
             background: url([[@{/img/baloon.png}]]);
             background-size: cover;
             background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0.5);
+            background-blend-mode: lighten;
         }
     </style>
 
@@ -35,10 +36,9 @@
         戻るボタンからメニュー画面へ戻ってください。
     </div>
     <div class="parent">
-
         <div>
             <form th:action="@{/__${cid}__/menu}" method="get">
-                <input type="submit" class="button" value="メニューへ戻る">
+                <input type="submit" class="btn btn--top btn--cubic btn--shadow" value="メニューへ戻る">
             </form>
         </div>
     </div>

@@ -7,7 +7,6 @@
     <title>マス一覧</title>
     <link rel="stylesheet" th:href="@{/css/display.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
-    <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/search.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- bootstrapを使用する際には下２行を追加 -->
@@ -116,7 +115,7 @@
 
     <!-- マスリスト -->
     <div class="card "
-        style="min-width: 22rem; margin-right: auto;margin-left: auto; height: 60vh;width: 90vw; overflow: auto;">
+        style="min-width: 22rem; margin-right: auto;margin-left: auto; height: 100vh;width: 90vw; overflow: auto;">
         <div class="d-flex flex-wrap justify-content-center">
             <div th:each="square: ${square_list}"
                 class="masu card border border-success border-3 shadow-sm mb-3 ms-3 lb-3 ls-3">

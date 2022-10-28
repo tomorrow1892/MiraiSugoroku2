@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>ログイン</title>
-    <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/login.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
@@ -106,7 +105,6 @@
 
     </div>
 
-
 </body>
 <script th:inline="javascript">
     const dropdownYear = document.getElementById("selectedYear");
@@ -132,8 +130,6 @@
     }
     eventDropDownChange();//最初に一回実行
     dropdownYear.addEventListener("change", (event) => eventDropDownChange());
-
-
 
 </script>
 
