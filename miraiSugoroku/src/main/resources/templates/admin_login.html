@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>管理者ログイン</title>
-    <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/login.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
@@ -16,61 +15,13 @@
             background: url([[@{/img/baloon.png}]]);
             background-size: cover;
             background-attachment: fixed;
-            min-height: 100%;
-            margin: 100px auto;
-            padding: 0;
-            display: table-cell;
-            vertical-align: middle;
-        }
-
-        html {
-            height: 100%;
-            margin: 0 auto;
-            padding: 0;
-            display: table;
+            background-color: rgba(255, 255, 255, 0.5);
+            background-blend-mode: lighten;
         }
     </style>
 
     <script>
-        // $(function(){
-        //     var textfield = $("input[name=user]");
-        //     $('button[type="submit"]').click(function(e) {
-        //         e.preventDefault();
-        //         //little validation just to check username
-        //         if (textfield.val() != "") {
-        //             //$("body").scrollTo("#output");
-        //             $("#output").addClass("alert alert-success animated fadeInUp").html("Welcome back " + "<span style='text-transform:uppercase'>" + textfield.val() + "</span>");
-        //             $("#output").removeClass(' alert-danger');
-        //             $("input").css({
-        //                 "height":"0",
-        //                 "padding":"0",
-        //                 "margin":"0",
-        //                 "opacity":"0"
-        //             });
-        //             //change button text
-        //             $('button[type="submit"]').html("continue")
-        //                 .removeClass("btn-info")
-        //                 .addClass("btn-default").click(function(){
-        //                 $("input").css({
-        //                     "height":"auto",
-        //                     "padding":"10px",
-        //                     "opacity":"1"
-        //                 }).val("");
-        //             });
-        //
-        //             //show avatar
-        //             $(".avatar").css({
-        //                 "background-image": "url('http://api.randomuser.me/0.3.2/portraits/women/35.jpg')"
-        //             });
-        //         } else {
-        //             //remove success mesage replaced with error message
-        //             $("#output").removeClass(' alert alert-success');
-        //             $("#output").addClass("alert alert-danger animated fadeInUp").html("sorry enter a username ");
-        //         }
-        //         //console.log(textfield.val());
-        //
-        //     });
-        // });
+        
 
     </script>
 
@@ -79,7 +30,7 @@
 <body>
 <!-- ヘッダー -->
 <!--  マス作成画面へのリンクは未実装  -->
-<nav class="navbar navbar-expand navbar-light fixed-top" style="background-color: white; border-bottom: darkblue medium solid">
+<nav class="navbar navbar-expand navbar-light" style="background-color: white; border-bottom: darkblue medium solid">
     <a class="navbar-brand" th:href="@{/}">
         <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
     </a>
@@ -87,16 +38,6 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 </nav>
-
-<!--<div class="title-center">-->
-<!--    <h1 class="sample_h_14">管理者ログイン</h1>-->
-<!--</div>-->
-<!--<div class="discription">-->
-<!--    管理者はパスワードを入力してログインしてください。<br>-->
-<!--    ＊パスワード未実装のため、現在どの文字列でもログイン可能<br>-->
-<!--</div>-->
-
-
 
 <div class="container">
     <div class="login-container">

@@ -24,5 +24,10 @@
         }
             .nav-item img{
 
-            height: 80px;
+            height: 60px;
+            }
+
+            .nav-item .nav-link{
+                color: blueviolet;
+                
             }

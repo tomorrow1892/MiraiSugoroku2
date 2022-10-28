@@ -113,16 +113,7 @@ button{
     height: 40px;
 }
 
-.sample_h_14:after {
-    position: absolute;
-    content: '';
-    top: -7px;
-    left: -7px;
-    border-width: 0 0 20px 20px;
-    border-style: dashed;
-    border-color: #fff #fff #ffc06b;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-}
+
 
 .discription_top{
     background-color: rgb(255, 237, 209);
@@ -131,6 +122,7 @@ button{
     width: 80vw;
     height: auto;
     margin-top: 10px;
+   
     margin-right: auto;
     margin-left: auto;
     padding: 10px 5px;
@@ -143,6 +135,7 @@ button{
     width: 60%; 
     height: auto;
     margin-top: 10px;
+    margin-bottom: 10px;
     margin-right: auto;
     margin-left: auto;
     padding: 10px 5px;
@@ -225,4 +218,24 @@ input.btn--orange-ad {
     margin-right: auto;
     margin-left: auto;
     padding: 10px 5px;
+}
+
+.btn-orange {
+    color: #fff;
+    background-color: #e4782b;
+    border-bottom: 5px solid #bd6120;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.btn-orange:hover {
+    margin-top: 0px;
+    color: #fff;
+    background: #da5b00;
+   
+}
+
+btn-orange--shadow {
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
 }
