@@ -71,7 +71,8 @@
                 </tr>
                 <tr>
                     <td><label>画像: </label></td>
-                    <td><img th:src=${sf.picture}></td>
+                    <td><img th:src="*{picture}"></td>
+                    <td><input type="text" th:field="*{picture}" id="pic" hidden /></td>
                 </tr>
                 </table>
                 <input type="hidden" th:field="*{squareEventId}" />
