@@ -17,6 +17,8 @@
             background: url([[@{/img/baloon.png}]]);
             background-size: cover;
             background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0.5);
+            background-blend-mode: lighten;
         }
     </style>
 
@@ -34,10 +36,9 @@
         戻るボタンからメニュー画面へ戻ってください。
     </div>
     <div class="parent">
-
         <div>
             <form th:action="@{/__${cid}__/menu}" method="get">
-                <input type="submit" class="button" value="メニューへ戻る">
+                <input type="submit" class="btn btn--top btn--cubic btn--shadow" value="メニューへ戻る">
             </form>
         </div>
     </div>
