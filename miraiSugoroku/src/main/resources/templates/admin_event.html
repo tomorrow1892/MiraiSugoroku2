@@ -60,11 +60,19 @@
 </div>
 <div class="admin-menu">
     <div>
-        <h2>[[${str1}]]</h3>
+        <h2>承認済みマス一覧</h2>
+        <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventid})}" method="get">
+            <input type="submit" value="マスを確認する">
+        </form>
+    </div>
+    <div>
+        <h2>[[${str1}]]</h2>
         <form th:action="@{/admin/event/{eventId}/approve(eventId=${eventid})}" method="get">
             <input type="submit" value="マスを承認する">
         </form>
     </div>
+
+    
     
     <h2><br>参加者を追加する</h2>
     
