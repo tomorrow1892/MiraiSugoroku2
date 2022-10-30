@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
 
 .masu{
-    width: 25rem;
-    height: 30rem;
+    width: 22.5rem;
+    height: 27rem;
     position: relative;
 }
 .masu .masu-header{
@@ -41,7 +41,7 @@
     }
         .masu-contents .masu-description{
             font-size: 0.8rem;
-            height: 75%;
+            height: 70%;
             width: 100%;
             overflow: auto;
         }
