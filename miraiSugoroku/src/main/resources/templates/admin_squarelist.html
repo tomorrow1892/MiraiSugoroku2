@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>マス確認</title>
-    <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/display.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
@@ -25,7 +24,7 @@
 <body>
 <!-- ヘッダー -->
 <!--  マス作成画面へのリンクは未実装  -->
-<nav class="navbar navbar-expand navbar-light fixed-top" style="background-color: white; border-bottom: darkblue medium solid">
+<nav class="navbar navbar-expand navbar-light" style="background-color: white; border-bottom: darkblue medium solid">
     <a class="navbar-brand" th:href="@{/}">
         <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
     </a>
@@ -51,13 +50,12 @@
 </nav>
 
 <div class="title-center">
-    <h1 class="sample_h_14">マス一覧</h1>
+    <h1 class="sample_h_14">承認済みマス一覧</h1>
 </div>
 <div class="discription">
     承認済みマスの一覧画面です。<br>
 </div>
 <div class="admin-menu">
-    <h2>承認済みマス一覧</h2>
         <table border="2" class="table">
             <tr>
                 <th>作成者</th>

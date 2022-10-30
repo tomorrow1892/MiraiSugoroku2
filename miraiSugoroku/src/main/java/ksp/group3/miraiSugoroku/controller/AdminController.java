@@ -237,18 +237,15 @@ public class AdminController {
     // 承認マス削除確認
     @GetMapping("/admin/event/{eventId}/squarelist/{squareId}")
     public String deleteConfirmSquare(@PathVariable Long eventId, @PathVariable Long squareId, Model model) {
-        // Square s = sService.getSquare(squareId);
-        // SquareForm sf = new SquareForm();
-        // sf.setTitle(s.getTitle());
-        // sf.setDescription(s.getDescription());
-        // sf.setSquareEventId(s.getSquareEventId());
-        // sf.setPicture(s.getPicture());
-        // model.addAttribute("sf", sf);
-        // List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
-        // model.addAttribute("SquareEventList", SquareEventList);
+        SquareForm sf = new SquareForm();
+        Square s = sService.getSquare(squareId);
+        sf.setTitle(s.getTitle());
+        sf.setDescription(s.getDescription());
+        sf.setCreatorName(s.getNickName());
+        sf.setSquareEventId(s.getSquareEventId());
+        sf.setPicture(s.getPicture());
 
-        // String name = cService.getSquareCreator(s.getCreatorId()).getName();
-        // model.addAttribute("name", name);
+        model.addAttribute("SquareForm", sf);
         model.addAttribute("squareId", squareId);
         model.addAttribute("eventId", eventId);
         model.addAttribute("roll", "admin");
@@ -258,19 +255,6 @@ public class AdminController {
     // 承認マス削除
     @GetMapping("/admin/event/{eventId}/squarelist/{squareId}/delete")
     public String deleteSquare(@PathVariable Long eventId, @PathVariable Long squareId, Model model) {
-        // Square s = sService.getSquare(squareId);
-        // SquareForm sf = new SquareForm();
-        // sf.setTitle(s.getTitle());
-        // sf.setDescription(s.getDescription());
-        // sf.setSquareEventId(s.getSquareEventId());
-        // sf.setPicture(s.getPicture());
-        // model.addAttribute("sf", sf);
-        // List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
-        // model.addAttribute("SquareEventList", SquareEventList);
-
-        // String name = cService.getSquareCreator(s.getCreatorId()).getName();
-        // model.addAttribute("name", name);
-        // model.addAttribute("squareId", squareId);
         sService.deleteSquare(squareId);
         model.addAttribute("eventId", eventId);
         model.addAttribute("roll", "admin");
