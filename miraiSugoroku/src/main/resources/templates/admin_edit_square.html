@@ -135,7 +135,14 @@
             <td><input type="text"  th:field="*{picture}"  id="pic" hidden/></td>
         </tr>
             </table>
+            
             <input type="submit" value="確認" class="btn-submit"/>
+        </form>
+        <form th:action="@{/admin/event/{eventId}/approve/{squareId}/decline(eventId=${eventId},squareId=${squareId})}" method="get">
+            <input type="submit" value="承認しない（削除する）">
+        </form>
+        <form th:action="@{/admin/event/{eventId}(eventId=${eventId})}" method="get">
+            <input type="submit" value="イベント詳細に戻る">
         </form>
     </div>
 </div>

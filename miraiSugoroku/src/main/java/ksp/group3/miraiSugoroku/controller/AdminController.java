@@ -244,7 +244,7 @@ public class AdminController {
         sf.setCreatorName(s.getNickName());
         sf.setSquareEventId(s.getSquareEventId());
         sf.setPicture(s.getPicture());
-
+        model.addAttribute("square", s);
         model.addAttribute("SquareForm", sf);
         model.addAttribute("squareId", squareId);
         model.addAttribute("eventId", eventId);
@@ -295,6 +295,33 @@ public class AdminController {
         model.addAttribute("eventId", eventId);
         model.addAttribute("roll", "admin");
         return "admin_confirm_square";
+    }
+
+    // マス承認拒否
+    @GetMapping("/admin/event/{eventId}/approve/{squareId}/decline")
+    public String declineSquare(@PathVariable Long eventId, @PathVariable Long squareId, Model model) {
+        SquareForm sf = new SquareForm();
+        Square s = sService.getSquare(squareId);
+        sf.setTitle(s.getTitle());
+        sf.setDescription(s.getDescription());
+        sf.setCreatorName(s.getNickName());
+        sf.setSquareEventId(s.getSquareEventId());
+        sf.setPicture(s.getPicture());
+        model.addAttribute("square", s);
+        model.addAttribute("SquareForm", sf);
+        model.addAttribute("squareId", squareId);
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
+        return "admin_approve_square_decline";
+    }
+
+    // マス承認拒否
+    @GetMapping("/admin/event/{eventId}/approve/{squareId}/decline/done")
+    public String declineDoneSquare(@PathVariable Long eventId, @PathVariable Long squareId, Model model) {
+        sService.deleteSquare(squareId);
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
+        return "admin_approve_square_decline_done";
     }
 
     @PostMapping("/admin/event/{eventId}/approve/{squareId}/done")

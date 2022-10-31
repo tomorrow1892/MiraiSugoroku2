@@ -65,7 +65,6 @@
                     </ul>
                 </div>
                 <div class="masu-event" th:switch="${SquareForm.squareEventId}">
-                    
                     <img th:if="${square.squareEffect > 0}" th:src="@{/img/dice_blue.png}">
                     <img th:if="${square.squareEffect < 0}" th:src="@{/img/dice_red.png}">
                     <p th:case="1" class="font-wght700">1マス進む</p>
@@ -94,10 +93,10 @@
                 </div>
             </div>
    
-    <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventId})}" method="get">
+    <form th:action="@{/admin/event/{eventId}/approve/{squareId}(eventId=${eventId},squareId=${squareId})}" method="get">
         <input type="submit" value="戻る">
     </form>
-    <form th:action="@{/admin/event/{eventId}/squarelist/{squareId}/delete(eventId=${eventId},squareId=${squareId})}" method="get">
+    <form th:action="@{/admin/event/{eventId}/approve/{squareId}/decline/done(eventId=${eventId},squareId=${squareId})}" method="get">
         <input type="submit" value="削除する">
     </form>
 </div> 

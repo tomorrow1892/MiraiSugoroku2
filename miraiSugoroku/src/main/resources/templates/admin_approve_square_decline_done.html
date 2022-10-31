@@ -43,7 +43,7 @@
 <div class="admin-menu">
 <h2>
     
-    <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventId})}" method="get">
+    <form th:action="@{/admin/event/{eventId}/approve(eventId=${eventId},squareId=${squareId})}" method="get">
         <input type="submit" value="戻る">
     </form>
    
