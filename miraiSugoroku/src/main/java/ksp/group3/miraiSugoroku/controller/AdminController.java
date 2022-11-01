@@ -183,6 +183,32 @@ public class AdminController {
         return "redirect:/admin/event/" + eventId;
     }
 
+    // 承認済マス一覧
+    @GetMapping("/admin/event/{eventId}/squarelist")
+    public String adminSquareList(@PathVariable Long eventId, Model model) {
+        List<CreatorAndSquareDTO> dtolist = new ArrayList<CreatorAndSquareDTO>();
+        List<Square> slist = sService.filterSquaresByEventIdAndIsApproved(eventId, true);
+
+        for (int i = 0; i < slist.size(); i++) {
+            CreatorAndSquareDTO dto = new CreatorAndSquareDTO();
+            SquareCreator sc = cService.getSquareCreator(slist.get(i).getCreatorId());
+            String name = "";
+            if (sc == null) {
+                name = "削除済のユーザ";
+            } else {
+                name = sc.getName();
+            }
+            dto.setName(name);
+            dto.setTitle(slist.get(i).getTitle());
+            dto.setSquareId(slist.get(i).getSquareId());
+            dtolist.add(dto);
+        }
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("dtolist", dtolist);
+        model.addAttribute("roll", "admin");
+        return "admin_squarelist";
+    }
+
     // 未承認マス一覧
     @GetMapping("/admin/event/{eventId}/approve")
     public String approveSquareList(@PathVariable Long eventId, Model model) {
@@ -190,8 +216,13 @@ public class AdminController {
         List<Square> slist = sService.filterSquaresByEventIdAndIsApproved(eventId, false);
         for (int i = 0; i < slist.size(); i++) {
             CreatorAndSquareDTO dto = new CreatorAndSquareDTO();
-
-            String name = cService.getSquareCreator(slist.get(i).getCreatorId()).getName();
+            SquareCreator sc = cService.getSquareCreator(slist.get(i).getCreatorId());
+            String name = "";
+            if (sc == null) {
+                name = "削除済のユーザ";
+            } else {
+                name = sc.getName();
+            }
             dto.setName(name);
             dto.setTitle(slist.get(i).getTitle());
             dto.setSquareId(slist.get(i).getSquareId());
@@ -201,6 +232,33 @@ public class AdminController {
         model.addAttribute("dtolist", dtolist);
         model.addAttribute("roll", "admin");
         return "admin_approve_square";
+    }
+
+    // 承認マス削除確認
+    @GetMapping("/admin/event/{eventId}/squarelist/{squareId}")
+    public String deleteConfirmSquare(@PathVariable Long eventId, @PathVariable Long squareId, Model model) {
+        SquareForm sf = new SquareForm();
+        Square s = sService.getSquare(squareId);
+        sf.setTitle(s.getTitle());
+        sf.setDescription(s.getDescription());
+        sf.setCreatorName(s.getNickName());
+        sf.setSquareEventId(s.getSquareEventId());
+        sf.setPicture(s.getPicture());
+        model.addAttribute("square", s);
+        model.addAttribute("SquareForm", sf);
+        model.addAttribute("squareId", squareId);
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
+        return "admin_square_delete";
+    }
+
+    // 承認マス削除
+    @GetMapping("/admin/event/{eventId}/squarelist/{squareId}/delete")
+    public String deleteSquare(@PathVariable Long eventId, @PathVariable Long squareId, Model model) {
+        sService.deleteSquare(squareId);
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
+        return "admin_square_delete_done";
     }
 
     // 未承認マス詳細
@@ -213,8 +271,7 @@ public class AdminController {
         sf.setSquareEventId(s.getSquareEventId());
         sf.setPicture(s.getPicture());
         model.addAttribute("sf", sf);
-        List<SquareEvent> SquareEventList = seService.getAllSquareEvent();
-        SquareEventList.remove(13);
+        List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
         model.addAttribute("SquareEventList", SquareEventList);
 
         String name = cService.getSquareCreator(s.getCreatorId()).getName();
@@ -238,6 +295,33 @@ public class AdminController {
         model.addAttribute("eventId", eventId);
         model.addAttribute("roll", "admin");
         return "admin_confirm_square";
+    }
+
+    // マス承認拒否
+    @GetMapping("/admin/event/{eventId}/approve/{squareId}/decline")
+    public String declineSquare(@PathVariable Long eventId, @PathVariable Long squareId, Model model) {
+        SquareForm sf = new SquareForm();
+        Square s = sService.getSquare(squareId);
+        sf.setTitle(s.getTitle());
+        sf.setDescription(s.getDescription());
+        sf.setCreatorName(s.getNickName());
+        sf.setSquareEventId(s.getSquareEventId());
+        sf.setPicture(s.getPicture());
+        model.addAttribute("square", s);
+        model.addAttribute("SquareForm", sf);
+        model.addAttribute("squareId", squareId);
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
+        return "admin_approve_square_decline";
+    }
+
+    // マス承認拒否
+    @GetMapping("/admin/event/{eventId}/approve/{squareId}/decline/done")
+    public String declineDoneSquare(@PathVariable Long eventId, @PathVariable Long squareId, Model model) {
+        sService.deleteSquare(squareId);
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
+        return "admin_approve_square_decline_done";
     }
 
     @PostMapping("/admin/event/{eventId}/approve/{squareId}/done")

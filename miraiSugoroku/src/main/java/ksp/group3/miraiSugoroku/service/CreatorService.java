@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,11 @@ public class CreatorService {
     }
 
     public SquareCreator getSquareCreator(Long creatorId) {
+        Optional<SquareCreator> sc = cRepo.findById(creatorId);
+        if (sc.isEmpty()) {
+            return null;
+        }
+
         return cRepo.findById(creatorId).get();
     }
 
