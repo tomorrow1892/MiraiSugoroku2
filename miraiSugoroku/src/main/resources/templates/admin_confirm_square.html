@@ -47,65 +47,69 @@
     </div>
     <div class="d-flex flex-column">
         <div class="d-flex flex-row justify-content-center">
-            <form role="form"
-                th:action="@{/admin/event/{eventId}/approve/{squareId}/done(eventId=${eventId},squareId=${squareId})}"
-                th:object="${sf}" method="post">
-                <!-- 修正後のマス -->
-                <div class="masu card border border-success border-3 shadow-sm ">
 
-                    <div class="masu-header d-flex justify-content-center" id="headerMasu">
-                        <img class="masu-img" id="imgMasu" th:src="${sf.picture}">
+            <!-- 修正後のマス -->
+            <div class="masu card border border-success border-3 shadow-sm ">
 
-                    </div>
-                    <div class="masu-body">
-                        <ul class="list-group ">
-                            <li class="masu-title list-group-item">
-                                <p class="align-items-center" id="titleMasu"> [[${sf.title}]]</p>
-                            </li>
-                            <li class="masu-contents list-group-item ">
-                                <p class="masu-description" id="textMasu"> [[${sf.description}]]</p>
-                                <p class="masu-creator">作者: [[${name}]]</p>
-                            </li>
+                <div class="masu-header d-flex justify-content-center" id="headerMasu">
+                    <img class="masu-img" id="imgMasu" th:src="${sf.picture}">
 
-                        </ul>
-                    </div>
-                    <div class="masu-event" th:switch="${sf.squareEventId}">
-                        <img th:src="@{/img/dice.png}" id="eventImgMasu">
-                        <p th:case="1" id="eventMasu" class="font-wght700">1マス進む</p>
-                        <p th:case="2" id="eventMasu" class="font-wght700">2マス進む</p>
-                        <p th:case="3" id="eventMasu" class="font-wght700">3マス進む</p>
-                        <p th:case="4" id="eventMasu" class="font-wght700">4マス進む</p>
-                        <p th:case="5" id="eventMasu" class="font-wght700">5マス進む</p>
-                        <p th:case="6" id="eventMasu" class="font-wght700">6マス進む</p>
-                        <p th:case="7" id="eventMasu" class="font-wght700">1マス戻る</p>
-                        <p th:case="8" id="eventMasu" class="font-wght700">2マス戻る</p>
-                        <p th:case="9" id="eventMasu" class="font-wght700">3マス戻る</p>
-                        <p th:case="10" id="eventMasu" class="font-wght700">4マス戻る</p>
-                        <p th:case="11" id="eventMasu" class="font-wght700">5マス戻る</p>
-                        <p th:case="12" id="eventMasu" class="font-wght700">6マス戻る</p>
-                        <p th:case="13" id="eventMasu" class="font-wght700">1回休み</p>
-                        <p th:case="15" id="eventMasu" class="font-wght700">+100<br>ポイント</p>
-                        <p th:case="16" id="eventMasu" class="font-wght700">+200<br>ポイント</p>
-                        <p th:case="17" id="eventMasu" class="font-wght700">+300<br>ポイント</p>
-                        <p th:case="18" id="eventMasu" class="font-wght700">+400<br>ポイント</p>
-                        <p th:case="19" id="eventMasu" class="font-wght700">+500<br>ポイント</p>
-                        <p th:case="20" id="eventMasu" class="font-wght700">-100<br>ポイント</p>
-                        <p th:case="21" id="eventMasu" class="font-wght700">-200<br>ポイント</p>
-                        <p th:case="22" id="eventMasu" class="font-wght700">-300<br>ポイント</p>
-                        <p th:case="23" id="eventMasu" class="font-wght700">-400<br>ポイント</p>
-                        <p th:case="24" id="eventMasu" class="font-wght700">-500<br>ポイント</p>
-
-                    </div>
                 </div>
-                <!-- マスここまで -->
+                <div class="masu-body">
+                    <ul class="list-group ">
+                        <li class="masu-title list-group-item">
+                            <p class="align-items-center" id="titleMasu"> [[${sf.title}]]</p>
+                        </li>
+                        <li class="masu-contents list-group-item ">
+                            <p class="masu-description" id="textMasu"> [[${sf.description}]]</p>
+                            <p class="masu-creator">作者: [[${name}]]</p>
+                        </li>
 
-                <input type="hidden" th:field="*{squareEventId}" />
-                <div style="text-align: center;"><input type="submit" value="承認" class="btn btn-primary" /></div>
-                
-            </form>
+                    </ul>
+                </div>
+                <div class="masu-event" th:switch="${sf.squareEventId}">
+                    <img th:src="@{/img/dice.png}" id="eventImgMasu">
+                    <p th:case="1" id="eventMasu" class="font-wght700">1マス進む</p>
+                    <p th:case="2" id="eventMasu" class="font-wght700">2マス進む</p>
+                    <p th:case="3" id="eventMasu" class="font-wght700">3マス進む</p>
+                    <p th:case="4" id="eventMasu" class="font-wght700">4マス進む</p>
+                    <p th:case="5" id="eventMasu" class="font-wght700">5マス進む</p>
+                    <p th:case="6" id="eventMasu" class="font-wght700">6マス進む</p>
+                    <p th:case="7" id="eventMasu" class="font-wght700">1マス戻る</p>
+                    <p th:case="8" id="eventMasu" class="font-wght700">2マス戻る</p>
+                    <p th:case="9" id="eventMasu" class="font-wght700">3マス戻る</p>
+                    <p th:case="10" id="eventMasu" class="font-wght700">4マス戻る</p>
+                    <p th:case="11" id="eventMasu" class="font-wght700">5マス戻る</p>
+                    <p th:case="12" id="eventMasu" class="font-wght700">6マス戻る</p>
+                    <p th:case="13" id="eventMasu" class="font-wght700">1回休み</p>
+                    <p th:case="15" id="eventMasu" class="font-wght700">+100<br>ポイント</p>
+                    <p th:case="16" id="eventMasu" class="font-wght700">+200<br>ポイント</p>
+                    <p th:case="17" id="eventMasu" class="font-wght700">+300<br>ポイント</p>
+                    <p th:case="18" id="eventMasu" class="font-wght700">+400<br>ポイント</p>
+                    <p th:case="19" id="eventMasu" class="font-wght700">+500<br>ポイント</p>
+                    <p th:case="20" id="eventMasu" class="font-wght700">-100<br>ポイント</p>
+                    <p th:case="21" id="eventMasu" class="font-wght700">-200<br>ポイント</p>
+                    <p th:case="22" id="eventMasu" class="font-wght700">-300<br>ポイント</p>
+                    <p th:case="23" id="eventMasu" class="font-wght700">-400<br>ポイント</p>
+                    <p th:case="24" id="eventMasu" class="font-wght700">-500<br>ポイント</p>
+
+                </div>
+            </div>
+            <!-- マスここまで -->
+
+
         </div>
-            
-            <button class="btn btn-warning" onclick="history.back()">戻る</button>
+        <form role="form"
+            th:action="@{/admin/event/{eventId}/approve/{squareId}/done(eventId=${eventId},squareId=${squareId})}"
+            th:object="${sf}" method="post">
+            <input type="hidden" th:field="*{title}" />
+            <input type="hidden" th:field="*{description}" />
+            <input type="hidden" th:field="*{squareEventId}" />
+            <input type="hidden" th:field="*{picture}" />
+            <div style="text-align: center;"><input type="submit" value="承認" class="btn btn-primary" /></div>
+        </form>
+
+        <button class="btn btn-warning" onclick="history.back()">戻る</button>
     </div>
 
 </body>
