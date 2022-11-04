@@ -181,10 +181,10 @@ input.btn--orange-ad {
     color: #fff;
     background-color: #e4782b;
     border-bottom: 5px solid #bd6120;
-    font-size: auto;
+    font-size: 80%;
     font-weight: 800;
     width: 10vw;
-    height: 100px;
+    height: 70px;
 }
 
 .admin-menu {
