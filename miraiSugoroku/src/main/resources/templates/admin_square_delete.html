@@ -95,10 +95,10 @@
             </div>
    
     <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventId})}" method="get">
-        <input type="submit" value="戻る">
+        <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="戻る">
     </form>
     <form th:action="@{/admin/event/{eventId}/squarelist/{squareId}/delete(eventId=${eventId},squareId=${squareId})}" method="get">
-        <input type="submit" value="削除する">
+        <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="削除する">
     </form>
 </div> 
 </div>
