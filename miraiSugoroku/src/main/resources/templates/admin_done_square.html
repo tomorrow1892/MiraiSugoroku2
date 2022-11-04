@@ -60,10 +60,10 @@
 </div>
 <div class="admin-menu">
     <form th:action="@{/admin/event/{eventId}/approve(eventId=${eventId})}" method="get">
-        <input type="submit" value="続けてマスを承認する">
+        <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="続けてマスを承認する">
     </form>
     <form th:action="@{/admin/event/{eventId}(eventId=${eventId})}" method="get">
-        <input type="submit" value="イベント詳細に戻る">
+        <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="イベント詳細に戻る">
     </form>
 </div>
 </body>

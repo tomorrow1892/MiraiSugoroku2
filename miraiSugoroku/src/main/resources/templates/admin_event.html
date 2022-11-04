@@ -61,13 +61,13 @@
     <div>
         <h2>承認済みマス一覧</h2>
         <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventid})}" method="get">
-            <input type="submit" value="マスを確認する">
+            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを確認する">
         </form>
     </div>
     <div>
-        <h2>[[${str1}]]</h2>
+        <h2><br>[[${str1}]]</h2>
         <form th:action="@{/admin/event/{eventId}/approve(eventId=${eventid})}" method="get">
-            <input type="submit" value="マスを承認する">
+            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを承認する">
         </form>
     </div>
 
@@ -89,7 +89,7 @@
                 <td><input type="text" required th:field="*{loginId}" /></td>
             </tr>
         </table>
-        <input type="submit" value="追加" class="btn-submit"/>
+        <input type="submit" value="追加" class="btn btn--orange-ad btn--cubic btn--shadow" />
     </form>
 </div>
 <div th:if="${bool eq false}"><font color="red">
@@ -117,10 +117,10 @@
         </table>
         <br>
         <form th:action="@{/admin/event/{eventId}/edit(eventId=${eventid})}" method="get">
-            <input type="submit" value="イベント情報を修正する">
+            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="イベント情報を修正する">
         </form>
-        <form th:action="@{../menu}" method="get">
-            <input type="submit" value="管理者メニューに戻る">
+        <form th:action="@{/admin/menu/}" method="get">
+            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="管理者メニューに戻る">
         </form>
     </div>
 </body>
