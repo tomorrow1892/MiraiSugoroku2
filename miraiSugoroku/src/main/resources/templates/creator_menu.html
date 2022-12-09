@@ -38,55 +38,42 @@
                 マス作成期限([[${event.limitDate}]])を超えたためマス作成出来ません。</font>
         </div>
     </div>
-    <div class="menupage_btn">
-        <div>
-            <form th:action="@{/__${cid}__/config}" method="get" style="margin-right: 20px; margin-left: 20px;">
-                <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="すごろくで遊ぶ">
+    <div class="d-flex flex-wrap justify-content-center">
+        <div class="flex-item">
+            <form th:action="@{/__${cid}__/config}" method="get">
+                <input type="submit" class="button_A mb-3 mx-3" value="すごろくで遊ぶ">
             </form>
+            <p class="text-center">みんなが作ったマスを使ってすごろくを遊ぶことができます</p>
         </div>
-        <div>
-            <form th:action="@{/__${cid}__/squares}" method="get" style="margin-right: 20px; margin-left: 20px;">
-                <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="マス一覧">
+        <div class="flex-item">
+            <form th:action="@{/__${cid}__/squares}" method="get">
+                <input type="submit" class="button_A mb-3 mx-3" value="マス一覧">
             </form>
+            <p class="text-center">みんなが作った三田市に関するマスを見ることができます</p>
         </div>
-        <div th:if="${bool}">
-            <form th:action="@{/__${cid}__/create}" method="get" style="margin-left: 20px; margin-right: 20px;">
-                <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="マス作成">
+        <div class="flex-item" th:if="${bool}">
+            <form th:action="@{/__${cid}__/create}" method="get">
+                <input type="submit" class="button_A mb-3 mx-3" value="マス作成">
             </form>
+            <p class="text-center">三田市に関して調べた内容をもとにマスを作ることができます</p>
         </div>
-        <div th:if="${bool eq false}">
-            <form th:action="@{/__${cid}__/create}" method="get" style="margin-left: 20px; margin-right: 20px;">
-                <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="マス作成" disabled="disabled">
+        <div class="flex-item" th:if="${bool eq false}">
+            <form th:action="@{/__${cid}__/create}" method="get">
+                <input type="submit" class="button_A mb-3 mx-3" value="マス作成" disabled="disabled">
             </form>
+            <p class="text-center">三田市に関して調べた内容をもとにマスを作ることができます</p>
         </div>
-    </div>
-    <div class="btn_discription">
-        <div class="btn_discription_child">
-            みんなが作ったマスを使ってすごろくを遊ぶことができます
-        </div>
-        <div class="btn_discription_child">
-            みんなが作った三田市に関するマスを見ることができます
-        </div>
-        <div class="btn_discription_child">
-            三田市に関して調べた内容をもとにマスを作ることができます
-        </div>
-    </div>
-    <div class="menupage_btn">
-        <div>
-            <form th:action="@{/__${cid}__/detail}" method="get" style="margin-left: 20px; margin-right: 20px;">
-                <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="詳細設定">
+        <div class="flex-item">
+            <form th:action="@{/__${cid}__/detail}" method="get">
+                <input type="submit" class="button_A mb-3 mx-3" value="詳細設定">
             </form>
+            <p class="text-center">自分のプロフィールを確認・編集することができます</p>
         </div>
-        <div>
-            <form th:action="@{/}" method="get" style="margin-right: 20px; margin-left: 20px">
-                <input type="submit" class="btn btn--menu btn--cubic btn--shadow" value="トップページに戻る">
-        </div>
-    </div>
-    <div class="btn_discription">
-        <div class="btn_discription_child">
-            自分のプロフィールを確認・編集することができます
-        </div>
-        <div class="btn_discription_child">
+        <div class="flex-item">
+            <form th:action="@{/}" method="get">
+                <input type="submit" class="button_A mb-3 mx-3" value="トップページに戻る">
+            </form>
+            <p class="text-center"></p>
         </div>
     </div>
 </body>

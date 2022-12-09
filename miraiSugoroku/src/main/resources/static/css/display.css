@@ -1,4 +1,8 @@
-input.btn--top {
+
+/****ボタンに関するスタイル****/
+
+/*ボタンA: トップページのボタン*/
+.button_A{
     color: #fff;
     background-color: #e4782b;
     border-bottom: 5px solid #bd6120;
@@ -6,79 +10,44 @@ input.btn--top {
     font-weight: 800;
     width: 25vw;
     height: 100px;
-}
-
-input.btn--orange:hover {
-    margin-top: 0px;
-    color: #fff;
-    background: #da5b00;
-    border-bottom: 2px solid #a14300;
-}
-
-input.btn--shadow {
     -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
     box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
 }
-
-input.btn--menu{
-    color: #fff;
-    background-color: #e4782b;
-    border-bottom: 5px solid #bd6120;
-    font-size: 22px;
-    font-weight: 800;
-    width: 25vw;
-    height: 100px;
-}
-
-input.btn--menu:hover {
-    margin-top: 3px;
-    color: #fff;
-    background: #da5b00;
-    border-bottom: 2px solid #a14300;
-}
-
-.menupage_btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-.toppage_btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-.parent{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-.toppage_img{
-    margin-top: 80px;
-    text-align: center;
-}
-
-.back_button{
+    .button_A:hover{
+        margin-top: 0px;
+        color: #fff;
+        background: #da5b00;
+        border-bottom: 2px solid #a14300;
+    }
+   
+/*戻るボタン*/
+.button_back{
     width: 5em;
     height: 2em;
 }
 
-
-
-.button{
-    width: 20em;
-    height: 10em;
-}
-
-.b{/*ゲーム設定画面のボタン*/
+/*ゲーム設定画面のボタン*/
+.button_gameconfig{
     width: 10em;
     height: 3em;
     background-color: #ffc06b;
+}
+
+/****ボタンここまで****/
+
+
+/* トップページから管理者ページに飛ぶリンク */
+.admin_link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+/* トップページのタイトル画像 */
+.toppage_img{
+    margin-top: 80px;
+    text-align: center;
 }
 
 .title-center{
@@ -107,6 +76,7 @@ input.btn--menu:hover {
 
 
 
+/*トップページの概要説明欄*/
 .discription_top{
     background-color: rgb(255, 237, 209);
     /*margin-bottom: 1rem;*/
@@ -114,12 +84,13 @@ input.btn--menu:hover {
     width: 80vw;
     height: auto;
     margin-top: 10px;
-   
     margin-right: auto;
     margin-left: auto;
     padding: 10px 5px;
 }
 
+
+/*ページの概要説明欄*/
 .discription {
     background-color: rgb(255, 237, 209);
     /*margin-bottom: 1rem;*/
@@ -127,27 +98,13 @@ input.btn--menu:hover {
     width: 60%; 
     height: auto;
     margin-top: 10px;
-    margin-bottom: 10px;
+    
     margin-right: auto;
     margin-left: auto;
     padding: 10px 5px;
 }
 
-.btn_discription{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
 
-.btn_discription_child{
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 25vw;
-}
 
 .search-center{
     text-align: center;
