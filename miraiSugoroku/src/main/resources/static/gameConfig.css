@@ -1,3 +1,23 @@
+
+/*ゲーム設定画面のボタン*/
+.button_gameconfig{
+    width: 10em;
+    height: 3em;
+    background-color: #ffc06b;
+}
+
+.config {
+    background-color: rgb(255, 255, 255);
+    /*margin-bottom: 1rem;*/
+    text-align: center;
+    width: 1000px;
+    height: auto;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px 5px;
+}
+
 input[type=radio]+label:before{
     content: "";
     display: inline-block;

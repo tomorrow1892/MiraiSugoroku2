@@ -1,81 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
 
-/****ボタンに関するスタイル****/
+@font-face {
+    font-family: 'myfont'; /* フォント名 */
+    /* フォーマットごとにパスを指定 */
+    src: url('../fonts/myfont.ttf') format('truetype');
+    src: url('../fonts/myfont.woff') format('woff');
+  }
+  
 
-/*ボタンA: トップページのボタン*/
-.button_A{
-    color: #fff;
-    background-color: #e4782b;
-    border-bottom: 5px solid #bd6120;
-    font-size: 22px;
-    font-weight: 800;
-    width: 25vw;
-    height: 100px;
-    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-}
-    .button_A:hover{
-        margin-top: 0px;
-        color: #fff;
-        background: #da5b00;
-        border-bottom: 2px solid #a14300;
-    }
-   
-/*戻るボタン*/
-.button_back{
-    width: 5em;
-    height: 2em;
-}
-
-/*ゲーム設定画面のボタン*/
-.button_gameconfig{
-    width: 10em;
-    height: 3em;
-    background-color: #ffc06b;
-}
-
-/****ボタンここまで****/
-
-
-/* トップページから管理者ページに飛ぶリンク */
-.admin_link{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-/* トップページのタイトル画像 */
-.toppage_img{
-    margin-top: 80px;
-    text-align: center;
-}
-
-.title-center{
-    margin-top: 20px;
-    /*margin-bottom: 1rem;*/
-    text-align: center;
-    width: 400px;
-    height: 40px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.sample_h_14{
+/* ページタイトルのスタイル */
+.page_title{
     font-size: 1.5em;/* フォントサイズ */
-    font-weight: bold;/* フォント太さ */
-    padding: 5px;
-    /*margin-bottom: 2em;*/
-    /*position: relative;*/
-    background-color: #ffc06b;/* 背景色 */
-    box-shadow: 0px 0px 0px 5px #ffc06b;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    text-align: center;
+    background-color: #b0f794;/* 背景色 */
+    box-shadow: 0px 0px 0px 5px #51c542;
     border: dashed 2px #ffffff;/* 破線 */
     color:#000000;/* フォント色 */
     width: 400px;
-    height: 40px;
+    line-height: 50px;
+}
+/*ページの概要説明欄*/
+.discription {
+    background-color: rgb(255, 237, 209);
+    /*margin-bottom: 1rem;*/
+    text-align: center;
+    width: 60%; 
+    height: auto;
+    margin-top: 10px;  
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px 5px;
 }
 
-
-
+/**** 以下はページ毎に固有のスタイル ****/
+/** 以下トップページのスタイル **/
 /*トップページの概要説明欄*/
 .discription_top{
     background-color: rgb(255, 237, 209);
@@ -88,28 +47,41 @@
     margin-left: auto;
     padding: 10px 5px;
 }
-
-
-/*ページの概要説明欄*/
-.discription {
-    background-color: rgb(255, 237, 209);
-    /*margin-bottom: 1rem;*/
-    text-align: center;
-    width: 60%; 
-    height: auto;
-    margin-top: 10px;
-    
-    margin-right: auto;
-    margin-left: auto;
-    padding: 10px 5px;
-}
-
-
-
-.search-center{
+/* トップページのタイトル画像 */
+.toppage_img{
+    margin-top: 80px;
     text-align: center;
 }
 
+/*トップページ・作成者メニューのボタン*/
+.button_A{
+    color: #fff;
+    background-color: #9cff8e;
+    border-bottom: 5px solid #5ee143;
+    font-size: 22px;
+    font-weight: 800;
+    width: 300px;
+    height: 210px;
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+}
+    .button_A:hover{
+        margin-top: 0px;
+        color: #fff;
+        background: #da5b00;
+        border-bottom: 2px solid #a14300;
+    }
+
+/* トップページから管理者ページに飛ぶリンク */
+.admin_link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+/** トップページのスタイルここまで **/
+
+/** 以下マス作成，マス承認画面のスタイル **/
 #dragDropArea{
     background-color: #f4f4f4;
     margin: 10px;
@@ -132,8 +104,9 @@
 .drag-drop-buttons input{
     margin: auto;
 }
+/** マス作成，マス承認画面のスタイル　ここまで **/
 
-/*ここからadmin用*/
+/** 以下admin用のスタイル **/
 input.btn--orange-ad {
     color: #fff;
     background-color: #e4782b;
@@ -155,36 +128,5 @@ input.btn--orange-ad {
     margin-left: auto;
     padding: 10px 5px;
 }
-  /*ここまでadmin用*/
-
-.config {
-    background-color: rgb(255, 255, 255);
-    /*margin-bottom: 1rem;*/
-    text-align: center;
-    width: 1000px;
-    height: auto;
-    margin-top: 10px;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 10px 5px;
-}
-
-.btn-orange {
-    color: #fff;
-    background-color: #e4782b;
-    border-bottom: 5px solid #bd6120;
-    font-size: 22px;
-    font-weight: 800;
-}
-
-.btn-orange:hover {
-    margin-top: 0px;
-    color: #fff;
-    background: #da5b00;
-   
-}
-
-btn-orange--shadow {
-    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-}
+/** ここまでadmin用のスタイル **/
+/**** ページ毎に固有のスタイルここまで ****/

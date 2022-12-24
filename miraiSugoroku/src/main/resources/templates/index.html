@@ -10,7 +10,15 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
 
-    
+    <style th:inline="text">
+        body {
+            background: url([[@{/img/450-20110411172544135827.jpg}]]);
+            background-size:contain;
+            background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0.8);
+            background-blend-mode: lighten;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,7 +26,7 @@
     <div th:replace="header :: header"></div>
 
     <div class="toppage_img">
-        <img th:src="@{img/logo.png}" style="width: 80%;">
+        <img th:src="@{img/logo.png}" style="width: 60%;">
     </div>
 
     <div class="discription_top">
