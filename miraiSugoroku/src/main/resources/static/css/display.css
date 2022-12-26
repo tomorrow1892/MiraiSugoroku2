@@ -20,6 +20,13 @@
     width: 400px;
     line-height: 50px;
 }
+ .body {
+            /* background: url([[@{/img/450-20110411172544135827.jpg}]]); */
+            background-size: contain;
+            background-attachment: fixed;
+            background-color: #FFFBEF;
+            background-blend-mode: lighten;
+        }
 /*ページの概要説明欄*/
 .discription {
     background-color: rgb(255, 237, 209);
