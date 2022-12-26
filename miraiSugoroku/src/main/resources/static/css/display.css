@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
+/* ほとんどのページで共通のスタイル */
 
+/** 以下フォントに関するスタイル **/
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
 @font-face {
     font-family: 'myfont'; /* フォント名 */
     /* フォーマットごとにパスを指定 */
@@ -7,6 +9,14 @@
     src: url('../fonts/myfont.woff') format('woff');
   }
   
+  .font-comic{
+    font-family: "Hannotate SC", "游ゴシック", Georgia, Times, 'Times New Roman', sans-serif;
+}
+
+.font-wght700{
+    font-family: 'Zen Maru Gothic', sans-serif;
+}
+/** フォントに関するスタイルここまで **/
 
 /* ページタイトルのスタイル */
 .page_title{
@@ -40,102 +50,3 @@
     padding: 10px 5px;
 }
 
-/**** 以下はページ毎に固有のスタイル ****/
-/** 以下トップページのスタイル **/
-/*トップページの概要説明欄*/
-.discription_top{
-    background-color: rgb(255, 237, 209);
-    /*margin-bottom: 1rem;*/
-    text-align: center;
-    width: 80%;
-    height: auto;
-    margin-top: 10px;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 10px 5px;
-}
-/* トップページのタイトル画像 */
-.toppage_img{
-    margin-top: 80px;
-    text-align: center;
-}
-
-/*トップページ・作成者メニューのボタン*/
-.button_A{
-    color: #fff;
-    background-color: #9cff8e;
-    border-bottom: 5px solid #5ee143;
-    font-size: 22px;
-    font-weight: 800;
-    width: 300px;
-    height: 210px;
-    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-}
-    .button_A:hover{
-        margin-top: 0px;
-        color: #fff;
-        background: #da5b00;
-        border-bottom: 2px solid #a14300;
-    }
-
-/* トップページから管理者ページに飛ぶリンク */
-.admin_link{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-
-/** トップページのスタイルここまで **/
-
-/** 以下マス作成，マス承認画面のスタイル **/
-#dragDropArea{
-    background-color: #f4f4f4;
-    margin: 10px;
-    padding: 10px;
-    border: #ddd dashed 5px;
-    min-height: 200px;
-    text-align: center;
-}
-#dragDropArea p{
-    color: #999;
-    font-weight: bold;
-    font-size: 14px;
-    font-size: 1.4em;
-}
-#dragDropArea .drag-drop-buttons{
-    margin-top: 20px;
-    font-size: 12px;
-    font-size: 1.2em;
-}
-.drag-drop-buttons input{
-    margin: auto;
-}
-/** マス作成，マス承認画面のスタイル　ここまで **/
-
-/** 以下admin用のスタイル **/
-input.btn--orange-ad {
-    color: #fff;
-    background-color: #e4782b;
-    border-bottom: 5px solid #bd6120;
-    font-size: 80%;
-    font-weight: 800;
-    width: 10vw;
-    height: 70px;
-}
-
-.admin-menu {
-    background-color: rgb(255, 255, 255);
-    /*margin-bottom: 1rem;*/
-    text-align: center;
-    width: 500px;
-    height: auto;
-    margin-top: 10px;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 10px 5px;
-}
-/** ここまでadmin用のスタイル **/
-/**** ページ毎に固有のスタイルここまで ****/
