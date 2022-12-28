@@ -1,233 +1,45 @@
-input.btn--top {
-    color: #fff;
-    background-color: #e4782b;
-    border-bottom: 5px solid #bd6120;
-    font-size: 22px;
-    font-weight: 800;
-    width: 25vw;
-    height: 100px;
+/* ほとんどのページで共通のスタイル */
+
+/** 以下フォントに関するスタイル **/
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
+@font-face {
+    font-family: 'myfont'; /* フォント名 */
+    /* フォーマットごとにパスを指定 */
+    src: url('../fonts/myfont.ttf') format('truetype');
+    src: url('../fonts/myfont.woff') format('woff');
+  }
+  
+  .font-comic{
+    font-family: "Hannotate SC", "游ゴシック", Georgia, Times, 'Times New Roman', sans-serif;
 }
 
-input.btn--orange:hover {
-    margin-top: 0px;
-    color: #fff;
-    background: #da5b00;
-    border-bottom: 2px solid #a14300;
+.font-wght700{
+    font-family: 'Zen Maru Gothic', sans-serif;
 }
+/** フォントに関するスタイルここまで **/
 
-input.btn--shadow {
-    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-}
-
-input.btn--menu{
-    color: #fff;
-    background-color: #e4782b;
-    border-bottom: 5px solid #bd6120;
-    font-size: 22px;
-    font-weight: 800;
-    width: 25vw;
-    height: 100px;
-}
-
-input.btn--menu:hover {
-    margin-top: 3px;
-    color: #fff;
-    background: #da5b00;
-    border-bottom: 2px solid #a14300;
-}
-
-.menupage_btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-.toppage_btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-.parent{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-.toppage_img{
-    margin-top: 80px;
-    text-align: center;
-}
-
-.back_button{
-    width: 5em;
-    height: 2em;
-}
-
-
-
-.button{
-    width: 20em;
-    height: 10em;
-}
-
-.b{/*ゲーム設定画面のボタン*/
-    width: 10em;
-    height: 3em;
-    background-color: #ffc06b;
-}
-
-.title-center{
-    margin-top: 20px;
-    /*margin-bottom: 1rem;*/
-    text-align: center;
-    width: 400px;
-    height: 40px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.sample_h_14{
+/* ページタイトルのスタイル */
+.page_title{
     font-size: 1.5em;/* フォントサイズ */
-    font-weight: bold;/* フォント太さ */
-    padding: 5px;
-    /*margin-bottom: 2em;*/
-    /*position: relative;*/
-    background-color: #ffc06b;/* 背景色 */
-    box-shadow: 0px 0px 0px 5px #ffc06b;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    text-align: center;
+    background-color: #b0f794;/* 背景色 */
+    box-shadow: 0px 0px 0px 5px #51c542;
     border: dashed 2px #ffffff;/* 破線 */
     color:#000000;/* フォント色 */
     width: 400px;
-    height: 40px;
+    line-height: 50px;
 }
-
-
-
-.discription_top{
-    background-color: rgb(255, 237, 209);
-    /*margin-bottom: 1rem;*/
-    text-align: center;
-    width: 80vw;
-    height: auto;
-    margin-top: 10px;
-   
-    margin-right: auto;
-    margin-left: auto;
-    padding: 10px 5px;
-}
-
+/*ページの概要説明欄*/
 .discription {
     background-color: rgb(255, 237, 209);
     /*margin-bottom: 1rem;*/
     text-align: center;
     width: 60%; 
     height: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 10px;  
     margin-right: auto;
     margin-left: auto;
     padding: 10px 5px;
 }
 
-.btn_discription{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-.btn_discription_child{
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 25vw;
-}
-
-.search-center{
-    text-align: center;
-}
-
-#dragDropArea{
-    background-color: #f4f4f4;
-    margin: 10px;
-    padding: 10px;
-    border: #ddd dashed 5px;
-    min-height: 200px;
-    text-align: center;
-}
-#dragDropArea p{
-    color: #999;
-    font-weight: bold;
-    font-size: 14px;
-    font-size: 1.4em;
-}
-#dragDropArea .drag-drop-buttons{
-    margin-top: 20px;
-    font-size: 12px;
-    font-size: 1.2em;
-}
-.drag-drop-buttons input{
-    margin: auto;
-}
-
-/*ここからadmin用*/
-input.btn--orange-ad {
-    color: #fff;
-    background-color: #e4782b;
-    border-bottom: 5px solid #bd6120;
-    font-size: 80%;
-    font-weight: 800;
-    width: 10vw;
-    height: 70px;
-}
-
-.admin-menu {
-    background-color: rgb(255, 255, 255);
-    /*margin-bottom: 1rem;*/
-    text-align: center;
-    width: 500px;
-    height: auto;
-    margin-top: 10px;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 10px 5px;
-}
-  /*ここまでadmin用*/
-
-.config {
-    background-color: rgb(255, 255, 255);
-    /*margin-bottom: 1rem;*/
-    text-align: center;
-    width: 1000px;
-    height: auto;
-    margin-top: 10px;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 10px 5px;
-}
-
-.btn-orange {
-    color: #fff;
-    background-color: #e4782b;
-    border-bottom: 5px solid #bd6120;
-    font-size: 22px;
-    font-weight: 800;
-}
-
-.btn-orange:hover {
-    margin-top: 0px;
-    color: #fff;
-    background: #da5b00;
-   
-}
-
-btn-orange--shadow {
-    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
-}

@@ -30,6 +30,11 @@ public class GameConfigForm {
     String i6;
     ArrayList<String> names; // playerの名前のリスト
     ArrayList<String> icons; // playerが使用するアイコンのパス情報
+    boolean isEvent;
+    boolean isGroup;
+    Long eventId;
+    Long creatorId;
+
 
     public void addNameAndIcon() {
         this.names = new ArrayList<>();
