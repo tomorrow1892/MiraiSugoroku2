@@ -58,9 +58,10 @@
                 <td>
                 使用するマスを絞る
                 <br>
-                    <input type="radio" required th:field="*{masu}" value="none" id="71" checked><label for="71">なし</label>
+                
+                    <input type="radio" required name="*{masu}" value="none" id="71" checked><label for="71">なし</label>
                     <br>
-                    <input type="radio" required th:field="*{masu}" value="event" id="72"><label for="72">イベントで絞る</label>
+                    <input type="radio" required name="*{masu}" value="event" id="72"><label for="72">イベントで絞る</label>
                         <select required th:field="*{eventId}" disabled>
                             <option required th:each="eid:${eventIdList}" th:value="${eid.eventId}"
                             th:text="${eid.name}"
@@ -68,7 +69,7 @@
                             </option>
                         </select>
                     <br>
-                    <input type="radio" required th:field="*{masu}" value="group" id="73"><label for="73">自分のグループで絞る</label>
+                    <input type="radio" required name="*{masu}" value="group" id="73"><label for="73">自分のグループで絞る</label>
                 
             </td>
             </tr>
