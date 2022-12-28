@@ -59,6 +59,10 @@
             <div class="col-12 col-md-5">
                 <div class="toppage_img" style="position: relative;">
                     <img th:src="@{img/topimg1.png}" width="100%" style="border-radius: 50%;position: absolute;top: 10px;left: 10px;">
+                    <form th:action="@{/loginpage}" method="get">
+                        <input type="image" th:src="@{img/button_login.png}" width="30%" style="position: absolute;top: 450px;left: 500px;">
+                    </form>
+                    
                     <!-- <img th:src="@{img/blob-haikei.png}" width="120%" style="position: absolute;top: 10px;left: 10px;"> -->
                 </div>
 
