@@ -36,6 +36,24 @@ public class GameConfigForm {
     Long eventId;
     Long creatorId;
 
+    public void setConfig() {
+        if (this.masu.equals("none")) {
+            this.isEvent = false;
+            this.isGroup = false;
+        }
+        if (this.masu.equals("event")) {
+            this.isEvent = true;
+            this.isGroup = false;
+            System.out.println(this.eventId);
+        }
+        if (this.masu.equals("group")) {
+            this.isEvent = false;
+            this.isGroup = true;
+            System.out.println(this.creatorId);
+        }
+
+    }
+
     public void addNameAndIcon() {
         this.names = new ArrayList<>();
         this.icons = new ArrayList<>();

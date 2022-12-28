@@ -41,6 +41,8 @@ public class GameController {
     @PostMapping("/game/createSugoroku")
     public String createSugoroku(GameConfigForm form, Model model) {
         // TODO: process POST request
+        form.setConfig();
+        System.out.println("おおお");
         form.addNameAndIcon();
         System.out.println(form.getNPlayers());
         Sugoroku sugoroku = gameService.createSugoroku(form, false, Long.parseLong("-1"));

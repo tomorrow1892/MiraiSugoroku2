@@ -47,6 +47,23 @@
         <div class="config">
         <form role="form" th:action="@{/game/createSugoroku}" th:object="${GameConfigForm}" method="post">
             <table class="table">
+                <tr id="7">
+                    <td>
+                    使用するマスを絞る
+                    <br>
+                    
+                        <input type="radio" required name="masu" value="none" id="71" checked><label for="71">なし</label>
+                        <br>
+                        <input type="radio" required name="masu" value="event" id="72"><label for="72">イベントで絞る</label>
+                            <select required th:field="*{eventId}" id="722" disabled>
+                                <option required th:each="eid:${eventIdList}" th:value="${eid.eventId}"
+                                th:text="${eid.name}"
+                                th:selected="${eid.eventId == selectedValue}">
+                                </option>
+                            </select>
+                        <br>
+                </td>
+                </tr>
                 <tr id="0">
                     <div class="nagasa">
                         コースの長さ
@@ -172,6 +189,16 @@
     </body>
 
     <script>
+        let event = document.getElementById('722');
+    let radio_btns = document.querySelectorAll(`input[type='radio'][name='masu']`);
+    for (let target of radio_btns) {
+        target.addEventListener(`change`, () => {
+            if(target.value=="event"){
+                event.disabled=false;
+            }else{event.disabled=true;}
+        
+        });
+    }
         //プレイヤーの追加に関する部分
         document.getElementById("0").style.display = 'none';
         document.getElementById("1").style.display = 'none';
