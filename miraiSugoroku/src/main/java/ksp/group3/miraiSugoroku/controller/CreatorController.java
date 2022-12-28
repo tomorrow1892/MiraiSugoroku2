@@ -147,6 +147,7 @@ public class CreatorController {
         }
 
         model.addAttribute("groups", groups);
+        model.addAttribute("cid", creatorId);
         model.addAttribute("roll", "creator");
         return "creator_profile";
     }
