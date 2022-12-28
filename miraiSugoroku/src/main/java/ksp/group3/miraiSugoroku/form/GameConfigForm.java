@@ -32,9 +32,9 @@ public class GameConfigForm {
     ArrayList<String> icons; // playerが使用するアイコンのパス情報
     boolean isEvent;
     boolean isGroup;
+    String masu;
     Long eventId;
     Long creatorId;
-
 
     public void addNameAndIcon() {
         this.names = new ArrayList<>();
