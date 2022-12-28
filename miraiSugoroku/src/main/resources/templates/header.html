@@ -11,12 +11,7 @@
     <a class="navbar-brand" th:href="@{/}">
         <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"
-        style="width: auto; height: auto">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <!-- 以下，一般ユーザ・管理者の選択肢 -->
             <li th:if="${roll == 'user'|| roll == 'admin'}" class="nav-item active">
