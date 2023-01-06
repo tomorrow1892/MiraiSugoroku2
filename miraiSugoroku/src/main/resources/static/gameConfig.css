@@ -18,7 +18,19 @@
     padding: 10px 5px;
 }
 
-input[type=radio]+label:before{
+
+
+input[type=radio][value="dog"]+label:before{
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 70px;
+    background-image: url(./img/dog.png);
+}
+input[type=radio][value="cat"]+label:before{
+    background-image: url(./img/cat.png);
     content: "";
     display: inline-block;
     background-size: contain;
@@ -26,24 +38,41 @@ input[type=radio]+label:before{
     width: 70px;
     height: 70px;
 }
-
-input[type=radio][value="dog"]+label:before{
-    background-image: url(./img/dog.png);
-}
-input[type=radio][value="cat"]+label:before{
-    background-image: url(./img/cat.png);
-}
 input[type=radio][value="hiyoko"]+label:before{
     background-image: url(./img/hiyoko.png);
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 70px;
 }
 input[type=radio][value="hamster"]+label:before{
     background-image: url(./img/hamster.png);
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 70px;
 }
 input[type=radio][value="zo"]+label:before{
     background-image: url(./img/zo.png);
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 70px;
 }
 input[type=radio][value="penguin"]+label:before{
     background-image: url(./img/penguin.png);
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 70px;
+    height: 70px;
 }
 
 input[type=radio]:checked+label::before{
@@ -70,6 +99,10 @@ input[type=radio][value="penguin"]{
     display: none;
 } 
 
+
+
+
+
 .nagasa {
     background-color: rgb(255, 255, 255);
     /*margin-bottom: 1rem;*/
@@ -82,12 +115,6 @@ input[type=radio][value="penguin"]{
     padding: 10px 5px;
 }
 
-.nagasabotan {
-    background-color: rgb(255, 255, 255);
-    /*margin-bottom: 1rem;*/
-    position: fixed;
-    left: 50%;
-}
 
 input[type=radio][value="0"]+label:before{
     content: "";
@@ -137,3 +164,5 @@ input[type=radio][value="1"]+label:before{
 input[type=radio][value="2"]+label:before{
     background-image: url(./img/nagame.png);
 }
+
+
