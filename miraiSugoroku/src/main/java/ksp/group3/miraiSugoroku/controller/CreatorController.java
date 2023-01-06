@@ -147,6 +147,7 @@ public class CreatorController {
         }
 
         model.addAttribute("groups", groups);
+        model.addAttribute("cid", creatorId);
         model.addAttribute("roll", "creator");
         return "creator_profile";
     }
@@ -207,7 +208,7 @@ public class CreatorController {
         Page<Square> page = sService.searchPageSquaresByKeyword(pageable, keyword);
         model.addAttribute("square_list", page.getContent());
         model.addAttribute("page", page);
-        model.addAttribute("path", "/"+cid+"/squares/search/keyword?keyword=" + keyword);
+        model.addAttribute("path", "/" + cid + "/squares/search/keyword?keyword=" + keyword);
         model.addAttribute("cid", cid);
         model.addAttribute("roll", "creator");
         return "creator_squarelist";
@@ -219,7 +220,7 @@ public class CreatorController {
         Page<Square> page = sService.searchPageSquaresByNickname(pageable, nickname);
         model.addAttribute("square_list", page.getContent());
         model.addAttribute("page", page);
-        model.addAttribute("path", "/"+cid+"/squares/search/nickname?nickname=" + nickname);
+        model.addAttribute("path", "/" + cid + "/squares/search/nickname?nickname=" + nickname);
         model.addAttribute("cid", cid);
         model.addAttribute("roll", "creator");
         return "creator_squarelist";
@@ -264,6 +265,8 @@ public class CreatorController {
         model.addAttribute("GameConfigForm", new GameConfigForm());
         model.addAttribute("cid", cid);
         model.addAttribute("roll", "creator");
+        List<Event> eventIdList = eService.getAllEvents();
+        model.addAttribute("eventIdList", eventIdList);
         return "creator_sugoroku_config";
     }
 

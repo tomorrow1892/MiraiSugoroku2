@@ -4,17 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>マス一覧</title>
-    <link rel="stylesheet" th:href="@{/css/display.css}">
-    <link rel="stylesheet" th:href="@{/css/navbar.css}">
-    <link rel="stylesheet" th:href="@{/css/search.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- bootstrapを使用する際には下2行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
-    <link rel="stylesheet" th:href="@{/css/masulist.css}">
-
+    <link rel="stylesheet" th:href="@{/css/display.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/page_squarelist.css}">
     <!-- 背景設定用CSS   -->
     <style th:inline="text">
         body {
@@ -31,8 +29,8 @@
     <!-- ヘッダー -->
     <div th:replace="header :: header"></div>
 
-    <div class="title-center">
-        <h1 class="sample_h_14">みんなのマス</h1>
+    <div class="mt-3 mb-3 d-flex justify-content-center">
+        <h1 class="page_title">みんなのマス</h1>
     </div>
     <div class="discription">
         作成されたマスの一覧を見ることができます。<br>
@@ -70,7 +68,7 @@
                 <a th:href="@{${path}(page=${page.number})}" class=" page-link" th:tabindex="${page.first} ? -1"
                     aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">前のページ</span>
+                    <span >前のページ</span>
                 </a>
             </li>
 
@@ -106,7 +104,7 @@
                 <a th:href="@{${path}(page=${page.number + 2})}" class="page-link" th:tabindex="${page.last} ? -1"
                     aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">次のページ</span>
+                    <span >次のページ</span>
                 </a>
             </li>
         </ul>

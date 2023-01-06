@@ -5,66 +5,117 @@
     <meta charset="UTF-8">
     <title>さんだみらいすごろく</title>
     <link rel="stylesheet" th:href="@{/css/display.css}">
-    <link rel="stylesheet" th:href="@{/css/top.css}">
+    <link rel="stylesheet" th:href="@{/css/page_top.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
 
-    <!-- 背景設定用CSS   -->
-    <style th:inline="text">
-        body {
-            background: url([[@{/img/baloon.png}]]);
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: rgba(255, 255, 255, 0.5);
-            background-blend-mode: lighten;
-        }
-    </style>
+
 </head>
 
-<body>
+<body class="body">
     <!-- ヘッダー -->
     <div th:replace="header :: header"></div>
 
-    <div class="toppage_img">
-        <img th:src="@{img/logo.png}" style="width: 80%;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="red col-12 col-md-5">
+                <div class="toppage_img">
+                    <img th:src="@{img/logo6.png}" class="img-fluid">
+                </div>
+
+                <div class="discription_top">
+                    三田こうみん未来塾の生徒が作成した三田市に関する「すごろく」遊ぶことができるWebページです<br>
+                    すごろく上の各マスにおいて生徒が調べた三田市のスポットや歴史などを知ることができます
+                </div>
+
+                <div class="d-flex justify-content-center ml-3 mr-3 mt-3">
+                    <div class="flex-item mb-3">
+                        <form th:action="@{/config}" method="get" style="text-align: center;">
+                            <input id="button_play" type="image" th:src="@{img/button_playsugoroku5.png}" width="70%">
+                        </form>
+
+                    </div>
+                    <div class="flex-item mb-3">
+                        <form th:action="@{/squares}" method="get" style="text-align: center;">
+                            <input id="button_masulist" type="image" th:src="@{img/button_masulist2.png}" width="70%">
+                        </form>
+                        <p class="text-center">こうみん未来塾のイベント参加者が作ったマスを見ることができます</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12 col-md-5">
+                <div class="toppage_img" style="position: relative;width:100%;padding-top:100%">
+                    <img th:src="@{img/topimg1.png}" width="100%"
+                        style="border-radius: 50%;position: absolute;top: 0%;left: 10%;">
+                    <form th:action="@{/loginpage}" method="get">
+                        <input id="button_login" type="image" th:src="@{img/button_login2.png}" width="30%"
+                            style="position: absolute;top: 55%;left: 60%;">
+                    </form>
+
+                    <!-- <img th:src="@{img/blob-haikei.png}" width="120%" style="position: absolute;top: 10px;left: 10px;"> -->
+                </div>
+
+
+                <!-- クリップパス用SVG -->
+
+                <!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                <!-- <svg version="1.1" id="blobSvg" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" 
+                    width="1041.891px" height="595.281px" viewBox="0 0 841.891 595.281"
+                   >
+                    <g transform="translate(572.62448120117188, -1.5853042602539062)">
+                        <clipPath id="clip02">
+                            <path fill="#D1D8E0" d="M620.502,463.825c-58.155,113.203-144.4,151.355-258.731,114.455
+                            C247.44,541.379,127.159,517.611,0.93,506.98c-126.226-10.632-177.114-76.303-152.66-197.013
+                            c24.451-120.71,84.591-204.519,180.418-251.427c95.827-46.909,187.029-56.289,273.604-28.144
+                            c86.574,28.144,175.793,79.118,267.653,152.919C661.81,257.117,678.661,350.621,620.502,463.825z" />
+                        </clipPath>
+                        
+                    </g>
+                    <image th:href="@{img/topimg1.png}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet"
+                        clip-path="url(#clip02)" />
+                </svg> -->
+
+
+
+            </div>
+
+
+        </div>
+
+
     </div>
 
-    <div class="discription_top">
-        三田こうみん未来塾の生徒が作成した三田市に関する「すごろく」遊ぶことができるWebページです<br>
-        すごろく上の各マスにおいて生徒が調べた三田市のスポットや歴史などを知ることができます
-    </div>
 
-    <div class="toppage_btn" style="margin-top: 20px;">
-        <form th:action="@{/config}" method="get" style="margin-left: 20px; margin-right: 20px;">
-            <input type="submit" class="btn btn--top btn--cubic btn--shadow" value="すごろくで遊ぶ">
-        </form>
-        <form th:action="@{/squares}" method="get" style="margin-left: 20px; margin-right: 20px;">
-            <input type="submit" class="btn btn--top btn--cubic btn--shadow" value="みんなが作ったマスを見る">
-        </form>
-        <form th:action="@{/loginpage}" method="get" style="margin-left: 20px; margin-right: 20px;">
-            <input type="submit" class="btn btn--top btn--cubic btn--shadow" value="作成者はこちら">
-        </form>
-    </div>
-
-    <div class="btn_discription">
-        <div class="btn_discription_child">
-            こうみん未来塾のイベント参加者が作ったマスを使ってすごろくを遊ぶことができます
-        </div>
-        <div class="btn_discription_child">
-            こうみん未来塾のイベント参加者が作ったマスを見ることができます
-        </div>
-        <div class="btn_discription_child">
-            こうみん未来塾のイベント参加者はこちらからログインします．
-        </div>
-    </div>
-    <div class="parent">
+    <div class="admin_link">
         <h2>
             <td><a th:href=@{/admin/}>管理者画面へのリンク（開発中のみ）</a></td>
         </h2>
     </div>
 
 </body>
+<script>
+    
+    const setButtonHover = (id, imgPath_nohover, imgPath_hover) => {
+        const button = document.getElementById(id)
+        //マウスを上に置いたとき
+        button.addEventListener("mouseenter", (e) => {button.setAttribute("src", imgPath_hover)})
+        //マウスが離れたとき
+        button.addEventListener("mouseleave", (e) => { button.setAttribute("src", imgPath_nohover)})
+        //指で長押ししたとき(タブレット・スマホ用)
+        button.addEventListener("touchstart", (e) => {button.setAttribute("src", imgPath_hover)})
+        //長押しをやめたとき(タブレット・スマホ用)
+        button.addEventListener("touchend", (e) => {button.setAttribute("src", imgPath_nohover)})
+    }
+    setButtonHover("button_play","img/button_playsugoroku5.png","img/button_playsugoroku5_hover.png")
+    setButtonHover("button_masulist","img/button_masulist2.png","img/button_masulist2_hover.png")
+    setButtonHover("button_login","img/button_login2.png","img/button_login2_hover.png")
+
+</script>
 
 </html>
