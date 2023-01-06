@@ -54,56 +54,22 @@ public class GameService {
      * @param form
      * @return
      */
-    public Sugoroku createSugoroku(GameConfigForm form, boolean withGroupSquares, Long creatorId) {
+    public Sugoroku createSugoroku( GameConfigForm form ) {
         Sugoroku g = form.toSugorokuEntity();
         Sugoroku game = sgRepo.save(g);
         Long gameId = game.getSugorokuId();
         pService.createPlayers(form, gameId);
 
-        List<Square> goodSquares;
-        List<Square> badSquares;
-
-        //--- ゲストログインの時、グループ選択を強制的に不可能にする
-        if (creatorId < 0) {
-            withGroupSquares = false;
-        }
-
-        if (withGroupSquares) { //--- グループ選択時のマス選択戦略
-            SquareCreator creator = cRepo.findById(creatorId).get();
-            Long event = creator.getEventId();
-            int group = creator.getGroup();
-            goodSquares = sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, 1, true);
-            badSquares = sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, -1, true);
-            // neutralSquares =
-            // sqRepo.findByEventIdAndGroupIdAndSquareEffectAndIsApproved(event, group, 0,
-            // true);
-        } else {
-            goodSquares = sqRepo.findBySquareEffectAndIsApproved(1, true);
-            badSquares = sqRepo.findBySquareEffectAndIsApproved(-1, true);
-            // neutralSquares = sqRepo.findBySquareEffectAndIsApproved(0, true);
-        }
-
-        //--- マス生成ロジック
         int length = game.getLength();
-        int nBadSquares = length * minusRate / 100;
-        //-- * マイナスマスが規定数に満たない場合、合計のマイナスマスを設定する
-        if (badSquares.size() < nBadSquares) {
-            nBadSquares = badSquares.size();
-        }
-        int nGoodSquares = length - nBadSquares;
-        if (goodSquares.size() < nGoodSquares) {
-            nGoodSquares = goodSquares.size();
-            nBadSquares = length - nGoodSquares;
-            if (badSquares.size() < nBadSquares) {
-                //--- * throw error
-                //--- * 登録されているマス数が必要なマス数に足りていません
-            }
-        }
-        List<Square> squares = takeAtRandom(goodSquares, nGoodSquares, new Random());
-        List<Square> bSquares = takeAtRandom(badSquares, nBadSquares, new Random());
+        List<Square> squares;
 
-        squares.addAll(bSquares);
-        Collections.shuffle(squares);
+        if ( form.isEvent() ) {
+            squares = selectSquaresFromGroup( length, form.getEventId() );
+        } else {
+            squares = selectSquaresFromAll( length );
+        }
+        Collections.shuffle( squares );
+        
         int i = 0;
         for (Square square : squares) {
             Board board = new Board(null, gameId, square.getSquareId(), i + 1);
@@ -283,6 +249,33 @@ public class GameService {
         }
 
         return taken;
+    }
+
+    public List<Square> selectSquaresFromAll( int length ) {
+        int n_badSquares = length * minusRate / 100;
+        int n_goodSquares = length - n_badSquares;
+        List<Square> allGoodSquares = sqRepo.findBySquareEffectAndIsApproved( 1, true );
+        List<Square> allBadSquares = sqRepo.findBySquareEffectAndIsApproved( -1, true );
+        List<Square> goodSquares = takeAtRandom( allGoodSquares, n_goodSquares, new Random() );
+        List<Square> badSquares = takeAtRandom( allBadSquares, n_badSquares, new Random() );
+
+        List<Square> squares = goodSquares;
+        squares.addAll( badSquares );
+        return squares;
+    }
+
+    public List<Square> selectSquaresFromGroup( int length, Long eventId ) {
+        List<Square> allGroupSquares = sqRepo.findByEventIdAndIsApproved( eventId, true );
+        int rest = length - allGroupSquares.size();
+        List<Square> squares;
+        if ( rest <= 0 ) { squares = takeAtRandom( allGroupSquares, length, new Random() ); }
+        else {
+            List<Square> remainSquares = sqRepo.findByIsApproved( true );
+            remainSquares.removeAll( allGroupSquares );
+            squares = takeAtRandom( remainSquares, rest, new Random() );
+            squares.addAll( allGroupSquares );
+        }
+        return squares;
     }
 
 }
