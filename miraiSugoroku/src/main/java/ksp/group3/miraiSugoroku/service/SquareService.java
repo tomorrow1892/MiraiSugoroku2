@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ser.std.StdArraySerializers.LongArraySerializer;
+
 import ksp.group3.miraiSugoroku.entity.Square;
 import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.form.SquareForm;
@@ -142,6 +144,10 @@ public class SquareService {
 
     public Page<Square> searchPageSquaresByNickname(Pageable pageable, String nickname) {
         return sRepo.findByNickNameContainingAndIsApproved(pageable, nickname, true);
+    }
+
+    public Page<Square> searchPageSquaresByEventId(Pageable pageable, Long eventId) {
+        return sRepo.findByEventIdAndIsApproved(pageable, eventId, true);
     }
 
 }
