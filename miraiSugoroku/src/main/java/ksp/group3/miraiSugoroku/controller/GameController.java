@@ -44,7 +44,7 @@ public class GameController {
         form.setConfig();
         form.addNameAndIcon();
         System.out.println(form.getNPlayers());
-        Sugoroku sugoroku = gameService.createSugoroku(form, false, Long.parseLong("-1"));
+        Sugoroku sugoroku = gameService.createSugoroku(form);
         Long sugorokuId = sugoroku.getSugorokuId();
         return "redirect:/game/" + sugorokuId;
     }
