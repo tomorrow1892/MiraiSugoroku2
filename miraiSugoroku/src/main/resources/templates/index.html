@@ -6,12 +6,12 @@
     <title>さんだみらいすごろく</title>
     <link rel="stylesheet" th:href="@{/css/display.css}">
     <link rel="stylesheet" th:href="@{/css/page_top.css}">
-     <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
 
-  
+
 </head>
 
 <body class="body">
@@ -23,7 +23,7 @@
             <div class="col-md-1"></div>
             <div class="red col-12 col-md-5">
                 <div class="toppage_img">
-                    <img th:src="@{img/logo3.png}" class="img-fluid">
+                    <img th:src="@{img/logo6.png}" class="img-fluid">
                 </div>
 
                 <div class="discription_top">
@@ -31,44 +31,38 @@
                     すごろく上の各マスにおいて生徒が調べた三田市のスポットや歴史などを知ることができます
                 </div>
 
-                <div class="d-flex " style="margin-top: 20px;">
+                <div class="d-flex justify-content-center ml-3 mr-3 mt-3">
                     <div class="flex-item mb-3">
-                        <form th:action="@{/config}" method="get">
-
-                            <input type="image"  class = "button_nohover" th:src="@{img/button_playsugoroku4.png}" width="70%">
-                            <input type="image"  class = "button_hover" th:src="@{img/button_playsugoroku2.png}" width="70%" style="display: none;">
-
+                        <form th:action="@{/config}" method="get" style="text-align: center;">
+                            <input id="button_play" type="image" th:src="@{img/button_playsugoroku5.png}" width="70%">
                         </form>
-                        <!-- <p class="text-center">こうみん未来塾のイベント参加者が作ったマスを使ってすごろくを遊ぶことができます</p> -->
+
                     </div>
                     <div class="flex-item mb-3">
-                        <form th:action="@{/squares}" method="get">
-                            <input type="image" th:src="@{img/button_masulist_1.png}" width="70%">
+                        <form th:action="@{/squares}" method="get" style="text-align: center;">
+                            <input id="button_masulist" type="image" th:src="@{img/button_masulist2.png}" width="70%">
                         </form>
                         <p class="text-center">こうみん未来塾のイベント参加者が作ったマスを見ることができます</p>
                     </div>
-                    <!-- <div class="flex-item mb-3">
-                        <form th:action="@{/loginpage}" method="get">
-                            <input type="submit" class="button_A mb-3 mx-3" value="作成者はこちら">
-                        </form>
-                        <p class="text-center">こうみん未来塾のイベント参加者はこちらからログインします</p>
-                    </div> -->
+
                 </div>
             </div>
 
             <div class="col-12 col-md-5">
-                <div class="toppage_img" style="position: relative;">
-                    <img th:src="@{img/topimg1.png}" width="100%" style="border-radius: 50%;position: absolute;top: 10px;left: 10px;">
+                <div class="toppage_img" style="position: relative;width:100%;padding-top:100%">
+                    <img th:src="@{img/topimg1.png}" width="100%"
+                        style="border-radius: 50%;position: absolute;top: 0%;left: 10%;">
                     <form th:action="@{/loginpage}" method="get">
-                        <input type="image" th:src="@{img/button_login.png}" width="30%" style="position: absolute;top: 450px;left: 500px;">
+                        <input id="button_login" type="image" th:src="@{img/button_login2.png}" width="30%"
+                            style="position: absolute;top: 55%;left: 60%;">
                     </form>
-                    
+
                     <!-- <img th:src="@{img/blob-haikei.png}" width="120%" style="position: absolute;top: 10px;left: 10px;"> -->
                 </div>
 
 
                 <!-- クリップパス用SVG -->
-                
+
                 <!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
                 <!-- <svg version="1.1" id="blobSvg" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" 
@@ -105,5 +99,23 @@
     </div>
 
 </body>
+<script>
+    
+    const setButtonHover = (id, imgPath_nohover, imgPath_hover) => {
+        const button = document.getElementById(id)
+        //マウスを上に置いたとき
+        button.addEventListener("mouseenter", (e) => {button.setAttribute("src", imgPath_hover)})
+        //マウスが離れたとき
+        button.addEventListener("mouseleave", (e) => { button.setAttribute("src", imgPath_nohover)})
+        //指で長押ししたとき(タブレット・スマホ用)
+        button.addEventListener("touchstart", (e) => {button.setAttribute("src", imgPath_hover)})
+        //長押しをやめたとき(タブレット・スマホ用)
+        button.addEventListener("touchend", (e) => {button.setAttribute("src", imgPath_nohover)})
+    }
+    setButtonHover("button_play","img/button_playsugoroku5.png","img/button_playsugoroku5_hover.png")
+    setButtonHover("button_masulist","img/button_masulist2.png","img/button_masulist2_hover.png")
+    setButtonHover("button_login","img/button_login2.png","img/button_login2_hover.png")
+
+</script>
 
 </html>
