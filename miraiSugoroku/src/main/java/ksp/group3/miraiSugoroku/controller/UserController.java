@@ -93,6 +93,21 @@ public class UserController {
         return "guest_squarelist";
     }
 
+    // 検索結果の内承認済みのやつだけ表示できるように今後修正
+    @GetMapping("/squares/search/event")
+    public String searchSquaresByEventId(@RequestParam("eventId") Long eventId, Model model, Pageable pageable) {
+        // List<Square> square_list = sService.searchSquaresByeventId(eventId);
+        // model.addAttribute("square_list", square_list);
+
+        Page<Square> page = sService.searchPageSquaresByEventId(pageable, eventId);
+        model.addAttribute("square_list", page.getContent());
+        model.addAttribute("page", page);
+        model.addAttribute("path", "/squares/search/event?eventId=" + eventId);
+        model.addAttribute("roll", "user");
+        return "guest_squarelist";
+    }
+
+
     @GetMapping("/config")
     public String showGuestSugorokuConfigPage(Model model) {
         model.addAttribute("GameConfigForm", new GameConfigForm());

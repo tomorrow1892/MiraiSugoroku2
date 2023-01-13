@@ -44,6 +44,6 @@ public interface SquareRepository extends CrudRepository<Square, Long> {
 
     public Page<Square> findByNickNameContainingAndIsApproved(Pageable pageable,String nickName,boolean isApproved);
 
-    
+    public Page<Square> findByEventIdAndIsApproved(Pageable pageable, Long eventId, boolean isApproved);
    
 }

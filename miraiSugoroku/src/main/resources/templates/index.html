@@ -16,13 +16,13 @@
 
 <body class="body">
     <!-- ヘッダー -->
-    <div th:replace="header :: header"></div>
+    
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-1"></div>
-            <div class="red col-12 col-md-5">
-                <div class="toppage_img">
+            <div class="col-md-5">
+                <div class="mt-5">
                     <img th:src="@{img/logo6.png}" class="img-fluid">
                 </div>
 
@@ -42,15 +42,14 @@
                         <form th:action="@{/squares}" method="get" style="text-align: center;">
                             <input id="button_masulist" type="image" th:src="@{img/button_masulist2.png}" width="70%">
                         </form>
-                        <p class="text-center">こうみん未来塾のイベント参加者が作ったマスを見ることができます</p>
                     </div>
 
                 </div>
             </div>
 
-            <div class="col-12 col-md-5">
+            <div class="col-md-5">
                 <div class="toppage_img" style="position: relative;width:100%;padding-top:100%">
-                    <img th:src="@{img/topimg1.png}" width="100%"
+                    <img th:src="@{img/花のじゅうたん_1316(わがまちさんだ).JPG}" width="100%"
                         style="border-radius: 50%;position: absolute;top: 0%;left: 10%;">
                     <form th:action="@{/loginpage}" method="get">
                         <input id="button_login" type="image" th:src="@{img/button_login2.png}" width="30%"
@@ -115,6 +114,7 @@
     setButtonHover("button_play","img/button_playsugoroku5.png","img/button_playsugoroku5_hover.png")
     setButtonHover("button_masulist","img/button_masulist2.png","img/button_masulist2_hover.png")
     setButtonHover("button_login","img/button_login2.png","img/button_login2_hover.png")
+
 
 </script>
 

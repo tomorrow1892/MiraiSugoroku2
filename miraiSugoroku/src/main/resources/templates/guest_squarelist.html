@@ -54,6 +54,10 @@
                 <input type="submit" class="searchsubmit" value="">
             </form>
         </div>
+        <form th:action="@{/squares/search/event}" method="get">
+            <input type="hidden" name="eventId" th:value="2">
+            <input type="submit" value="イベントで絞る" />
+        </form>
     </div>
 
 
