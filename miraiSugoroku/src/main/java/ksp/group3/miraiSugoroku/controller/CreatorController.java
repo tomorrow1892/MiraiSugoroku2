@@ -1,5 +1,6 @@
 package ksp.group3.miraiSugoroku.controller;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -177,15 +178,15 @@ public class CreatorController {
 
     @GetMapping("/{cid}/squares")
     public String showSquare(@PathVariable("cid") String cid, Model model, @PageableDefault(60) Pageable pageable) {
-        // List<Square> square_list = sService.filterSquaresByIsApproved(true);
-        // model.addAttribute("square_list", square_list);
         model.addAttribute("cid", cid);
-
         Page<Square> page = sService.getPageApprovedSquare(pageable, true);
         model.addAttribute("square_list", page.getContent());
         model.addAttribute("page", page);
         model.addAttribute("path", "/" + cid + "/squares");
         model.addAttribute("roll", "creator");
+        List<Integer> years = createYearList();
+        model.addAttribute("years", years);
+        model.addAttribute("events", eService.getAllEvents());
         return "creator_squarelist";
     }
 
@@ -211,6 +212,9 @@ public class CreatorController {
         model.addAttribute("path", "/" + cid + "/squares/search/keyword?keyword=" + keyword);
         model.addAttribute("cid", cid);
         model.addAttribute("roll", "creator");
+        List<Integer> years = createYearList();
+        model.addAttribute("years", years);
+        model.addAttribute("events", eService.getAllEvents());
         return "creator_squarelist";
     }
 
@@ -223,6 +227,25 @@ public class CreatorController {
         model.addAttribute("path", "/" + cid + "/squares/search/nickname?nickname=" + nickname);
         model.addAttribute("cid", cid);
         model.addAttribute("roll", "creator");
+        List<Integer> years = createYearList();
+        model.addAttribute("years", years);
+        model.addAttribute("events", eService.getAllEvents());
+        return "creator_squarelist";
+    }
+
+    @GetMapping("{cid}/squares/search/event")
+    public String searchSquaresByEvent(@PathVariable("cid") String cid, @RequestParam("event") String event,
+            @RequestParam("year") String year, @PageableDefault(60) Pageable pageable, Model model) {
+        Long eventId = Long.parseLong(event);
+        Page<Square> page = sService.searchPageSquaresByEventId(pageable, eventId);
+        model.addAttribute("square_list", page.getContent());
+        model.addAttribute("page", page);
+        model.addAttribute("path", "/" + cid + "/squares/search/event?year=" + year + "&event=" + event);
+        model.addAttribute("cid", cid);
+        model.addAttribute("roll", "creator");
+        List<Integer> years = createYearList();
+        model.addAttribute("years", years);
+        model.addAttribute("events", eService.getAllEvents());
         return "creator_squarelist";
     }
 

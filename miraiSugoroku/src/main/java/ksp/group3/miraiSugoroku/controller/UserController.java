@@ -1,5 +1,7 @@
 package ksp.group3.miraiSugoroku.controller;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.websocket.server.PathParam;
@@ -52,6 +54,9 @@ public class UserController {
         model.addAttribute("page", page);
         model.addAttribute("path", "/squares");
         model.addAttribute("roll", "user");
+        List<Integer> years = createYearList();
+        model.addAttribute("years", years);
+        model.addAttribute("events", eService.getAllEvents());
         return "guest_squarelist";
     }
 
@@ -62,6 +67,9 @@ public class UserController {
         SquareCreator creator = cService.getSquareCreator(square.getCreatorId());
         model.addAttribute("creator", creator);
         model.addAttribute("roll", "user");
+        List<Integer> years = createYearList();
+        model.addAttribute("years", years);
+        model.addAttribute("events", eService.getAllEvents());
         return "square_detail";
     }
 
@@ -76,6 +84,9 @@ public class UserController {
         model.addAttribute("page", page);
         model.addAttribute("path", "/squares/search/keyword?keyword=" + keyword);
         model.addAttribute("roll", "user");
+        List<Integer> years = createYearList();
+        model.addAttribute("years", years);
+        model.addAttribute("events", eService.getAllEvents());
         return "guest_squarelist";
     }
 
@@ -90,20 +101,27 @@ public class UserController {
         model.addAttribute("page", page);
         model.addAttribute("path", "/squares/search/nickname?nickname=" + nickname);
         model.addAttribute("roll", "user");
+        List<Integer> years = createYearList();
+        model.addAttribute("years", years);
+        model.addAttribute("events", eService.getAllEvents());
         return "guest_squarelist";
     }
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/squares/search/event")
-    public String searchSquaresByEventId(@RequestParam("eventId") Long eventId, Model model, Pageable pageable) {
-        // List<Square> square_list = sService.searchSquaresByeventId(eventId);
-        // model.addAttribute("square_list", square_list);
+    public String searchSquaresByEventId(@RequestParam("year") String year, @RequestParam("event") String event,
+             Model model, Pageable pageable) {
+
+        Long eventId = Long.parseLong(event);
 
         Page<Square> page = sService.searchPageSquaresByEventId(pageable, eventId);
         model.addAttribute("square_list", page.getContent());
         model.addAttribute("page", page);
-        model.addAttribute("path", "/squares/search/event?eventId=" + eventId);
+        model.addAttribute("path", "/squares/search/event?year=" + year + "&event=" + event);
         model.addAttribute("roll", "user");
+        List<Integer> years = createYearList();
+        model.addAttribute("years", years);
+        model.addAttribute("events", eService.getAllEvents());
         return "guest_squarelist";
     }
 
@@ -132,4 +150,18 @@ public class UserController {
         return "sugoroku";
     }
 
+
+    private List<Integer> createYearList() {
+        List<Integer> years = new ArrayList<>();
+
+        Calendar calender = Calendar.getInstance();
+        int latestYear = calender.get(Calendar.YEAR);
+        int oldestYear = 2020;
+
+        for (int i = latestYear; i >= oldestYear; i--) {
+            years.add(i);
+        }
+
+        return years;
+    }
 }
