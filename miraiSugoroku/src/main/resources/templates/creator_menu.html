@@ -30,23 +30,36 @@
     </div>
 
     <div class="container-fluid">
-        <div class="row text-center">
+        <div class="row text-center mt-5">
             <div class="col-md-4">
-                <form th:action="@{/config}" method="get" >
-                    <input id="button_play" type="image" th:src="@{/img/button_playsugoroku5.png}" width="70%">
+                <form th:action="@{/__${cid}__/config}" method="get" >
+                    <input id="button_play" type="image" th:src="@{/img/button_playsugoroku5.png}" width="60%">
                 </form>
             </div>
             <div class="col-md-4">
-                <form th:action="@{/config}" method="get" >
-                    <input id="button_play" type="image" th:src="@{/img/button_playsugoroku5.png}" width="70%">
+                <form th:action="@{/__${cid}__/create}" method="get" >
+                    <input id="button_masucreate" type="image" th:src="@{/img/button_masucreate.png}" width="60%">
                 </form>
             </div>
             <div class="col-md-4">
-                <form th:action="@{/squares}" method="get" style="text-align: center;">
-                    <input id="button_masulist" type="image" th:src="@{/img/button_masulist2.png}" width="70%">
+                <form th:action="@{/__${cid}__/squares}" method="get" style="text-align: center;">
+                    <input id="button_masulist" type="image" th:src="@{/img/button_masulist2.png}" width="60%">
                 </form>
             </div>
-            
+        </div>
+        <div class="row text-center mt-5">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <form th:action="@{/__${cid}__/detail}" method="get" >
+                    <input id="button_editprofile" type="image" th:src="@{/img/button_editprofile.png}" height="200px">
+                </form>
+            </div>
+            <div class="col-md-4">
+                <form th:action="@{/}" method="get" >
+                    <input id="button_logout" type="image" th:src="@{/img/button_logout.png}" height="200px">
+                </form>
+            </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 
@@ -106,7 +119,10 @@
     }
     setButtonHover("button_play","/img/button_playsugoroku5.png","/img/button_playsugoroku5_hover.png")
     setButtonHover("button_masulist","/img/button_masulist2.png","/img/button_masulist2_hover.png")
-    setButtonHover("button_login","/img/button_login2.png","/img/button_login2_hover.png")
+    setButtonHover("button_masucreate","/img/button_masucreate.png","/img/button_masucreate_hover.png")
+    setButtonHover("button_editprofile","/img/button_editprofile.png","/img/button_editprofile_hover.png")
+    setButtonHover("button_logout","/img/button_logout.png","/img/button_logout_hover.png")
+
 
 </script>
 </html>

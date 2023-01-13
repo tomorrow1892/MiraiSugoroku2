@@ -16,7 +16,7 @@
 
 <body class="body">
     <!-- ヘッダー -->
-    <div th:replace="header :: header"></div>
+    
 
     <div class="container-fluid">
         <div class="row">
@@ -49,7 +49,7 @@
 
             <div class="col-md-5">
                 <div class="toppage_img" style="position: relative;width:100%;padding-top:100%">
-                    <img th:src="@{img/花のじゅうたん_1316(わがまちさんだ).JPG}" width="100%"
+                    <img th:src="@{img/topimg1.png}" width="100%"
                         style="border-radius: 50%;position: absolute;top: 0%;left: 10%;">
                     <form th:action="@{/loginpage}" method="get">
                         <input id="button_login" type="image" th:src="@{img/button_login2.png}" width="30%"
