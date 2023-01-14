@@ -191,14 +191,18 @@ public class CreatorController {
     }
 
     @GetMapping("/{cid}/squares/mysquares")
-    public String showMySquare(@PathVariable("cid") Long cid, Model model) {
-        List<Square> approved_square_list = sService.filterCreatorIdAndIsApproved(cid, true);
-        List<Square> not_approved_square_list = sService.filterCreatorIdAndIsApproved(cid, false);
-        model.addAttribute("approved_square_list", approved_square_list);
-        model.addAttribute("not_approved_square_list", not_approved_square_list);
+    public String showMySquare(@PathVariable("cid") Long cid,
+            @PageableDefault(60) Pageable pageable,  Model model) {
+        Page<Square> page = sService.searchPageSquaresByCreator(pageable, cid, true);
+        model.addAttribute("square_list", page.getContent());
+        model.addAttribute("page", page);
+        model.addAttribute("path", "/" + cid + "/squares/mysquares");
         model.addAttribute("cid", cid);
         model.addAttribute("roll", "creator");
-        return "creator_my_squarelist";
+        List<Integer> years = createYearList();
+        model.addAttribute("years", years);
+        model.addAttribute("events", eService.getAllEvents());
+        return "creator_squarelist";
     }
 
     @GetMapping("/{cid}/squares/search/keyword")
