@@ -9,6 +9,7 @@
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{/module/hover_set.js}" type="text/javascript"></script>
 
 
 </head>
@@ -31,32 +32,36 @@
 
     <div class="container-fluid">
         <div class="row text-center mt-5">
-            <div class="col-md-4">
+            <div class="col-md-3 "></div>
+            <div class="col-md-2 0">
                 <form th:action="@{/__${cid}__/config}" method="get" >
-                    <input id="button_play" type="image" th:src="@{img/button_playsugoroku5.png}" width="60%">
+                    <input id="button_play" type="image" th:src="@{/img/button_playsugoroku5.png}" width="90%">
                 </form>
             </div>
-            <div class="col-md-4">
+           
+            <div class="col-md-2">
                 <form th:action="@{/__${cid}__/create}" method="get" >
-                    <input id="button_masucreate" type="image" th:src="@{img/button_masucreate.png}" width="60%">
+                    <input id="button_masucreate" type="image" th:src="@{/img/button_masucreate.png}" width="90%">
                 </form>
             </div>
-            <div class="col-md-4">
+           
+            <div class="col-md-2">
                 <form th:action="@{/__${cid}__/squares}" method="get" style="text-align: center;">
-                    <input id="button_masulist" type="image" th:src="@{img/button_masulist2.png}" width="60%">
+                    <input id="button_masulist" type="image" th:src="@{/img/button_masulist2.png}" width="90%">
                 </form>
             </div>
+            <div class="col-md-3 "></div>
         </div>
         <div class="row text-center mt-5">
             <div class="col-md-2"></div>
             <div class="col-md-4">
                 <form th:action="@{/__${cid}__/detail}" method="get" >
-                    <input id="button_editprofile" type="image" th:src="@{img/button_editprofile.png}" height="200px">
+                    <input id="button_editprofile" type="image" th:src="@{/img/button_editprofile.png}" height="200px">
                 </form>
             </div>
             <div class="col-md-4">
                 <form th:action="@{/}" method="get" >
-                    <input id="button_logout" type="image" th:src="@{img/button_logout.png}" height="200px">
+                    <input id="button_logout" type="image" th:src="@{/img/button_logout.png}" height="200px">
                 </form>
             </div>
             <div class="col-md-2"></div>
@@ -105,23 +110,12 @@
     </div> -->
 </body>
 <script>
-    
-    const setButtonHover = (id, imgPath_nohover, imgPath_hover) => {
-        const button = document.getElementById(id)
-        //マウスを上に置いたとき
-        button.addEventListener("mouseenter", (e) => {button.setAttribute("src", imgPath_hover)})
-        //マウスが離れたとき
-        button.addEventListener("mouseleave", (e) => { button.setAttribute("src", imgPath_nohover)})
-        //指で長押ししたとき(タブレット・スマホ用)
-        button.addEventListener("touchstart", (e) => {button.setAttribute("src", imgPath_hover)})
-        //長押しをやめたとき(タブレット・スマホ用)
-        button.addEventListener("touchend", (e) => {button.setAttribute("src", imgPath_nohover)})
-    }
-    setButtonHover("button_play","img/button_playsugoroku5.png","img/button_playsugoroku5_hover.png")
-    setButtonHover("button_masulist","img/button_masulist2.png","img/button_masulist2_hover.png")
-    setButtonHover("button_masucreate","img/button_masucreate.png","img/button_masucreate_hover.png")
-    setButtonHover("button_editprofile","img/button_editprofile.png","img/button_editprofile_hover.png")
-    setButtonHover("button_logout","img/button_logout.png","img/button_logout_hover.png")
+
+    setButtonHover("button_play","/img/button_playsugoroku5.png","/img/button_playsugoroku5_hover.png")
+    setButtonHover("button_masulist","/img/button_masulist2.png","/img/button_masulist2_hover.png")
+    setButtonHover("button_masucreate","/img/button_masucreate.png","/img/button_masucreate_hover.png")
+    setButtonHover("button_editprofile","/img/button_editprofile.png","/img/button_editprofile_hover.png")
+    setButtonHover("button_logout","/img/button_logout.png","/img/button_logout_hover.png")
 
 
 </script>
