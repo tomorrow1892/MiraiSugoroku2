@@ -4,10 +4,9 @@ function setButtonHover(id, imgPath_nohover, imgPath_hover) {
 
 
     //デプロイ用設定
-    //const deployedPath = "https://es4.eedept.kobe-u.ac.jp/miraisugoroku"
+    const deployedPath = "https://es4.eedept.kobe-u.ac.jp/miraisugoroku"
     //ローカル用設定．
-    const deployedPath = "";
-console.log("aaaa");
+    //const deployedPath = "";
     const button = document.getElementById(id)
     //マウスを上に置いたとき
     button.addEventListener("mouseenter", (e) => { button.setAttribute("src", deployedPath + imgPath_hover) })
