@@ -43,7 +43,7 @@ public class AdminController {
     public String showAdminLodinPage(Model model) {
         AdminLoginForm adform = new AdminLoginForm();
         model.addAttribute("AdminLoginForm", adform);
-        model.addAttribute("roll", "user");
+        model.addAttribute("roll", "admin");
         return "admin_login";
     }
 
@@ -53,7 +53,7 @@ public class AdminController {
         // パスワード未設定
         // パスワード設定した際に下記例外を追加する
         // throw new MiraiSugorokuException(MiraiSugorokuException.WRONG_PASSWORD, "");
-        System.out.println(loginform.getPassword());
+        // System.out.println(loginform.getPassword());
 
         if (!(loginform.getPassword().equals("miraisanda"))) {
             System.out.println(loginform.getPassword());
