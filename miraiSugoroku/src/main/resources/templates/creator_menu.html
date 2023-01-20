@@ -9,21 +9,12 @@
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{/module/hover_set.js}" type="text/javascript"></script>
 
-    <!-- 背景設定用CSS   -->
-    <style th:inline="text">
-        body {
-            background: url([[@{/img/baloon.png}]]);
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: rgba(255, 255, 255, 0.5);
-            background-blend-mode: lighten;
-        }
-    </style>
 
 </head>
 
-<body>
+<body class="body">
     <!-- ヘッダー -->
     <div th:replace="header :: header"></div>
 
@@ -38,7 +29,48 @@
                 マス作成期限([[${event.limitDate}]])を超えたためマス作成出来ません。</font>
         </div>
     </div>
-    <div class="d-flex flex-wrap justify-content-center">
+
+    <div class="container-fluid">
+        <div class="row text-center mt-5">
+            <div class="col-md-3 "></div>
+            <div class="col-md-2 0">
+                <form th:action="@{/__${cid}__/config}" method="get" >
+                    <input id="button_play" type="image" th:src="@{/img/button_playsugoroku5.png}" width="90%">
+                </form>
+            </div>
+           
+            <div class="col-md-2">
+                <form th:action="@{/__${cid}__/create}" method="get" >
+                    <input id="button_masucreate" type="image" th:src="@{/img/button_masucreate.png}" width="90%">
+                </form>
+            </div>
+           
+            <div class="col-md-2">
+                <form th:action="@{/__${cid}__/squares}" method="get" style="text-align: center;">
+                    <input id="button_masulist" type="image" th:src="@{/img/button_masulist2.png}" width="90%">
+                </form>
+            </div>
+            <div class="col-md-3 "></div>
+        </div>
+        <div class="row text-center mt-5">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <form th:action="@{/__${cid}__/detail}" method="get" >
+                    <input id="button_editprofile" type="image" th:src="@{/img/button_editprofile.png}" height="200px">
+                </form>
+            </div>
+            <div class="col-md-4">
+                <form th:action="@{/}" method="get" >
+                    <input id="button_logout" type="image" th:src="@{/img/button_logout.png}" height="200px">
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+
+
+    <!-- <div class="d-flex flex-wrap justify-content-center">
         <div class="flex-item">
             <form th:action="@{/__${cid}__/config}" method="get">
                 <input type="submit" class="button_A mb-3 mx-3" value="すごろくで遊ぶ">
@@ -75,7 +107,16 @@
             </form>
             <p class="text-center"></p>
         </div>
-    </div>
+    </div> -->
 </body>
+<script>
 
+    setButtonHover("button_play","/img/button_playsugoroku5.png","/img/button_playsugoroku5_hover.png")
+    setButtonHover("button_masulist","/img/button_masulist2.png","/img/button_masulist2_hover.png")
+    setButtonHover("button_masucreate","/img/button_masucreate.png","/img/button_masucreate_hover.png")
+    setButtonHover("button_editprofile","/img/button_editprofile.png","/img/button_editprofile_hover.png")
+    setButtonHover("button_logout","/img/button_logout.png","/img/button_logout_hover.png")
+
+
+</script>
 </html>

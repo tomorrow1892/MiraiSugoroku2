@@ -150,4 +150,8 @@ public class SquareService {
         return sRepo.findByEventIdAndIsApproved(pageable, eventId, true);
     }
 
+    public Page<Square> searchPageSquaresByCreator(Pageable pageable, Long creatorId, boolean isApproved) {
+        return sRepo.findByCreatorIdAndIsApproved(pageable, creatorId, isApproved);
+    }
+
 }

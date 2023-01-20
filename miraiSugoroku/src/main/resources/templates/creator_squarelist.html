@@ -13,19 +13,12 @@
     <link rel="stylesheet" th:href="@{/css/display.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/page_squarelist.css}">
-    <!-- 背景設定用CSS   -->
-    <style th:inline="text">
-        body {
-            background: url([[@{/img/baloon.png}]]);
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: rgba(255, 255, 255, 0.5);
-            background-blend-mode: lighten;
-        }
-    </style>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="https://es4.eedept.kobe-u.ac.jp/miraisugoroku_newiine_app/newiine.css">
 </head>
 
-<body>
+<body class="body">
     <!-- ヘッダー -->
     <div th:replace="header :: header"></div>
 
@@ -82,7 +75,7 @@
                 <a th:href="@{${path}(page=${page.number})}" class=" page-link" th:tabindex="${page.first} ? -1"
                     aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
-                    <span >前のページ</span>
+                    <span>前のページ</span>
                 </a>
             </li>
 
@@ -118,17 +111,17 @@
                 <a th:href="@{${path}(page=${page.number + 2})}" class="page-link" th:tabindex="${page.last} ? -1"
                     aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
-                    <span >次のページ</span>
+                    <span>次のページ</span>
                 </a>
             </li>
         </ul>
     </nav>
     <!-- マスリスト -->
-    <div class="card "
+    <div class="card"
         style="min-width: 22rem; margin-right: auto;margin-left: auto; height: 100vh;width: 90vw; overflow: auto;">
         <div class="d-flex flex-wrap justify-content-center">
             <div th:each="square: ${square_list}"
-                class="masu card border border-success border-3 shadow-sm mb-3 ms-3 lb-3 ls-3">
+                class="masu  mt-5 ms-3 lb-3 ls-3">
 
                 <div class="masu-header d-flex justify-content-center">
                     <img th:src="${square.picture}" class="masu-img">
@@ -144,6 +137,7 @@
                         </li>
                     </ul>
                 </div>
+                
                 <div class="masu-event" th:switch="${square.squareEventId}">
                     <img th:if="${square.squareEffect > 0}" th:src="@{/img/dice_blue.png}">
                     <img th:if="${square.squareEffect < 0}" th:src="@{/img/dice_red.png}">
@@ -171,10 +165,30 @@
                     <p th:case="23" class="font-wght700">-400<br>ポイント</p>
                     <p th:case="24" class="font-wght700">-500<br>ポイント</p>
                 </div>
+                <div class="masu-iine mt-3">
+                    <!-- いいねボタン改ここから -->
+                    <button type="submit" class="newiine_btn" th:data-iinename="|squareId:${square.squareId}|">
+                        <span class="material-icons-round">favorite</span>
+                        <span class="newiine_count"></span>いいね
+
+                        <!-- お礼メッセージここから -->
+                        <div class="newiine_thanks newiine_thanks_up" style="display:none;">
+                            <div class="newiine_box">
+                                <img th:src="@{/img/kominkun.jpg}"
+                                    alt="THANK YOU!">
+                                <p>ありがとうございます！</p>
+                            </div>
+                        </div>
+                        <!-- お礼メッセージここまで -->
+                    </button>
+                    <!-- いいねボタン改ここまで -->
+                </div>
             </div>
         </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://es4.eedept.kobe-u.ac.jp/miraisugoroku_newiine_app/newiine.js"></script>
 </body>
 <script th:inline="javascript">
     const dropdownYear = document.getElementById("selectedYear");

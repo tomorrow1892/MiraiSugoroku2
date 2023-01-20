@@ -45,6 +45,7 @@
     width: 20rem;
     height: 24rem;
     position: relative;
+    border: 6px solid rgba(54, 180, 16, 0.795);
 }
 .masu .masu-header{
     height:50%;
@@ -159,3 +160,11 @@
         color: blue;
         background: rgb(185, 255, 145);
     }
+
+    #app .VueStar {
+        position: relative;
+      }
+      .VueStar__icon .fa {
+        font-size: 3em;
+        cursor: pointer;
+      }
