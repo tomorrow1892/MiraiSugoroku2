@@ -192,7 +192,7 @@ public class CreatorController {
 
     @GetMapping("/{cid}/squares/mysquares")
     public String showMySquare(@PathVariable("cid") Long cid,
-            @PageableDefault(60) Pageable pageable,  Model model) {
+            @PageableDefault(60) Pageable pageable, Model model) {
         Page<Square> page = sService.searchPageSquaresByCreator(pageable, cid, true);
         model.addAttribute("square_list", page.getContent());
         model.addAttribute("page", page);

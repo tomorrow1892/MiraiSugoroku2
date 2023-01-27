@@ -50,26 +50,27 @@
                 <table class="table">
                     <tr id="7">
                         <td>
-                            使用するマスを絞る
-                            <br>
+                            <div>使用するマスを絞る</div>
                             <input type="hidden" name="creatorId" th:value="-1">
                             <input type="radio" required name="masu" value="none" id="71" checked><label
-                                for="71">なし</label>
-                            <br>
+                                for="71">なし　　　</label>
                             <input type="radio" required name="masu" value="event" id="72"><label
                                 for="72">イベントで絞る</label>
-                            <select required th:field="*{eventId}" id="722" disabled>
+                                
+                                <select required th:field="*{eventId}" id="722" disabled>
                                 <option required th:each="eid:${eventIdList}" th:value="${eid.eventId}"
                                     th:text="${eid.name}" th:selected="${eid.eventId == selectedValue}">
                                 </option>
                             </select>
-                            <br>
+                                
                         </td>
                     </tr>
                     <tr id="0">
+                        <td>
                         <div class="nagasa">
                             コースの長さ
                         </div>
+                        </td>
                         <td>
                             <div class="d-flex justify-content-center">
                                 <input type="radio" required th:field="*{length}" value=0 id="00"><label
@@ -80,10 +81,7 @@
                                     for="22"></label>
                             </div>
                         </td>
-                        <td></td>
-                        <td></td>
                     </tr>
-                    <tr></tr>
                     <tr id="1">
                         <td><label>プレイヤー1 : 名前 </label></td>
                         <td><input type="text" required th:field="*{p1}" /></td>
