@@ -8,19 +8,22 @@
 <body class="body">
 <!-- ヘッダー -->
 <nav th:fragment="header" class="navbar navbar-expand navbar-light ">
-    <a class="navbar-brand" th:href="@{/}">
-        <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="">
-    </a>
+        <a th:if="${roll == 'user' || roll == 'creator'}" class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="">
+        </a>
+        <a th:if="${roll == 'admin'}"  class="navbar-brand" th:href="@{/admin/menu}">
+            <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="">
+        </a>
     <div class="" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <!-- 以下，一般ユーザ・管理者の選択肢 -->
-            <li th:if="${roll == 'user'|| roll == 'admin'}" class="nav-item active">
+            <li th:if="${roll == 'user'}" class="nav-item active">
                 <a class="nav-link" th:href="@{/config}">
                     <img th:src="@{/img/header_sugoroku.png}">
                     <div style="color: black;">すごろくで遊ぶ</div>
                 </a>
             </li>
-            <li th:if="${roll == 'user'|| roll == 'admin'}" class="nav-item active">
+            <li th:if="${roll == 'user'}" class="nav-item active">
                 <a class="nav-link" th:href="@{/squares}">
                     <img th:src="@{/img/header_masulist.png}">
                     <div style="color: black;">マスを見る</div>
