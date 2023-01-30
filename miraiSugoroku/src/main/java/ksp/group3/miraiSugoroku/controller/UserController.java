@@ -57,6 +57,7 @@ public class UserController {
         List<Integer> years = createYearList();
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
+        model.addAttribute("search", 0);
         return "guest_squarelist";
     }
 
@@ -87,6 +88,8 @@ public class UserController {
         List<Integer> years = createYearList();
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
+        model.addAttribute("search", 1);
+        model.addAttribute("kw", keyword);
         return "guest_squarelist";
     }
 
@@ -104,13 +107,15 @@ public class UserController {
         List<Integer> years = createYearList();
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
+        model.addAttribute("search", 2);
+        model.addAttribute("nn", nickname);
         return "guest_squarelist";
     }
 
     // 検索結果の内承認済みのやつだけ表示できるように今後修正
     @GetMapping("/squares/search/event")
     public String searchSquaresByEventId(@RequestParam("year") String year, @RequestParam("event") String event,
-             Model model, Pageable pageable) {
+            Model model, Pageable pageable) {
 
         Long eventId = Long.parseLong(event);
 
@@ -122,9 +127,11 @@ public class UserController {
         List<Integer> years = createYearList();
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
+        model.addAttribute("search", 3);
+        model.addAttribute("year", year);
+        model.addAttribute("event", eService.getEvent(eventId).getName());
         return "guest_squarelist";
     }
-
 
     @GetMapping("/config")
     public String showGuestSugorokuConfigPage(Model model) {
@@ -150,13 +157,12 @@ public class UserController {
         return "sugoroku";
     }
 
-
     private List<Integer> createYearList() {
         List<Integer> years = new ArrayList<>();
 
         Calendar calender = Calendar.getInstance();
         int latestYear = calender.get(Calendar.YEAR);
-        int oldestYear = 2020;
+        int oldestYear = 2022;
 
         for (int i = latestYear; i >= oldestYear; i--) {
             years.add(i);

@@ -16,7 +16,13 @@
         </a>
     <div class="" id="navbarNavDropdown">
         <ul class="navbar-nav">
-            <!-- 以下，一般ユーザ・管理者の選択肢 -->
+            <!-- 以下，一般ユーザの選択肢 -->
+            <li th:if="${roll == 'user'}" class="nav-item active">
+                <a class="nav-link" th:href="@{/}">
+                    <img th:src="@{/img/header_modoru.png}">
+                    <div style="color: black;">さいしょにもどる</div>
+                </a>
+            </li>
             <li th:if="${roll == 'user'}" class="nav-item active">
                 <a class="nav-link" th:href="@{/config}">
                     <img th:src="@{/img/header_sugoroku.png}">
