@@ -23,6 +23,18 @@
     margin-left: auto;
     padding: 10px 5px;
 }
+
+.discription_top_koumin{
+    background-color: rgb(255, 237, 209);
+    /*margin-bottom: 1rem;*/
+    text-align: left;
+    width: 80%;
+    height: auto;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px 5px;
+}
 /* トップページのタイトル画像 */
 .toppage_img{
     margin-top: 80px;
