@@ -24,12 +24,14 @@
             <div class="col-md-1"></div>
             <div class="col-md-5">
                 <div class="mt-5">
-                    <img th:src="@{/img/logo6.png}" class="img-fluid">
+                    <img th:src="@{/img/logo7.png}" class="img-fluid">
                 </div>
 
                 <div class="discription_top">
-                    三田こうみん未来塾の生徒が作成した三田市に関する「すごろく」遊ぶことができるWebページです<br>
-                    すごろく上の各マスにおいて生徒が調べた三田市のスポットや歴史などを知ることができます
+                    三田の子どもたちが、自分たちのまちの「いいところ」や「ちょっとマイナスなところ」などを<br>
+                    すごろくのマスにして、学びながらふるさと発見をしていくアプリです。
+                    <!-- 三田こうみん未来塾の生徒が作成した三田市に関する「すごろく」遊ぶことができるWebページです<br>
+                    すごろく上の各マスにおいて生徒が調べた三田市のスポットや歴史などを知ることができます -->
                 </div>
 
                 <div class="d-flex justify-content-center ml-3 mr-3 mt-3">
@@ -37,25 +39,45 @@
                         <form th:action="@{/config}" method="get" style="text-align: center;">
                             <input id="button_play" type="image" th:src="@{/img/button_playsugoroku5.png}" width="70%">
                         </form>
-
+                        <div class="discription_top">
+                            みんなが作ったマスを使って<br>
+                            すごろくで遊ぶことができます。<br>
+                        </div>
                     </div>
                     <div class="flex-item mb-3">
                         <form th:action="@{/squares}" method="get" style="text-align: center;">
                             <input id="button_masulist" type="image" th:src="@{/img/button_masulist2.png}" width="70%">
                         </form>
+                        <div class="discription_top">
+                            みんなが見つけた<br>
+                            三田市情報を見ることができます。<br>
+                        </div>
                     </div>
 
                 </div>
             </div>
 
             <div class="col-md-5">
-                <div class="toppage_img" style="position: relative;width:100%;padding-top:100%">
+                <div class="toppage_img" style="position: relative;width:100%;padding-top:70%">
                     <img th:src="@{/img/s-農村風景_0077(わがまちさんだ).jpg}" width="100%"
                         style="border-radius: 50%;position: absolute;top: 0%;left: 10%;">
                     <form th:action="@{/loginpage}" method="get">
-                        <input id="button_login" type="image" th:src="@{img/button_login2.png}" width="30%"
-                            style="position: absolute;top: 55%;left: 60%;">
+                        <input id="button_login" type="image" th:src="@{img/button_login4.png}" width="30%"
+                            style="position: absolute;top: 60%;left: 60%;">
                     </form>
+                    <a href="https://www.city.sanda.lg.jp/kosodate_kyoiku/ikuji_student/chiki_kosodate/3/10169.html" target="_blank"><img type="image" th:src="@{img/kouminkun.png}" width="30%"
+                            style="position: absolute;top: 103%;left: 1%;">
+                    </a>
+                    <div class="discription_top_koumin" style="position: absolute;top: 105%;left: 35%;">
+                        <h4>こうみん未来塾とは</h4>
+                        　企業や専門家、地域人材などオール三田で子どもの学びを支える「こうみん未来塾」は、<br>
+                        　多彩なプログラムが１００個以上！子どもたちが本物に触れる体験を通して、<br>
+                        　①科学技術に親しみを感じる子、
+                        ②グローバルに活躍する気概を持つ子、<br>
+                        　③チャレンジ精神旺盛な子の育成をめざしています。<br>
+                        　☚詳しくはアイコンをクリック！
+                    </div>
+                    
 
                     <!-- <img th:src="@{img/blob-haikei.png}" width="120%" style="position: absolute;top: 10px;left: 10px;"> -->
                 </div>
@@ -102,7 +124,7 @@
 <script>
     setButtonHover("button_play","/img/button_playsugoroku5.png","/img/button_playsugoroku5_hover.png")
     setButtonHover("button_masulist","/img/button_masulist2.png","/img/button_masulist2_hover.png")
-    setButtonHover("button_login","/img/button_login2.png","/img/button_login2_hover.png")
+    setButtonHover("button_login","/img/button_login4.png","/img/button_login4_hover.png")
 </script>
 
 </html>
