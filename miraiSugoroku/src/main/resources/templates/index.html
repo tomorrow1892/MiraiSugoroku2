@@ -17,13 +17,13 @@
 
 <body class="body">
     <!-- ヘッダー -->
-    
+
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-5">
-                <div class="mt-5">
+            <!-- <div class="col-md-1"></div> -->
+            <div class="col-md-6 col-sm-12 px-5">
+                <div class="mt-1">
                     <img th:src="@{/img/logo7.png}" class="img-fluid">
                 </div>
 
@@ -57,18 +57,39 @@
                 </div>
             </div>
 
-            <div class="col-md-5">
-                <div class="toppage_img" style="position: relative;width:100%;padding-top:70%">
-                    <img th:src="@{/img/s-農村風景_0077(わがまちさんだ).jpg}" width="100%"
+            <div class="col-md-6 col-sm-12 px-5">
+                <div class="toppage_img center-block" style="position: relative;width:100%;padding-top:65%">
+                    <img th:src="@{/img/s-農村風景_0077(わがまちさんだ).jpg}" width="90%"
                         style="border-radius: 50%;position: absolute;top: 0%;left: 10%;">
                     <form th:action="@{/loginpage}" method="get">
                         <input id="button_login" type="image" th:src="@{img/button_login4.png}" width="30%"
-                            style="position: absolute;top: 60%;left: 60%;">
+                            style="position: absolute;top: 50%;left: 60%;">
                     </form>
-                    <a href="https://www.city.sanda.lg.jp/kosodate_kyoiku/ikuji_student/chiki_kosodate/3/10169.html" target="_blank"><img type="image" th:src="@{img/kouminkun.png}" width="30%"
-                            style="position: absolute;top: 103%;left: 1%;">
-                    </a>
-                    <div class="discription_top_koumin" style="position: absolute;top: 105%;left: 35%;">
+
+                </div>
+                <div class="box" style="width: 100%">
+                    <h3>こうみん未来塾とは</h3>
+                    <div class="inner">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <a href="https://www.city.sanda.lg.jp/kosodate_kyoiku/ikuji_student/chiki_kosodate/3/10169.html"
+                                        target="_blank"><img type="image" th:src="@{img/kouminkun.png}" width="80%">
+                                    </a>
+                                    <div>👆詳しくはアイコンをクリック！</div>
+                                </div>
+
+                                <div class="col-md-8 col-sm-12">
+                                    企業や専門家、地域人材などオール三田で子どもの学びを支える「こうみん未来塾」は、
+                                    多彩なプログラムが１００個以上！子どもたちが本物に触れる体験を通して、<br>
+                                    　①科学技術に親しみを感じる子、<br>
+                                    　②グローバルに活躍する気概を持つ子、<br>
+                                    　③チャレンジ精神旺盛な子<br>
+                                    の育成をめざしています。
+                                </div>
+                            </div>
+                            
+                            <!-- <div class="discription_top_koumin" style="position: absolute;top: 105%;left: 35%;">
                         <h4>こうみん未来塾とは</h4>
                         　企業や専門家、地域人材などオール三田で子どもの学びを支える「こうみん未来塾」は、<br>
                         　多彩なプログラムが１００個以上！子どもたちが本物に触れる体験を通して、<br>
@@ -76,55 +97,28 @@
                         ②グローバルに活躍する気概を持つ子、<br>
                         　③チャレンジ精神旺盛な子の育成をめざしています。<br>
                         　☚詳しくはアイコンをクリック！
-                    </div>
-                    
+                    </div> -->
 
-                    <!-- <img th:src="@{img/blob-haikei.png}" width="120%" style="position: absolute;top: 10px;left: 10px;"> -->
+
+
+
+                            <!-- <img th:src="@{img/blob-haikei.png}" width="120%" style="position: absolute;top: 10px;left: 10px;"> -->
+                        </div>
+                    </div>
                 </div>
 
 
-                <!-- クリップパス用SVG -->
-
-                <!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-                <!-- <svg version="1.1" id="blobSvg" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" 
-                    width="1041.891px" height="595.281px" viewBox="0 0 841.891 595.281"
-                   >
-                    <g transform="translate(572.62448120117188, -1.5853042602539062)">
-                        <clipPath id="clip02">
-                            <path fill="#D1D8E0" d="M620.502,463.825c-58.155,113.203-144.4,151.355-258.731,114.455
-                            C247.44,541.379,127.159,517.611,0.93,506.98c-126.226-10.632-177.114-76.303-152.66-197.013
-                            c24.451-120.71,84.591-204.519,180.418-251.427c95.827-46.909,187.029-56.289,273.604-28.144
-                            c86.574,28.144,175.793,79.118,267.653,152.919C661.81,257.117,678.661,350.621,620.502,463.825z" />
-                        </clipPath>
-                        
-                    </g>
-                    <image th:href="@{img/topimg1.png}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet"
-                        clip-path="url(#clip02)" />
-                </svg> -->
-
-
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-    <div class="admin_link">
-        <h2>
-            <td><a th:href=@{/admin/}>管理者画面へのリンク（開発中のみ）</a></td>
-        </h2>
-    </div>
+                <!-- <div class="admin_link">
+                    <h2>
+                        <td><a th:href=@{/admin/}>管理者画面へのリンク（開発中のみ）</a></td>
+                    </h2>
+                </div> -->
 
 </body>
 <script>
-    setButtonHover("button_play","/img/button_playsugoroku5.png","/img/button_playsugoroku5_hover.png")
-    setButtonHover("button_masulist","/img/button_masulist2.png","/img/button_masulist2_hover.png")
-    setButtonHover("button_login","/img/button_login4.png","/img/button_login4_hover.png")
+    setButtonHover("button_play", "/img/button_playsugoroku5.png", "/img/button_playsugoroku5_hover.png")
+    setButtonHover("button_masulist", "/img/button_masulist2.png", "/img/button_masulist2_hover.png")
+    setButtonHover("button_login", "/img/button_login4.png", "/img/button_login4_hover.png")
 </script>
 
 </html>
