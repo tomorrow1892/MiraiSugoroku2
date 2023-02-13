@@ -68,7 +68,7 @@
         height: 100%;
     }
     .masu-body .masu-title{
-        height: 40%;
+        height: 45%;
         width: auto;
         text-align: center;
         
@@ -81,11 +81,11 @@
         }
 
     .masu-body .masu-contents{
-        height: 60%;
+        height: 55%;
         width: 100%;
     }
         .masu-contents .masu-description{
-            font-size: 0.8rem;
+            font-size: 1.0rem;
             height: 70%;
             width: 100%;
             overflow: auto;
