@@ -20,6 +20,7 @@
     outline: none;
     background-color: #deffd9;
 }
+
 .searchform .searchsubmit {
     position: absolute;
     top: 1px;
@@ -36,6 +37,8 @@
     font-weight: 900;
     padding: 4px 0px;
 }
+
+
 /** 検索窓のスタイルここまで **/
 
 /** 以下マスのスタイル **/
