@@ -92,13 +92,13 @@ public class GameConfigForm {
         int nSquares = 0;
         switch (length) {
             case 0:
-                nSquares = 7;
+                nSquares = 10;
                 break;
             case 1:
-                nSquares = 35;
+                nSquares = 20;
                 break;
             case 2:
-                nSquares = 50;
+                nSquares = 30;
                 break;
             default:
                 // exceptionを返す
