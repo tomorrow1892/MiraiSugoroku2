@@ -31,11 +31,11 @@ public class SquareForm {
         return square;
     }
 
-    private int determineKindOfSquare(Long squareEventId) {
+    public int determineKindOfSquare(Long squareEventId) {
         int kind = 0;
         if (squareEventId >= 1 && squareEventId <= 6) {
             kind = 1;
-        } else if (squareEventId >= 7 && squareEventId  <= 13) {
+        } else if (squareEventId >= 7 && squareEventId <= 13) {
             kind = -1;
         } else if (squareEventId >= 15 && squareEventId <= 19) {
             kind = 1;
