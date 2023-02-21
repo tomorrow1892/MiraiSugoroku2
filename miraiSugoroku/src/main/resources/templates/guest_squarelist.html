@@ -61,6 +61,8 @@
         </div>
         <form role="search" method="get" class="searchform" th:action="@{/squares/search/event}">
             <input th:value="*{event}" id="eventname" hidden>
+            <input th:value="*{sentaku}" id="eventy" hidden>
+            <input th:value="*{search}" id="event" hidden>
             <div>
                 <label class="screen-reader-text" for="nickname">&emsp;イベント</label>
                 <div th:if="${(search eq 0) or (search eq 1) or (search eq 2)}">
@@ -68,17 +70,17 @@
                         <option th:each="y: ${years}" th:value="${y}" th:text="${y}">
                         </option>
                     </select>
-                    <select id="selectedEventId" name="event" required=false value="2222">
+                    <select id="selectedEventId" name="event" required=false>
                         <option value="" class="form-control">- イベントをえらんでください -</option>
                     </select>
                 </div>
 
                 <div th:if="${search eq 3}">
                     <select id="selectedYear" name="year">
-                        <option th:each="y: ${years}" th:value="${y}" th:text="${y}" th:selected="*{year}">
+                        <option th:each="y: ${years}" th:value="${y}" th:text="${y}" th:selected="${y} == *{sentaku}">
                         </option>
                     </select>
-                    <select id="selectedEventId" name="event" required=false  value="1111">
+                    <select id="selectedEventId" name="event" required=false>
                         <option value="" class="form-control">- イベントをえらんでください -</option>
                     </select>
                 </div>
@@ -243,12 +245,12 @@
                     option.selected = true
                 }
             dropdownEvent.appendChild(option);
+            
             }
         });
     }
     eventDropDownChange();//最初に一回実行
     dropdownYear.addEventListener("change", (event) => eventDropDownChange());
-
 </script>
 
 </html>
