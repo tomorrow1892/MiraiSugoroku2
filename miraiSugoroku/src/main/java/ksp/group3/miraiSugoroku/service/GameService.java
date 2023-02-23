@@ -28,7 +28,7 @@ import ksp.group3.miraiSugoroku.repository.SugorokuRepository;
 @Service
 public class GameService {
 
-    int minusRate = 50; //--- すごろくにどれだけマイナスなマスを選択するべきか
+    int minusRate = 40; //--- すごろくにどれだけマイナスなマスを選択するべきか
     // Repository
     @Autowired
     PlayerRepository pRepo;

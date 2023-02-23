@@ -128,7 +128,7 @@ public class UserController {
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
         model.addAttribute("search", 3);
-        model.addAttribute("year", year);
+        model.addAttribute("sentaku", year);
         model.addAttribute("event", eService.getEvent(eventId).getName());
         return "guest_squarelist";
     }
