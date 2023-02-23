@@ -10,7 +10,7 @@
     margin-right: auto;
     margin-left: auto;
     padding: 10px 5px;
-    font-size: 1.2em;
+    font-size: 1.0em;
 }
 
 /*トップページの概要説明欄*/
@@ -85,5 +85,5 @@
   }
   .box .inner{
     padding: .5em 1.5em;
-    font-size: 1.2em;
+    font-size: 0.9em;
   }
