@@ -2,7 +2,6 @@
 /*トップページの概要説明欄*/
 .discription_top{
     background-color: rgb(255, 237, 209);
-    /*margin-bottom: 1rem;*/
     text-align: center;
     width: 80%;
     height: auto;
@@ -10,7 +9,6 @@
     margin-right: auto;
     margin-left: auto;
     padding: 10px 5px;
-    font-size: 1.0em;
 }
 
 /*トップページの概要説明欄*/

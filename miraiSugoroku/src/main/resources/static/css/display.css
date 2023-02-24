@@ -2,51 +2,125 @@
 
 /** 以下フォントに関するスタイル **/
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
+
 @font-face {
-    font-family: 'myfont'; /* フォント名 */
-    /* フォーマットごとにパスを指定 */
-    src: url('../fonts/myfont.ttf') format('truetype');
-    src: url('../fonts/myfont.woff') format('woff');
+  font-family: 'myfont';
+  /* フォント名 */
+  /* フォーマットごとにパスを指定 */
+  src: url('../fonts/myfont.ttf') format('truetype');
+  src: url('../fonts/myfont.woff') format('woff');
+}
+
+.font-comic {
+  font-family: "Hannotate SC", "游ゴシック", Georgia, Times, 'Times New Roman', sans-serif;
+}
+
+.font-wght700 {
+  font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+/* スマホ */
+@media (max-width: 1000px) {
+  .text-large {
+    font-size: 4rem;
   }
-  
-  .font-comic{
-    font-family: "Hannotate SC", "游ゴシック", Georgia, Times, 'Times New Roman', sans-serif;
-}
 
-.font-wght700{
-    font-family: 'Zen Maru Gothic', sans-serif;
-}
-/** フォントに関するスタイルここまで **/
+  .text-middle {
+    font-size: 2rem;
+  }
 
-/* ページタイトルのスタイル */
-.page_title{
-    font-size: 1.5em;/* フォントサイズ */
+  .text-small {
+    font-size: 1rem;
+  }
+
+  /* ページタイトルのスタイル */
+  .page_title {
+    font-size: 1.5em;
+    /* フォントサイズ */
     font-family: 'Zen Maru Gothic', sans-serif;
     text-align: center;
-    background-color: #b0f794;/* 背景色 */
+    background-color: #b0f794;
+    /* 背景色 */
     box-shadow: 0px 0px 0px 5px #84e477;
     /*border: dashed 2px #ffffff; 破線 */
-    color:#000000;/* フォント色 */
-    width: 400px;
+    color: #000000;
+    /* フォント色 */
+    width: 80vw;
     line-height: 50px;
-}
- .body {
-            /* background: url([[@{/img/450-20110411172544135827.jpg}]]); */
-            background-size: contain;
-            background-attachment: fixed;
-            background-color: #fcf4e0;
-            background-blend-mode: lighten;
-        }
-/*ページの概要説明欄*/
-.discription {
+  }
+
+  .body {
+    /* background: url([[@{/img/450-20110411172544135827.jpg}]]); */
+    background-size: contain;
+    background-attachment: fixed;
+    background-color: #fcf4e0;
+    background-blend-mode: lighten;
+  }
+
+  /*ページの概要説明欄*/
+  .discription {
     background-color: rgb(255, 237, 209);
     /*margin-bottom: 1rem;*/
     text-align: center;
-    width: 60%; 
+    width: 60%;
     height: auto;
-    margin-top: 10px;  
+    margin-top: 10px;
     margin-right: auto;
     margin-left: auto;
     padding: 10px 5px;
+  }
+
+
 }
 
+/* pc,tab */
+@media (min-width: 1000px) {
+  .text-large {
+    font-size: 2rem;
+  }
+
+  .text-middle {
+    font-size: 1rem;
+  }
+
+  .text-small {
+    font-size: 0.8rem;
+  }
+
+  /* ページタイトルのスタイル */
+  .page_title {
+    font-size: 1.5em;
+    /* フォントサイズ */
+    font-family: 'Zen Maru Gothic', sans-serif;
+    text-align: center;
+    background-color: #b0f794;
+    /* 背景色 */
+    box-shadow: 0px 0px 0px 5px #84e477;
+    /*border: dashed 2px #ffffff; 破線 */
+    color: #000000;
+    /* フォント色 */
+    width: 400px;
+    line-height: 50px;
+  }
+
+  .body {
+    /* background: url([[@{/img/450-20110411172544135827.jpg}]]); */
+    background-size: contain;
+    background-attachment: fixed;
+    background-color: #fcf4e0;
+    background-blend-mode: lighten;
+  }
+
+  /*ページの概要説明欄*/
+  .discription {
+    background-color: rgb(255, 237, 209);
+    /*margin-bottom: 1rem;*/
+    text-align: center;
+    width: 60%;
+    height: auto;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px 5px;
+  }
+}

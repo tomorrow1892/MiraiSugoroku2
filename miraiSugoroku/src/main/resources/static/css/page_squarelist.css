@@ -6,7 +6,7 @@
     position: relative;
     padding: 0;
     margin: 10px auto;
-    width: 200px;
+    width: 250px;
 }
 .searchform input{
     line-height: 23px;
@@ -22,14 +22,13 @@
 }
 
 .searchform .searchsubmit {
-    position: absolute;
-    top: 1px;
-    right: 8px;
+
     vertical-align: top;
     line-height: 23px;
     border: none;
     border-radius: 3px;
     background: 0 0;
+    color: black;
     font-size: 18px;
     cursor: pointer;
     width: 30px;
