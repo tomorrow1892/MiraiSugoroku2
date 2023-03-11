@@ -1,9 +1,12 @@
 package ksp.group3.miraiSugoroku.form;
 
+import org.hibernate.validator.constraints.Length;
+
 import lombok.Data;
 
 @Data
 public class UpdateSquareCreatorForm {
-    String nickname = null;
-    int selectedGroup = 0;
+    @Length(max=10)
+    String nickname;
+    int selectedGroup;
 }

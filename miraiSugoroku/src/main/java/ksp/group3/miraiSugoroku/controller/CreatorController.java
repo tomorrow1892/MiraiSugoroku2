@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -265,7 +266,7 @@ public class CreatorController {
     }
 
     @PostMapping("/{cid}/create/confirm") // マス作成確認画面
-    public String showSquareCreateConfirm(@PathVariable String cid, SquareForm form, Model model) {
+    public String showSquareCreateConfirm(@PathVariable String cid,@Validated SquareForm form, Model model) {
         model.addAttribute("SquareForm", form);
         model.addAttribute("cid", cid);
 

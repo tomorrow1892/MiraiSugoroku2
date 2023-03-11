@@ -40,18 +40,18 @@
         
                                 <tr>
                                     <td><label>
-                                            <font color="red">*</font>タイトル(50字まで):
+                                            <font color="red">*</font>タイトル(28文字まで):
                                         </label></td>
-                                    <td><input type="text" size="40" placeholder="例)しい茸園有馬富士でBBQする" maxlength="50"
+                                    <td><input type="text" size="40" placeholder="例)しい茸園有馬富士でBBQする" maxlength="28"
                                             id="titleInput" required th:field="*{title}" style="width: 300px;" /></td>
                                 </tr>
                                 <tr>
                                     <td><label>
-                                            <font color="red">*</font>説明(255字まで):
+                                            <font color="red">*</font>説明(60文字まで):
                                         </label></td>
         
                                     <td><textarea id="textInput" placeholder="例)しい茸園有馬富士では、しい茸狩りやBBQ、魚釣り、栗ひろいが体験できます。" rows="5"
-                                            cols="50" maxlength="255" required th:field="*{description}"
+                                            cols="50" maxlength="60" required th:field="*{description}"
                                             style="width: 300px;" />
                                     </td>
                                 </tr>
@@ -94,7 +94,7 @@
                     <div class="card d-flex align-items-center">
                         <h2 class="font-wght700" style="text-align: center;">でき上がるマス</h2>
                         <!-- マス -->
-                        <div class="masu card border border-success border-3 shadow-sm ">
+                        <div class="masu">
         
                             <div class="masu-header d-flex justify-content-center" id="headerMasu">
                                 <img class="masu-img" id="imgMasu">
@@ -107,11 +107,12 @@
                                     </li>
                                     <li class="masu-contents list-group-item ">
                                         <p class="masu-description" id="textMasu"></p>
-                                        <p class="masu-creator">作者: [[${nickName}]]</p>
+                                        
                                     </li>
         
                                 </ul>
                             </div>
+                            <div class="masu-creator">作者: [[${nickName}]]</div>
                             <div class="masu-event">
                                 <img th:src="@{/img/dice.png}" id="eventImgMasu">
                                 <p class="font-wght700" id="eventMasu">

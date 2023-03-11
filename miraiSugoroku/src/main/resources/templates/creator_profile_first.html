@@ -48,8 +48,8 @@
                 </tr>
                 <br>
                 <tr>
-                    <td><label>ニックネーム: </label></td>
-                    <td><input type="text" th:field="*{nickname}" required /></td>
+                    <td><label>ニックネーム(10文字まで): </label></td>
+                    <td><input type="text" th:field="*{nickname}" maxlength="10" required /></td>
                 </tr>
 
                 <p><input type="submit" value="登録" />

@@ -1,5 +1,7 @@
 package ksp.group3.miraiSugoroku.form;
 
+import org.hibernate.validator.constraints.Length;
+
 import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import lombok.Data;
 

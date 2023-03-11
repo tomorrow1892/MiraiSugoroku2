@@ -1,12 +1,14 @@
+/** 以下マスのスタイル **/
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
 
 .masu{
-    width: 22.5rem;
-    height: 27rem;
+    width: 20rem;
+    height: 24rem;
     position: relative;
+    border: 6px solid rgba(54, 180, 16, 0.795);
 }
 .masu .masu-header{
-    height:50%;
+    height:48%;
     background-color: #c1ff7953;
 }
     .masu-header .masu-img{
@@ -16,14 +18,14 @@
     }
 
 .masu .masu-body{
-    height:50%;
+    height:52%;
     width: 100%;
 }
     .masu-body ul{
         height: 100%;
     }
     .masu-body .masu-title{
-        height: 40%;
+        height: 45%;
         width: auto;
         text-align: center;
         
@@ -36,26 +38,29 @@
         }
 
     .masu-body .masu-contents{
-        height: 60%;
+        height: 55%;
         width: 100%;
     }
         .masu-contents .masu-description{
-            font-size: 0.8rem;
-            height: 70%;
+            font-size: 1.0rem;
+            height: 80%;
             width: 100%;
             overflow: auto;
         }
 
-        .masu-contents .masu-creator{
-            font-family: 'Zen Maru Gothic', sans-serif;
-            height: 25%;
-            text-align:end;
-            font-size: 1.2rem;
-        }
+.masu .masu-creator{
+    font-family: 'Zen Maru Gothic', sans-serif;
+    bottom: 0%;
+    right: 5%; 
+    position: absolute;
+    
+    text-align:end;
+    font-size: 1.0rem;
+}
 
 .masu .masu-event{
     position: absolute;
-    width:25%;
+    width:30%;
     right: 0%; 
     top: 40%;
 }
@@ -82,3 +87,4 @@
               -1px 0 0 #FFF, 1px 0 0 #FFF;
     
     }
+/** マスのスタイルここまで **/
