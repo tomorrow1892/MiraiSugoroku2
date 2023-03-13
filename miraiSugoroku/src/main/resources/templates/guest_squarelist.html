@@ -38,25 +38,34 @@
         <div class="flex-item">
             <form role="search" method="get" class="searchform" th:action="@{/squares/search/keyword}">
                 <label class="screen-reader-text" for="keyword">&emsp;キーワード：</label>
-                <div th:if="${(search eq 0) or (search eq 2) or (search eq 3)}">
-                    <input type="text" value="" name="keyword" id="keyword" placeholder="キーワードでけんさく">
+                <div class="d-flex">
+                    <div th:if="${(search eq 0) or (search eq 2) or (search eq 3)}">
+                        <input type="text" value="" name="keyword" id="keyword" placeholder="キーワードでけんさく">
+                    </div>
+                    <div th:if="${search eq 1}">
+                        <input type="text" th:value="*{kw}" name="keyword" id="keyword" placeholder="キーワードでけんさく">
+                    </div>
+                    <div>
+                        <input type="submit" class="searchsubmit" value="">
+                    </div>
                 </div>
-                <div th:if="${search eq 1}">
-                    <input type="text" th:value="*{kw}" name="keyword" id="keyword" placeholder="キーワードでけんさく">
-                </div>
-                <input type="submit" class="searchsubmit" value="">
+               
+               
             </form>
         </div>
         <div class="flex-item">
             <form role="search" method="get" class="searchform flex-item" th:action="@{/squares/search/nickname}">
                 <label class="screen-reader-text" for="nickname">&emsp;ニックネーム：</label>
-                <div th:if="${(search eq 0) or (search eq 1) or (search eq 3)}">
-                    <input type="text" value="" name="nickname" id="nickname"  placeholder="ニックネームでけんさく">
+                <div class="d-flex">
+                    <div th:if="${(search eq 0) or (search eq 1) or (search eq 3)}">
+                        <input type="text" value="" name="nickname" id="nickname"  placeholder="ニックネームでけんさく">
+                    </div>
+                    <div th:if="${search eq 2}">
+                        <input type="text" th:value="*{nn}" name="nickname" id="nickname"  placeholder="ニックネームでけんさく">
+                    </div>
+                    <input type="submit" class="searchsubmit" value="">
                 </div>
-                <div th:if="${search eq 2}">
-                    <input type="text" th:value="*{nn}" name="nickname" id="nickname"  placeholder="ニックネームでけんさく">
-                </div>
-                <input type="submit" class="searchsubmit" value="">
+                
             </form>
         </div>
         <form role="search" method="get" class="searchform" th:action="@{/squares/search/event}">
@@ -65,27 +74,30 @@
             <input th:value="*{search}" id="event" hidden>
             <div>
                 <label class="screen-reader-text" for="nickname">&emsp;イベント</label>
-                <div th:if="${(search eq 0) or (search eq 1) or (search eq 2)}">
-                    <select id="selectedYear" name="year">
-                        <option th:each="y: ${years}" th:value="${y}" th:text="${y}">
-                        </option>
-                    </select>
-                    <select id="selectedEventId" name="event" required=false>
-                        <option value="" class="form-control">- イベントをえらんでください -</option>
-                    </select>
+                <div class="d-flex">
+                    <div th:if="${(search eq 0) or (search eq 1) or (search eq 2)}">
+                        <select id="selectedYear" name="year">
+                            <option th:each="y: ${years}" th:value="${y}" th:text="${y}">
+                            </option>
+                        </select>
+                        <select id="selectedEventId" name="event" required=false>
+                            <option value="" class="form-control">- イベントをえらんでください -</option>
+                        </select>
+                    </div>
+    
+                    <div th:if="${search eq 3}">
+                        <select id="selectedYear" name="year">
+                            <option th:each="y: ${years}" th:value="${y}" th:text="${y}" th:selected="${y} == *{sentaku}">
+                            </option>
+                        </select>
+                        <select id="selectedEventId" name="event" required=false>
+                            <option value="" class="form-control">- イベントをえらんでください -</option>
+                        </select>
+                    </div>
+    
+                    <input type="submit" class="searchsubmit mx-3" value="">
                 </div>
-
-                <div th:if="${search eq 3}">
-                    <select id="selectedYear" name="year">
-                        <option th:each="y: ${years}" th:value="${y}" th:text="${y}" th:selected="${y} == *{sentaku}">
-                        </option>
-                    </select>
-                    <select id="selectedEventId" name="event" required=false>
-                        <option value="" class="form-control">- イベントをえらんでください -</option>
-                    </select>
-                </div>
-
-                <input type="submit" class="searchsubmit" value="">
+               
             </div>
         </form>
     </div>
@@ -102,7 +114,7 @@
                 <a th:href="@{${path}(page=${page.number})}" class=" page-link" th:tabindex="${page.first} ? -1"
                     aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
-                    <span>前のページ</span>
+                    <!-- <span>前のページ</span> -->
                 </a>
             </li>
 
@@ -138,7 +150,7 @@
                 <a th:href="@{${path}(page=${page.number + 2})}" class="page-link" th:tabindex="${page.last} ? -1"
                     aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
-                    <span>次のページ</span>
+                    <!-- <span>次のページ</span> -->
                 </a>
             </li>
         </ul>
@@ -148,8 +160,8 @@
 
 
     <!-- マスリスト -->
-    <div class="card "
-        style="min-width: 22rem; margin-right: auto;margin-left: auto; height: 100vh;width: 90vw; overflow: auto;">
+    <div class="card pb-5"
+        style="min-width: 22rem; margin-right: auto;margin-left: auto;width: 90vw;">
         <div class="d-flex flex-wrap justify-content-center">
             <div th:each="square: ${square_list}" class="masu mt-5 ms-3 lb-3 ls-3">
 
@@ -203,13 +215,13 @@
                         <span class="newiine_count"></span>いいね
 
                         <!-- お礼メッセージここから -->
-                        <div class="newiine_thanks newiine_thanks_up" style="display:none;">
+                        <!-- <div class="newiine_thanks newiine_thanks_up" style="display:none;">
                             <div class="newiine_box">
                                 <img th:src="@{/img/kominkun.jpg}"
                                     alt="THANK YOU!">
                                 <p>ありがとうございます！</p>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- お礼メッセージここまで -->
                     </button>
                     <!-- いいねボタン改ここまで -->
