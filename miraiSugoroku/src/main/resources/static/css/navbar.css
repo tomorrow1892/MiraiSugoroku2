@@ -1,33 +1,77 @@
-.navbar{
-    background-color: #faefcb;
+/* スマホ */
+@media (max-width: 1000px) {
+    .navbar{
+        background-color: #faefcb;
+        
+        width: 100vw;
+        height: 130px;
+        overflow-x: auto;
+        /* max-height: 110px;
+        min-height: 100px; */
+    }
     
-    width: 100%;
-    height: 12vh;
-    /* max-height: 110px;
-    min-height: 100px; */
+        .navbar .navbar-brand img{
+            width: 100px; 
+            height: 100px; 
+            margin-left: 20px;
+        }
+        .navbar .navbar-nav{
+            height: 100%;
+            
+            align-items: center;
+            text-align: center;
+        }
+            .navbar-nav .nav-item{
+                height: 100%;
+                width: 150px;
+                padding-left:30px;
+      padding-right:30px;
+            }
+                .nav-item img{
+    
+                height: 40px;
+                }
+    
+                .nav-item .nav-link{
+                    color: blueviolet;
+                    
+                }
 }
 
-    .navbar .navbar-brand img{
-        width: 110px; 
-        height: 110px; 
-        margin-left: 20px;
+/* tab,pc */
+@media (min-width: 1000px) {
+    .navbar{
+        background-color: #faefcb;
+        
+        width: 100vw;
+        height: 120px;
+        overflow-x: auto;
+        /* max-height: 110px;
+        min-height: 100px; */
     }
-    .navbar .navbar-nav{
-        height: 100%;
-        align-items: center;
-        text-align: center;
-    }
-        .navbar-nav .nav-item{
-            height: 100%;
-            padding-left:30px;
-  padding-right:30px;
+    
+        .navbar .navbar-brand img{
+            width: 110px; 
+            height: 110px; 
+            margin-left: 20px;
         }
-            .nav-item img{
-
-            height: 45px;
+        .navbar .navbar-nav{
+            height: 100%;
+            align-items: center;
+            text-align: center;
+        }
+            .navbar-nav .nav-item{
+                height: 100%;
+                padding-left:30px;
+      padding-right:30px;
             }
-
-            .nav-item .nav-link{
-                color: blueviolet;
-                
-            }
+                .nav-item img{
+    
+                height: 45px;
+                }
+    
+                .nav-item .nav-link{
+                    color: blueviolet;
+                    
+                }
+}
