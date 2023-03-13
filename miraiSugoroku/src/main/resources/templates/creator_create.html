@@ -37,7 +37,7 @@
                         <div class="card-header">
                             <font color="red" style="font-size: 10;">*</font>は必ず入力してください
                             <table>
-        
+
                                 <tr>
                                     <td><label>
                                             <font color="red">*</font>タイトル(28文字まで):
@@ -49,9 +49,9 @@
                                     <td><label>
                                             <font color="red">*</font>説明(60文字まで):
                                         </label></td>
-        
-                                    <td><textarea id="textInput" placeholder="例)しい茸園有馬富士では、しい茸狩りやBBQ、魚釣り、栗ひろいが体験できます。" rows="5"
-                                            cols="50" maxlength="60" required th:field="*{description}"
+
+                                    <td><textarea id="textInput" placeholder="例)しい茸園有馬富士では、しい茸狩りやBBQ、魚釣り、栗ひろいが体験できます。"
+                                            rows="5" cols="50" maxlength="60" required th:field="*{description}"
                                             style="width: 300px;" />
                                     </td>
                                 </tr>
@@ -61,9 +61,10 @@
                                         </label></td>
                                     <td>
                                         <select required th:field="*{squareEventId}" id="eventInput" class="">
-        
-                                            <option required th:each="se:${SquareEventList}" th:value="${se.squareEventID}"
-                                                th:text="${se.eventTitle}" th:selected="${se.squareEventID == selectedValue}">
+
+                                            <option required th:each="se:${SquareEventList}"
+                                                th:value="${se.squareEventID}" th:text="${se.eventTitle}"
+                                                th:selected="${se.squareEventID == selectedValue}">
                                             </option>
                                         </select>
                                     </td>
@@ -75,30 +76,30 @@
                                             <p class="drag-drop-info">ここにファイルをドロップ</p>
                                             <p>または</p>
                                             <p class="drag-drop-buttons btn-green">
-                                                <input id="fileInput" type="file" accept="image/*" value="ファイルを選択" name="photo"
-                                                    onChange="photoPreview(event)">
+                                                <input id="fileInput" type="file" accept="image/*" value="ファイルを選択"
+                                                    name="photo" onChange="photoPreview(event)">
                                             </p>
                                             <div id="previewArea"></div>
                                         </div>
                                     </td>
                                     <td><input type="text" th:field="*{picture}" id="pic" hidden /></td>
                                 </tr>
-        
+
                             </table>
                             <input type="hidden" name="creatorName" th:value="${nickName}">
-        
+
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card d-flex align-items-center">
+                    <div class="card d-flex align-items-center p-3 ">
                         <h2 class="font-wght700" style="text-align: center;">でき上がるマス</h2>
                         <!-- マス -->
                         <div class="masu">
-        
+
                             <div class="masu-header d-flex justify-content-center" id="headerMasu">
                                 <img class="masu-img" id="imgMasu">
-        
+
                             </div>
                             <div class="masu-body">
                                 <ul class="list-group ">
@@ -107,9 +108,9 @@
                                     </li>
                                     <li class="masu-contents list-group-item ">
                                         <p class="masu-description" id="textMasu"></p>
-                                        
+
                                     </li>
-        
+
                                 </ul>
                             </div>
                             <div class="masu-creator">作者: [[${nickName}]]</div>
@@ -128,8 +129,8 @@
         </div>
 
         <div class="d-flex align-items-start justify-content-center   flex-wrap">
-        
-            
+
+
 
         </div>
         <p style="text-align: center;"><input type="submit" value="これで完成" class="btn btn--top btn--cubic btn--shadow" />
@@ -187,8 +188,40 @@
         eventLine.hide("fade", { duration: 100 });
     })
     eventInput.addEventListener("change", (e) => {
-
+        //デプロイ用設定
+        //const deployedPath = "https://es4.eedept.kobe-u.ac.jp/miraisugoroku"
+        //ローカル用設定．
+        const deployedPath = "";
+        let diceImgSrc = "";
         eventMasu.textContent = eventInput.options[eventInput.selectedIndex].text;
+        console.log("eventInput:" + eventInput.value)
+        switch (eventInput.value) {
+            case "1": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
+            case "2": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
+            case "3": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
+            case "4": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
+            case "5": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
+            case "6": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
+            case "7": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "8": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "9": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "10": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "11": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "12": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "13": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "14": eventImgMasu.src=deployedPath+"/img/dice.png"; break;
+            case "15": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
+            case "16": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
+            case "17": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
+            case "18": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
+            case "19": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
+            case "20": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "21": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "22": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "23": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "24": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            default: break;
+        }
     })
 
     //画像
