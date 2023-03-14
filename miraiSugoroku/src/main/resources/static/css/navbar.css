@@ -44,15 +44,15 @@
         background-color: #faefcb;
         
         width: 100vw;
-        height: 120px;
+        height: 130px;
         overflow-x: auto;
         /* max-height: 110px;
         min-height: 100px; */
     }
     
         .navbar .navbar-brand img{
-            width: 110px; 
-            height: 110px; 
+            width: 100px; 
+            height: 100px; 
             margin-left: 20px;
         }
         .navbar .navbar-nav{
