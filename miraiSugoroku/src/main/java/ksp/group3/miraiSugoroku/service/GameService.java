@@ -294,7 +294,6 @@ public class GameService {
             squares = takeAtRandom( remainSquares, rest, new Random() );
             squares.addAll( allGroupSquares );
         }
-        System.out.println("allGroupSquares" + allGroupSquares);
         return squares;
     }
 
