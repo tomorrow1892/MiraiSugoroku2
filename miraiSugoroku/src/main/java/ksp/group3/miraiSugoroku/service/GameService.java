@@ -67,7 +67,7 @@ public class GameService {
             squares = selectSquaresFromEvent( length, form.getEventId() );
         } else if ( form.isGroup() ) {
             SquareCreator creator = cRepo.findById( form.getCreatorId() ).get();
-            squares = selectSquaresFromGroup(length, gameId, creator.getGroup() );
+            squares = selectSquaresFromGroup(length,creator.getEventId(), creator.getGroup() );
         } else {
             squares = selectSquaresFromAll( length );
         }
@@ -294,6 +294,7 @@ public class GameService {
             squares = takeAtRandom( remainSquares, rest, new Random() );
             squares.addAll( allGroupSquares );
         }
+        System.out.println("allGroupSquares" + allGroupSquares);
         return squares;
     }
 
