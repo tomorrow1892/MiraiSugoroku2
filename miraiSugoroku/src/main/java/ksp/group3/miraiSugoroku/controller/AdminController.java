@@ -294,6 +294,7 @@ public class AdminController {
         model.addAttribute("squareId", squareId);
         model.addAttribute("eventId", eventId);
         model.addAttribute("roll", "admin");
+        System.out.println(sf);
         return "admin_confirm_square";
     }
 

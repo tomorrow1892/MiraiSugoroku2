@@ -39,6 +39,28 @@
 
 
 /** 検索窓のスタイルここまで **/
+/**ボタンスタイル**/
+.button_link {
+    font-family: "メイリオ", Meiryo, "ヒラギノ角ゴシック", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", sans-serif;
+    position: relative;
+    cursor: pointer;
+    background: transparent;
+    background-color: #c5fbff;
+    border: 1px solid;
+    color: #0033ff;
+    font-size: 13px;
+    border-radius: 20px;
+    padding: 3px 13px;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+  
+  .button_link:hover {
+    background: #60f4ff;
+  }
+  
 
 /** 以下マスのスタイル **/
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');

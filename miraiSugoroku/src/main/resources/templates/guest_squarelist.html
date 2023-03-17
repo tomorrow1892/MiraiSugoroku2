@@ -163,7 +163,7 @@
     <div class="card pb-5"
         style="min-width: 22rem; margin-right: auto;margin-left: auto;width: 90vw;">
         <div class="d-flex flex-wrap justify-content-center">
-            <div th:each="square: ${square_list}" class="masu mt-5 ms-3 lb-3 ls-3">
+            <div th:each="square: ${square_list}" class="masu mt-5 mb-3 ms-3 lb-3 ls-3">
 
                 <div class="masu-header d-flex justify-content-center">
                     <img th:src="${square.picture}" class="masu-img">
@@ -223,7 +223,11 @@
                             </div>
                         </div> -->
                         <!-- お礼メッセージここまで -->
+                        <!-- th:if="${square.link != null}" -->
                     </button>
+                    <a th:if="${square.link}" class="button_link" th:href="${square.link}" target="_blank">
+                       もっと見てみる
+                    </a>
                     <!-- いいねボタン改ここまで -->
                 </div>
             </div>

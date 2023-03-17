@@ -131,7 +131,7 @@
                 <div class="card  bg-white mb-3 ms-5 lb-3 ls-3 border-3 shadow-sm ">
                     <div class="card-header">
                         <font color="red" style="font-size: 10;">*</font>は必ず入力してください
-                        <table>
+                        <table >
                             <tr>
                                 <td><label>
                                         <font color="red">*</font>タイトル(50字まで):
@@ -178,6 +178,13 @@
                                     </div>
                                 </td>
                                 <td><input type="text" th:field="*{picture}" id="pic" hidden /></td>
+                            </tr>
+                            <tr>
+                                <td>リンク<br>(マスの内容に関連した外部サイトなどのURL)</td>
+                                <td>
+                                    <input type="text" size="40"
+                                        id="linkInput" required th:field="*{link}" style="width: 300px;" />
+                                </td>
                             </tr>
 
                         </table>
