@@ -47,6 +47,7 @@ public class SquareService {
         square.setPicture(form.getPicture());
         square.setApproved(form.isApproved());
         square.setSquareEffect(form.determineKindOfSquare(form.getSquareEventId()));
+        square.setLink(form.getLink());
 
         return sRepo.save(square);
     }

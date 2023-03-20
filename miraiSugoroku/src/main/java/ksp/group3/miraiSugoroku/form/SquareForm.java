@@ -17,6 +17,7 @@ public class SquareForm {
     int groupId;
     boolean isApproved;
     String picture;
+    String link;
 
     public Square toEntity() {
         Square square = new Square();
@@ -30,7 +31,7 @@ public class SquareForm {
         square.setEventId(eventId);
         square.setPicture(picture);
         square.setSquareEffect(determineKindOfSquare(squareEventId));
-
+        square.setLink(link);
         return square;
     }
 
