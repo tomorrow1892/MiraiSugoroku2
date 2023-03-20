@@ -20,3 +20,14 @@
 .drag-drop-buttons input{
     margin: auto;
 }
+
+input[type="submit"] {
+    color: #fff;
+    width: 10%;
+    padding: 0.7%;
+  background-color:  rgb(255, 82, 41);
+  border-radius: 100vh;
+  border: 1px solid #ffffff;
+  vertical-align: middle;
+  
+}

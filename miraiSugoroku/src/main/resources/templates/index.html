@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
+
     <title>さんだみらいすごろく</title>
-    <link rel="icon" th:href="@{/img/favicon.ico}" >
-    <link rel="apple-touch-icon" sizes="180x180"   th:href="@{/img/kouminkun.png}" />
+    <link rel="icon" th:href="@{/img/favicon.ico}">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/kouminkun.png}" />
     <link rel="stylesheet" th:href="@{/css/display.css}">
     <link rel="stylesheet" th:href="@{/css/page_top.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
@@ -55,43 +56,57 @@
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12 px-5">
-                <div class="toppage_img center-block" style="position: relative;width:100%;padding-top:65%">
-                    <img th:src="@{/img/s-農村風景_0077(わがまちさんだ).jpg}" width="90%"
-                        style="border-radius: 50%;position: absolute;top: 0%;left: 10%;">
-                    <form th:action="@{/loginpage}" method="get">
-                        <input id="button_login" type="image" th:src="@{img/button_login4.png}" width="30%"
-                            style="position: absolute;top: 50%;left: 60%;">
-                    </form>
+                <div class="toppage_img center-block">
+                    <img th:src="@{/img/s-農村風景_0077(わがまちさんだ).jpg}" width="60%" style="border-radius: 40px;">
                 </div>
-                <div class="box " style="width: 100%">
+                <div class="box mt-5" style="width: 100%; border-radius:10px">
                     <h3 class="text-large">こうみん未来塾とは</h3>
                     <div class="inner">
                         <div class="container-fluid p-3">
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-12 text-center">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-4 col-sm-8 text-center">
                                     <a href="https://www.city.sanda.lg.jp/kosodate_kyoiku/ikuji_student/chiki_kosodate/3/10174.html"
                                         target="_blank"><img type="image" th:src="@{img/kouminkun.png}" width="100%">
                                     </a>
-                                    <div class="text-middle "><font color="red">👆詳しくはアイコンをクリック！</font></div>
+                                    <div class="text-middle ">
+                                        <font color="red"><b>👆詳しくはアイコンをクリック！</b></font>
+                                    </div>
                                 </div>
-                                <div class="col-lg-8  col-sm-12 text-middle">
-                                    企業や専門家、地域人材などオール三田で子どもの学びを支える「こうみん未来塾」は、
-                                    多彩なプログラムが１００個以上！子どもたちが本物に触れる体験を通して、<br>
-                                    　①科学技術に親しみを感じる子、<br>
-                                    　②グローバルに活躍する気概を持つ子、<br>
-                                    　③チャレンジ精神旺盛な子<br>
-                                    の育成をめざしています。
+                                <div class="col-lg-8  col-sm-12 text-middle ">
+
+                                    <div class="container-fluid">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12 ">
+                                                企業や専門家、地域人材などオール三田で子どもの学びを支える「こうみん未来塾」は、
+                                                多彩なプログラムが１００個以上！子どもたちが本物に触れる体験を通して、<br>
+                                                　①科学技術に親しみを感じる子、<br>
+                                                　②グローバルに活躍する気概を持つ子、<br>
+                                                　③チャレンジ精神旺盛な子<br>
+                                                の育成をめざしています。
+                                            </div>
+                                            <div class="col-12 col-lg-10">
+                                                
+                                                <form th:action="@{/loginpage}" method="get">
+                                                    <input id="button_login" type="image"
+                                                        th:src="@{img/button_login.png}" width="90%">
+                                                </form>
+                                            </div>
+                                            <div class="col-12 col-lg-10 text-middle">
+                                                <font color="red"><b>👆イベント参加者はこちらからマスづくりができます</b></font>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <!-- <img th:src="@{img/blob-haikei.png}" width="120%" style="position: absolute;top: 10px;left: 10px;"> -->
                                 </div>
                             </div>
-                            <!-- <img th:src="@{img/blob-haikei.png}" width="120%" style="position: absolute;top: 10px;left: 10px;"> -->
                         </div>
-                    </div>
-                </div>
 </body>
 <script>
     setButtonHover("button_play", "/img/button_playsugoroku5.png", "/img/button_playsugoroku5_hover.png")
     setButtonHover("button_masulist", "/img/button_masulist2.png", "/img/button_masulist2_hover.png")
-    setButtonHover("button_login", "/img/button_login4.png", "/img/button_login4_hover.png")
+    setButtonHover("button_login", "/img/button_login.png", "/img/button_login_hover.png")
 </script>
 
 </html>

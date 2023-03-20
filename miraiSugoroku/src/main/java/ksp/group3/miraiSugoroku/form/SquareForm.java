@@ -1,10 +1,13 @@
 package ksp.group3.miraiSugoroku.form;
 
+import org.hibernate.validator.constraints.Length;
+
 import ksp.group3.miraiSugoroku.entity.Square;
 import lombok.Data;
 
 @Data
 public class SquareForm {
+    @Length(max=28)
     String title;
     Long squareEventId;
     String description;

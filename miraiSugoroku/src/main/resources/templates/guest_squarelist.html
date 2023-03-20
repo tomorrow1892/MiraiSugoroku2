@@ -40,10 +40,10 @@
                 <label class="screen-reader-text" for="keyword">&emsp;キーワード：</label>
                 <div class="d-flex">
                     <div th:if="${(search eq 0) or (search eq 2) or (search eq 3)}">
-                        <input type="text" value="" name="keyword" id="keyword" placeholder="キーワードでけんさく">
+                        <input type="text" value="" name="keyword" id="keyword" placeholder="キーワードでマスをけんさく">
                     </div>
                     <div th:if="${search eq 1}">
-                        <input type="text" th:value="*{kw}" name="keyword" id="keyword" placeholder="キーワードでけんさく">
+                        <input type="text" th:value="*{kw}" name="keyword" id="keyword" placeholder="キーワードでマスをけんさく">
                     </div>
                     <div>
                         <input type="submit" class="searchsubmit" value="">
@@ -58,10 +58,10 @@
                 <label class="screen-reader-text" for="nickname">&emsp;ニックネーム：</label>
                 <div class="d-flex">
                     <div th:if="${(search eq 0) or (search eq 1) or (search eq 3)}">
-                        <input type="text" value="" name="nickname" id="nickname"  placeholder="ニックネームでけんさく">
+                        <input type="text" value="" name="nickname" id="nickname"  placeholder="マスの作者でマスをけんさく">
                     </div>
                     <div th:if="${search eq 2}">
-                        <input type="text" th:value="*{nn}" name="nickname" id="nickname"  placeholder="ニックネームでけんさく">
+                        <input type="text" th:value="*{nn}" name="nickname" id="nickname"  placeholder="マスの作者でマスをけんさく">
                     </div>
                     <input type="submit" class="searchsubmit" value="">
                 </div>
@@ -81,7 +81,7 @@
                             </option>
                         </select>
                         <select id="selectedEventId" name="event" required=false>
-                            <option value="" class="form-control">- イベントをえらんでください -</option>
+                            <option value="" class="form-control">- イベントでマスをけんさく -</option>
                         </select>
                     </div>
     

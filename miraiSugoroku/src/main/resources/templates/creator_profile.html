@@ -50,8 +50,8 @@
             <br>
                 <br>
             <tr>
-                <td><label style="font-weight: bold; color: #6091d3;">ニックネーム: </label></td>
-                <td><input type="text" th:field="*{nickname}" required class="form-control"/></td>
+                <td><label>ニックネーム(10文字まで): </label></td>
+                <td><input type="text" th:field="*{nickname}" maxlength="10" required class="form-control"/></td>
             </tr>
                 <p><button class="btn btn-info btn-block login" type="submit">登録</button></p>
             </form>
