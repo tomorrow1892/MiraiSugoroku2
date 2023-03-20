@@ -64,7 +64,10 @@ public class GameService {
         List<Square> squares;
 
         if ( form.isEvent() ) {
-            squares = selectSquaresFromGroup( length, form.getEventId() );
+            squares = selectSquaresFromEvent( length, form.getEventId() );
+        } else if ( form.isGroup() ) {
+            SquareCreator creator = cRepo.findById( form.getCreatorId() ).get();
+            squares = selectSquaresFromGroup(length,creator.getEventId(), creator.getGroup() );
         } else {
             squares = selectSquaresFromAll( length );
         }
@@ -264,13 +267,29 @@ public class GameService {
         return squares;
     }
 
-    public List<Square> selectSquaresFromGroup( int length, Long eventId ) {
-        List<Square> allGroupSquares = sqRepo.findByEventIdAndIsApproved( eventId, true );
+    public List<Square> selectSquaresFromEvent( int length, Long eventId ) {
+        List<Square> allEventSquares = sqRepo.findByEventIdAndIsApproved( eventId, true );
+        int rest = length - allEventSquares.size();
+        List<Square> squares;
+        if ( rest <= 0 ) { squares = takeAtRandom( allEventSquares, length, new Random() ); }
+        else
+        {
+            List<Square> remainSquares = sqRepo.findByIsApproved( true );
+            remainSquares.removeAll( allEventSquares );
+            squares = takeAtRandom( remainSquares, rest, new Random() );
+            squares.addAll( allEventSquares );
+        }
+        return squares;
+    }
+
+    public List<Square> selectSquaresFromGroup( int length, Long eventId, int groupId) {
+        List<Square> allGroupSquares = sqRepo.findByEventIdAndGroupIdAndIsApproved(eventId, groupId, true);
         int rest = length - allGroupSquares.size();
         List<Square> squares;
         if ( rest <= 0 ) { squares = takeAtRandom( allGroupSquares, length, new Random() ); }
-        else {
-            List<Square> remainSquares = sqRepo.findByIsApproved( true );
+        else
+        {
+            List<Square> remainSquares = sqRepo.findByIsApproved(true);
             remainSquares.removeAll( allGroupSquares );
             squares = takeAtRandom( remainSquares, rest, new Random() );
             squares.addAll( allGroupSquares );
