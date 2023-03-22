@@ -82,4 +82,35 @@ public class CreatorService {
 
         return cRepo.findByEventIdAndLoginId(eventId, loginId);
     }
+
+    public void createSquareCreatorsOneTime(int nCreators, Long eventId ) {
+        for (int i = 0; i < nCreators; i++) {
+            String id = generateCreatorId(eventId, i);
+            // この部分はSquareCreatorエンティティによって変更の必要あり（name属性など）
+            SquareCreator creator = new SquareCreator(null, id, eventId, 0, true, "", "");
+            cRepo.save(creator);
+        }
+    }
+
+    public String generateCreatorId(long eventId, int index) {
+        int number = (int)eventId + index;
+        int sum = getDigitsSum(number);
+        int check_digit = sum % 26;
+        char alphabet = 'A';
+        for (int i = 0; i < check_digit; i++) {
+            alphabet ++;
+        }
+        String creatorId = String.format("%04d", eventId) + alphabet + String.format("%03d", index);
+        return creatorId; 
+    }
+
+    private int getDigitsSum(int number) {
+        int sum = 0;
+        while ( number < 1 ) {
+            sum += number % 10;
+            number /= 10;
+        }
+        return sum;
+    }
+
 }
