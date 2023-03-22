@@ -187,11 +187,22 @@ input[type=radio][value="event"]+label:before{
     width: 140px;
     height: 48px;
 }
+input[type=radio][value="group"]+label:before{
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 140px;
+    height: 48px;
+}
 input[type=radio][value="none"]{
     display: none;
 } 
 
 input[type=radio][value="event"]{
+    display: none;
+} 
+input[type=radio][value="group"]{
     display: none;
 } 
 
@@ -210,6 +221,15 @@ input[type=radio][value="none"]:checked+label:before{
 }
 input[type=radio][value="event"]:checked+label:before{
     background-image: url(./img/eventaf.png);
+    border: 0px solid rgb(0, 0, 0);
+    box-sizing: border-box;
+}
+input[type=radio][value="group"]+label:before{
+    background-image: url(./img/group.png);
+}
+
+input[type=radio][value="group"]:checked+label:before{
+    background-image: url(./img/groupaf.png);
     border: 0px solid rgb(0, 0, 0);
     box-sizing: border-box;
 }
