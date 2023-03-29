@@ -5,6 +5,7 @@ import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.form.SquareCreatorForm;
 import ksp.group3.miraiSugoroku.form.UpdateSquareCreatorForm;
 import ksp.group3.miraiSugoroku.repository.CreatorRepository;
+import ksp.group3.miraiSugoroku.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,25 @@ import java.util.Optional;
 public class CreatorService {
     @Autowired
     CreatorRepository cRepo;
+    @AutoWired
+    EventRepository eRepo;
 
     public SquareCreator createSquareCreator(SquareCreatorForm form) {
         return cRepo.save(form.toEntity());
     }
+
+    public void createSquareCreators(long eventId, int number) {
+        int nMembers = eRepo.findById(eventId).getNMembers();
+        for (int index = 0; index < number; index++) {
+            String id = generateCreatorId(eventId, nMembers + index + 1);
+            SquareCreator creator = new SquareCreator(null, id, eventId, 0, true, "", null);
+            cRepo.save(creator); 
+        }
+        eRepo.findById(eventId).setNMembers(nMembers + number);
+
+    }
+
+
 
     public SquareCreator getSquareCreator(Long creatorId) {
         Optional<SquareCreator> sc = cRepo.findById(creatorId);
@@ -82,4 +98,35 @@ public class CreatorService {
 
         return cRepo.findByEventIdAndLoginId(eventId, loginId);
     }
+
+    public void createSquareCreatorsOneTime(int nCreators, Long eventId ) {
+        for (int i = 0; i < nCreators; i++) {
+            String id = generateCreatorId(eventId, i);
+            // この部分はSquareCreatorエンティティによって変更の必要あり（name属性など）
+            SquareCreator creator = new SquareCreator(null, id, eventId, 0, true, "", "");
+            cRepo.save(creator);
+        }
+    }
+
+    public String generateCreatorId(long eventId, int index) {
+        int number = (int)eventId + index;
+        int sum = getDigitsSum(number);
+        int check_digit = sum % 26;
+        char alphabet = 'A';
+        for (int i = 0; i < check_digit; i++) {
+            alphabet ++;
+        }
+        String creatorId = String.format("%04d", eventId) + alphabet + String.format("%03d", index);
+        return creatorId; 
+    }
+
+    private int getDigitsSum(int number) {
+        int sum = 0;
+        while ( number < 1 ) {
+            sum += number % 10;
+            number /= 10;
+        }
+        return sum;
+    }
+
 }

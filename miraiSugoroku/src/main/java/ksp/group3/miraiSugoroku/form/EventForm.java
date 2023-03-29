@@ -27,6 +27,7 @@ public class EventForm {
         e.setLimitDate(date2);
         e.setNGroups(nGroups);
         e.setApproved(true);
+        e.setNMembers(0);
 
         return e;
     }
