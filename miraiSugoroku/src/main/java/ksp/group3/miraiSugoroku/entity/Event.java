@@ -29,4 +29,6 @@ public class Event {
     String name;
 
     boolean isApproved;
+
+    int nMembers;
 }

@@ -5,6 +5,7 @@ import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.form.SquareCreatorForm;
 import ksp.group3.miraiSugoroku.form.UpdateSquareCreatorForm;
 import ksp.group3.miraiSugoroku.repository.CreatorRepository;
+import ksp.group3.miraiSugoroku.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,25 @@ import java.util.Optional;
 public class CreatorService {
     @Autowired
     CreatorRepository cRepo;
+    @AutoWired
+    EventRepository eRepo;
 
     public SquareCreator createSquareCreator(SquareCreatorForm form) {
         return cRepo.save(form.toEntity());
     }
+
+    public void createSquareCreators(long eventId, int number) {
+        int nMembers = eRepo.findById(eventId).getNMembers();
+        for (int index = 0; index < number; index++) {
+            String id = generateCreatorId(eventId, nMembers + index + 1);
+            SquareCreator creator = new SquareCreator(null, id, eventId, 0, true, "", null);
+            cRepo.save(creator); 
+        }
+        eRepo.findById(eventId).setNMembers(nMembers + number);
+
+    }
+
+
 
     public SquareCreator getSquareCreator(Long creatorId) {
         Optional<SquareCreator> sc = cRepo.findById(creatorId);

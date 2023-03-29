@@ -19,6 +19,7 @@ import ksp.group3.miraiSugoroku.entity.SquareEvent;
 import ksp.group3.miraiSugoroku.form.AdminLoginForm;
 import ksp.group3.miraiSugoroku.form.CreatorAndSquareDTO;
 import ksp.group3.miraiSugoroku.form.EventForm;
+import ksp.group3.miraiSugoroku.form.GenerateCreatorsForm;
 import ksp.group3.miraiSugoroku.form.SquareCreatorForm;
 import ksp.group3.miraiSugoroku.form.SquareForm;
 import ksp.group3.miraiSugoroku.service.CreatorService;
@@ -153,6 +154,7 @@ public class AdminController {
     }
 
     // 参加者（作成者）の追加
+    /*
     @PostMapping("/admin/event/{eventId}/creator/register")
     public String registerSquareCreator(@PathVariable Long eventId, SquareCreatorForm scform, Model model) {
         // 一応イベント内のログインIDが重複しないように
@@ -164,6 +166,19 @@ public class AdminController {
         }
         return "redirect:/admin/event/" + eventId;
     }
+    */
+
+    @PostMapping("/admin/event/{eventId}/creator/register")
+    public String registerSquareCreators(@PathVariable Long eventId, GenerateCreatorsForm form, Model model) {
+        int number = form.getNumber();
+        if (number > 0) {
+            cService.createSquareCreators(eventId, number);
+        }
+        return "redirect:/admin/event/" + eventId;
+    }
+
+
+
 
     // 参加者（作成者）の削除の確認
     @GetMapping("/admin/event/{eventId}/creator/delete/confirm/{creatorId}")
