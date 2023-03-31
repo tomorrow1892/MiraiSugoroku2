@@ -21,47 +21,23 @@
 </div>
 <div class="discription">
     [[${event.name}]]についての詳細設定画面です。<br>
-    参加者の編集、マス承認を行うことができます。<br>
-    マス作成権限の有効期限は、[[${event.limitDate}]]です。<br>
+    参加者の確認、マス承認を行うことができます。<br>
 </div>
 <div class="admin-menu">
     <div>
         <h2>承認済みマス一覧</h2>
-        <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventid})}" method="get">
+        <form th:action="@{/subadmin/event/{eventId}/squarelist(eventId=${eventid})}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを確認する">
         </form>
     </div>
     <div>
         <h2><br>[[${str1}]]</h2>
-        <form th:action="@{/admin/event/{eventId}/approve(eventId=${eventid})}" method="get">
+        <form th:action="@{/subadmin/event/{eventId}/approve(eventId=${eventid})}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを承認する">
         </form>
     </div>
 
-    
-    
-    <h2><br>参加者を追加する</h2>
-    
-    <div th:if="${bool}">
-        <font color="red">
-            <h5>同じログインIDは使用出来ません。</h5></font>
-    <form role="form" th:action="@{/admin/event/{eventId}/creator/register(eventId=${eventid})}" th:object="${scform}" method="post">
-        <table class="table">
-            <tr>
-                <td><label>名前: </label></td>
-                <td><input type="text" required th:field="*{name}" /></td>
-            </tr>
-            <tr>
-                <td><label>ログインID: </label></td>
-                <td><input type="text" required th:field="*{loginId}" /></td>
-            </tr>
-        </table>
-        <input type="submit" value="追加" class="btn btn--orange-ad btn--cubic btn--shadow" />
-    </form>
-</div>
-<div th:if="${bool eq false}"><font color="red">
-    <h4>終了済みイベントのため参加者を追加出来ません</h2></font>
-</div>
+
     <h2><br>参加者一覧</h2>
     <h3>[[${str2}]]</h3>
     <h5>未設定の場合：ニックネームは空欄、<br>グループは0と表示されます。</h3>
@@ -83,11 +59,8 @@
             </tr>
         </table>
         <br>
-        <form th:action="@{/admin/event/{eventId}/edit(eventId=${eventid})}" method="get">
-            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="イベント情報を修正する">
-        </form>
-        <form th:action="@{/admin/menu/}" method="get">
-            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="管理者メニューに戻る">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" class="btn btn-danger m-3" value="ログアウト">
         </form>
     </div>
 </body>

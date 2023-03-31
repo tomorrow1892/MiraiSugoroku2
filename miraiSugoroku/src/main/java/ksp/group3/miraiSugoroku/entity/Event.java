@@ -3,6 +3,7 @@ package ksp.group3.miraiSugoroku.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.Date;
 
@@ -13,7 +14,7 @@ import javax.persistence.Id;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Data
 public class Event {
     @Id
@@ -29,4 +30,6 @@ public class Event {
     String name;
 
     boolean isApproved;
+
+    Long uid; //イベントのサブ管理者ID
 }

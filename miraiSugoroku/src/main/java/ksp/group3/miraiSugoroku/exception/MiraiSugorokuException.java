@@ -6,6 +6,12 @@ public class MiraiSugorokuException extends RuntimeException {
     public static final int WRONG_PASSWORD = 11;
     public static final int ADMIN_PASSWORD_WRONG = 12;
     public static final int USED_LOGINID = 13;
+    public static final int USER_NOT_FOUND = 14;
+    public static final int USER_ALREADY_EXIST = 15;
+    public static final int INVALID_USER_UPDATE = 16;
+    public static final int INVALID_USER_ROLE = 17;
+    
+
     public static final int ERROR = 99;
 
     int code;

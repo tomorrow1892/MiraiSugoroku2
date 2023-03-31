@@ -47,6 +47,7 @@
 <div class="mt-3 mb-3 d-flex justify-content-center">
     <h1 class="page_title">イベント作成</h1>
 </div>
+
 <div class="discription">
     イベント名、マス作成権限の有効期限、最大グループ数を設定してください。<br>
     <font color="red">イベント名は一度設定すると修正できません。</font>
@@ -59,6 +60,14 @@
                 <td><input type="text" required th:field="*{name}" /></td>
             </tr>
             <tr>
+                <td><label>マス承認管理者ID: </label></td>
+                <td><input type="text" required th:field="*{subadminName}" /></td>
+            </tr>
+            <tr>
+                <td><label>マス承認管理者パスワード: </label></td>
+                <td><input type="text" required th:field="*{password}" /></td>
+            </tr>
+            <tr>
                 <td><label>期限: </label></td>
                 <td><input type="date" required th:field="*{limitDate}" id="today" /></td>
             </tr>
@@ -67,11 +76,15 @@
                 <td><input type="number" min="1" required th:field="*{nGroups}" /></td>
             </tr>
         </table>
-        <input type="submit" value="確認" class="btn btn--orange-ad btn--cubic btn--shadow"/>
+        
+        <input type="submit" value="確認" class="btn btn-primary"/>
     </form>
+    <br>
     <form th:action="@{/admin/menu/}" method="get">
-        <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="管理者メニューへ戻る">
+        <input type="submit" class="btn btn-secondary" value="戻る">
     </form>
+    
+    
 </div>
 
 </body>
