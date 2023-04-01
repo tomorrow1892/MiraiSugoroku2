@@ -161,7 +161,7 @@ public class AdminController {
             if (sc == null) {
                 name = "削除済のユーザ";
             } else {
-                name = sc.getName();
+                name = sc.getLoginId();
             }
             dto.setName(name);
             dto.setTitle(slist.get(i).getTitle());
@@ -186,7 +186,7 @@ public class AdminController {
             if (sc == null) {
                 name = "削除済のユーザ";
             } else {
-                name = sc.getName();
+                name = sc.getLoginId();
             }
             dto.setName(name);
             dto.setTitle(slist.get(i).getTitle());
@@ -209,6 +209,7 @@ public class AdminController {
         sf.setCreatorName(s.getNickName());
         sf.setSquareEventId(s.getSquareEventId());
         sf.setPicture(s.getPicture());
+        sf.setSquareEffect(sf.determineKindOfSquare(s.getSquareEventId()));
         model.addAttribute("square", s);
         model.addAttribute("SquareForm", sf);
         model.addAttribute("squareId", squareId);
@@ -235,11 +236,12 @@ public class AdminController {
         sf.setDescription(s.getDescription());
         sf.setSquareEventId(s.getSquareEventId());
         sf.setPicture(s.getPicture());
+        sf.setSquareEffect(sf.determineKindOfSquare(s.getSquareEventId()));
         model.addAttribute("sf", sf);
         List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
         model.addAttribute("SquareEventList", SquareEventList);
 
-        String name = cService.getSquareCreator(s.getCreatorId()).getName();
+        String name = cService.getSquareCreator(s.getCreatorId()).getNickname();
         model.addAttribute("name", name);
         model.addAttribute("squareId", squareId);
         model.addAttribute("eventId", eventId);
@@ -250,6 +252,7 @@ public class AdminController {
     // マス承認確認
     @PostMapping("/admin/event/{eventId}/approve/{squareId}/confirm")
     public String confirmSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
+        sf.setSquareEffect(sf.determineKindOfSquare(sf.getSquareEventId()));
         model.addAttribute("sf", sf);
         List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
         model.addAttribute("SquareEventList", SquareEventList);
@@ -259,7 +262,6 @@ public class AdminController {
         model.addAttribute("squareId", squareId);
         model.addAttribute("eventId", eventId);
         model.addAttribute("roll", "admin");
-        System.out.println(sf);
         return "admin_confirm_square";
     }
 

@@ -11,33 +11,10 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
 
-    <!-- 背景設定用CSS   -->
-    <style th:inline="text">
-        body {
-            background: url([[@{/img/baloon.png}]]);
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: rgba(255, 255, 255, 0.5);
-            background-blend-mode: lighten;
-        }
-    </style>
 </head>
 
 <body class="body">
-    <!-- ヘッダー -->
-    <!--  マス作成画面へのリンクは未実装  -->
-    <nav class="navbar navbar-expand navbar-light"
-        style="background-color: white; border-bottom: darkblue medium solid">
-        <a class="navbar-brand" th:href="@{/}">
-            <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt=""
-                style="width: 50px; height: 50px; margin-left: 20px;">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"
-            style="width: auto; height: auto">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
+
 
     <div class="mt-3 mb-3 d-flex justify-content-center">
         <h1 class="page_title">マス承認確認</h1>
@@ -50,7 +27,7 @@
         <div class="d-flex flex-row justify-content-center">
 
             <!-- 修正後のマス -->
-            <div class="masu card border border-success border-3 shadow-sm ">
+            <div class="masu">
 
                 <div class="masu-header d-flex justify-content-center" id="headerMasu">
                     <img class="masu-img" id="imgMasu" th:src="${sf.picture}">
@@ -69,7 +46,8 @@
                     </ul>
                 </div>
                 <div class="masu-event" th:switch="${sf.squareEventId}">
-                    <img th:src="@{/img/dice.png}" id="eventImgMasu">
+                    <img th:if="${sf.squareEffect > 0}" th:src="@{/img/dice_blue.png}">
+                    <img th:if="${sf.squareEffect < 0}" th:src="@{/img/dice_red.png}">
                     <p th:case="1" id="eventMasu" class="font-wght700">1マス進む</p>
                     <p th:case="2" id="eventMasu" class="font-wght700">2マス進む</p>
                     <p th:case="3" id="eventMasu" class="font-wght700">3マス進む</p>
@@ -100,8 +78,8 @@
 
 
         </div>
-        <form role="form"
-            th:action="@{/admin/event/{eventId}/approve/{squareId}/done(eventId=${eventId},squareId=${squareId})}"
+        <form role="form" class="m-3"
+            th:action="@{/subadmin/event/{eventId}/approve/{squareId}/done(eventId=${eventId},squareId=${squareId})}"
             th:object="${sf}" method="post">
             <input type="hidden" th:field="*{title}" />
             <input type="hidden" th:field="*{description}" />
@@ -111,7 +89,7 @@
             <div style="text-align: center;"><input type="submit" value="承認" class="btn btn-primary" /></div>
         </form>
 
-        <button class="btn btn-warning" onclick="history.back()">戻る</button>
+        <button class="btn btn-secondary" onclick="history.back()">戻る</button>
     </div>
 
 </body>

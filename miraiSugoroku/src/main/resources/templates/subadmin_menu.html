@@ -43,19 +43,16 @@
     <h5>未設定の場合：ニックネームは空欄、<br>グループは0と表示されます。</h3>
         <table border="2" class="table">
             <tr>
-                <th>名前</th>
-                <th>ニックネーム</th>
                 <th>ログインID</th>
+                <th>ニックネーム</th>
                 <th>グループ</th>
-                <th>操作</th>
             </tr>
             <tr th:each="clist: ${clist}">
-                <td>[[${clist.name}]]</td>
-                <td>[[${clist.nickname}]]</td>
                 <td>[[${clist.loginId}]]</td>
-                <td>[[${clist.group}]]</td>
-                <td><a th:href=@{/admin/event/{eventId}/creator/delete/confirm/{creatorId}(eventId=${eventid},creatorId=${clist.creatorId})}>削除</a>
-                </td>
+                <td>[[${clist.nickname}]]</td>
+                <td th:if="${clist.group == 0}">未割当て</td>
+                <td th:if="${clist.group != 0}">[[${clist.group}]]</td>
+
             </tr>
         </table>
         <br>

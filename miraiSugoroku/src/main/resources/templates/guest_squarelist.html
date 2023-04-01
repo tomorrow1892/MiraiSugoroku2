@@ -213,17 +213,6 @@
                     <button type="submit" class="newiine_btn" th:data-iinename="|squareId:${square.squareId}|">
                         <span class="material-icons-round">favorite</span>
                         <span class="newiine_count"></span>いいね
-
-                        <!-- お礼メッセージここから -->
-                        <!-- <div class="newiine_thanks newiine_thanks_up" style="display:none;">
-                            <div class="newiine_box">
-                                <img th:src="@{/img/kominkun.jpg}"
-                                    alt="THANK YOU!">
-                                <p>ありがとうございます！</p>
-                            </div>
-                        </div> -->
-                        <!-- お礼メッセージここまで -->
-                        <!-- th:if="${square.link != null}" -->
                     </button>
                     <a th:if="${square.link}" class="button_link" th:href="${square.link}" target="_blank">
                        もっと見てみる

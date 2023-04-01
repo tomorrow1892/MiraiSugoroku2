@@ -88,7 +88,7 @@
                                 <td>リンク<br>(マスの内容に関連した外部サイトなどのURL)</td>
                                 <td>
                                     <input type="text" size="40"
-                                        id="linkInput" required th:field="*{link}" style="width: 300px;" />
+                                        id="linkInput"  th:field="*{link}" style="width: 300px;" />
                                 </td>
                             </tr>
 
@@ -112,18 +112,16 @@
                             <li class="masu-title list-group-item">
                                 <p class="align-items-center" id="titleMasu"> [[${sf.title}]]</p>
                             </li>
-                
+                            <li class="masu-contents list-group-item ">
+                                <p class="masu-description" id="textMasu"></p>
+
+                            </li>
                         </ul>
                     </div>
                     <div class="masu-creator">作者: [[${name}]]</div>
-                            <div class="masu-event">
-                                <img th:src="@{/img/dice.png}" id="eventImgMasu">
-                                <p class="font-wght700" id="eventMasu">
-                                    1マス進む
-                                </p>
-                            </div>
                     <div class="masu-event" th:switch="${sf.squareEventId}">
-                        <img th:src="@{/img/dice.png}" id="eventImgMasu">
+                        <img th:if="${sf.squareEffect > 0}" th:src="@{/img/dice_blue.png}" id="eventImgMasu">
+                        <img th:if="${sf.squareEffect < 0}" th:src="@{/img/dice_red.png}" id="eventImgMasu">
                         <p th:case="1" id="eventMasu" class="font-wght700">1マス進む</p>
                         <p th:case="2" id="eventMasu" class="font-wght700">2マス進む</p>
                         <p th:case="3" id="eventMasu" class="font-wght700">3マス進む</p>
@@ -162,11 +160,11 @@
     </form>
     <div style="text-align: center;">
         <form class="m-3"
-            th:action="@{/admin/event/{eventId}/approve/{squareId}/decline(eventId=${eventId},squareId=${squareId})}"
+            th:action="@{/subadmin/event/{eventId}/approve/{squareId}/decline(eventId=${eventId},squareId=${squareId})}"
             method="get">
             <input type="submit" value="承認しない(削除する)" class="btn btn-primary btn-danger">
         </form>
-        <form th:action="@{/admin/event/{eventId}(eventId=${eventId})}" method="get">
+        <form th:action="@{/subadmin/menu}" method="get">
             <input type="submit" value="戻る" class="btn btn-secondary">
         </form>
     </div>

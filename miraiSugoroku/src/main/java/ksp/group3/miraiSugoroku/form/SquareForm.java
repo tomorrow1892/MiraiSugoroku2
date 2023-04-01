@@ -18,6 +18,7 @@ public class SquareForm {
     boolean isApproved;
     String picture;
     String link;
+    int squareEffect;
 
     public Square toEntity() {
         Square square = new Square();
