@@ -56,7 +56,6 @@ public class AdminController {
     public String adminLogin(AdminLoginForm loginform, Model model) {
 
         if (!(loginform.getPassword().equals("miraisanda"))) {
-            System.out.println(loginform.getPassword());
             throw new MiraiSugorokuException(MiraiSugorokuException.ADMIN_PASSWORD_WRONG, "");
         }
         return "redirect:/admin/menu";
@@ -306,7 +305,6 @@ public class AdminController {
         // 一応イベント内のログインIDが重複しないように
         // ただし重複した場合のエラー文の表示なし
         SquareCreator sc = cService.getSquareCreatorByEventIdAndLoginId(eventId, scform.getLoginId());
-        System.out.println(sc);
         if (sc == null) {
             cService.createSquareCreator(scform);
         }
