@@ -8,28 +8,11 @@ import java.util.Date;
 
 @Data
 public class EventForm {
-    int nGroups;
-    String limitDate;
-    String name;
-
-    public Event toEntity() {
-        Event e = new Event();
-
-        Date startDate = new Date();
-        Date d_limitDate = changeLimitDate();
-
-        e.setName(name);
-        long timeInMilliSeconds = startDate.getTime();
-        java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
-        e.setStartDate(date1);
-        timeInMilliSeconds = d_limitDate.getTime();
-        java.sql.Date date2 = new java.sql.Date(timeInMilliSeconds);
-        e.setLimitDate(date2);
-        e.setNGroups(nGroups);
-        e.setApproved(true);
-
-        return e;
-    }
+    int nGroups; //グループ数
+    String limitDate;//有効日数
+    String name;// イベント名
+    String subadminName; //サブ管理者名
+    String password; //パスワード
 
     public Date changeLimitDate() {
         SimpleDateFormat limitFormat = new SimpleDateFormat("yyyy-MM-dd");

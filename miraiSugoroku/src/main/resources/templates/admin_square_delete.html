@@ -11,43 +11,20 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
 
-    <!-- 背景設定用CSS   -->
-    <style th:inline="text">
-        body {
-            background: url([[@{/img/baloon.png}]]);
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: rgba(255, 255, 255, 0.5);
-            background-blend-mode: lighten;
-        }
-    </style>
 </head>
 
 <body class="body">
-<!-- ヘッダー -->
-<!--  マス作成画面へのリンクは未実装  -->
-<nav class="navbar navbar-expand navbar-light" style="background-color: white; border-bottom: darkblue medium solid">
-    <a class="navbar-brand" th:href="@{/}">
-        <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width: auto; height: auto">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
-
-<div class="mt-3 mb-3 d-flex justify-content-center">
-    <h1 class="page_title">マスの削除確認</h1>
-</div>
-<div class="discription">
-    削除するマスの情報を確認してください。
-</div>
-<div class="admin-menu">
-<h2>このマスを削除しますか？
-    <div class="parent">
-       
-        <div>
+    <div class="mt-3 mb-3 d-flex justify-content-center">
+        <h1 class="page_title">マスの削除確認</h1>
+    </div>
+    <div class="discription">
+        削除するマスの情報を確認してください。
+    </div>
+    <div class="admin-menu">
+        <h2>このマスを削除しますか？</h2>
+        <div class="d-flex justify-content-center">
             <!-- マス -->
-            <div class="masu card border border-success border-3 shadow-sm ">
+            <div class="masu">
 
                 <div class="masu-header d-flex justify-content-center" id="headerMasu">
                     <img th:src=${SquareForm.picture} class="masu-img" id="imgMasu">
@@ -66,7 +43,7 @@
                     </ul>
                 </div>
                 <div class="masu-event" th:switch="${SquareForm.squareEventId}">
-                    
+
                     <img th:if="${square.squareEffect > 0}" th:src="@{/img/dice_blue.png}">
                     <img th:if="${square.squareEffect < 0}" th:src="@{/img/dice_red.png}">
                     <p th:case="1" class="font-wght700">1マス進む</p>
@@ -94,14 +71,16 @@
                     <p th:case="24" class="font-wght700">-500<br>ポイント</p>
                 </div>
             </div>
-   
-    <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventId})}" method="get">
-        <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="戻る">
-    </form>
-    <form th:action="@{/admin/event/{eventId}/squarelist/{squareId}/delete(eventId=${eventId},squareId=${squareId})}" method="get">
-        <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="削除する">
-    </form>
-</div> 
-</div>
+        </div>
+        <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventId})}" method="get">
+            <input type="submit" class="btn btn-secondary m-3" value="戻る">
+        </form>
+        <form
+            th:action="@{/admin/event/{eventId}/squarelist/{squareId}/delete(eventId=${eventId},squareId=${squareId})}"
+            method="get">
+            <input type="submit" class="btn btn-danger m-3" value="削除する">
+        </form>
+    </div>
 </body>
+
 </html>

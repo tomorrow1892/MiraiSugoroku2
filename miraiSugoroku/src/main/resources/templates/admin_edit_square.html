@@ -14,116 +14,21 @@
     <script th:src="@{/module/leader-line.min.js}" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/gh/fengyuanchen/compressorjs/dist/compressor.min.js"></script>
 
-    <!-- 背景設定用CSS   -->
-    <style th:inline="text">
-        body {
-            background: url([[@{/img/baloon.png}]]);
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: rgba(255, 255, 255, 0.5);
-            background-blend-mode: lighten;
-        }
-    </style>
 </head>
 
 <body class="body">
-    <!-- ヘッダー -->
-    <!--  マス作成画面へのリンクは未実装  -->
-    <nav class="navbar navbar-expand navbar-light"
-        style="background-color: white; border-bottom: darkblue medium solid">
-        <a class="navbar-brand" th:href="@{/}">
-            <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt=""
-                style="width: 50px; height: 50px; margin-left: 20px;">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"
-            style="width: auto; height: auto">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a th:href=@{/admin/createEvent} class="nav-link">イベント作成</a>
-                </li>
-                <li class="nav-item">
-                    <a th:href=@{/admin/event/__${eventId}__} class="nav-link">イベント詳細</a>
-                </li>
-                <li class="nav-item">
-                    <a th:href=@{/admin/event/__${eventId}__/approve} class="nav-link">マス承認</a>
-                </li>
-                <li class="nav-item">
-                    <a th:href=@{/admin/menu} class="nav-link">メニュー</a>
-                </li>
 
-            </ul>
-        </div>
-    </nav>
 
     <div class="mt-3 mb-3 d-flex justify-content-center">
         <h1 class="page_title">マス承認</h1>
     </div>
     <div class="discription">
-        内容を確認し、適宜修正を加えてください。
+        マスの内容を確認し、承認します．<br>
+        承認されたマスは一般公開されます． <br>
+        管理者によって内容を修正することもできます．
     </div>
 
-
-
-
-
-    <h3 style="text-align: center;">申請されたマス</h3>
-    <div class="d-flex justify-content-center">
-        <!-- 変更前のマス -->
-        <div class="masu card border border-success border-3 shadow-sm ">
-
-            <div class="masu-header d-flex justify-content-center">
-                <img class="masu-img" th:src="${sf.picture}">
-
-            </div>
-            <div class="masu-body">
-                <ul class="list-group ">
-                    <li class="masu-title list-group-item">
-                        <p class="align-items-center">[[${sf.title}]]</p>
-                    </li>
-                    <li class="masu-contents list-group-item ">
-                        <p class="masu-description">[[${sf.description}]]</p>
-                        <p class="masu-creator">作者: [[${name}]]</p>
-                    </li>
-
-                </ul>
-            </div>
-            <div class="masu-event" th:switch="${sf.squareEventId}">
-                <img th:src="@{/img/dice.png}">
-                <p th:case="1" class="font-wght700">1マス進む</p>
-                <p th:case="2" class="font-wght700">2マス進む</p>
-                <p th:case="3" class="font-wght700">3マス進む</p>
-                <p th:case="4" class="font-wght700">4マス進む</p>
-                <p th:case="5" class="font-wght700">5マス進む</p>
-                <p th:case="6" class="font-wght700">6マス進む</p>
-                <p th:case="7" class="font-wght700">1マス戻る</p>
-                <p th:case="8" class="font-wght700">2マス戻る</p>
-                <p th:case="9" class="font-wght700">3マス戻る</p>
-                <p th:case="10" class="font-wght700">4マス戻る</p>
-                <p th:case="11" class="font-wght700">5マス戻る</p>
-                <p th:case="12" class="font-wght700">6マス戻る</p>
-                <p th:case="13" class="font-wght700">1回休み</p>
-                <p th:case="15" class="font-wght700">+100<br>ポイント</p>
-                <p th:case="16" class="font-wght700">+200<br>ポイント</p>
-                <p th:case="17" class="font-wght700">+300<br>ポイント</p>
-                <p th:case="18" class="font-wght700">+400<br>ポイント</p>
-                <p th:case="19" class="font-wght700">+500<br>ポイント</p>
-                <p th:case="20" class="font-wght700">-100<br>ポイント</p>
-                <p th:case="21" class="font-wght700">-200<br>ポイント</p>
-                <p th:case="22" class="font-wght700">-300<br>ポイント</p>
-                <p th:case="23" class="font-wght700">-400<br>ポイント</p>
-                <p th:case="24" class="font-wght700">-500<br>ポイント</p>
-            </div>
-        </div>
-        <!-- マスここまで -->
-    </div>
-
-    <h3 style="text-align: center; margin-top: 30px;">マスを修正</h3>
-
-    <form role="form"
+    <form role="form" class="m-3"
         th:action="@{/admin/event/{eventId}/approve/{squareId}/confirm(eventId=${eventId},squareId=${squareId})}"
         th:object="${sf}" method="post">
         <div class="d-flex justify-content-center flex-wrap">
@@ -131,7 +36,7 @@
                 <div class="card  bg-white mb-3 ms-5 lb-3 ls-3 border-3 shadow-sm ">
                     <div class="card-header">
                         <font color="red" style="font-size: 10;">*</font>は必ず入力してください
-                        <table >
+                        <table>
                             <tr>
                                 <td><label>
                                         <font color="red">*</font>タイトル(28字まで):
@@ -182,8 +87,8 @@
                             <tr>
                                 <td>リンク<br>(マスの内容に関連した外部サイトなどのURL)</td>
                                 <td>
-                                    <input type="text" size="40"
-                                        id="linkInput" required th:field="*{link}" style="width: 300px;" />
+                                    <input type="text" size="40" id="linkInput" th:field="*{link}"
+                                        style="width: 300px;" />
                                 </td>
                             </tr>
 
@@ -195,13 +100,12 @@
             </div>
 
             <div class="bd-highlight mb-3 ms-5 lb-3 ls-3">
-
+                <h3 style="text-align: center; margin-top: 30px;">承認申請されたマス</h3>
                 <!-- 修正後のマス -->
-                <div class="masu card border border-success border-3 shadow-sm ">
+                <div class="masu ">
 
                     <div class="masu-header d-flex justify-content-center" id="headerMasu">
                         <img class="masu-img" id="imgMasu" th:src="${sf.picture}">
-
                     </div>
                     <div class="masu-body">
                         <ul class="list-group ">
@@ -209,15 +113,16 @@
                                 <p class="align-items-center" id="titleMasu"> [[${sf.title}]]</p>
                             </li>
                             <li class="masu-contents list-group-item ">
-                                <p class="masu-description" id="textMasu"> [[${sf.description}]]</p>
-                                <p class="masu-creator">作者: [[${name}]]</p>
+                                <p class="masu-description" id="textMasu"></p>
+
                             </li>
 
                         </ul>
                     </div>
+                    <div class="masu-creator">作者: [[${name}]]</div>
                     <div class="masu-event" th:switch="${sf.squareEventId}">
-                        <img th:src="@{/img/dice.png}" id="eventImgMasu">
-
+                        <img th:if="${sf.squareEffect > 0}" th:src="@{/img/dice_blue.png}" id="eventImgMasu">
+                        <img th:if="${sf.squareEffect < 0}" th:src="@{/img/dice_red.png}" id="eventImgMasu">
                         <p th:case="1" id="eventMasu" class="font-wght700">1マス進む</p>
                         <p th:case="2" id="eventMasu" class="font-wght700">2マス進む</p>
                         <p th:case="3" id="eventMasu" class="font-wght700">3マス進む</p>
@@ -247,21 +152,21 @@
                 <!-- マスここまで -->
             </div>
         </div>
-        
+
         <div style="text-align: center;">
             <input type="submit" value="確認" class="btn btn-primary btn-submit" />
         </div>
-        
+
 
     </form>
     <div style="text-align: center;">
-        <form
+        <form class="m-3"
             th:action="@{/admin/event/{eventId}/approve/{squareId}/decline(eventId=${eventId},squareId=${squareId})}"
             method="get">
             <input type="submit" value="承認しない(削除する)" class="btn btn-primary btn-danger">
         </form>
         <form th:action="@{/admin/event/{eventId}(eventId=${eventId})}" method="get">
-            <input type="submit" value="イベント詳細に戻る" class="btn btn-primary btn-warning">
+            <input type="submit" value="戻る" class="btn btn-secondary">
         </form>
     </div>
 
@@ -317,8 +222,39 @@
         eventLine.hide("fade", { duration: 100 });
     })
     eventInput.addEventListener("change", (e) => {
-
+        //デプロイ用設定
+        //const deployedPath = "https://es4.eedept.kobe-u.ac.jp/miraisugoroku"
+        //ローカル用設定．
+        const deployedPath = "";
+        let diceImgSrc = "";
         eventMasu.textContent = eventInput.options[eventInput.selectedIndex].text;
+        switch (eventInput.value) {
+            case "1": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "2": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "3": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "4": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "5": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "6": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "7": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "8": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "9": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "10": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "11": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "12": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "13": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "14": eventImgMasu.src = deployedPath + "/img/dice.png"; break;
+            case "15": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "16": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "17": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "18": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "19": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "20": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "21": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "22": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "23": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "24": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            default: break;
+        }
     })
 
     //画像

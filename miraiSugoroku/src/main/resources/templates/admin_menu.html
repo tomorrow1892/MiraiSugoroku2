@@ -12,36 +12,19 @@
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
     <link rel="stylesheet" th:href="@{/css/masu.css}">
 
-    <!-- 背景設定用CSS   -->
-    <style th:inline="text">
-        body {
-            background-size: contain;
-            background-attachment: fixed;
-            background-color: #FFFBEF;
-            background-blend-mode: lighten;
-        }
-    </style>
+   
 </head>
 
 <body class="body">
-<!-- ヘッダー -->
-<!--  マス作成画面へのリンクは未実装  -->
-<div th:replace="header :: header"></div>
-
-<div class="mt-3 mb-3 d-flex justify-content-center">
-    <h1 class="page_title">管理者メニュー</h1>
-</div>
-<!-- <div class="mt-3 mb-3 d-flex justify-content-center">
-    <div class="page_title">
-        <h3>管理者メニュー</h3>
-            <h5>イベント一覧から対象のイベントを選択し、各種操作を行ってください。<br>
-                イベントが存在しない場合は、まずイベントを作成してください。</h5>
+    <div class="mt-3 mb-3 d-flex justify-content-center">
+        <h1 class="page_title">管理者メニュー</h1>
     </div>
-</div> -->
+   
 <div class="discription">
     イベント一覧から対象のイベントを選択し、各種操作を行ってください。<br>
     イベントが存在しない場合は、まずイベントを作成してください。<br>
 </div>
+
 <div class="admin-menu">
     <div>
         <form th:action="@{/admin/createEvent}" method="get">
@@ -85,6 +68,9 @@
             </tr>
         </table>
     </div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" class="btn btn-danger m-3" value="ログアウト">
+    </form>
 </div>
 </body>
 </html>
