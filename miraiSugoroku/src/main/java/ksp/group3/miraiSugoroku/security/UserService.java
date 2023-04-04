@@ -114,8 +114,6 @@ public class UserService implements UserDetailsService {
         // ユーザのロールに応じて，権限を追加していく
         List<GrantedAuthority> authorities = new ArrayList<>(); // 権限リスト
         User.Role role = user.getRole(); // ユーザの権限
-        System.out.println("role:" + role);
-        System.out.println("name:" + name);
         switch (role) {
             // 教員の時は，教員権限を追加
             case SUB_ADMIN:
