@@ -157,12 +157,16 @@ public class AdminController {
             CreatorAndSquareDTO dto = new CreatorAndSquareDTO();
             SquareCreator sc = cService.getSquareCreator(slist.get(i).getCreatorId());
             String name = "";
+            String nickname = "";
             if (sc == null) {
                 name = "削除済のユーザ";
+                nickname = "削除済のユーザ";
             } else {
                 name = sc.getLoginId();
+                nickname = sc.getNickname();
             }
             dto.setName(name);
+            dto.setNickname(nickname);
             dto.setTitle(slist.get(i).getTitle());
             dto.setSquareId(slist.get(i).getSquareId());
             dtolist.add(dto);
@@ -182,12 +186,16 @@ public class AdminController {
             CreatorAndSquareDTO dto = new CreatorAndSquareDTO();
             SquareCreator sc = cService.getSquareCreator(slist.get(i).getCreatorId());
             String name = "";
+            String nickname = "";
             if (sc == null) {
                 name = "削除済のユーザ";
+                nickname = "削除済のユーザ";
             } else {
                 name = sc.getLoginId();
+                nickname = sc.getNickname();
             }
             dto.setName(name);
+            dto.setNickname(nickname);
             dto.setTitle(slist.get(i).getTitle());
             dto.setSquareId(slist.get(i).getSquareId());
             dtolist.add(dto);
@@ -334,5 +342,4 @@ public class AdminController {
         return "error";
     }
 
-   
 }
