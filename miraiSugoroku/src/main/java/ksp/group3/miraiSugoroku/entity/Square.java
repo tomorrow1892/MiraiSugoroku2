@@ -1,5 +1,7 @@
 package ksp.group3.miraiSugoroku.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,4 +32,5 @@ public class Square {
     String link;//マス詳細画面でマスに紐づいたリンク
     @Lob
     String picture;//画像(文字列に変換されたもの)
+    Date createdAt;
 }

@@ -70,18 +70,3 @@
 /** トップページのスタイルここまで **/
 
 
-.box{
-    border: 2px solid #0094D6;
-    background-color: white;
-  }
-  .box h3{
-    color: #0094D6;
-    text-align: center;
-    margin: .2em auto;
-    width: calc(100% - 2em);
-    border-bottom: 2px solid #0094D6;
-  }
-  .box .inner{
-    padding: .5em 1.5em;
-    font-size: 0.9em;
-  }

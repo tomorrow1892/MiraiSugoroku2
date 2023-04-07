@@ -25,8 +25,8 @@
     </div>
     <div class="discription">
         マスの作成画面です。<br>
-        マスのタイトル、詳細説明、マスに止まったときのアクション、マスを説明する画像を設定することができます。<br>
-        作成したマスは、管理者の承認を得た後に公開されます。
+        三田市のことを調べてすごろくのマスを作ってみましょう。
+
     </div>
     <form role="form" th:action="@{/{c}/create/confirm(c=${cid})}" th:object="${SquareForm}" method="post">
         <div class="container-fluid">
@@ -40,18 +40,19 @@
 
                                 <tr>
                                     <td><label>
-                                            <font color="red">*</font>タイトル(28文字まで):
+                                            <font color="red">*</font>タイトル(28文字まで)
                                         </label></td>
-                                    <td><input type="text" size="40" placeholder="例)しい茸園有馬富士でBBQする" maxlength="28"
+                                    <td><input type="text" size="40" placeholder="例)三田米がおいしくて食べすぎた！" maxlength="28"
                                             id="titleInput" required th:field="*{title}" style="width: 300px;" /></td>
                                 </tr>
                                 <tr>
                                     <td><label>
-                                            <font color="red">*</font>説明(60文字まで):
+                                            <font color="red">*</font>くわしい説明<br>(60文字まで)
                                         </label></td>
 
-                                    <td><textarea id="textInput" placeholder="例)しい茸園有馬富士では、しい茸狩りやBBQ、魚釣り、栗ひろいが体験できます。"
-                                            rows="5" cols="50" maxlength="60" required th:field="*{description}"
+                                    <td><textarea id="textInput"
+                                            placeholder="例)三田市では、「コシヒカリ」・「山田錦」・「どんとこい」という品種がよく作られています。" rows="5"
+                                            cols="50" maxlength="60" required th:field="*{description}"
                                             style="width: 300px;" />
                                     </td>
                                 </tr>
@@ -60,7 +61,7 @@
                                             <font color="red">*</font>アクション:
                                         </label></td>
                                     <td>
-                                        <select required th:field="*{squareEventId}" id="eventInput" class="">
+                                        <select required th:field="*{squareEventId}" id="eventInput">
 
                                             <option required th:each="se:${SquareEventList}"
                                                 th:value="${se.squareEventID}" th:text="${se.eventTitle}"
@@ -92,35 +93,38 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card d-flex align-items-center p-3 ">
-                        <h2 class="font-wght700" style="text-align: center;">でき上がるマス</h2>
+                    <div class="box   align-items-center p-3 ">
+                        <h3 class="font-wght700" >できあがるマス</h3>
                         <!-- マス -->
-                        <div class="masu">
+                        <div class="d-flex justify-content-center m-3">
+                            <div class="masu " >
 
-                            <div class="masu-header d-flex justify-content-center" id="headerMasu">
-                                <img class="masu-img" id="imgMasu">
-
-                            </div>
-                            <div class="masu-body">
-                                <ul class="list-group ">
-                                    <li class="masu-title list-group-item">
-                                        <p class="align-items-center" id="titleMasu"></p>
-                                    </li>
-                                    <li class="masu-contents list-group-item ">
-                                        <p class="masu-description" id="textMasu"></p>
-
-                                    </li>
-
-                                </ul>
-                            </div>
-                            <div class="masu-creator">作者: [[${nickName}]]</div>
-                            <div class="masu-event">
-                                <img th:src="@{/img/dice.png}" id="eventImgMasu">
-                                <p class="font-wght700" id="eventMasu">
-                                    1マス進む
-                                </p>
+                                <div class="masu-header d-flex justify-content-center" id="headerMasu">
+                                    <img class="masu-img" id="imgMasu">
+    
+                                </div>
+                                <div class="masu-body">
+                                    <ul class="list-group ">
+                                        <li class="masu-title list-group-item">
+                                            <p class="align-items-center" id="titleMasu"></p>
+                                        </li>
+                                        <li class="masu-contents list-group-item ">
+                                            <p class="masu-description" id="textMasu"></p>
+    
+                                        </li>
+    
+                                    </ul>
+                                </div>
+                                <div class="masu-creator">作者: [[${nickName}]]</div>
+                                <div class="masu-event">
+                                    <img id="eventImgMasu">
+                                    <p class="font-wght700" id="eventMasu">
+                                        
+                                    </p>
+                                </div>
                             </div>
                         </div>
+                        
                         <!-- マスここまで -->
                     </div>
                 </div>
@@ -133,7 +137,8 @@
 
 
         </div>
-        <p style="text-align: center;"><input type="submit" value="これで完成" class="btn btn--top btn--cubic btn--shadow" />
+        <p style="text-align: center;"><input type="submit" value="これで完成"
+                class=" font-wght700" />
         </p>
     </form>
     <script th:src="@{/module/fitty.min.js}"></script>
@@ -178,6 +183,40 @@
     const eventInput = document.getElementById("eventInput");
     const eventMasu = document.getElementById("eventMasu");
     const eventImgMasu = document.getElementById("eventImgMasu");
+    //デプロイ用設定
+    //const deployedPath = "https://es4.eedept.kobe-u.ac.jp/miraisugoroku"
+    //ローカル用設定．
+    const deployedPath = "";
+    let diceImgSrc = "";
+    //ページ読み込み時に選択中のアクションに対応する画像，テキストをセットする
+    eventMasu.textContent = eventInput.options[eventInput.selectedIndex].text;
+    switch (eventInput.value) {
+        case "1": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+        case "2": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+        case "3": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+        case "4": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+        case "5": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+        case "6": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+        case "7": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        case "8": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        case "9": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        case "10": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        case "11": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        case "12": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        case "13": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        case "14": eventImgMasu.src = deployedPath + "/img/dice.png"; break;
+        case "15": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+        case "16": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+        case "17": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+        case "18": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+        case "19": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+        case "20": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        case "21": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        case "22": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        case "23": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        case "24": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+        default: break;
+    }
     eventInput.addEventListener("focus", (e) => {
         //枠線の有無，色，太さ，パディング，破線,角丸
         eventImgMasu.classList.add("border", "border-danger", "border-3", "p-1", "rounded");
@@ -188,37 +227,34 @@
         eventLine.hide("fade", { duration: 100 });
     })
     eventInput.addEventListener("change", (e) => {
-        //デプロイ用設定
-        //const deployedPath = "https://es4.eedept.kobe-u.ac.jp/miraisugoroku"
-        //ローカル用設定．
-        const deployedPath = "";
-        let diceImgSrc = "";
+
+
         eventMasu.textContent = eventInput.options[eventInput.selectedIndex].text;
         switch (eventInput.value) {
-            case "1": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
-            case "2": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
-            case "3": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
-            case "4": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
-            case "5": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
-            case "6": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
-            case "7": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
-            case "8": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
-            case "9": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
-            case "10": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
-            case "11": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
-            case "12": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
-            case "13": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
-            case "14": eventImgMasu.src=deployedPath+"/img/dice.png"; break;
-            case "15": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
-            case "16": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
-            case "17": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
-            case "18": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
-            case "19": eventImgMasu.src=deployedPath+"/img/dice_blue.png"; break;
-            case "20": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
-            case "21": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
-            case "22": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
-            case "23": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
-            case "24": eventImgMasu.src=deployedPath+"/img/dice_red.png"; break;
+            case "1": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "2": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "3": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "4": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "5": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "6": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "7": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "8": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "9": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "10": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "11": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "12": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "13": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "14": eventImgMasu.src = deployedPath + "/img/dice.png"; break;
+            case "15": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "16": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "17": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "18": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "19": eventImgMasu.src = deployedPath + "/img/dice_blue.png"; break;
+            case "20": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "21": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "22": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "23": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
+            case "24": eventImgMasu.src = deployedPath + "/img/dice_red.png"; break;
             default: break;
         }
     })

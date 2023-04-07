@@ -19,6 +19,8 @@
   font-family: 'Zen Maru Gothic', sans-serif;
 }
 
+
+/** 以下端末サイズに関するスタイル **/
 /* スマホ */
 @media (max-width: 1000px) {
   .text-large {
@@ -123,4 +125,31 @@
     margin-left: auto;
     padding: 10px 5px;
   }
+}
+
+/** 以下デザインに関するスタイル **/
+.backbutton {
+  color: #fff;
+    width: 10rem;
+    padding: 0.7%;
+  background-color:  rgb(179, 179, 179);
+  border-radius: 5rem;
+  border: 1px solid #ffffff;
+  vertical-align: middle;
+}
+
+.box{
+  border: 2px solid #0094D6;
+  background-color: white;
+}
+.box h3{
+  color: #0094D6;
+  text-align: center;
+  margin: .2em auto;
+  width: calc(100% - 2em);
+  border-bottom: 2px solid #0094D6;
+}
+.box .inner{
+  padding: .5em 1.5em;
+  font-size: 0.9em;
 }

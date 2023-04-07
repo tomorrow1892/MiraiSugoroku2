@@ -1,5 +1,7 @@
 package ksp.group3.miraiSugoroku.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,5 +24,5 @@ public class Sugoroku {
     int nPlayers; // playerの数
     int length; // すごろくが持っているマスの数（ゴール・スタートは除く）
     int nPlayersGoaled; // ゴールしているプレイヤー数
-
+    Date createdAt;
 }

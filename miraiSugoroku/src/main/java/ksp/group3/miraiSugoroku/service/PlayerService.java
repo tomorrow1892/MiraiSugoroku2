@@ -1,6 +1,7 @@
 package ksp.group3.miraiSugoroku.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,7 +130,7 @@ public class PlayerService {
         List<String> icons = form.getIcons();
         List<Player> players = new ArrayList<Player>();
         for (int i = 0; i < nPlayers; i++) {
-            Player player = new Player(null, sugorokuId, icons.get(i), names.get(i), i + 1, 0, 0, false, false);
+            Player player = new Player(null, sugorokuId, icons.get(i), names.get(i), i + 1, 0, 0, false, false,new Date());
             players.add(player);
             pRepo.save(player);
         }
