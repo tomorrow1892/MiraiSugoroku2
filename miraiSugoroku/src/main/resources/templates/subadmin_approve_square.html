@@ -25,12 +25,14 @@
     <h2>未承認マス一覧</h2>
         <table border="2" class="table">
             <tr>
-                <th>作成者のログインID</th>
+                <th>ログインID</th>
+                <th>ニックネーム</th>
                 <th>タイトル</th>
                 <th>操作</th>
             </tr>
             <tr th:each="dto: ${dtolist}">
                 <td>[[${dto.name}]]</td>
+                <td>[[${dto.nickname}]]</td>
                 <td>[[${dto.title}]]</td>
                 <td><a th:href=@{/subadmin/event/{eventId}/approve/{squareId}(eventId=${eventId},squareId=${dto.squareId})}>選択</a></td>
             </tr>

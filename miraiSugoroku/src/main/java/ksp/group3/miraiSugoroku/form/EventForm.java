@@ -6,13 +6,23 @@ import lombok.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 @Data
 public class EventForm {
-    int nGroups; //グループ数
-    String limitDate;//有効日数
+    int nGroups; // グループ数
+    String limitDate;// 有効日数
     String name;// イベント名
-    String subadminName; //サブ管理者名
-    String password; //パスワード
+
+    String subadminName; // サブ管理者名
+    @Size(max = 16)
+    @Pattern(regexp = "[0-9a-zA-Z]+")
+
+    String password; // パスワード
+
+    @Size(max = 16)
+    @Pattern(regexp = "[0-9a-zA-Z]+")
 
     public Date changeLimitDate() {
         SimpleDateFormat limitFormat = new SimpleDateFormat("yyyy-MM-dd");

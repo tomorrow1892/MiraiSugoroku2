@@ -24,12 +24,14 @@
 <div class="admin-menu">
         <table border="2" class="table">
             <tr>
-                <th>作成者のログインID</th>
+                <th>ログインID</th>
+                <th>ニックネーム</th>
                 <th>タイトル</th>
                 <th>操作</th>
             </tr>
             <tr th:each="dto: ${dtolist}">
                 <td>[[${dto.name}]]</td>
+                <td>[[${dto.nickname}]]</td>
                 <td>[[${dto.title}]]</td>
                 <td><a th:href=@{/subadmin/event/{eventId}/squarelist/{squareId}(eventId=${eventId},squareId=${dto.squareId})}>削除</a></td>
             </tr>

@@ -133,7 +133,7 @@ public class CreatorController {
         model.addAttribute("cid", creatorId);
         String nickname = cService.getSquareCreator(creatorId).getNickname();
         model.addAttribute("nickname", nickname);
-        model.addAttribute("roll", "creator");
+        model.addAttribute("roll", "creator_menu");
         return "creator_menu";
     }
 
@@ -143,11 +143,11 @@ public class CreatorController {
         SquareCreator sc = cService.getSquareCreator(creatorId);
         Event e = eService.getEvent(sc.getEventId());
         List<Integer> groups = new ArrayList<>();
-
+        form.setSelectedGroup(sc.getGroup());
         for (int i = 1; i <= e.getNGroups(); i++) {
             groups.add(i);
         }
-
+        model.addAttribute("updateSquareCreatorForm", form);
         model.addAttribute("groups", groups);
         model.addAttribute("cid", creatorId);
         model.addAttribute("roll", "creator");
@@ -188,6 +188,7 @@ public class CreatorController {
         List<Integer> years = createYearList();
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
+        model.addAttribute("search", 0);
         return "creator_squarelist";
     }
 
@@ -203,6 +204,7 @@ public class CreatorController {
         List<Integer> years = createYearList();
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
+        model.addAttribute("search", 0);
         return "creator_squarelist";
     }
 
@@ -220,6 +222,8 @@ public class CreatorController {
         List<Integer> years = createYearList();
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
+        model.addAttribute("search", 1);
+        model.addAttribute("kw", keyword);
         return "creator_squarelist";
     }
 
@@ -235,6 +239,8 @@ public class CreatorController {
         List<Integer> years = createYearList();
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
+        model.addAttribute("search", 2);
+        model.addAttribute("nn", nickname);
         return "creator_squarelist";
     }
 
@@ -251,6 +257,9 @@ public class CreatorController {
         List<Integer> years = createYearList();
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
+        model.addAttribute("search", 3);
+        model.addAttribute("sentaku", year);
+        model.addAttribute("event", eService.getEvent(eventId).getName());
         return "creator_squarelist";
     }
 
@@ -266,7 +275,7 @@ public class CreatorController {
     }
 
     @PostMapping("/{cid}/create/confirm") // マス作成確認画面
-    public String showSquareCreateConfirm(@PathVariable String cid,@Validated SquareForm form, Model model) {
+    public String showSquareCreateConfirm(@PathVariable String cid, @Validated SquareForm form, Model model) {
         model.addAttribute("SquareForm", form);
         model.addAttribute("cid", cid);
 

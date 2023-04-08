@@ -25,13 +25,13 @@
 </div>
 <div class="admin-menu">
     <div>
-        <h2>承認済みマス一覧</h2>
+        <h4>承認済みマス一覧</h4>
         <form th:action="@{/subadmin/event/{eventId}/squarelist(eventId=${eventid})}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを確認する">
         </form>
     </div>
     <div>
-        <h2><br>[[${str1}]]</h2>
+        <h4><br>[[${str1}]]</h4>
         <form th:action="@{/subadmin/event/{eventId}/approve(eventId=${eventid})}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを承認する">
         </form>

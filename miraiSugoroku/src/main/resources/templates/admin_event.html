@@ -23,6 +23,10 @@
     [[${event.name}]]についての詳細設定画面です。<br>
     参加者の編集、マス承認を行うことができます。<br>
     マス作成権限の有効期限は、[[${event.limitDate}]]です。<br>
+    <div th:if="${ubool}">
+    管理者ID：[[${user.name}]]<br>
+    管理者パスワード：[[${user.password}]]
+    </div>
 </div>
 <div class="admin-menu">
     <div>
@@ -85,6 +89,7 @@
         <form th:action="@{/admin/event/{eventId}/edit(eventId=${eventid})}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="イベント情報を修正する">
         </form>
+        <br>
         <form th:action="@{/admin/menu/}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="管理者メニューに戻る">
         </form>

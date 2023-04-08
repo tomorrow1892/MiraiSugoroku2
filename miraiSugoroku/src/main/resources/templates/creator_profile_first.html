@@ -6,34 +6,47 @@
     <title>詳細設定</title>
     <link rel="stylesheet" th:href="@{/css/display.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/page_login.css}">
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
-
-    <!-- 背景設定用CSS   -->
-    <style th:inline="text">
-        body {
-            background: url([[@{/img/baloon.png}]]);
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: rgba(255, 255, 255, 0.5);
-            background-blend-mode: lighten;
-        }
-    </style>
-
 </head>
 
 <body class="body">
-    <!-- ヘッダー -->
     <div th:replace="header :: header"></div>
 
     <div class="mt-3 mb-3 d-flex justify-content-center">
         <h1 class="page_title">作成者詳細設定</h1>
     </div>
     <div class="discription">
-        ニックネームとグループ番号を設定してください。
+        グループとニックネームを設定してください。
     </div>
-    <div class="parent">
+    <div class="login-container">
+        <div  class="form-box">
+            <form th:action="@{/__${creatorId}__/update}" method="post" th:object="${updateSquareCreatorForm}">
+                <tr>
+                    <td><label style="font-weight: bold; color: #6091d3;">グループ: </label></td>
+                <select id="selectedGroup" name="selectedGroup">
+
+                <option value="グループを選択" style="font-weight: bold; color: #6091d3;">- グループをえらんでください -</option>
+                <option th:each="g: ${groups}"
+                        th:value="${g}"
+                        th:text="${g}"
+                        th:selected="${g == updateSquareCreatorForm.selectedGroup}"></option>
+                </option>
+            </select>
+            </tr>
+            <br>
+                <br>
+            <tr>
+                <td><label>ニックネーム(10文字まで): </label></td>
+                <td><input type="text" th:field="*{nickname}" maxlength="10" required class="form-control"/></td>
+            </tr>
+                <p><button class="btn btn-info btn-block login" type="submit">登録</button></p>
+            </form>
+        </div>
+    </div>
+    <!-- <div class="parent">
         <div>
             <form th:action="@{/__${creatorId}__/update}" method="post" th:object="${updateSquareCreatorForm}">
                 <tr>
@@ -55,7 +68,7 @@
                 <p><input type="submit" value="登録" />
             </form>
         </div>
-    </div>
+    </div> -->
 </body>
 
 </html>

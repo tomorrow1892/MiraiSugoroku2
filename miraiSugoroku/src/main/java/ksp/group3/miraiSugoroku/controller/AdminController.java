@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import ksp.group3.miraiSugoroku.entity.Event;
 import ksp.group3.miraiSugoroku.entity.Square;
@@ -88,7 +91,10 @@ public class AdminController {
 
     // イベント作成確認画面
     @PostMapping("/admin/confirmEvent")
-    public String showConfirmEventForm(EventForm eventform, Model model) {
+    public String showConfirmEventForm(@Validated EventForm eventform, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            throw new MiraiSugorokuException(MiraiSugorokuException.PASSWORD_ERROR, "");
+        }
         model.addAttribute("Eventform", eventform);
         model.addAttribute("roll", "admin");
         return "admin_confirm_event";
@@ -108,6 +114,13 @@ public class AdminController {
         Event event = eService.getEvent(eventId);
         List<SquareCreator> creator_list = cService.getSquareCreatorsByEventId(eventId);
         SquareCreatorForm scform = new SquareCreatorForm();
+        boolean ubool=false;
+        if (event.getUid() != null) {
+            User user = uService.getUserById(event.getUid());
+            model.addAttribute("user", user);
+            ubool = true;
+        }
+        model.addAttribute("ubool", ubool);
         model.addAttribute("event", event);
         model.addAttribute("eventid", eventId);
         model.addAttribute("clist", creator_list);
