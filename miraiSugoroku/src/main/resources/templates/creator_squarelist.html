@@ -99,14 +99,14 @@
 
             </div>
         </form>
-        <div class="flex-item">
+        <div class="d-flex justify-content-center m-3">
             <form th:action="@{/__${cid}__/squares/mysquares}">
-                <input type="submit" class="searchsubmit mx-3" value="自分が作ったマスを見る">
+                <input type="submit" class="submitbutton" value="自分が作ったマス">
             </form>
         </div>
-        
+
     </div>
-    <p th:if="${search == 1}"> "[[${kw}]]"の検索結果</p>
+
 
     <!--/* ページネーションバー（Redmine参考） */-->
     <nav aria-label="Page navigation2">
@@ -157,7 +157,15 @@
     </nav>
     <!-- マスリスト -->
     <div class="card pb-5" style="min-width: 22rem; margin-right: auto;margin-left: auto; width: 90vw;">
+        <div class="d-flex justify-content-center mt-3">
+            <p th:if="${search == 1}" class="font-wght700 search_result_text"> 「[[${kw}]]」のけんさく結果</p>
+            <p th:if="${search == 2}" class="font-wght700 search_result_text"> [[${nn}]]さんが作ったマス</p>
+            <p th:if="${search == 3}" class="font-wght700 search_result_text"> 「[[${event}]]」イベントで作られたマス</p>
+            <p th:if="${search == 4}" class="font-wght700 search_result_text">自分が作ったマス</p>
+        </div>
+
         <div class="d-flex flex-wrap justify-content-center">
+
             <div th:each="square: ${square_list}" class="masu mt-5 mb-3 ms-3 lb-3 ls-3">
 
                 <div class="masu-header d-flex justify-content-center">
@@ -227,34 +235,34 @@
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-    
+
                 <!--/* 最初のページ */-->
                 <li th:if="${page.number gt 2}" class="page-item">
                     <a th:href="@{${path}(page=0)}" class="page-link">1</a>
                 </li>
-    
+
                 <!--/* … */-->
                 <li th:if="${page.number gt 3}" class="page-item disabled">
                     <a href="#" class="page-link">…</a>
                 </li>
-    
+
                 <th:block th:each="i : ${ #numbers.sequence(page.number - 2, page.number + 2) }">
                     <li th:if="${i ge 0 and i lt page.totalPages}" class="page-item"
                         th:classappend="${i eq page.number} ? 'active'">
                         <a th:href="@{${path}(page=${i+1})}" th:text="${i + 1}" class="page-link"></a>
                     </li>
                 </th:block>
-    
+
                 <!--/* … */-->
                 <li th:if="${page.totalPages gt (page.number + 4)}" class="page-item disabled">
                     <a href="#" class="page-link">…</a>
                 </li>
-    
+
                 <!--/* 最後のページ */-->
                 <li th:if="${page.totalPages gt (page.number + 3)}" class="page-item">
                     <a th:href="@{${path}(page=${page.totalPages})}" th:text="${page.totalPages}" class="page-link"></a>
                 </li>
-    
+
                 <!--/* 次のページ */-->
                 <li class="page-item" th:classappend="${page.last} ? 'disabled'">
                     <a th:href="@{${path}(page=${page.number + 2})}" class="page-link" th:tabindex="${page.last} ? -1"
@@ -265,7 +273,7 @@
             </ul>
         </nav>
     </div>
-    
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://es4.eedept.kobe-u.ac.jp/miraisugoroku_newiine_app/newiine.js"></script>
