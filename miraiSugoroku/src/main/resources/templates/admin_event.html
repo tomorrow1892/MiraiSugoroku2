@@ -68,23 +68,41 @@
 </div>
     <h2><br>参加者一覧</h2>
     <h3>[[${str2}]]</h3>
-    <h5>未設定の場合：ニックネームは空欄、<br>グループは0と表示されます。</h3>
-        <table border="2" class="table">
+    <h5>未設定の場合：ニックネームは空欄、<br>
+        グループは未割当てと表示されます。<br>
+        下のボタンで参加者情報をクリップボードにコピー出来ます。<br>
+        Excelに貼り付けられます。</h5>
+    
+        <form>
+            <input onclick="copy()" class="btn btn--orange-ad btn--cubic btn--shadow" value="コピー">
+        </form>
+        <div class="sankasha">
+                    <div class="table1">
+        <table border="1" class="table" id="optional">
             <tr>
                 <th>ログインID</th>
                 <th>ニックネーム</th>
                 <th>グループ</th>
-                <th>削除</th>
             </tr>
             <tr th:each="clist: ${clist}">
                 <td>[[${clist.loginId}]]</td>
                 <td>[[${clist.nickname}]]</td>
                 <td th:if="${clist.group == 0}">未割当て</td>
                 <td th:if="${clist.group != 0}">[[${clist.group}]]</td>
+                </td>
+            </tr>
+        </table></div>
+        <div class="table2">
+        <table border="1" class="table">
+            <tr>
+                <th>削除</th>
+            </tr>
+            <tr th:each="clist: ${clist}">
                 <td><a th:href=@{/admin/event/{eventId}/creator/delete/confirm/{creatorId}(eventId=${eventid},creatorId=${clist.creatorId})}>削除</a>
                 </td>
             </tr>
-        </table>
+        </table></div>
+    </div>
         <br>
         <form th:action="@{/admin/event/{eventId}/edit(eventId=${eventid})}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="イベント情報を修正する">
@@ -95,4 +113,26 @@
         </form>
     </div>
 </body>
+<script>
+    function copy() {
+        //p要素の文字列を取得
+        var text = document.getElementById("optional").innerText;
+
+        //textareaを生成
+        var area = document.createElement("textarea");
+
+        //p要素の内容をtextareaに記述
+        area.textContent = text;
+
+        //生成したものをdocumentに追加
+        document.body.appendChild(area);
+
+        //選択/コピーして・・
+        area.select();
+        document.execCommand("copy");
+
+        //すぐに消す。
+        document.body.removeChild(area);
+    }
+</script>
 </html>
