@@ -35,6 +35,9 @@ public class MiraiSugorokuErrorHandler {
             case MiraiSugorokuException.CREATE_SQUARE_NOT_PERMITTED:
                 message = "イベント期間が終了しているのでマスを作ることは出来ません．";
                 break;
+                case MiraiSugorokuException.USER_ALREADY_EXIST:
+                message = "マス承認管理者のIDが既に使われています。";
+                break;
             case 11:
                 message = "パスワードが間違っています。戻るボタンを押して、再度入力してください。";
                 break;
