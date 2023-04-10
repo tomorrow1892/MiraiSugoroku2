@@ -73,8 +73,29 @@ p.search_result_text {
 
 .button_link:hover {
     background: #60f4ff;
+  }
+
+  .mysquare{
+    position: relative;
+    padding: 0;
+    margin: 10px auto;
+    width: 250px;
 }
 
+.mysquare input{
+    color: rgba(0, 0, 0, 0.543);
+    background-color: #deffd9;
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 2px #afffa3 double;
+    line-height: 23px;
+    padding: 5px 45px 5px 45px;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 100px;
+    outline: none;
+    
+}
 
 /** 以下マスのスタイル **/
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');

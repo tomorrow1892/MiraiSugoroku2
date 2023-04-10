@@ -25,13 +25,13 @@
 </div>
 <div class="admin-menu">
     <div>
-        <h2>承認済みマス一覧</h2>
+        <h4>承認済みマス一覧</h4>
         <form th:action="@{/subadmin/event/{eventId}/squarelist(eventId=${eventid})}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを確認する">
         </form>
     </div>
     <div>
-        <h2><br>[[${str1}]]</h2>
+        <h4><br>[[${str1}]]</h4>
         <form th:action="@{/subadmin/event/{eventId}/approve(eventId=${eventid})}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを承認する">
         </form>
@@ -40,8 +40,15 @@
 
     <h2><br>参加者一覧</h2>
     <h3>[[${str2}]]</h3>
-    <h5>未設定の場合：ニックネームは空欄、<br>グループは0と表示されます。</h3>
-        <table border="2" class="table">
+    <h5>未設定の場合：ニックネームは空欄、<br>
+        グループは未割当てと表示されます。<br>
+        下のボタンで参加者情報をクリップボードにコピー出来ます。<br>
+        Excelに貼り付けられます。</h5>
+    
+        <form>
+            <input onclick="copy()" class="btn btn--orange-ad btn--cubic btn--shadow" value="コピー">
+        </form>
+        <table border="1" class="table" id="optional">
             <tr>
                 <th>ログインID</th>
                 <th>ニックネーム</th>
@@ -52,7 +59,7 @@
                 <td>[[${clist.nickname}]]</td>
                 <td th:if="${clist.group == 0}">未割当て</td>
                 <td th:if="${clist.group != 0}">[[${clist.group}]]</td>
-
+                </td>
             </tr>
         </table>
         <br>
@@ -61,4 +68,27 @@
         </form>
     </div>
 </body>
+
+<script>
+    function copy() {
+        //p要素の文字列を取得
+        var text = document.getElementById("optional").innerText;
+
+        //textareaを生成
+        var area = document.createElement("textarea");
+
+        //p要素の内容をtextareaに記述
+        area.textContent = text;
+
+        //生成したものをdocumentに追加
+        document.body.appendChild(area);
+
+        //選択/コピーして・・
+        area.select();
+        document.execCommand("copy");
+
+        //すぐに消す。
+        document.body.removeChild(area);
+    }
+</script>
 </html>

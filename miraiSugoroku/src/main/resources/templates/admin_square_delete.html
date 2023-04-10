@@ -72,13 +72,14 @@
                 </div>
             </div>
         </div>
-        <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventId})}" method="get">
-            <input type="submit" class="btn btn-secondary m-3" value="戻る">
-        </form>
+        
         <form
             th:action="@{/admin/event/{eventId}/squarelist/{squareId}/delete(eventId=${eventId},squareId=${squareId})}"
             method="get">
             <input type="submit" class="btn btn-danger m-3" value="削除する">
+        </form>
+        <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventId})}" method="get">
+            <input type="submit" class="btn btn-secondary m-3" value="戻る">
         </form>
     </div>
 </body>

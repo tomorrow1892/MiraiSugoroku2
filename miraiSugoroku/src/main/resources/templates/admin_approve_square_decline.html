@@ -70,15 +70,16 @@
                 </div>
             </div>
         </div>
-        <form class="m-3"
-            th:action="@{/admin/event/{eventId}/approve/{squareId}(eventId=${eventId},squareId=${squareId})}"
-            method="get">
-            <input type="submit" class="btn btn-secondary" value="戻る">
-        </form>
+        
         <form class="m-3"
             th:action="@{/admin/event/{eventId}/approve/{squareId}/decline/done(eventId=${eventId},squareId=${squareId})}"
             method="get">
             <input type="submit" class="btn btn-danger" value="削除する">
+        </form>
+        <form class="m-3"
+            th:action="@{/admin/event/{eventId}/approve/{squareId}(eventId=${eventId},squareId=${squareId})}"
+            method="get">
+            <input type="submit" class="btn btn-secondary" value="戻る">
         </form>
 
 </body>

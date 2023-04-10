@@ -125,7 +125,18 @@
     margin-left: auto;
     padding: 10px 5px;
   }
+
+  .sankasha {
+    display:flex;
+  }
+  .table1 {
+    width: 90%;
+  }
+  .tabble2 {
+    width: 100%;
+  }
 }
+
 
 /** 以下デザインに関するスタイル **/
 .backbutton {

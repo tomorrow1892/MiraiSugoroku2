@@ -29,6 +29,9 @@ public class MiraiSugorokuErrorHandler {
             case MiraiSugorokuException.USED_LOGINID:
                 message = "このイベント内で既に使用されているログインIDです。別のログインIDを使用してください。";
                 break;
+            case MiraiSugorokuException.PASSWORD_ERROR:
+                message = "マス承認管理者のIDとパスワードは半角英数16文字以下にしてください。";
+                break;
             case MiraiSugorokuException.CREATE_SQUARE_NOT_PERMITTED:
                 message = "イベント期間が終了しているのでマスを作ることは出来ません．";
                 break;
