@@ -29,6 +29,9 @@ public class MiraiSugorokuErrorHandler {
             case MiraiSugorokuException.USED_LOGINID:
                 message = "このイベント内で既に使用されているログインIDです。別のログインIDを使用してください。";
                 break;
+            case MiraiSugorokuException.PASSWORD_ERROR:
+                message = "マス承認管理者のIDとパスワードは半角英数16文字以下にしてください。";
+                break;
             case 11:
                 message = "パスワードが間違っています。戻るボタンを押して、再度入力してください。";
                 break;

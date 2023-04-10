@@ -61,7 +61,10 @@
                 <td><input type="number" th:min="*{nGroups}" required th:field="*{nGroups}" /></td>
             </tr>
             </table>
-            <input type="submit" value="確定" class="btn-submit"/>
+            <input type="submit" class="btn btn-danger m-3" value="修正する">
+        </form>
+        <form th:action="@{/admin/event/{eventId}(eventId=${eventId})}" method="get">
+            <input type="submit" class="btn btn-secondary m-3" value="戻る">
         </form>
     </div>
 </div>

@@ -10,7 +10,7 @@ public class MiraiSugorokuException extends RuntimeException {
     public static final int USER_ALREADY_EXIST = 15;
     public static final int INVALID_USER_UPDATE = 16;
     public static final int INVALID_USER_ROLE = 17;
-    
+    public static final int PASSWORD_ERROR = 18;
 
     public static final int ERROR = 99;
 

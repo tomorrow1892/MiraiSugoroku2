@@ -46,7 +46,7 @@
                 <td>[[${#dates.format(event.startDate, 'yyyy/MM/dd')}]]</td>
                 <td>[[${#dates.format(event.limitDate, 'yyyy/MM/dd')}]]</td>
                 <td>[[${event.nGroups}]]</td>
-                <td><a th:href=@{/admin/event/{num}(num=${event.eventId})}>選択</a></td>
+                <td><a th:href=@{/admin/event/{num}(num=${event.eventId})}>詳細</a></td>
             </tr>
 
         </table>
@@ -64,7 +64,7 @@
                 <td>[[${#dates.format(end.startDate, 'yyyy/MM/dd')}]]</td>
                 <td>[[${#dates.format(end.limitDate, 'yyyy/MM/dd')}]]</td>
                 <td>[[${end.nGroups}]]</td>
-                <td><a th:href=@{/admin/event/{num}(num=${end.eventId})}>選択</a></td>
+                <td><a th:href=@{/admin/event/{num}(num=${end.eventId})}>詳細</a></td>
             </tr>
         </table>
     </div>

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -74,12 +73,16 @@ public class SubAdminController {
             CreatorAndSquareDTO dto = new CreatorAndSquareDTO();
             SquareCreator sc = cService.getSquareCreator(slist.get(i).getCreatorId());
             String name = "";
+            String nickname = "";
             if (sc == null) {
                 name = "削除済のユーザ";
+                nickname = "削除済のユーザ";
             } else {
                 name = sc.getLoginId();
+                nickname = sc.getNickname();
             }
             dto.setName(name);
+            dto.setNickname(nickname);
             dto.setTitle(slist.get(i).getTitle());
             dto.setSquareId(slist.get(i).getSquareId());
             dtolist.add(dto);
@@ -99,12 +102,16 @@ public class SubAdminController {
             CreatorAndSquareDTO dto = new CreatorAndSquareDTO();
             SquareCreator sc = cService.getSquareCreator(slist.get(i).getCreatorId());
             String name = "";
+            String nickname = "";
             if (sc == null) {
                 name = "削除済のユーザ";
+                nickname = "削除済のユーザ";
             } else {
                 name = sc.getLoginId();
+                nickname = sc.getNickname();
             }
             dto.setName(name);
+            dto.setNickname(nickname);
             dto.setTitle(slist.get(i).getTitle());
             dto.setSquareId(slist.get(i).getSquareId());
             dtolist.add(dto);
@@ -208,7 +215,7 @@ public class SubAdminController {
         return "subadmin_approve_square_decline_done";
     }
 
-    //マス承認完了
+    // マス承認完了
     @PostMapping("/subadmin/event/{eventId}/approve/{squareId}/done")
     public String doneSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
         sf.setApproved(true);
@@ -216,4 +223,3 @@ public class SubAdminController {
         return "subadmin_done_square";
     }
 }
-

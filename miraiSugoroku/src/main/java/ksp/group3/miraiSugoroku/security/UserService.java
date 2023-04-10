@@ -72,6 +72,19 @@ public class UserService implements UserDetailsService {
     }
 
     /**
+     * ユーザをIDで取得
+     * 
+     * @param uid
+     * @return
+     */
+    public User getUserById(Long uid) {
+        User user = users.findByUid(uid)
+                .orElseThrow(() -> new MiraiSugorokuException(MiraiSugorokuException.USER_NOT_FOUND,
+                        uid + ": No such user"));
+        return user;
+    }
+
+    /**
      * ユーザを更新
      * 
      * @param name

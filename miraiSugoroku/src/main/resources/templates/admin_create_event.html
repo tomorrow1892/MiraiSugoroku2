@@ -21,7 +21,8 @@
 
 <div class="discription">
     イベント名、マス作成権限の有効期限、最大グループ数を設定してください。<br>
-    <font color="red">イベント名は一度設定すると修正できません。</font>
+    <font color="red">イベント名は一度設定すると修正できません。</font><br>
+    <font color="red">マス承認管理者のIDとパスワードは半角英数16文字以下にしてください。</font>
 </div>
 <div class="admin-menu">
     <form role="form" th:action="@{/admin/confirmEvent}" th:object="${EventForm}" method="post">
@@ -32,11 +33,11 @@
             </tr>
             <tr>
                 <td><label>マス承認管理者ID: </label></td>
-                <td><input type="text" required th:field="*{subadminName}" /></td>
+                <td><input type="text" maxlength="16" required th:field="*{subadminName}" /></td>
             </tr>
             <tr>
                 <td><label>マス承認管理者パスワード: </label></td>
-                <td><input type="text" required th:field="*{password}" /></td>
+                <td><input type="text" maxlength="16" required th:field="*{password}" /></td>
             </tr>
             <tr>
                 <td><label>期限: </label></td>
