@@ -32,11 +32,17 @@ public class MiraiSugorokuErrorHandler {
             case MiraiSugorokuException.PASSWORD_ERROR:
                 message = "マス承認管理者のIDとパスワードは半角英数16文字以下にしてください。";
                 break;
+            case MiraiSugorokuException.CREATE_SQUARE_NOT_PERMITTED:
+                message = "イベント期間が終了しているのでマスを作ることは出来ません．";
+                break;
+                case MiraiSugorokuException.USER_ALREADY_EXIST:
+                message = "マス承認管理者のIDが既に使われています。";
+                break;
             case 11:
                 message = "パスワードが間違っています。戻るボタンを押して、再度入力してください。";
                 break;
             default:
-                message = "アプリケーション例外が発生しました．メッセージを確認してください";
+                message = "エラーが発生しました．";
                 model.addAttribute("exception", ex);
         }
 

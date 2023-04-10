@@ -1,5 +1,7 @@
 package ksp.group3.miraiSugoroku.form;
 
+import java.util.Date;
+
 import org.hibernate.validator.constraints.Length;
 
 import ksp.group3.miraiSugoroku.entity.Square;
@@ -33,6 +35,7 @@ public class SquareForm {
         square.setPicture(picture);
         square.setSquareEffect(determineKindOfSquare(squareEventId));
         square.setLink(link);
+        square.setCreatedAt(new Date());
         return square;
     }
 

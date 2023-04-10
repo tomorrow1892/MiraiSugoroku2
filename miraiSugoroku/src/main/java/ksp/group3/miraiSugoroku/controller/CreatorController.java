@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +25,7 @@ import ksp.group3.miraiSugoroku.entity.Event;
 import ksp.group3.miraiSugoroku.entity.Square;
 import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.entity.SquareEvent;
+import ksp.group3.miraiSugoroku.exception.MiraiSugorokuException;
 import ksp.group3.miraiSugoroku.form.CreatorLoginForm;
 import ksp.group3.miraiSugoroku.form.GameConfigForm;
 import ksp.group3.miraiSugoroku.form.UpdateSquareCreatorForm;
@@ -189,6 +192,7 @@ public class CreatorController {
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
         model.addAttribute("search", 0);
+        model.addAttribute("search", 0);
         return "creator_squarelist";
     }
 
@@ -204,7 +208,7 @@ public class CreatorController {
         List<Integer> years = createYearList();
         model.addAttribute("years", years);
         model.addAttribute("events", eService.getAllEvents());
-        model.addAttribute("search", 0);
+        model.addAttribute("search", 4);
         return "creator_squarelist";
     }
 
@@ -265,6 +269,14 @@ public class CreatorController {
 
     @GetMapping("/{cid}/create") // マス作成画面を表示
     public String showSquareCreateFrom(@PathVariable Long cid, Model model) {
+        //マス作成権限をチェック
+        SquareCreator creator = cService.getSquareCreator(cid);
+        Date today = new Date(); 
+        
+        if(today.compareTo(eService.getEvent(creator.getEventId()).getLimitDate()) == 1){
+            throw new MiraiSugorokuException(MiraiSugorokuException.CREATE_SQUARE_NOT_PERMITTED, "create square permission expired");
+        }
+
         model.addAttribute("SquareForm", new SquareForm());
         model.addAttribute("cid", cid);
         model.addAttribute("nickName", cService.getSquareCreator(cid).getNickname());
@@ -275,7 +287,8 @@ public class CreatorController {
     }
 
     @PostMapping("/{cid}/create/confirm") // マス作成確認画面
-    public String showSquareCreateConfirm(@PathVariable String cid, @Validated SquareForm form, Model model) {
+    public String showSquareCreateConfirm(@PathVariable String cid,@Validated SquareForm form, Model model) {
+        form.setSquareEffect(form.determineKindOfSquare(form.getSquareEventId()));
         model.addAttribute("SquareForm", form);
         model.addAttribute("cid", cid);
 

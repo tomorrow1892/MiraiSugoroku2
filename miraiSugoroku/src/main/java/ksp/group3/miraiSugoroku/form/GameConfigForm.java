@@ -1,6 +1,7 @@
 package ksp.group3.miraiSugoroku.form;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ksp.group3.miraiSugoroku.entity.Player;
@@ -104,7 +105,7 @@ public class GameConfigForm {
                 // exceptionを返す
                 break;
         }
-        Sugoroku game = new Sugoroku(null, 1, nPlayers, nSquares, 0);
+        Sugoroku game = new Sugoroku(null, 1, nPlayers, nSquares, 0,new Date());
         return game;
 
     }
@@ -113,7 +114,7 @@ public class GameConfigForm {
 
         List<Player> players = new ArrayList<Player>();
         for (int i = 0; i < nPlayers; i++) {
-            Player player = new Player(null, null, icons.get(i), names.get(i), i + 1, 0, 0, false, false);
+            Player player = new Player(null, null, icons.get(i), names.get(i), i + 1, 0, 0, false, false,new Date());
             players.add(player);
         }
         return players;

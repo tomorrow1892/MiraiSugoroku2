@@ -24,10 +24,10 @@
     </div>
     <div class="discription text-middle">
         [[${nickname}]]さん、ようこそ！
-        <div th:if="${bool}">マス作成は[[${event.limitDate}]]まで出来ます。</div>
+        <div th:if="${bool}">マス作成は <font color="red">[[${event.limitDate}]]</font>まで出来ます。</div>
         <div th:if="${bool eq false}">
             <font color="red">
-                マス作成期限([[${event.limitDate}]])を超えたためマス作成出来ません。</font>
+                イベント期間([[${event.limitDate}]])が終了しているのでマス作成は出来ません。</font>
         </div>
     </div>
 
@@ -40,7 +40,7 @@
                 </form>
             </div>
            
-            <div class="col-lg-3 col-6 align-self-center">
+            <div  th:if="${bool eq true}"　class="col-lg-3 col-6 align-self-center">
                 <form th:action="@{/__${cid}__/create}" method="get" >
                     <input id="button_masucreate" type="image" th:src="@{/img/button_masucreate.png}" width="80%">
                 </form>
@@ -74,9 +74,9 @@
 
     setButtonHover("button_play","/img/button_playsugoroku5.png","/img/button_playsugoroku5_hover.png")
     setButtonHover("button_masulist","/img/button_masulist2.png","/img/button_masulist2_hover.png")
-    setButtonHover("button_masucreate","/img/button_masucreate.png","/img/button_masucreate_hover.png")
     setButtonHover("button_editprofile","/img/button_editprofile.png","/img/button_editprofile_hover.png")
     setButtonHover("button_logout","/img/button_logout.png","/img/button_logout_hover.png")
+    setButtonHover("button_masucreate","/img/button_masucreate.png","/img/button_masucreate_hover.png")
 
 
 </script>

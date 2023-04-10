@@ -90,7 +90,7 @@ public class SquareService {
     }
 
     public List<Square> searchSquaresByNickname(String nickname) {
-        Iterable<SquareCreator> result = cRepo.findByNicknameContaining(nickname);
+        Iterable<SquareCreator> result = cRepo.findByNickname(nickname);
         ArrayList<SquareCreator> list_creator = new ArrayList<>();
         result.forEach(list_creator::add);
 
@@ -145,7 +145,7 @@ public class SquareService {
     }
 
     public Page<Square> searchPageSquaresByNickname(Pageable pageable, String nickname) {
-        return sRepo.findByNickNameContainingAndIsApproved(pageable, nickname, true);
+        return sRepo.findByNickNameAndIsApproved(pageable, nickname, true);
     }
 
     public Page<Square> searchPageSquaresByEventId(Pageable pageable, Long eventId) {

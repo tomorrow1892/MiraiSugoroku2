@@ -46,8 +46,8 @@
                         <input type="submit" class="searchsubmit" value="">
                     </div>
                 </div>
-               
-               
+
+
             </form>
         </div>
         <div class="flex-item">
@@ -55,14 +55,14 @@
                 <label class="screen-reader-text" for="nickname">&emsp;ニックネーム：</label>
                 <div class="d-flex">
                     <div th:if="${(search eq 0) or (search eq 1) or (search eq 3)}">
-                        <input type="text" value="" name="nickname" id="nickname"  placeholder="マスの作者でマスをけんさく">
+                        <input type="text" value="" name="nickname" id="nickname" placeholder="マスの作者でマスをけんさく">
                     </div>
                     <div th:if="${search eq 2}">
-                        <input type="text" th:value="*{nn}" name="nickname" id="nickname"  placeholder="マスの作者でマスをけんさく">
+                        <input type="text" th:value="*{nn}" name="nickname" id="nickname" placeholder="マスの作者でマスをけんさく">
                     </div>
                     <input type="submit" class="searchsubmit" value="">
                 </div>
-                
+
             </form>
         </div>
         <form role="search" method="get" class="searchform" th:action="@{/squares/search/event}">
@@ -81,20 +81,21 @@
                             <option value="" class="form-control">- イベントでマスをけんさく -</option>
                         </select>
                     </div>
-    
+
                     <div th:if="${search eq 3}">
                         <select id="selectedYear" name="year">
-                            <option th:each="y: ${years}" th:value="${y}" th:text="${y}" th:selected="${y} == *{sentaku}">
+                            <option th:each="y: ${years}" th:value="${y}" th:text="${y}"
+                                th:selected="${y} == *{sentaku}">
                             </option>
                         </select>
                         <select id="selectedEventId" name="event" required=false>
-                            <option value="" class="form-control">- イベントをえらんでください -</option>
+                            <option value="" class="form-control">- イベントでマスをけんさく -</option>
                         </select>
                     </div>
-    
+
                     <input type="submit" class="searchsubmit mx-3" value="">
                 </div>
-               
+
             </div>
         </form>
     </div>
@@ -157,8 +158,7 @@
 
 
     <!-- マスリスト -->
-    <div class="card pb-5"
-        style="min-width: 22rem; margin-right: auto;margin-left: auto;width: 90vw;">
+    <div class="card pb-5" style="min-width: 22rem; margin-right: auto;margin-left: auto;width: 90vw;">
         <div class="d-flex flex-wrap justify-content-center">
             <div th:each="square: ${square_list}" class="masu mt-5 mb-3 ms-3 lb-3 ls-3">
 
@@ -177,7 +177,7 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <div class="masu-event" th:switch="${square.squareEventId}">
                     <img th:if="${square.squareEffect > 0}" th:src="@{/img/dice_blue.png}">
                     <img th:if="${square.squareEffect < 0}" th:src="@{/img/dice_red.png}">
@@ -212,12 +212,61 @@
                         <span class="newiine_count"></span>いいね
                     </button>
                     <a th:if="${square.link}" class="button_link" th:href="${square.link}" target="_blank">
-                       もっと見てみる
+                        もっと見てみる
                     </a>
                     <!-- いいねボタン改ここまで -->
                 </div>
             </div>
         </div>
+    </div>
+    <!--/* ページネーションバー（Redmine参考） */-->
+    <div class="mt-3">
+        <nav aria-label="Page navigation2">
+            <ul class="pagination pagination-lg justify-content-center">
+                <!--/* 前のページ */-->
+                <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+                    <a th:href="@{${path}(page=${page.number})}" class=" page-link" th:tabindex="${page.first} ? -1"
+                        aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+    
+                <!--/* 最初のページ */-->
+                <li th:if="${page.number gt 2}" class="page-item">
+                    <a th:href="@{${path}(page=0)}" class="page-link">1</a>
+                </li>
+    
+                <!--/* … */-->
+                <li th:if="${page.number gt 3}" class="page-item disabled">
+                    <a href="#" class="page-link">…</a>
+                </li>
+    
+                <th:block th:each="i : ${ #numbers.sequence(page.number - 2, page.number + 2) }">
+                    <li th:if="${i ge 0 and i lt page.totalPages}" class="page-item"
+                        th:classappend="${i eq page.number} ? 'active'">
+                        <a th:href="@{${path}(page=${i+1})}" th:text="${i + 1}" class="page-link"></a>
+                    </li>
+                </th:block>
+    
+                <!--/* … */-->
+                <li th:if="${page.totalPages gt (page.number + 4)}" class="page-item disabled">
+                    <a href="#" class="page-link">…</a>
+                </li>
+    
+                <!--/* 最後のページ */-->
+                <li th:if="${page.totalPages gt (page.number + 3)}" class="page-item">
+                    <a th:href="@{${path}(page=${page.totalPages})}" th:text="${page.totalPages}" class="page-link"></a>
+                </li>
+    
+                <!--/* 次のページ */-->
+                <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+                    <a th:href="@{${path}(page=${page.number + 2})}" class="page-link" th:tabindex="${page.last} ? -1"
+                        aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
 
@@ -235,19 +284,18 @@
         while (dropdownEvent.children[1]) {//"イベントを選択してください"以外の要素をすべて削除
             dropdownEvent.removeChild(dropdownEvent.children[1]);
         }
-        console.log(allEvents);
+
         allEvents.forEach(event => {
             let option = document.createElement("option");
             let date = new Date(event["startDate"]);
             if (date.getFullYear() == selectedYear) {//年度選択のドロップダウンの年度に該当するイベントをリストに入れる
-                console.log(event["name"]);
                 option.text = event["name"];
                 option.value = event["eventId"];
-                if(eventName.value==event["name"]){
+                if (eventName.value == event["name"]) {
                     option.selected = true
                 }
-            dropdownEvent.appendChild(option);
-            
+                dropdownEvent.appendChild(option);
+
             }
         });
     }

@@ -1,5 +1,7 @@
 package ksp.group3.miraiSugoroku.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,5 +29,6 @@ public class Player {
     int position; // playerの現在位置（何番目のマスにいるかを返す）
     Boolean isGoaled; // playerがすでにゴールしていたらTrueを返す
     Boolean isBreak; // playerが休み状態であるときTrueを返す
+    Date createdAt; //作られた日付
 
 }
