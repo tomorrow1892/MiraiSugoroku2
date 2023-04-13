@@ -111,25 +111,32 @@ public class CreatorService {
         }
     }
 
-    public String generateCreatorId(long eventId, int index) {
-        int number = (int)eventId + index;
+    public static String generateCreatorId(long eventId, int index) {
+        int number = (int)eventId * 1000 + index;
         int sum = getDigitsSum(number);
         int check_digit = sum % 26;
-        char alphabet = 'A';
+        char alphabet = 'a';
         for (int i = 0; i < check_digit; i++) {
             alphabet ++;
+            
         }
         String creatorId = String.format("%04d", eventId) + alphabet + String.format("%03d", index);
-        return creatorId; 
+        return creatorId;
     }
-
-    private int getDigitsSum(int number) {
-        int sum = 0;
-        while ( number < 1 ) {
-            sum += number % 10;
+  private static int getDigitsSum(int number) {
+        int sum_odd = 0;
+        int sum_even = 0;
+        int i = 0;
+        while ( number >= 1 ) {
+            if ( i % 2 == 0 ) {
+                sum_odd += number % 10;
+            } else {
+                sum_even += number % 10;
+            }
             number /= 10;
+            i++;
         }
-        return sum;
+        return sum_even * 3 + sum_odd;
     }
 
 }
