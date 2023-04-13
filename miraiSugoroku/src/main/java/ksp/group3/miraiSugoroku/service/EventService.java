@@ -61,7 +61,7 @@ public class EventService {
 
         Event createdEvent =  eRepo.save(e);
         Long eventId = createdEvent.getEventId();
-        
+        System.out.println(eventForm.getNMembers());
         creatorService.createSquareCreators(eventId, eventForm.getNMembers());
         
         

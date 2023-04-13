@@ -44,6 +44,10 @@
                 <td><input type="date" required th:field="*{limitDate}" id="today" /></td>
             </tr>
             <tr>
+                <td><label>参加人数(後で追加することもできます): </label></td>
+                <td><input type="number" min="1" required th:field="*{nMembers}" /></td>
+            </tr>
+            <tr>
                 <td><label>グループ数: </label></td>
                 <td><input type="number" min="1" required th:field="*{nGroups}" /></td>
             </tr>

@@ -1,6 +1,7 @@
 package ksp.group3.miraiSugoroku.service;
 
 import ksp.group3.miraiSugoroku.exception.MiraiSugorokuException;
+import ksp.group3.miraiSugoroku.entity.Event;
 import ksp.group3.miraiSugoroku.entity.SquareCreator;
 import ksp.group3.miraiSugoroku.form.SquareCreatorForm;
 import ksp.group3.miraiSugoroku.form.UpdateSquareCreatorForm;
@@ -34,7 +35,9 @@ public class CreatorService {
             SquareCreator creator = new SquareCreator(null, id, eventId, 0, true, "", null);
             cRepo.save(creator); 
         }
-        eRepo.findById(eventId).get().setNMembers(nMembers + number);
+        Event updatedEvent = eRepo.findById(eventId).get();
+        updatedEvent.setNMembers(nMembers+number);
+        eRepo.save(updatedEvent) ;
 
     }
 
@@ -108,25 +111,32 @@ public class CreatorService {
         }
     }
 
-    public String generateCreatorId(long eventId, int index) {
-        int number = (int)eventId + index;
+    public static String generateCreatorId(long eventId, int index) {
+        int number = (int)eventId * 1000 + index;
         int sum = getDigitsSum(number);
         int check_digit = sum % 26;
-        char alphabet = 'A';
+        char alphabet = 'a';
         for (int i = 0; i < check_digit; i++) {
             alphabet ++;
+            
         }
         String creatorId = String.format("%04d", eventId) + alphabet + String.format("%03d", index);
-        return creatorId; 
+        return creatorId;
     }
-
-    private int getDigitsSum(int number) {
-        int sum = 0;
-        while ( number < 1 ) {
-            sum += number % 10;
+  private static int getDigitsSum(int number) {
+        int sum_odd = 0;
+        int sum_even = 0;
+        int i = 0;
+        while ( number >= 1 ) {
+            if ( i % 2 == 0 ) {
+                sum_odd += number % 10;
+            } else {
+                sum_even += number % 10;
+            }
             number /= 10;
+            i++;
         }
-        return sum;
+        return sum_even * 3 + sum_odd;
     }
 
 }
