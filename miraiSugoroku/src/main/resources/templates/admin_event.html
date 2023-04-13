@@ -2,6 +2,9 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+ <link rel="icon" th:href="@{/img/favicon.ico}">
+
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/kouminkun.png}" />
     <meta charset="UTF-8">
     <title>イベント詳細</title>
     <link rel="stylesheet" th:href="@{/css/display.css}">
@@ -55,8 +58,6 @@
     <h2><br>参加者を追加する</h2>
     
     <div th:if="${bool}">
-        <font color="red">
-            <h5>同じログインIDは使用出来ません。</h5></font>
     <form role="form" th:action="@{/admin/event/{eventId}/creator/register(eventId=${eventid})}" th:object="${gcform}" method="post">
         <table class="table">
             <tr>
