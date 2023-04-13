@@ -8,48 +8,57 @@
 <body class="body">
 <!-- ヘッダー -->
 <nav th:fragment="header" class="navbar navbar-expand navbar-light ">
-        <a th:if="${roll == 'user' || roll == 'creator'}" class="navbar-brand" th:href="@{/}">
+        <a th:if="${roll == 'user'}" class="navbar-brand" th:href="@{/}">
             <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="">
         </a>
-        <a th:if="${roll == 'admin'}"  class="navbar-brand" th:href="@{/admin/menu}">
+        <a th:if="${roll == 'creator'|| roll == 'creator_menu'}" class="navbar-brand" th:href="@{/__${cid}__/menu}">
             <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="">
         </a>
-    <div class="" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <!-- 以下，一般ユーザの選択肢 -->
-            <li th:if="${roll == 'user'}" class="nav-item active">
-                <a class="nav-link" th:href="@{/}">
-                    <img th:src="@{/img/header_modoru.png}">
-                    <div style="color: black;">さいしょにもどる</div>
-                </a>
-            </li>
-            <li th:if="${roll == 'user'}" class="nav-item active">
-                <a class="nav-link" th:href="@{/config}">
-                    <img th:src="@{/img/header_sugoroku.png}">
-                    <div style="color: black;">すごろくで遊ぶ</div>
-                </a>
-            </li>
-            <li th:if="${roll == 'user'}" class="nav-item active">
-                <a class="nav-link" th:href="@{/squares}">
-                    <img th:src="@{/img/header_masulist.png}">
-                    <div style="color: black;">マスを見る</div>
-                </a>
-            </li>
+        <a th:if="${roll == 'admin'}" class="navbar-brand" th:href="@{/admin/menu}">
+            <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="">
+        </a>
+        <div class="" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <!-- 以下，一般ユーザの選択肢 -->
+                <li th:if="${roll == 'user'}" class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">
+                        <img th:src="@{/img/header_modoru.png}">
+                        <div style="color: black;">さいしょにもどる</div>
+                    </a>
+                </li>
+                <li th:if="${roll == 'user'}" class="nav-item active">
+                    <a class="nav-link" th:href="@{/config}">
+                        <img th:src="@{/img/header_sugoroku.png}">
+                        <div style="color: black;">すごろくで遊ぶ</div>
+                    </a>
+                </li>
+                <li th:if="${roll == 'user'}" class="nav-item active">
+                    <a class="nav-link" th:href="@{/squares}">
+                        <img th:src="@{/img/header_masulist.png}">
+                        <div style="color: black;">マスを見る</div>
+                    </a>
+                </li>
 
             <!-- 以下，マス作成者の選択肢 -->
             <li th:if="${roll == 'creator'}" class="nav-item active">
+                <a class="nav-link" th:href="@{/__${cid}__/menu}">
+                    <img th:src="@{/img/header_modoru.png}">
+                    <div style="color: black;">メニューにもどる</div>
+                </a>
+            </li>
+            <li th:if="${roll == 'creator' || roll == 'creator_menu'}" class="nav-item active">
                 <a class="nav-link" th:href="@{/__${cid}__/config}">
                     <img th:src="@{/img/header_sugoroku.png}">
                     <div style="color: black;">すごろくで遊ぶ</div>
                 </a>
             </li>
-            <li th:if="${roll == 'creator'}" class="nav-item active">
+            <li th:if="${roll == 'creator'|| roll == 'creator_menu'}" class="nav-item active">
                 <a class="nav-link" th:href="@{/__${cid}__/squares}">
                     <img th:src="@{/img/header_masulist.png}">
                     <div style="color: black;">マスを見る</div>
                 </a>
             </li>
-            <li th:if="${roll == 'creator'}" class="nav-item active">
+            <li th:if="${roll == 'creator'|| roll == 'creator_menu'}" class="nav-item active">
                 <a class="nav-link" th:href="@{/__${cid}__/create}">
                     <img th:src="@{/img/header_create.png}">
                     <div style="color: black;">マスを作る　</div>
@@ -60,4 +69,5 @@
 </nav>
 
 </body>
+
 </html>

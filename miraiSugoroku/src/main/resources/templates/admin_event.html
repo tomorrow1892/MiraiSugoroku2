@@ -10,45 +10,11 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
 
-    <!-- 背景設定用CSS   -->
-    <style th:inline="text">
-        body {
-            background: url([[@{/img/baloon.png}]]);
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: rgba(255, 255, 255, 0.5);
-            background-blend-mode: lighten;
-        }
-    </style>
+    
 </head>
 
 <body class="body">
-<!-- ヘッダー -->
-<!--  マス作成画面へのリンクは未実装  -->
-<nav class="navbar navbar-expand navbar-light " style="background-color: white; border-bottom: darkblue medium solid">
-    <a class="navbar-brand" th:href="@{/}">
-        <img th:src="@{/img/icon.png}" class="d-inline-block align-top" alt="" style="width: 50px; height: 50px; margin-left: 20px;">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="width: auto; height: auto">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a th:href=@{/admin/createEvent} class="nav-link">イベント作成</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/admin/event/__${eventid}__} class="nav-link">イベント詳細</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/admin/event/__${eventid}__/approve} class="nav-link">マス承認</a>
-            </li>
-            <li class="nav-item">
-                <a th:href=@{/admin/menu} class="nav-link">メニュー</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+
 
 <div class="mt-3 mb-3 d-flex justify-content-center">
     <h1 class="page_title">イベント詳細</h1>
@@ -57,6 +23,10 @@
     [[${event.name}]]についての詳細設定画面です。<br>
     参加者の編集、マス承認を行うことができます。<br>
     マス作成権限の有効期限は、[[${event.limitDate}]]です。<br>
+    <div th:if="${ubool}">
+    管理者ID：[[${user.name}]]<br>
+    管理者パスワード：[[${user.password}]]
+    </div>
 </div>
 <div class="admin-menu">
     <div>
@@ -98,31 +68,71 @@
 </div>
     <h2><br>参加者一覧</h2>
     <h3>[[${str2}]]</h3>
-    <h5>未設定の場合：ニックネームは空欄、<br>グループは0と表示されます。</h3>
-        <table border="2" class="table">
+    <h5>未設定の場合：ニックネームは空欄、<br>
+        グループは未割当てと表示されます。<br>
+        下のボタンで参加者情報をクリップボードにコピー出来ます。<br>
+        Excelに貼り付けられます。</h5>
+    
+        <form>
+            <input onclick="copy()" class="btn btn--orange-ad btn--cubic btn--shadow" value="コピー">
+        </form>
+        <div class="sankasha">
+                    <div class="table1">
+        <table border="1" class="table" id="optional">
             <tr>
-                <th>名前</th>
-                <th>ニックネーム</th>
                 <th>ログインID</th>
+                <th>ニックネーム</th>
                 <th>グループ</th>
-                <th>操作</th>
             </tr>
             <tr th:each="clist: ${clist}">
-                <td>[[${clist.name}]]</td>
-                <td>[[${clist.nickname}]]</td>
                 <td>[[${clist.loginId}]]</td>
-                <td>[[${clist.group}]]</td>
+                <td>[[${clist.nickname}]]</td>
+                <td th:if="${clist.group == 0}">未割当て</td>
+                <td th:if="${clist.group != 0}">[[${clist.group}]]</td>
+                </td>
+            </tr>
+        </table></div>
+        <div class="table2">
+        <table border="1" class="table">
+            <tr>
+                <th>削除</th>
+            </tr>
+            <tr th:each="clist: ${clist}">
                 <td><a th:href=@{/admin/event/{eventId}/creator/delete/confirm/{creatorId}(eventId=${eventid},creatorId=${clist.creatorId})}>削除</a>
                 </td>
             </tr>
-        </table>
+        </table></div>
+    </div>
         <br>
         <form th:action="@{/admin/event/{eventId}/edit(eventId=${eventid})}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="イベント情報を修正する">
         </form>
+        <br>
         <form th:action="@{/admin/menu/}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="管理者メニューに戻る">
         </form>
     </div>
 </body>
+<script>
+    function copy() {
+        //p要素の文字列を取得
+        var text = document.getElementById("optional").innerText;
+
+        //textareaを生成
+        var area = document.createElement("textarea");
+
+        //p要素の内容をtextareaに記述
+        area.textContent = text;
+
+        //生成したものをdocumentに追加
+        document.body.appendChild(area);
+
+        //選択/コピーして・・
+        area.select();
+        document.execCommand("copy");
+
+        //すぐに消す。
+        document.body.removeChild(area);
+    }
+</script>
 </html>

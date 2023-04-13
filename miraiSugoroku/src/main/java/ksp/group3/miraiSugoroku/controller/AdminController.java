@@ -6,11 +6,16 @@ import java.util.List;
 
 import ksp.group3.miraiSugoroku.exception.MiraiSugorokuException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import ksp.group3.miraiSugoroku.entity.Event;
 import ksp.group3.miraiSugoroku.entity.Square;
@@ -22,6 +27,9 @@ import ksp.group3.miraiSugoroku.form.EventForm;
 import ksp.group3.miraiSugoroku.form.GenerateCreatorsForm;
 import ksp.group3.miraiSugoroku.form.SquareCreatorForm;
 import ksp.group3.miraiSugoroku.form.SquareForm;
+import ksp.group3.miraiSugoroku.security.User;
+import ksp.group3.miraiSugoroku.security.UserService;
+import ksp.group3.miraiSugoroku.security.UserSession;
 import ksp.group3.miraiSugoroku.service.CreatorService;
 import ksp.group3.miraiSugoroku.service.EventService;
 import ksp.group3.miraiSugoroku.service.SquareEventService;
@@ -37,27 +45,21 @@ public class AdminController {
     SquareService sService;
     @Autowired
     SquareEventService seService;
+    @Autowired
+    UserService uService;
 
     // 管理者ログインページ
     // パスワード未実装
     @GetMapping("/admin")
     public String showAdminLodinPage(Model model) {
-        AdminLoginForm adform = new AdminLoginForm();
-        model.addAttribute("AdminLoginForm", adform);
-        model.addAttribute("roll", "admin");
         return "admin_login";
     }
 
     // ログイン
     @PostMapping("/admin/login")
     public String adminLogin(AdminLoginForm loginform, Model model) {
-        // パスワード未設定
-        // パスワード設定した際に下記例外を追加する
-        // throw new MiraiSugorokuException(MiraiSugorokuException.WRONG_PASSWORD, "");
-        // System.out.println(loginform.getPassword());
 
         if (!(loginform.getPassword().equals("miraisanda"))) {
-            System.out.println(loginform.getPassword());
             throw new MiraiSugorokuException(MiraiSugorokuException.ADMIN_PASSWORD_WRONG, "");
         }
         return "redirect:/admin/menu";
@@ -90,11 +92,10 @@ public class AdminController {
 
     // イベント作成確認画面
     @PostMapping("/admin/confirmEvent")
-    public String showConfirmEventForm(EventForm eventform, Model model) {
-        // Event event = eventform.toEntity();
-        System.out.println(eventform.getNGroups());
-        System.out.println(eventform.getName());
-        System.out.println(eventform.getLimitDate());
+    public String showConfirmEventForm(@Validated EventForm eventform, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            throw new MiraiSugorokuException(MiraiSugorokuException.PASSWORD_ERROR, "");
+        }
         model.addAttribute("Eventform", eventform);
         model.addAttribute("roll", "admin");
         return "admin_confirm_event";
@@ -103,7 +104,7 @@ public class AdminController {
     // イベント作成完了画面
     @PostMapping("/admin/registerEvent")
     public String showRegistertEvent(EventForm eventform, Model model) {
-        Event event = eService.createEvent(eventform);
+        eService.createEvent(eventform);
         model.addAttribute("roll", "admin");
         return "admin_register_event";
     }
@@ -114,6 +115,13 @@ public class AdminController {
         Event event = eService.getEvent(eventId);
         List<SquareCreator> creator_list = cService.getSquareCreatorsByEventId(eventId);
         SquareCreatorForm scform = new SquareCreatorForm();
+        boolean ubool=false;
+        if (event.getUid() != null) {
+            User user = uService.getUserById(event.getUid());
+            model.addAttribute("user", user);
+            ubool = true;
+        }
+        model.addAttribute("ubool", ubool);
         model.addAttribute("event", event);
         model.addAttribute("eventid", eventId);
         model.addAttribute("clist", creator_list);
@@ -153,6 +161,7 @@ public class AdminController {
         return "redirect:/admin/event/" + eventId;
     }
 
+<<<<<<< HEAD
     // 参加者（作成者）の追加
     /*
     @PostMapping("/admin/event/{eventId}/creator/register")
@@ -198,6 +207,8 @@ public class AdminController {
         return "redirect:/admin/event/" + eventId;
     }
 
+=======
+>>>>>>> 5b99af0db746fe4fe2744e90e47a40889ba8b76d
     // 承認済マス一覧
     @GetMapping("/admin/event/{eventId}/squarelist")
     public String adminSquareList(@PathVariable Long eventId, Model model) {
@@ -208,12 +219,16 @@ public class AdminController {
             CreatorAndSquareDTO dto = new CreatorAndSquareDTO();
             SquareCreator sc = cService.getSquareCreator(slist.get(i).getCreatorId());
             String name = "";
+            String nickname = "";
             if (sc == null) {
                 name = "削除済のユーザ";
+                nickname = "削除済のユーザ";
             } else {
-                name = sc.getName();
+                name = sc.getLoginId();
+                nickname = sc.getNickname();
             }
             dto.setName(name);
+            dto.setNickname(nickname);
             dto.setTitle(slist.get(i).getTitle());
             dto.setSquareId(slist.get(i).getSquareId());
             dtolist.add(dto);
@@ -233,12 +248,16 @@ public class AdminController {
             CreatorAndSquareDTO dto = new CreatorAndSquareDTO();
             SquareCreator sc = cService.getSquareCreator(slist.get(i).getCreatorId());
             String name = "";
+            String nickname = "";
             if (sc == null) {
                 name = "削除済のユーザ";
+                nickname = "削除済のユーザ";
             } else {
-                name = sc.getName();
+                name = sc.getLoginId();
+                nickname = sc.getNickname();
             }
             dto.setName(name);
+            dto.setNickname(nickname);
             dto.setTitle(slist.get(i).getTitle());
             dto.setSquareId(slist.get(i).getSquareId());
             dtolist.add(dto);
@@ -259,6 +278,7 @@ public class AdminController {
         sf.setCreatorName(s.getNickName());
         sf.setSquareEventId(s.getSquareEventId());
         sf.setPicture(s.getPicture());
+        sf.setSquareEffect(sf.determineKindOfSquare(s.getSquareEventId()));
         model.addAttribute("square", s);
         model.addAttribute("SquareForm", sf);
         model.addAttribute("squareId", squareId);
@@ -285,11 +305,12 @@ public class AdminController {
         sf.setDescription(s.getDescription());
         sf.setSquareEventId(s.getSquareEventId());
         sf.setPicture(s.getPicture());
+        sf.setSquareEffect(sf.determineKindOfSquare(s.getSquareEventId()));
         model.addAttribute("sf", sf);
         List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
         model.addAttribute("SquareEventList", SquareEventList);
 
-        String name = cService.getSquareCreator(s.getCreatorId()).getName();
+        String name = cService.getSquareCreator(s.getCreatorId()).getNickname();
         model.addAttribute("name", name);
         model.addAttribute("squareId", squareId);
         model.addAttribute("eventId", eventId);
@@ -300,6 +321,7 @@ public class AdminController {
     // マス承認確認
     @PostMapping("/admin/event/{eventId}/approve/{squareId}/confirm")
     public String confirmSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
+        sf.setSquareEffect(sf.determineKindOfSquare(sf.getSquareEventId()));
         model.addAttribute("sf", sf);
         List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
         model.addAttribute("SquareEventList", SquareEventList);
@@ -309,7 +331,6 @@ public class AdminController {
         model.addAttribute("squareId", squareId);
         model.addAttribute("eventId", eventId);
         model.addAttribute("roll", "admin");
-        System.out.println(sf);
         return "admin_confirm_square";
     }
 
@@ -346,6 +367,41 @@ public class AdminController {
         sService.updateSquare(squareId, sf);
         model.addAttribute("roll", "admin");
         return "admin_done_square";
+    }
+
+    // 参加者（作成者）の追加
+    @PostMapping("/admin/event/{eventId}/creator/register")
+    public String registerSquareCreator(@PathVariable Long eventId, SquareCreatorForm scform, Model model) {
+        // 一応イベント内のログインIDが重複しないように
+        // ただし重複した場合のエラー文の表示なし
+        SquareCreator sc = cService.getSquareCreatorByEventIdAndLoginId(eventId, scform.getLoginId());
+        if (sc == null) {
+            cService.createSquareCreator(scform);
+        }
+        return "redirect:/admin/event/" + eventId;
+    }
+
+    // 参加者（作成者）の削除の確認
+    @GetMapping("/admin/event/{eventId}/creator/delete/confirm/{creatorId}")
+    public String deleteConfirmSquareCreator(@PathVariable Long eventId, @PathVariable Long creatorId, Model model) {
+        model.addAttribute("eventid", eventId);
+        SquareCreator sc = cService.getSquareCreator(creatorId);
+        model.addAttribute("sc", sc);
+        // cService.deleteSquareCreator(creatorId);
+        model.addAttribute("roll", "admin");
+        return "admin_creator_delete";
+    }
+
+    // 参加者（作成者）の削除
+    @GetMapping("/admin/event/{eventId}/creator/delete/{creatorId}")
+    public String deleteSquareCreator(@PathVariable Long eventId, @PathVariable Long creatorId, Model model) {
+        cService.deleteSquareCreator(creatorId);
+        return "redirect:/admin/event/" + eventId;
+    }
+
+    @GetMapping("/loginerror")
+    public String loginError() {
+        return "error";
     }
 
 }

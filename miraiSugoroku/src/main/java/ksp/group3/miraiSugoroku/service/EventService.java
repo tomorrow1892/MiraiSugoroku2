@@ -4,6 +4,10 @@ import ksp.group3.miraiSugoroku.entity.Event;
 import ksp.group3.miraiSugoroku.exception.MiraiSugorokuException;
 import ksp.group3.miraiSugoroku.form.EventForm;
 import ksp.group3.miraiSugoroku.repository.EventRepository;
+import ksp.group3.miraiSugoroku.security.User;
+import ksp.group3.miraiSugoroku.security.UserForm;
+import ksp.group3.miraiSugoroku.security.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +17,46 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 @Service
 public class EventService {
     @Autowired
     EventRepository eRepo;
 
-    public Event createEvent(EventForm eventForm) {
-        Event e = eventForm.toEntity();
+    @Autowired
+    UserService userService;
 
+    @Transactional
+    public Event createEvent(EventForm eventForm) {
+        Event e = new Event();
+
+        Date startDate = new Date();
+        SimpleDateFormat limitFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date d_limitDate = null;
+        try {
+            d_limitDate = limitFormat.parse(eventForm.getLimitDate());
+        } catch (Exception exception) {
+            ;
+        }
+
+        e.setName(eventForm.getName());
+        long timeInMilliSeconds = startDate.getTime();
+        java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
+        e.setStartDate(date1);
+        timeInMilliSeconds = d_limitDate.getTime();
+        java.sql.Date date2 = new java.sql.Date(timeInMilliSeconds);
+        e.setLimitDate(date2);
+        e.setNGroups(eventForm.getNGroups());
+        e.setApproved(true);
+
+        //サブ管理者ユーザを作成
+        UserForm userForm = new UserForm(eventForm.getPassword(),eventForm.getSubadminName());
+        User user = userService.createUser(userForm);
+        
+        //サブ管理者ユーザのidをセット
+        e.setUid(user.getUid());
+        
         return eRepo.save(e);
     }
 
@@ -29,6 +65,11 @@ public class EventService {
                 .orElseThrow(() -> new MiraiSugorokuException(MiraiSugorokuException.ERROR,
                         eventId + ": No such Event"));
 
+        return e;
+    }
+    public Event getEventByUid(Long uid){
+        Event e = eRepo.findByUid(uid)
+        .orElseThrow(() -> new MiraiSugorokuException(MiraiSugorokuException.ERROR, uid+ "No such Event"));
         return e;
     }
 

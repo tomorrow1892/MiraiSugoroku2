@@ -6,18 +6,22 @@ import lombok.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 @Data
 public class EventForm {
-    int nGroups;
-    String limitDate;
-    String name;
+    int nGroups; // グループ数
+    String limitDate;// 有効日数
+    String name;// イベント名
 
-    public Event toEntity() {
-        Event e = new Event();
+    String subadminName; // サブ管理者名
+    @Size(max = 16)
+    @Pattern(regexp = "[0-9a-zA-Z]+")
 
-        Date startDate = new Date();
-        Date d_limitDate = changeLimitDate();
+    String password; // パスワード
 
+<<<<<<< HEAD
         e.setName(name);
         long timeInMilliSeconds = startDate.getTime();
         java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
@@ -31,6 +35,10 @@ public class EventForm {
 
         return e;
     }
+=======
+    @Size(max = 16)
+    @Pattern(regexp = "[0-9a-zA-Z]+")
+>>>>>>> 5b99af0db746fe4fe2744e90e47a40889ba8b76d
 
     public Date changeLimitDate() {
         SimpleDateFormat limitFormat = new SimpleDateFormat("yyyy-MM-dd");

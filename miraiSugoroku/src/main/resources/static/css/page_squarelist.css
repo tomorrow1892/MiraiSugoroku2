@@ -2,13 +2,15 @@
 .searchform .screen-reader-text {
     display: none;
 }
-.searchform{
+
+.searchform {
     position: relative;
     padding: 0;
     margin: 10px auto;
     width: 250px;
 }
-.searchform input{
+
+.searchform input {
     line-height: 23px;
     padding: 5px 45px 5px 13px;
     font-size: 14px;
@@ -37,6 +39,18 @@
     padding: 4px 0px;
 }
 
+.submitbutton {
+    color: #fff;
+    width: 10rem;
+    padding: 0.7%;
+    background-color: rgb(255, 82, 41);
+    border-radius: 5rem;
+    border: 1px solid #ffffff;
+}
+
+p.search_result_text {
+    font-size: 2.2rem;
+}
 
 /** 検索窓のスタイルここまで **/
 /**ボタンスタイル**/
@@ -55,140 +69,173 @@
     transition: 0.3s;
     margin-right: 10px;
     text-decoration: none;
-  }
-  
-  .button_link:hover {
+}
+
+.button_link:hover {
     background: #60f4ff;
   }
-  
+
+  .mysquare{
+    position: relative;
+    padding: 0;
+    margin: 10px auto;
+    width: 250px;
+}
+
+.mysquare input{
+    color: rgba(0, 0, 0, 0.543);
+    background-color: #deffd9;
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 2px #afffa3 double;
+    line-height: 23px;
+    padding: 5px 45px 5px 45px;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 100px;
+    outline: none;
+    
+}
 
 /** 以下マスのスタイル **/
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&display=swap');
 
-.masu{
+.masu {
     width: 20rem;
     height: 24rem;
     position: relative;
     border: 6px solid rgba(54, 180, 16, 0.795);
 }
-.masu .masu-header{
-    height:50%;
+
+.masu .masu-header {
+    height: 50%;
     background-color: #c1ff7953;
 }
-    .masu-header .masu-img{
-        
-        max-height: 100%;
-        max-width: 100%;
-    }
 
-.masu .masu-body{
-    height:50%;
+.masu-header .masu-img {
+
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.masu .masu-body {
+    height: 50%;
     width: 100%;
 }
-    .masu-body ul{
-        height: 100%;
-    }
-    .masu-body .masu-title{
-        height: 45%;
-        width: auto;
-        text-align: center;
-        
-    }
-        .masu-title p{
-            height: 100%;
-            font-size: 1.2rem;
-            overflow: auto;
-            font-family: 'Zen Maru Gothic', sans-serif;
-        }
 
-    .masu-body .masu-contents{
-        height: 55%;
-        width: 100%;
-    }
-        .masu-contents .masu-description{
-            font-size: 1.0rem;
-            height: 70%;
-            width: 100%;
-            overflow: auto;
-        }
+.masu-body ul {
+    height: 100%;
+}
 
-        .masu-contents .masu-creator{
-            font-family: 'Zen Maru Gothic', sans-serif;
-            height: 25%;
-            text-align:end;
-            font-size: 1.0rem;
-        }
+.masu-body .masu-title {
+    height: 45%;
+    width: auto;
+    text-align: center;
 
-.masu .masu-event{
+}
+
+.masu-title p {
+    height: 100%;
+    font-size: 1.2rem;
+    overflow: auto;
+    font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.masu-body .masu-contents {
+    height: 55%;
+    width: 100%;
+}
+
+.masu-contents .masu-description {
+    font-size: 1.0rem;
+    height: 70%;
+    width: 100%;
+    overflow: auto;
+}
+
+.masu-contents .masu-creator {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    height: 25%;
+    text-align: end;
+    font-size: 1.0rem;
+}
+
+.masu .masu-event {
     position: absolute;
-    width:30%;
-    right: 0%; 
+    width: 30%;
+    right: 0%;
     top: 40%;
 }
 
-    .masu-event img{
-        position: absolute;
-        box-sizing:content-box;
-        top: 50%;
-        left: 50%;
-        transform:translateX(-50%) translateY(-50%);
-        width: 100%;
-    }
-    .masu-event p{
-        position: absolute;
-        width: 100%;
-        text-align: center;
-        top: 50%;
-        left: 50%;
-        transform:translateX(-50%) translateY(-50%);
-        font-size: 20px;
-        text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
-              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
-              0px 1px 0 #FFF,  0 -1px 0 #FFF,
-              -1px 0 0 #FFF, 1px 0 0 #FFF;
-    
-    }
+.masu-event img {
+    position: absolute;
+    box-sizing: content-box;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+}
+
+.masu-event p {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 20px;
+    text-shadow: 1px 1px 0 #FFF, -1px -1px 0 #FFF,
+        -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+        0px 1px 0 #FFF, 0 -1px 0 #FFF,
+        -1px 0 0 #FFF, 1px 0 0 #FFF;
+
+}
+
 /** マスのスタイルここまで **/
 
 /** ページネーションバーのスタイル **/
-.paginationbar{
-    text-align:center;
-    
-}
-    .paginationbar a{
-        text-decoration: none;
-    }
-    .paginationbar span{
-        display: inline-block;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background: rgb(236, 249, 152);
-        text-align:center;
-        line-height: 60px;
-        
-    }
-
-.pagination{
+.paginationbar {
+    text-align: center;
 
 }
-    .page-item .page-link{
-     
-        background: #ffffff;
-    }
-    .page-item.disabled .page-link{
-        background: #ffffff;
-    }
-    .page-item.active .page-link{
-        
-        color: blue;
-        background: rgb(185, 255, 145);
-    }
 
-    #app .VueStar {
-        position: relative;
-      }
-      .VueStar__icon .fa {
-        font-size: 3em;
-        cursor: pointer;
-      }
+.paginationbar a {
+    text-decoration: none;
+}
+
+.paginationbar span {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgb(236, 249, 152);
+    text-align: center;
+    line-height: 60px;
+
+}
+
+.pagination {}
+
+.page-item .page-link {
+
+    background: #ffffff;
+}
+
+.page-item.disabled .page-link {
+    background: #ffffff;
+}
+
+.page-item.active .page-link {
+
+    color: blue;
+    background: rgb(185, 255, 145);
+}
+
+#app .VueStar {
+    position: relative;
+}
+
+.VueStar__icon .fa {
+    font-size: 3em;
+    cursor: pointer;
+}

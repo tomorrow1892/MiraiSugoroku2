@@ -11,16 +11,6 @@
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
     <link rel="stylesheet" th:href="@{/css/masu.css}">
 
-    <!-- 背景設定用CSS   -->
-    <style th:inline="text">
-        body {
-            background: url([[@{/img/baloon.png}]]);
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: rgba(255, 255, 255, 0.5);
-            background-blend-mode: lighten;
-        }
-    </style>
 
 </head>
 
@@ -29,17 +19,18 @@
     <div th:replace="header :: header"></div>
 
     <div class="mt-3 mb-3 d-flex justify-content-center">
-        <h1 class="page_title">申請完了</h1>
+        <h1 class="page_title">マスづくり完了</h1>
     </div>
     <div class="discription">
-        マスの承認申請を送信しました。<br>
-        戻るボタンからメニュー画面へ戻ってください。
+        マス作りが完了しました。<br>
+        下ボタンからメニュー画面へもどってください。
     </div>
-    <div class="parent">
-        <div>
-            <form th:action="@{/__${cid}__/menu}" method="get">
-                <input type="submit" class="btn btn--top btn--cubic btn--shadow" value="メニューへ戻る">
-            </form>
+    <div class="container-fluid">
+        <div class="row text-center ">
+            <div class="col-md-12 mt-3"> <form th:action="@{/__${cid}__/menu}" method="get">
+                <input type="submit" class="backbutton" value="メニューへ戻る">
+            </form></div>
+           
         </div>
     </div>
 </body>

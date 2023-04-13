@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>マス一覧</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
@@ -23,49 +24,88 @@
     <div th:replace="header :: header"></div>
 
     <div class="mt-3 mb-3 d-flex justify-content-center">
-        <h1 class="page_title">みんなのマス</h1>
+        <div class="page_title"><a>みんなが作ったマス</a></div>
     </div>
     <div class="discription">
-        作成されたマスの一覧を見ることができます。<br>
-        興味のある場所やイベントについて調べてみてください。<br>
-        自身が作成したマスを検索することもできます。
+        みんなが作ったマスを見ることができます。<br>
+        きょう味のある場所やイベントについて調べてみてください。<br>
+        自分が作成したマスをけんさくすることもできます。
     </div>
 
-    <div class="search-center">
-        <form role="search" method="get" class="searchform" th:action="@{/__${cid}__/squares/search/keyword}">
-            <div>
+
+    <div class="d-flex flex-column">
+        <div class="flex-item">
+            <form role="search" method="get" class="searchform" th:action="@{/__${cid}__/squares/search/keyword}">
                 <label class="screen-reader-text" for="keyword">&emsp;キーワード：</label>
-                <input type="text" value="" name="keyword" id="keyword" placeholder="キーワードで検索">
-                <input type="submit" class="searchsubmit" value="">
-            </div>
-        </form>
+                <div class="d-flex">
+                    <div th:if="${search != 1}">
+                        <input type="text" value="" name="keyword" id="keyword" placeholder="キーワードでマスをけんさく">
+                    </div>
+                    <div th:if="${search eq 1}">
+                        <input type="text" th:value="*{kw}" name="keyword" id="keyword" placeholder="キーワードでマスをけんさく">
+                    </div>
+                    <div>
+                        <input type="submit" class="searchsubmit" value="">
+                    </div>
+                </div>
 
-        <form role="search" method="get" class="searchform" th:action="@{/__${cid}__/squares/search/nickname}">
-            <div>
+
+            </form>
+        </div>
+        <div class="flex-item">
+            <form role="search" method="get" class="searchform flex-item"
+                th:action="@{/__${cid}__/squares/search/nickname}">
                 <label class="screen-reader-text" for="nickname">&emsp;ニックネーム：</label>
-                <input type="text" value="" name="nickname" id="nickname" placeholder="ニックネームで検索">
-                <input type="submit" class="searchsubmit" value="">
-            </div>
-        </form>
+                <div class="d-flex">
+                    <div th:if="${search != 2}">
+                        <input type="text" value="" name="nickname" id="nickname" placeholder="マスの作者でマスをけんさく">
+                    </div>
+                    <div th:if="${search eq 2}">
+                        <input type="text" th:value="*{nn}" name="nickname" id="nickname" placeholder="マスの作者でマスをけんさく">
+                    </div>
+                    <input type="submit" class="searchsubmit" value="">
+                </div>
 
+            </form>
+        </div>
         <form role="search" method="get" class="searchform" th:action="@{/__${cid}__/squares/search/event}">
+            <input th:value="*{event}" id="eventname" hidden>
+            <input th:value="*{sentaku}" id="eventy" hidden>
+            <input th:value="*{search}" id="event" hidden>
             <div>
-                <label class="screen-reader-text" for="nickname">&emsp;イベント：</label>
-                <select id="selectedYear" name="year">
-                    <option th:each="y: ${years}" th:value="${y}" th:text="${y}">
-                    </option>
-                </select>
-                <select id="selectedEventId" name="event" required=false>
-                    <option value="" class="form-control">- イベントを選択してください -</option>
-                </select>
-                <input type="submit" class="searchsubmit" value="">
+                <label class="screen-reader-text" for="nickname">&emsp;イベント</label>
+                <div class="d-flex">
+                    <div th:if="${search != 3}">
+                        <select id="selectedYear" name="year">
+                            <option th:each="y: ${years}" th:value="${y}" th:text="${y}">
+                            </option>
+                        </select>
+                        <select id="selectedEventId" name="event" required=false>
+                            <option value="" class="form-control">- イベントでマスをけんさく -</option>
+                        </select>
+                    </div>
+
+                    <div th:if="${search eq 3}">
+                        <select id="selectedYear" name="year">
+                            <option th:each="y: ${years}" th:value="${y}" th:text="${y}"
+                                th:selected="${y} == *{sentaku}">
+                            </option>
+                        </select>
+                        <select id="selectedEventId" name="event" required=false>
+                            <option value="" class="form-control">- イベントでマスをけんさく -</option>
+                        </select>
+                    </div>
+                    <input type="submit" class="searchsubmit mx-3" value="">
+                </div>
+
             </div>
         </form>
 
-        <form th:action="@{/__${cid}__/squares/mysquares}" method="get">
-            <input type="submit" value="自分が作成したマスを表示" />
+        <form th:action="@{/__${cid}__/squares/mysquares}" method="get" class="mysquare" >
+            <input type="submit" class="mysquare" value="自分が作ったマスを見る" />
         </form>
     </div>
+
 
     <!--/* ページネーションバー（Redmine参考） */-->
     <nav aria-label="Page navigation2">
@@ -75,7 +115,6 @@
                 <a th:href="@{${path}(page=${page.number})}" class=" page-link" th:tabindex="${page.first} ? -1"
                     aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
-                    <span>前のページ</span>
                 </a>
             </li>
 
@@ -111,17 +150,22 @@
                 <a th:href="@{${path}(page=${page.number + 2})}" class="page-link" th:tabindex="${page.last} ? -1"
                     aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
-                    <span>次のページ</span>
                 </a>
             </li>
         </ul>
     </nav>
     <!-- マスリスト -->
-    <div class="card"
-        style="min-width: 22rem; margin-right: auto;margin-left: auto; height: 100vh;width: 90vw; overflow: auto;">
+    <div class="card pb-5" style="min-width: 22rem; margin-right: auto;margin-left: auto; width: 90vw;">
+        <div class="d-flex justify-content-center mt-3">
+            <p th:if="${search == 1}" class="font-wght700 search_result_text"> 「[[${kw}]]」のけんさく結果</p>
+            <p th:if="${search == 2}" class="font-wght700 search_result_text"> [[${nn}]]さんが作ったマス</p>
+            <p th:if="${search == 3}" class="font-wght700 search_result_text"> 「[[${event}]]」イベントで作られたマス</p>
+            <p th:if="${search == 4}" class="font-wght700 search_result_text">自分が作ったマス</p>
+        </div>
+
         <div class="d-flex flex-wrap justify-content-center">
-            <div th:each="square: ${square_list}"
-                class="masu  mt-5 ms-3 lb-3 ls-3">
+
+            <div th:each="square: ${square_list}" class="masu mt-5 mb-3 ms-3 lb-3 ls-3">
 
                 <div class="masu-header d-flex justify-content-center">
                     <img th:src="${square.picture}" class="masu-img">
@@ -137,7 +181,7 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <div class="masu-event" th:switch="${square.squareEventId}">
                     <img th:if="${square.squareEffect > 0}" th:src="@{/img/dice_blue.png}">
                     <img th:if="${square.squareEffect < 0}" th:src="@{/img/dice_red.png}">
@@ -174,11 +218,61 @@
                     <!-- いいねボタン改ここまで -->
                     <a th:if="${square.link}" class="button_link" th:href="${square.link}" target="_blank">
                         もっと見てみる
-                     </a>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+    <!--/* ページネーションバー（Redmine参考） */-->
+    <div class="mt-3">
+        <nav aria-label="Page navigation2">
+            <ul class="pagination pagination-lg justify-content-center">
+                <!--/* 前のページ */-->
+                <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+                    <a th:href="@{${path}(page=${page.number})}" class=" page-link" th:tabindex="${page.first} ? -1"
+                        aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <!--/* 最初のページ */-->
+                <li th:if="${page.number gt 2}" class="page-item">
+                    <a th:href="@{${path}(page=0)}" class="page-link">1</a>
+                </li>
+
+                <!--/* … */-->
+                <li th:if="${page.number gt 3}" class="page-item disabled">
+                    <a href="#" class="page-link">…</a>
+                </li>
+
+                <th:block th:each="i : ${ #numbers.sequence(page.number - 2, page.number + 2) }">
+                    <li th:if="${i ge 0 and i lt page.totalPages}" class="page-item"
+                        th:classappend="${i eq page.number} ? 'active'">
+                        <a th:href="@{${path}(page=${i+1})}" th:text="${i + 1}" class="page-link"></a>
+                    </li>
+                </th:block>
+
+                <!--/* … */-->
+                <li th:if="${page.totalPages gt (page.number + 4)}" class="page-item disabled">
+                    <a href="#" class="page-link">…</a>
+                </li>
+
+                <!--/* 最後のページ */-->
+                <li th:if="${page.totalPages gt (page.number + 3)}" class="page-item">
+                    <a th:href="@{${path}(page=${page.totalPages})}" th:text="${page.totalPages}" class="page-link"></a>
+                </li>
+
+                <!--/* 次のページ */-->
+                <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+                    <a th:href="@{${path}(page=${page.number + 2})}" class="page-link" th:tabindex="${page.last} ? -1"
+                        aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://es4.eedept.kobe-u.ac.jp/miraisugoroku_newiine_app/newiine.js"></script>
@@ -193,12 +287,10 @@
         while (dropdownEvent.children[1]) {//"イベントを選択してください"以外の要素をすべて削除
             dropdownEvent.removeChild(dropdownEvent.children[1]);
         }
-        console.log(allEvents);
         allEvents.forEach(event => {
             let option = document.createElement("option");
             let date = new Date(event["startDate"]);
             if (date.getFullYear() == selectedYear) {//年度選択のドロップダウンの年度に該当するイベントをリストに入れる
-                console.log(event["name"]);
                 option.text = event["name"];
                 option.value = event["eventId"];
                 dropdownEvent.appendChild(option);
