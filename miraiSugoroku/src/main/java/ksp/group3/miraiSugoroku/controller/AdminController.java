@@ -96,6 +96,7 @@ public class AdminController {
         if (result.hasErrors()) {
             throw new MiraiSugorokuException(MiraiSugorokuException.PASSWORD_ERROR, "");
         }
+        
         model.addAttribute("Eventform", eventform);
         model.addAttribute("roll", "admin");
         return "admin_confirm_event";
@@ -104,6 +105,7 @@ public class AdminController {
     // イベント作成完了画面
     @PostMapping("/admin/registerEvent")
     public String showRegistertEvent(EventForm eventform, Model model) {
+        System.out.println(eventform.getNMembers());
         eService.createEvent(eventform);
         model.addAttribute("roll", "admin");
         return "admin_register_event";
@@ -114,7 +116,7 @@ public class AdminController {
     public String showEventDetail(@PathVariable Long eventId, Model model) {
         Event event = eService.getEvent(eventId);
         List<SquareCreator> creator_list = cService.getSquareCreatorsByEventId(eventId);
-        SquareCreatorForm scform = new SquareCreatorForm();
+
         boolean ubool=false;
         if (event.getUid() != null) {
             User user = uService.getUserById(event.getUid());
@@ -125,7 +127,7 @@ public class AdminController {
         model.addAttribute("event", event);
         model.addAttribute("eventid", eventId);
         model.addAttribute("clist", creator_list);
-        model.addAttribute("scform", scform);
+        model.addAttribute("gcform", new GenerateCreatorsForm());
         boolean bool = eService.getBoolean(eventId);
         model.addAttribute("bool", bool);
         List<Square> slist = sService.filterSquaresByEventIdAndIsApproved(eventId, false);

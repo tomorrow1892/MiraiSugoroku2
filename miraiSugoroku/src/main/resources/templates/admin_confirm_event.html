@@ -41,6 +41,10 @@
                 <td>[[${Eventform.limitDate}]]</td>
             </tr>
             <tr>
+                <td><label>参加人数: </label></td>
+                <td>[[${Eventform.nMembers}]]</td>
+            </tr>
+            <tr>
                 <td><label>グループ数: </label></td>
                 <td>[[${Eventform.nGroups}]]</td>
             </tr>
@@ -51,6 +55,7 @@
         <td><input type="hidden" required th:field="*{limitDate}"/></td>
         <td><input type="hidden" required th:field="*{nGroups}"/></td>
         <td><input type="hidden" required th:field="*{subadminName}"/></td>
+        <td><input type="hidden" required th:field="*{nMembers}"/></td>
         <td><input type="hidden" required th:field="*{password}"/></td>
        
     </form>

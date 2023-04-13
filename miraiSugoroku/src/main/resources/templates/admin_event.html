@@ -49,15 +49,11 @@
     <div th:if="${bool}">
         <font color="red">
             <h5>同じログインIDは使用出来ません。</h5></font>
-    <form role="form" th:action="@{/admin/event/{eventId}/creator/register(eventId=${eventid})}" th:object="${scform}" method="post">
+    <form role="form" th:action="@{/admin/event/{eventId}/creator/register(eventId=${eventid})}" th:object="${gcform}" method="post">
         <table class="table">
             <tr>
-                <td><label>名前: </label></td>
-                <td><input type="text" required th:field="*{name}" /></td>
-            </tr>
-            <tr>
-                <td><label>ログインID: </label></td>
-                <td><input type="text" required th:field="*{loginId}" /></td>
+                <td><label>人数: </label></td>
+                <td><input type="number" min="1" required th:field="*{number}" /></td>
             </tr>
         </table>
         <input type="submit" value="追加" class="btn btn--orange-ad btn--cubic btn--shadow" />
