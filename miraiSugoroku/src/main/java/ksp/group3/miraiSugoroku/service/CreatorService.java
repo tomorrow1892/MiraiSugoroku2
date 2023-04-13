@@ -120,7 +120,7 @@ public class CreatorService {
             alphabet ++;
             
         }
-        String creatorId = String.format("%04d", eventId) + alphabet + String.format("%03d", index);
+        String creatorId = String.format("%04d", eventId)  + String.format("%03d", index) + alphabet;
         return creatorId;
     }
   private static int getDigitsSum(int number) {
