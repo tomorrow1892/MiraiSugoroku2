@@ -161,22 +161,8 @@ public class AdminController {
         return "redirect:/admin/event/" + eventId;
     }
 
-<<<<<<< HEAD
-    // 参加者（作成者）の追加
-    /*
-    @PostMapping("/admin/event/{eventId}/creator/register")
-    public String registerSquareCreator(@PathVariable Long eventId, SquareCreatorForm scform, Model model) {
-        // 一応イベント内のログインIDが重複しないように
-        // ただし重複した場合のエラー文の表示なし
-        SquareCreator sc = cService.getSquareCreatorByEventIdAndLoginId(eventId, scform.getLoginId());
-        System.out.println(sc);
-        if (sc == null) {
-            cService.createSquareCreator(scform);
-        }
-        return "redirect:/admin/event/" + eventId;
-    }
-    */
 
+    //イベント参加者一括登録
     @PostMapping("/admin/event/{eventId}/creator/register")
     public String registerSquareCreators(@PathVariable Long eventId, GenerateCreatorsForm form, Model model) {
         int number = form.getNumber();
@@ -207,8 +193,6 @@ public class AdminController {
         return "redirect:/admin/event/" + eventId;
     }
 
-=======
->>>>>>> 5b99af0db746fe4fe2744e90e47a40889ba8b76d
     // 承認済マス一覧
     @GetMapping("/admin/event/{eventId}/squarelist")
     public String adminSquareList(@PathVariable Long eventId, Model model) {
@@ -369,35 +353,7 @@ public class AdminController {
         return "admin_done_square";
     }
 
-    // 参加者（作成者）の追加
-    @PostMapping("/admin/event/{eventId}/creator/register")
-    public String registerSquareCreator(@PathVariable Long eventId, SquareCreatorForm scform, Model model) {
-        // 一応イベント内のログインIDが重複しないように
-        // ただし重複した場合のエラー文の表示なし
-        SquareCreator sc = cService.getSquareCreatorByEventIdAndLoginId(eventId, scform.getLoginId());
-        if (sc == null) {
-            cService.createSquareCreator(scform);
-        }
-        return "redirect:/admin/event/" + eventId;
-    }
-
-    // 参加者（作成者）の削除の確認
-    @GetMapping("/admin/event/{eventId}/creator/delete/confirm/{creatorId}")
-    public String deleteConfirmSquareCreator(@PathVariable Long eventId, @PathVariable Long creatorId, Model model) {
-        model.addAttribute("eventid", eventId);
-        SquareCreator sc = cService.getSquareCreator(creatorId);
-        model.addAttribute("sc", sc);
-        // cService.deleteSquareCreator(creatorId);
-        model.addAttribute("roll", "admin");
-        return "admin_creator_delete";
-    }
-
-    // 参加者（作成者）の削除
-    @GetMapping("/admin/event/{eventId}/creator/delete/{creatorId}")
-    public String deleteSquareCreator(@PathVariable Long eventId, @PathVariable Long creatorId, Model model) {
-        cService.deleteSquareCreator(creatorId);
-        return "redirect:/admin/event/" + eventId;
-    }
+    
 
     @GetMapping("/loginerror")
     public String loginError() {

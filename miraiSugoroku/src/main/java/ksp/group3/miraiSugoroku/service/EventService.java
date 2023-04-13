@@ -27,10 +27,12 @@ public class EventService {
     @Autowired
     UserService userService;
 
+    @Autowired
+    CreatorService creatorService;
+
     @Transactional
     public Event createEvent(EventForm eventForm) {
         Event e = new Event();
-
         Date startDate = new Date();
         SimpleDateFormat limitFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date d_limitDate = null;
@@ -39,7 +41,6 @@ public class EventService {
         } catch (Exception exception) {
             ;
         }
-
         e.setName(eventForm.getName());
         long timeInMilliSeconds = startDate.getTime();
         java.sql.Date date1 = new java.sql.Date(timeInMilliSeconds);
@@ -49,6 +50,7 @@ public class EventService {
         e.setLimitDate(date2);
         e.setNGroups(eventForm.getNGroups());
         e.setApproved(true);
+        e.setNMembers(0);
 
         //サブ管理者ユーザを作成
         UserForm userForm = new UserForm(eventForm.getPassword(),eventForm.getSubadminName());
@@ -56,8 +58,14 @@ public class EventService {
         
         //サブ管理者ユーザのidをセット
         e.setUid(user.getUid());
+
+        Event createdEvent =  eRepo.save(e);
+        Long eventId = createdEvent.getEventId();
         
-        return eRepo.save(e);
+        creatorService.createSquareCreators(eventId, eventForm.getNMembers());
+        
+        
+        return createdEvent;
     }
 
     public Event getEvent(long eventId) {
