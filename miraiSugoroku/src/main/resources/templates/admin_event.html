@@ -17,30 +17,38 @@
 
 
 <div class="mt-3 mb-3 d-flex justify-content-center">
-    <h1 class="page_title">イベント詳細</h1>
+    <h1 class="page_title">イベント管理</h1>
 </div>
 <div class="discription">
-    [[${event.name}]]についての詳細設定画面です。<br>
+    イベントの管理画面です。<br>
     参加者の編集、マス承認を行うことができます。<br>
-    マス作成権限の有効期限は、[[${event.limitDate}]]です。<br>
     <div th:if="${ubool}">
-    管理者ID：[[${user.name}]]<br>
-    管理者パスワード：[[${user.password}]]
+    
     </div>
 </div>
 <div class="admin-menu">
-    <div>
-        <h2>承認済みマス一覧</h2>
-        <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventid})}" method="get">
-            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを確認する">
-        </form>
+    <h2>「[[${event.name}]]」イベント</h2>
+    マス承認管理者ID:　[[${user.name}]]<br>
+    マス承認管理者パスワード:　[[${user.password}]]<br>
+    マス作成権限の有効期限:　[[${event.limitDate}]]
+    <form th:action="@{/admin/event/{eventId}/edit(eventId=${eventid})}" method="get">
+        <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="イベント情報を修正する">
+    </form>
+    <div class="d-flex justify-content-center p-3" >
+        <div class="m-3">
+            <h4>承認済みマス一覧</h4>
+            <form th:action="@{/admin/event/{eventId}/squarelist(eventId=${eventid})}" method="get">
+                <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを確認する">
+            </form>
+        </div>
+        <div class="m-3">
+            <h4>[[${str1}]]</h4>
+            <form th:action="@{/admin/event/{eventId}/approve(eventId=${eventid})}" method="get">
+                <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを承認する">
+            </form>
+        </div>
     </div>
-    <div>
-        <h2><br>[[${str1}]]</h2>
-        <form th:action="@{/admin/event/{eventId}/approve(eventId=${eventid})}" method="get">
-            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを承認する">
-        </form>
-    </div>
+    
 
     
     
@@ -67,15 +75,15 @@
     <h4>終了済みイベントのため参加者を追加出来ません</h2></font>
 </div>
     <h2><br>参加者一覧</h2>
-    <h3>[[${str2}]]</h3>
-    <h5>未設定の場合：ニックネームは空欄、<br>
-        グループは未割当てと表示されます。<br>
+    <h4>[[${str2}]]</h4>
+    
         下のボタンで参加者情報をクリップボードにコピー出来ます。<br>
-        Excelに貼り付けられます。</h5>
+        Excelに貼り付けることができます。
     
         <form>
             <input onclick="copy()" class="btn btn--orange-ad btn--cubic btn--shadow" value="コピー">
         </form>
+        ＊イベント参加者がまだ設定していない項目は空欄で表示されます。
         <div class="sankasha">
                     <div class="table1">
         <table border="1" class="table" id="optional">
@@ -87,7 +95,7 @@
             <tr th:each="clist: ${clist}">
                 <td>[[${clist.loginId}]]</td>
                 <td>[[${clist.nickname}]]</td>
-                <td th:if="${clist.group == 0}">未割当て</td>
+                <td th:if="${clist.group == 0}"></td>
                 <td th:if="${clist.group != 0}">[[${clist.group}]]</td>
                 </td>
             </tr>
@@ -104,9 +112,7 @@
         </table></div>
     </div>
         <br>
-        <form th:action="@{/admin/event/{eventId}/edit(eventId=${eventid})}" method="get">
-            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="イベント情報を修正する">
-        </form>
+        
         <br>
         <form th:action="@{/admin/menu/}" method="get">
             <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="管理者メニューに戻る">

@@ -10,44 +10,54 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
 
-    
+
 </head>
 
 <body class="body">
 
 
-<div class="mt-3 mb-3 d-flex justify-content-center">
-    <h1 class="page_title">イベント詳細</h1>
-</div>
-<div class="discription">
-    「[[${event.name}]]」イベントの管理画面です。<br>
-    参加者の確認、マス承認を行うことができます。<br>
-</div>
-<div class="admin-menu">
-    <div>
-        <h4>承認済みマス一覧</h4>
-        <form th:action="@{/subadmin/event/{eventId}/squarelist(eventId=${eventid})}" method="get">
-            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを確認する">
-        </form>
+    <div class="mt-3 mb-3 d-flex justify-content-center">
+        <h1 class="page_title">イベント管理</h1>
     </div>
-    <div>
-        <h4><br>[[${str1}]]</h4>
-        <form th:action="@{/subadmin/event/{eventId}/approve(eventId=${eventid})}" method="get">
-            <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを承認する">
-        </form>
+    <div class="discription">
+        イベントの管理画面です。<br>
+        参加者の確認、マス承認を行うことができます。<br>
     </div>
+    <div class="admin-menu">
+        <div>
+            <h2>「[[${event.name}]]」イベント</h2>
+            <div class="d-flex justify-content-center p-3">
+                <div class="m-3">
+                    <h4>承認済みマス一覧</h4>
+                    <form th:action="@{/subadmin/event/{eventId}/squarelist(eventId=${eventid})}" method="get">
+                        <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを確認する">
+                    </form>
+                </div>
+                <div class="m-3">
+                    <h4>[[${str1}]]</h4>
+                    <form th:action="@{/subadmin/event/{eventId}/approve(eventId=${eventid})}" method="get">
+                        <input type="submit" class="btn btn--orange-ad btn--cubic btn--shadow" value="マスを承認する">
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
 
 
-    <h2><br>参加者一覧</h2>
-    <h3>[[${str2}]]</h3>
-    <h5>未設定の場合：ニックネームは空欄、<br>
-        グループは未割当てと表示されます。<br>
-        下のボタンで参加者情報をクリップボードにコピー出来ます。<br>
-        Excelに貼り付けられます。</h5>
-    
+
+
+
+        <h2>参加者一覧</h2>
+        <h4>[[${str2}]]</h4>
+        
+            下のボタンで参加者情報をクリップボードにコピー出来ます。<br>
+            Excelに貼り付けることができます。
+
         <form>
             <input onclick="copy()" class="btn btn--orange-ad btn--cubic btn--shadow" value="コピー">
         </form>
+        <br>＊イベント参加者がまだ設定していない項目は空欄で表示されます。
         <table border="1" class="table" id="optional">
             <tr>
                 <th>ログインID</th>
@@ -57,7 +67,7 @@
             <tr th:each="clist: ${clist}">
                 <td>[[${clist.loginId}]]</td>
                 <td>[[${clist.nickname}]]</td>
-                <td th:if="${clist.group == 0}">未割当て</td>
+                <td th:if="${clist.group == 0}"></td>
                 <td th:if="${clist.group != 0}">[[${clist.group}]]</td>
                 </td>
             </tr>
@@ -91,4 +101,5 @@
         document.body.removeChild(area);
     }
 </script>
+
 </html>
