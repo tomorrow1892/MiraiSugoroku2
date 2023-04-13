@@ -21,10 +21,10 @@ public class MiraiSugorokuErrorHandler {
 
         switch (ex.getCode()) {
             case MiraiSugorokuException.NO_SUCH_USER:
-                message = "参加イベントかユーザIDが間違っています。戻るボタンを押して、再度入力してください。";
+                message = "参加イベントかユーザIDが間違っています。戻るボタンを押して、もういちど入力してください。";
                 break;
             case MiraiSugorokuException.ADMIN_PASSWORD_WRONG:
-                message = "パスワードが間違っています。戻るボタンを押して、再度入力してください。";
+                message = "ログインIDが間違っています。戻るボタンを押して、もういちど入力してください。";
                 break;
             case MiraiSugorokuException.USED_LOGINID:
                 message = "このイベント内で既に使用されているログインIDです。別のログインIDを使用してください。";
