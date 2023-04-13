@@ -20,7 +20,7 @@ import java.util.Optional;
 public class CreatorService {
     @Autowired
     CreatorRepository cRepo;
-    @AutoWired
+    @Autowired
     EventRepository eRepo;
 
     public SquareCreator createSquareCreator(SquareCreatorForm form) {
@@ -28,13 +28,13 @@ public class CreatorService {
     }
 
     public void createSquareCreators(long eventId, int number) {
-        int nMembers = eRepo.findById(eventId).getNMembers();
+        int nMembers = eRepo.findById(eventId).get().getNMembers();
         for (int index = 0; index < number; index++) {
             String id = generateCreatorId(eventId, nMembers + index + 1);
             SquareCreator creator = new SquareCreator(null, id, eventId, 0, true, "", null);
             cRepo.save(creator); 
         }
-        eRepo.findById(eventId).setNMembers(nMembers + number);
+        eRepo.findById(eventId).get().setNMembers(nMembers + number);
 
     }
 
