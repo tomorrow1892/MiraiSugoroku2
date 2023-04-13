@@ -31,5 +31,7 @@ public class Event {
 
     boolean isApproved;
 
+    int nMembers;
+    
     Long uid; //イベントのサブ管理者ID
 }
