@@ -22,7 +22,7 @@
     <div class="mt-3 mb-3 d-flex justify-content-center" >
         <h1 class="page_title ">イベント参加者メニュー</h1>
     </div>
-    <div class="discription text-middle">
+    <div class="discription ">
         [[${nickname}]]さん、ようこそ！
         <div th:if="${bool}">マス作成は <font color="red">[[${event.limitDate}]]</font>まで出来ます。</div>
         <div th:if="${bool eq false}">
@@ -53,20 +53,21 @@
             </div>
            
         </div>
-        <div class="row text-center mt-5 justify-content-center">
+        <div class="row text-center mt-5 justify-content-center mb-5">
             
             <div class="col-lg-3 col-6">
                 <form th:action="@{/__${cid}__/detail}" method="get" >
-                    <input id="button_editprofile" type="image" th:src="@{/img/button_editprofile.png}" width="70%">
+                    <input id="button_editprofile" type="image" th:src="@{/img/button_editprofile.png}" width="80%">
                 </form>
             </div>
             <div class="col-lg-3 col-6">
                 <form th:action="@{/}" method="get" >
-                    <input id="button_logout" type="image" th:src="@{/img/button_logout.png}" width="70%">
+                    <input id="button_logout" type="image" th:src="@{/img/button_logout.png}" width="80%">
                 </form>
             </div>
             
         </div>
+        
     </div>
 
 </body>
