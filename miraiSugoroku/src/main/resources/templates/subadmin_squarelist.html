@@ -33,7 +33,9 @@
                 <td>[[${dto.name}]]</td>
                 <td>[[${dto.nickname}]]</td>
                 <td>[[${dto.title}]]</td>
-                <td><a th:href=@{/subadmin/event/{eventId}/squarelist/{squareId}(eventId=${eventId},squareId=${dto.squareId})}>削除</a></td>
+                <td><a th:href=@{/subadmin/event/{eventId}/squarelist/{squareId}(eventId=${eventId},squareId=${dto.squareId})}>削除</a>
+                    <a th:href=@{/subadmin/event/{eventId}/edit/{squareId}(eventId=${eventId},squareId=${dto.squareId})}>修正</a></td>
+                </td>
             </tr>
             
         </table>

@@ -32,14 +32,13 @@
                 <td>[[${dto.name}]]</td>
                 <td>[[${dto.nickname}]]</td>
                 <td>[[${dto.title}]]</td>
-                <td><a th:href=@{/admin/event/{eventId}/squarelist/{squareId}(eventId=${eventId},squareId=${dto.squareId})}>削除</a></td>
+                <td><a th:href=@{/admin/event/{eventId}/squarelist/{squareId}(eventId=${eventId},squareId=${dto.squareId})}>削除</a>
+                <a th:href=@{/admin/event/{eventId}/edit/{squareId}(eventId=${eventId},squareId=${dto.squareId})}>修正</a></td>
             </tr>
             
         </table>
         <br>
-        <form th:action="@{/admin/event/{eventId}(eventId=${eventId})}" method="get">
-            <input type="submit" class="btn btn-secondary" value="戻る">
-        </form>
+        <button class="btn btn-secondary" onclick="history.back()">戻る</button>
     </div>
 </body>
 </html>

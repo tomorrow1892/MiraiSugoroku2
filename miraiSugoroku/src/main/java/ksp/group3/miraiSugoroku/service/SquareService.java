@@ -156,4 +156,10 @@ public class SquareService {
         return sRepo.findByCreatorIdAndIsApproved(pageable, creatorId, isApproved);
     }
 
+    public Page<Square> searchPageSquaresByGroup(Pageable pageable, Long creatorId) {
+        Long eventId = cRepo.findById(creatorId).get().getEventId();
+        int groupId = cRepo.findById(creatorId).get().getGroup();
+        return sRepo.findByEventIdAndGroupIdAndIsApproved(pageable,eventId, groupId,true);
+    }
+
 }

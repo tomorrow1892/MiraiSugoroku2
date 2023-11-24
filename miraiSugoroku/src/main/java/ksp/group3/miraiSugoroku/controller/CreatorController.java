@@ -212,6 +212,22 @@ public class CreatorController {
         return "creator_squarelist";
     }
 
+    @GetMapping("{cid}/squares/search/mygroup")
+    public String searchSquaresByGroup(@PathVariable("cid") Long cid, @PageableDefault(60) Pageable pageable, Model model) {
+        Page<Square> page = sService.searchPageSquaresByGroup(pageable, cid);
+        model.addAttribute("square_list", page.getContent());
+        model.addAttribute("page", page);
+        model.addAttribute("path", "/" + cid + "/squares/search/mygroup");
+        model.addAttribute("cid", cid);
+        model.addAttribute("roll", "creator");
+        List<Integer> years = createYearList();
+        model.addAttribute("years", years);
+        model.addAttribute("events", eService.getAllEvents());
+        model.addAttribute("search", 5);
+        return "creator_squarelist";
+    }
+
+
     @GetMapping("/{cid}/squares/search/keyword")
     public String searchSquaresByKeyword(@PathVariable("cid") String cid, @RequestParam("keyword") String keyword,
             @PageableDefault(60) Pageable pageable,
@@ -267,6 +283,7 @@ public class CreatorController {
         return "creator_squarelist";
     }
 
+    
     @GetMapping("/{cid}/create") // マス作成画面を表示
     public String showSquareCreateFrom(@PathVariable Long cid, Model model) {
         //マス作成権限をチェック

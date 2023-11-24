@@ -291,6 +291,7 @@ public class AdminController {
         sf.setDescription(s.getDescription());
         sf.setSquareEventId(s.getSquareEventId());
         sf.setPicture(s.getPicture());
+        sf.setLink(s.getLink());
         sf.setSquareEffect(sf.determineKindOfSquare(s.getSquareEventId()));
         model.addAttribute("sf", sf);
         List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
@@ -302,6 +303,29 @@ public class AdminController {
         model.addAttribute("eventId", eventId);
         model.addAttribute("roll", "admin");
         return "admin_edit_square";
+    }
+
+    // 承認済みマス詳細
+    @GetMapping("/admin/event/{eventId}/edit/{squareId}")
+    public String editSquare(@PathVariable Long eventId, @PathVariable Long squareId, Model model) {
+        Square s = sService.getSquare(squareId);
+        SquareForm sf = new SquareForm();
+        sf.setTitle(s.getTitle());
+        sf.setDescription(s.getDescription());
+        sf.setSquareEventId(s.getSquareEventId());
+        sf.setPicture(s.getPicture());
+        sf.setLink(s.getLink());
+        sf.setSquareEffect(sf.determineKindOfSquare(s.getSquareEventId()));
+        model.addAttribute("sf", sf);
+        List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
+        model.addAttribute("SquareEventList", SquareEventList);
+
+        String name = cService.getSquareCreator(s.getCreatorId()).getNickname();
+        model.addAttribute("name", name);
+        model.addAttribute("squareId", squareId);
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
+        return "admin_edit_approvedSquare";
     }
 
     // マス承認確認
@@ -318,6 +342,22 @@ public class AdminController {
         model.addAttribute("eventId", eventId);
         model.addAttribute("roll", "admin");
         return "admin_confirm_square";
+    }
+
+     // マス修正確認
+    @PostMapping("/admin/event/{eventId}/edit/{squareId}/confirm")
+    public String confirmApprovedSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
+        sf.setSquareEffect(sf.determineKindOfSquare(sf.getSquareEventId()));
+        model.addAttribute("sf", sf);
+        List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
+        model.addAttribute("SquareEventList", SquareEventList);
+        Square s = sService.getSquare(squareId);
+        String name = cService.getSquareCreator(s.getCreatorId()).getName();
+        model.addAttribute("name", name);
+        model.addAttribute("squareId", squareId);
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
+        return "admin_confirm_approvedSquare";
     }
 
     // マス承認拒否
@@ -353,6 +393,14 @@ public class AdminController {
         sService.updateSquare(squareId, sf);
         model.addAttribute("roll", "admin");
         return "admin_done_square";
+    }
+
+    @PostMapping("/admin/event/{eventId}/edit/{squareId}/done")
+    public String doneApprovedSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
+        sf.setApproved(true);
+        sService.updateSquare(squareId, sf);
+        model.addAttribute("roll", "admin");
+        return "redirect:/admin/event/"+eventId+"/squarelist";
     }
 
     
