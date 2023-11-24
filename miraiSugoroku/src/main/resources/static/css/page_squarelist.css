@@ -77,9 +77,12 @@ p.search_result_text {
 
   .mysquare{
     position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     padding: 0;
     margin: 10px auto;
-    width: 250px;
+    /* width: 250px; */
 }
 
 .mysquare input{

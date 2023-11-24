@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * ユーザリポジトリ
  */
 @Repository
-public interface UserRepository extends CrudRepository<User, String> {
+public interface UserRepository extends CrudRepository<User, Long> {
     public Optional<User> findByName(String name);
 
     public boolean existsByName(String name);

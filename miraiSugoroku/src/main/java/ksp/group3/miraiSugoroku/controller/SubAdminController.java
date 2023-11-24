@@ -172,6 +172,29 @@ public class SubAdminController {
         return "subadmin_edit_square";
     }
 
+    // 承認済みマス詳細
+    @GetMapping("/subadmin/event/{eventId}/edit/{squareId}")
+    public String editSquare(@PathVariable Long eventId, @PathVariable Long squareId, Model model) {
+        Square s = sService.getSquare(squareId);
+        SquareForm sf = new SquareForm();
+        sf.setTitle(s.getTitle());
+        sf.setDescription(s.getDescription());
+        sf.setSquareEventId(s.getSquareEventId());
+        sf.setPicture(s.getPicture());
+        sf.setLink(s.getLink());
+        sf.setSquareEffect(sf.determineKindOfSquare(s.getSquareEventId()));
+        model.addAttribute("sf", sf);
+        List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
+        model.addAttribute("SquareEventList", SquareEventList);
+
+        String name = cService.getSquareCreator(s.getCreatorId()).getNickname();
+        model.addAttribute("name", name);
+        model.addAttribute("squareId", squareId);
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
+        return "subadmin_edit_approvedSquare";
+    }
+
     // マス承認確認
     @PostMapping("/subadmin/event/{eventId}/approve/{squareId}/confirm")
     public String confirmSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
@@ -186,6 +209,22 @@ public class SubAdminController {
         model.addAttribute("eventId", eventId);
         model.addAttribute("roll", "admin");
         return "subadmin_confirm_square";
+    }
+
+    // マス修正確認
+    @PostMapping("/subadmin/event/{eventId}/edit/{squareId}/confirm")
+    public String confirmApprovedSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
+        sf.setSquareEffect(sf.determineKindOfSquare(sf.getSquareEventId()));
+        model.addAttribute("sf", sf);
+        List<SquareEvent> SquareEventList = seService.getSquareEventForCreate();
+        model.addAttribute("SquareEventList", SquareEventList);
+        Square s = sService.getSquare(squareId);
+        String name = cService.getSquareCreator(s.getCreatorId()).getName();
+        model.addAttribute("name", name);
+        model.addAttribute("squareId", squareId);
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("roll", "admin");
+        return "subadmin_confirm_approvedSquare";
     }
 
     // マス承認拒否
@@ -221,5 +260,13 @@ public class SubAdminController {
         sf.setApproved(true);
         sService.updateSquare(squareId, sf);
         return "subadmin_done_square";
+    }
+
+    @PostMapping("/subadmin/event/{eventId}/edit/{squareId}/done")
+    public String doneApprovedSquare(@PathVariable Long eventId, @PathVariable Long squareId, SquareForm sf, Model model) {
+        sf.setApproved(true);
+        sService.updateSquare(squareId, sf);
+        model.addAttribute("roll", "admin");
+        return "redirect:/subadmin/event/"+eventId+"/squarelist";
     }
 }

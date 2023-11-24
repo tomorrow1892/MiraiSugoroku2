@@ -107,6 +107,9 @@
         <form th:action="@{/__${cid}__/squares/mysquares}" method="get" class="mysquare" >
             <input type="submit" class="mysquare" value="自分が作ったマスを見る" />
         </form>
+        <form th:action="@{/__${cid}__/squares/search/mygroup}" method="get" class="mysquare" >
+            <input type="submit" class="mysquare" value="自分のグループが作ったマスを見る" />
+        </form>
     </div>
 
 
@@ -164,6 +167,7 @@
             <p th:if="${search == 2}" class="font-wght700 search_result_text"> [[${nn}]]さんが作ったマス</p>
             <p th:if="${search == 3}" class="font-wght700 search_result_text"> 「[[${event}]]」イベントで作られたマス</p>
             <p th:if="${search == 4}" class="font-wght700 search_result_text">自分が作ったマス</p>
+            <p th:if="${search == 5}" class="font-wght700 search_result_text">自分のグループが作ったマス</p>
         </div>
 
         <div class="d-flex flex-wrap justify-content-center">
