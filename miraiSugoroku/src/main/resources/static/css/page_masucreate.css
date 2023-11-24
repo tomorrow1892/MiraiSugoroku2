@@ -1,3 +1,9 @@
+.card-header p{
+    
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
 #dragDropArea{
     background-color: #f4f4f4;
     margin: 10px;
@@ -9,13 +15,11 @@
 #dragDropArea p{
     color: #999;
     font-weight: bold;
-    font-size: 14px;
-    font-size: 1.4em;
+  
 }
 #dragDropArea .drag-drop-buttons{
     margin-top: 20px;
-    font-size: 12px;
-    font-size: 1.2em;
+
 }
 .drag-drop-buttons input{
     margin: auto;
@@ -24,7 +28,7 @@
 input[type="submit"] {
     color: #fff;
     width: 10rem;
-    padding: 0.7%;
+    padding: 20px;
   background-color:  rgb(255, 82, 41);
   border-radius: 5rem;
   border: 1px solid #ffffff;

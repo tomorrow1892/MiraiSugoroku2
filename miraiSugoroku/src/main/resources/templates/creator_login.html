@@ -6,10 +6,12 @@
 
     <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/kouminkun.png}" />
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>ログイン</title>
     <link rel="stylesheet" th:href="@{/css/page_login.css}">
-    <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/display.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
     <!-- bootstrapを使用する際には下２行を追加 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.2/css/bootstrap.min.css}">
     <script th:src="@{/webjars/bootstrap/5.1.2/js/bootstrap.min.js}" type="text/javascript"></script>
@@ -63,38 +65,44 @@
     <!-- ヘッダー -->
     <div th:replace="header :: header"></div>
     <!-- ログインフォーム -->
-    <div class="container">
-        <div class="login-container">
-            <div id="output"></div>
-
-            <div class="form-box">
-                <form th:action="@{/login/}" method="post" th:object="${creatorLoginForm}">
-                    <p style="    font-weight: bold; color: #6091d3;">イベントの年度を選んでください</p>
-                    <!--/* 年度選択のドロップダウン */-->
-                    <p>
-                        <select id="selectedYear" name="selectedYear">
-                            <option th:each="y: ${years}" th:value="${y}" th:text="${y}"
-                                th:selected="${y == creatorLoginForm.selectedYear}">
-                            </option>
-                        </select>
-                    </p>
-                    <p style="    font-weight: bold; color: #6091d3;">参加イベントを選択してください。</p>
-                    <!--/* イベント選択のドロップダウン */-->
-                    <p>
-                        <select id="selectedEventId" name="selectedEventId" th:required="required">
-
-                            <option value="" class="form-control">- イベントを選択してください -</option>
-
-                        </select>
-                    </p>
-                    <p style="    font-weight: bold; color: #6091d3;">ログインIDを入力してください。</p>
-                    <p><input type="text" th:field="*{loginId}" class="form-control" th:required="required" /></p>
-
-                    <p><button class="btn btn-info btn-block login" type="submit">ログイン</button></p>
-
-                </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="login-container">
+                    <div id="output"></div>
+        
+                    <div class="form-box">
+                        <form th:action="@{/login/}" method="post" th:object="${creatorLoginForm}">
+                            <p style="    font-weight: bold; color: #6091d3;">イベント年度を選んでください</p>
+                            <!--/* 年度選択のドロップダウン */-->
+                            <p >
+                                <select id="selectedYear" name="selectedYear" style="margin-bottom:10px;">
+                                    <option th:each="y: ${years}" th:value="${y}" th:text="${y}"
+                                        th:selected="${y == creatorLoginForm.selectedYear}">
+                                    </option>
+                                </select>
+                            </p>
+                            <p style="    font-weight: bold; color: #6091d3;">参加イベントを選んでください</p>
+                            <!--/* イベント選択のドロップダウン */-->
+                            <p>
+                                <select id="selectedEventId" name="selectedEventId" th:required="required" style="margin-bottom:10px;">
+        
+                                    <option value="" class="form-control">- イベントを選択してください -</option>
+        
+                                </select>
+                            </p>
+                            <p style="    font-weight: bold; color: #6091d3;">ログインIDを入力してください</p>
+                            <p><input type="text" th:field="*{loginId}" class="form-control" th:required="required" /></p>
+        
+                            <button class="btn btn-info btn-block login" type="submit">ログイン</button>
+        
+                        </form>
+                    </div>
+                </div>
             </div>
+            
         </div>
+        
 
     </div>
 
